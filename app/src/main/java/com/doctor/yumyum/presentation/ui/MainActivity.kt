@@ -1,7 +1,8 @@
-package com.doctor.yumyum
+package com.doctor.yumyum.presentation.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.doctor.yumyum.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

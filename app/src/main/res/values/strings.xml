@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Yumyum</string>
+    <string name="shared_pref_key">Yumyum_DB</string>
 </resources>
