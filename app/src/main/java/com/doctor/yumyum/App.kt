@@ -4,9 +4,7 @@ import android.app.Application
 import android.content.SharedPreferences
 
 class App : Application() {
-    companion object {
-        lateinit var sharedPref: SharedPreferences
-    }
+    lateinit var sharedPref: SharedPreferences
 
     override fun onCreate() {
         super.onCreate()

@@ -16,7 +16,7 @@ abstract class BaseActivity<T : ViewDataBinding>(@LayoutRes private val layoutRe
         binding = DataBindingUtil.setContentView(this, layoutResId)
     }
 
-    protected fun showCustomToast(message: String) {
+    protected fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
