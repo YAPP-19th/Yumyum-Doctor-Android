@@ -1,4 +1,4 @@
-package com.doctor.yumyum.data.remote
+package com.doctor.yumyum.common.network
 
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient

@@ -1,4 +1,4 @@
-package com.doctor.yumyum.presentation.base.viewmodel
+package com.doctor.yumyum.common.base.viewmodel
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope

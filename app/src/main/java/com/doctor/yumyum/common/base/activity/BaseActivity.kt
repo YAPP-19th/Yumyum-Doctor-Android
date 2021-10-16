@@ -1,4 +1,4 @@
-package com.doctor.yumyum.presentation.base.activity
+package com.doctor.yumyum.common.base.activity
 
 import android.os.Bundle
 import android.widget.Toast
