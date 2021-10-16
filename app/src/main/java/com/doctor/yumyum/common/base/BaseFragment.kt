@@ -1,4 +1,4 @@
-package com.doctor.yumyum.common.base.fragment
+package com.doctor.yumyum.common.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
