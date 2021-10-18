@@ -1,7 +1,7 @@
 ---
 name: Feature request
 about: 기능을 설명해주세요!
-title: "[Feat]"
+title: ''
 labels: ''
 assignees: junieberry
 
