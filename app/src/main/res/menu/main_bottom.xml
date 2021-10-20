@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item_main_bottom_home"
+        android:title="@string/menu_main_bottom_home"/>
+    <item
+        android:id="@+id/item_main_bottom_search_recipe"
+        android:title="@string/menu_main_bottom_search_recipe"/>
+    <item
+        android:id="@+id/item_main_bottom_write_recipe"
+        android:title="@string/menu_main_bottom_write_recipe"/>
+    <item
+        android:id="@+id/item_main_bottom_my_recipe"
+        android:title="@string/menu_main_bottom_my_recipe"/>
+    <item
+        android:id="@+id/item_main_bottom_my_page"
+        android:title="@string/menu_main_bottom_my_page"/>
+</menu>
