@@ -1,4 +1,4 @@
-package com.doctor.yumyum.presentation.ui
+package com.doctor.yumyum.presentation.ui.main
 
 import android.os.Bundle
 import com.doctor.yumyum.R
