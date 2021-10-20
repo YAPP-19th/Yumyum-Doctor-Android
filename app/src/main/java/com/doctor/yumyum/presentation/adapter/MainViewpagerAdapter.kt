@@ -5,17 +5,17 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.doctor.yumyum.presentation.ui.main.*
 
-class MainBottomAdapter(fragmentActivity: FragmentActivity): FragmentStateAdapter(fragmentActivity) {
+class MainViewpagerAdapter(fragmentActivity: FragmentActivity): FragmentStateAdapter(fragmentActivity) {
 
     override fun getItemCount(): Int = 5
 
     override fun createFragment(position: Int): Fragment {
         return when(position) {
-            1 -> HomeFragment()
-            2 -> SearchRecipeFragment()
-            3-> WriteRecipeFragment()
-            4-> MyRecipeFragment()
-            5-> MyPageFragment()
+            0 -> HomeFragment()
+            1 -> SearchRecipeFragment()
+            2-> WriteRecipeFragment()
+            3-> MyRecipeFragment()
+            4-> MyPageFragment()
             else -> HomeFragment()
         }
     }
