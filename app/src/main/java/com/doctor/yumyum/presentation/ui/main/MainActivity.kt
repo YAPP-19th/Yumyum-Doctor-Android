@@ -6,19 +6,18 @@ import com.doctor.yumyum.R
 import com.doctor.yumyum.databinding.ActivityMainBinding
 import com.doctor.yumyum.common.base.BaseActivity
 import com.doctor.yumyum.presentation.viewmodel.MainViewModel
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
-    private lateinit var vm: MainViewModel
+    private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        supportFragmentManager.beginTransaction().replace(R.id.main_ll_frag, HomeFragment())
+        supportFragmentManager.beginTransaction().replace(R.id.main_fl_frag, HomeFragment())
             .commit()
 
         //viewmodel
-        vm = ViewModelProvider(
+        viewModel = ViewModelProvider(
             this,
             ViewModelProvider.NewInstanceFactory()
         )[MainViewModel::class.java]
@@ -26,26 +25,26 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         //binding
         binding.apply {
             lifecycleOwner = this@MainActivity
-            vm = vm
+            viewModel = viewModel
             mainNvBottom.setOnItemSelectedListener { it ->
                 when (it.itemId) {
-                    R.id.item_main_bottom_home -> supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_ll_frag, HomeFragment()).commit()
+                    R.id.menu_main_home -> supportFragmentManager.beginTransaction()
+                        .replace(R.id.main_fl_frag, HomeFragment()).commit()
 
-                    R.id.item_main_bottom_search_recipe -> supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_ll_frag, SearchRecipeFragment()).commit()
+                    R.id.menu_main_search_recipe -> supportFragmentManager.beginTransaction()
+                        .replace(R.id.main_fl_frag, SearchRecipeFragment()).commit()
 
-                    R.id.item_main_bottom_write_recipe -> supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_ll_frag, WriteRecipeFragment()).commit()
+                    R.id.menu_main_write_recipe -> supportFragmentManager.beginTransaction()
+                        .replace(R.id.main_fl_frag, WriteRecipeFragment()).commit()
 
-                    R.id.item_main_bottom_my_recipe -> supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_ll_frag, MyRecipeFragment()).commit()
+                    R.id.menu_main_my_recipe -> supportFragmentManager.beginTransaction()
+                        .replace(R.id.main_fl_frag, MyRecipeFragment()).commit()
 
-                    R.id.item_main_bottom_my_page -> supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_ll_frag, MyPageFragment()).commit()
+                    R.id.menu_main_my_page -> supportFragmentManager.beginTransaction()
+                        .replace(R.id.main_fl_frag, MyPageFragment()).commit()
 
                     else -> supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_ll_frag, HomeFragment()).commit()
+                        .replace(R.id.main_fl_frag, HomeFragment()).commit()
 
                 }
                 return@setOnItemSelectedListener true

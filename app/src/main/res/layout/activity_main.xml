@@ -5,7 +5,7 @@
 
     <data>
         <variable
-            name="vm"
+            name="viewModel"
             type="com.doctor.yumyum.presentation.viewmodel.MainViewModel" />
 
     </data>
@@ -15,15 +15,14 @@
         android:layout_height="match_parent"
         tools:context=".presentation.ui.main.MainActivity">
 
-        <LinearLayout
-            android:id="@+id/main_ll_frag"
+        <FrameLayout
+            android:id="@+id/main_fl_frag"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:orientation="horizontal"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/main_nv_bottom"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"/>
 
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -33,7 +32,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:menu="@menu/main_bottom"/>
+            app:menu="@menu/menu_main"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
