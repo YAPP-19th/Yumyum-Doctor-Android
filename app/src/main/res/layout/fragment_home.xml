@@ -17,7 +17,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/menu_main_bottom_home" />
-
+            android:text="@string/menu_main_bottom_home"
+            style="@style/font_h1"/>
     </FrameLayout>
 </layout>
