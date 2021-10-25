@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- H1 -->
+    <style name="font_h1">
+        <item name="fontFamily">@font/bold</item>
+        <item name="android:textSize">22dp</item>
+    </style>
+
+    <!-- H2 -->
+    <style name="font_h2">
+        <item name="fontFamily">@font/bold</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+
+    <!-- H3 -->
+    <style name="font_h3_bold">
+        <item name="fontFamily">@font/bold</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="font_h3_medium">
+        <item name="fontFamily">@font/medium</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="font_h3_regular">
+        <item name="fontFamily">@font/regular</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <!-- SubTitle -->
+    <style name="font_subtitle_medium">
+        <item name="fontFamily">@font/medium</item>
+        <item name="android:textSize">15dp</item>
+    </style>
+
+    <style name="font_subtitle_regular">
+        <item name="fontFamily">@font/regular</item>
+        <item name="android:textSize">15dp</item>
+    </style>
+
+    <!-- Body1 -->
+    <style name="font_body1_medium">
+        <item name="fontFamily">@font/medium</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="font_body1_regular">
+        <item name="fontFamily">@font/regular</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="font_body1_light">
+        <item name="fontFamily">@font/light</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <!-- Body2 -->
+    <style name="font_body2_bold">
+        <item name="fontFamily">@font/bold</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+
+    <style name="font_body2_medium">
+        <item name="fontFamily">@font/medium</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+
+    <style name="font_body2_regular">
+        <item name="fontFamily">@font/regular</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+
+    <style name="font_body2_light">
+        <item name="fontFamily">@font/light</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+
+    <!-- caption -->
+    <style name="font_cap">
+        <item name="fontFamily">@font/light</item>
+        <item name="android:textSize">10dp</item>
+    </style>
+
+
+</resources>
