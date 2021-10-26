@@ -1,6 +1,7 @@
 package com.doctor.yumyum.presentation.ui.splash
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
@@ -24,5 +25,11 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
             lifecycleOwner = this@SplashActivity
             viewModel = viewModel
         }
+
+        //네트워크 연결 체크
+        val cm: ConnectivityManager =
+            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val isConnected = cm.activeNetwork != null
+        
     }
 }
