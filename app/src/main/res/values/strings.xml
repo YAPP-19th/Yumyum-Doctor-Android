@@ -10,4 +10,9 @@
     <string name="menu_main_bottom_write_recipe">래시피 작성</string>
     <string name="menu_main_bottom_my_recipe">나의 레시피</string>
     <string name="menu_main_bottom_my_page">마이페이지</string>
+
+    <!-- 레시피 탐구 -->
+    <string name="brand">브랜드</string>
+    <string name="brand_logo">브랜드 로고</string>
+    <string name="weekly_ranking">주간 랭킹</string>
 </resources>

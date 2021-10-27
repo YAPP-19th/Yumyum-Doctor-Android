@@ -64,6 +64,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:paddingHorizontal="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/research_recipe_divider">
 
@@ -71,6 +72,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+                <TextView
+                    android:id="@+id/research_recipe_tv_brand"
+                    style="@style/font_h3_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="4dp"
+                    android:text="@string/brand"
+                    android:textColor="@color/black"
+                    app:drawableStartCompat="@drawable/ic_martini"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/research_recipe_recyclerview_brand"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="20dp"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@id/research_recipe_tv_brand"
+                    app:spanCount="3"
+                    tools:listitem="@layout/item_research_brand" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
