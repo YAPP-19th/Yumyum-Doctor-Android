@@ -24,7 +24,9 @@ class ResearchRecipeFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ResearchRecipeViewModel::class.java)
+        // TODO: sharedpreferences에서 현재 모드 가져오기
+        viewModel = ResearchRecipeViewModel("음식")
+        binding.researchRecipeTvMode.setOnClickListener{ }
         binding.viewModel = viewModel
     }
 
