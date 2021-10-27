@@ -4,6 +4,8 @@
     <string name="food">음식</string>
     <string name="beverage">음료</string>
     <string name="change_mode">모드 변경 버튼</string>
+    <string name="number">1</string>
+    <string name="cost_example">12000원</string>
 
     <!--    #4 바텀 네비게이션바 초기 설정용 임시 string      -->
     <string name="menu_main_bottom_home">홈</string>
@@ -16,4 +18,11 @@
     <string name="brand">브랜드</string>
     <string name="brand_logo">브랜드 로고</string>
     <string name="weekly_ranking">주간 랭킹</string>
+    <string name="recipe_title">레시피 이름</string>
+    <string name="recipe_cost">레시피 가격</string>
+    <string name="ranking_medal">랭킹 메달</string>
+    <string name="recipe_image">레시피 이미지</string>
+    <string name="like_image">좋아요 아이콘</string>
+    <string name="weekly_ranking_icon">주간 랭킹 아이콘</string>
+    <string name="brand_icon">브랜드 아이콘</string>
 </resources>

@@ -59,26 +59,34 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:paddingHorizontal="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/research_recipe_divider">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp">
+
+                <ImageView
+                    android:id="@+id/research_recipe_iv_brand"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:contentDescription="@string/brand_icon"
+                    android:src="@drawable/ic_martini"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/research_recipe_tv_brand"
                     style="@style/font_h3_bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:drawablePadding="4dp"
+                    android:layout_marginStart="4dp"
                     android:text="@string/brand"
                     android:textColor="@color/black"
-                    app:drawableStartCompat="@drawable/ic_martini"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintBottom_toBottomOf="@id/research_recipe_iv_brand"
+                    app:layout_constraintStart_toEndOf="@id/research_recipe_iv_brand" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/research_recipe_recyclerview_brand"
@@ -90,6 +98,36 @@
                     app:layout_constraintTop_toBottomOf="@id/research_recipe_tv_brand"
                     app:spanCount="3"
                     tools:listitem="@layout/item_research_brand" />
+
+                <ImageView
+                    android:id="@+id/research_recipe_iv_ranking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:contentDescription="@string/weekly_ranking_icon"
+                    android:src="@drawable/ic_trophy"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/research_recipe_recyclerview_brand" />
+
+                <TextView
+                    android:id="@+id/research_recipe_tv_ranking"
+                    style="@style/font_h3_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="@string/weekly_ranking"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="@id/research_recipe_iv_ranking"
+                    app:layout_constraintStart_toEndOf="@id/research_recipe_iv_ranking" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/research_recipe_recyclerview_ranking"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@id/research_recipe_tv_ranking"
+                    tools:listitem="@layout/item_research_ranking" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
