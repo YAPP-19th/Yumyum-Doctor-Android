@@ -1,10 +1,12 @@
 package com.doctor.yumyum.presentation.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
 import com.doctor.yumyum.databinding.ActivityMainBinding
 import com.doctor.yumyum.common.base.BaseActivity
+import com.doctor.yumyum.presentation.ui.write.WriteRecipeActivity
 import com.doctor.yumyum.presentation.viewmodel.MainViewModel
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
@@ -34,8 +36,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                     R.id.menu_main_search_recipe -> supportFragmentManager.beginTransaction()
                         .replace(R.id.main_fl_frag, SearchRecipeFragment()).commit()
 
-                    R.id.menu_main_write_recipe -> supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_fl_frag, WriteRecipeFragment()).commit()
+                    R.id.menu_main_write_recipe -> {
+                        val intent = Intent(this@MainActivity, WriteRecipeActivity::class.java)
+                        startActivity(intent)
+                    }
 
                     R.id.menu_main_my_recipe -> supportFragmentManager.beginTransaction()
                         .replace(R.id.main_fl_frag, MyRecipeFragment()).commit()
