@@ -26,7 +26,13 @@ class ResearchRecipeFragment :
         super.onViewCreated(view, savedInstanceState)
         // TODO: sharedpreferences에서 현재 모드 가져오기
         viewModel = ResearchRecipeViewModel("음식")
-        binding.researchRecipeTvMode.setOnClickListener{ }
+        viewModel.mode.observe(viewLifecycleOwner) {
+            if (it.equals("음식")) {
+                binding.researchRecipeIbMode.setImageResource(R.drawable.ic_change_beverage)
+            } else {
+                binding.researchRecipeIbMode.setImageResource(R.drawable.ic_change_food)
+            }
+        }
         binding.viewModel = viewModel
     }
 

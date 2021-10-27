@@ -3,6 +3,7 @@
     <string name="shared_pref_key">Yumyum_DB</string>
     <string name="food">음식</string>
     <string name="beverage">음료</string>
+    <string name="change_mode">모드 변경 버튼</string>
 
     <!--    #4 바텀 네비게이션바 초기 설정용 임시 string      -->
     <string name="menu_main_bottom_home">홈</string>

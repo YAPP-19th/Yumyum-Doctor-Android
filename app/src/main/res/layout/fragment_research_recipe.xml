@@ -34,23 +34,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/research_recipe_tv_mode"
-                style="@style/font_body2_bold"
+            <ImageButton
+                android:id="@+id/research_recipe_ib_mode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_change_mode"
-                android:drawablePadding="4.5dp"
-                android:foreground="?attr/selectableItemBackground"
+                android:background="@null"
+                android:contentDescription="@string/change_mode"
+                android:minHeight="48dp"
                 android:onClick="@{()->viewModel.changeMode()}"
-                android:paddingHorizontal="6.5dp"
-                android:text="@{viewModel.mode}"
-                android:textColor="@color/black"
-                app:drawableStartCompat="@drawable/ic_change_mode"
+                android:src="@drawable/ic_change_food"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="@string/food" />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
