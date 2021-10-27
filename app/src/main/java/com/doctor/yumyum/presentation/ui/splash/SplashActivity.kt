@@ -30,6 +30,10 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
         val cm: ConnectivityManager =
             getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val isConnected = cm.activeNetwork != null
+
+        if (!isConnected) {
+            InternetDialog().show(supportFragmentManager, "InternetDialog")
+        }
         
     }
 }

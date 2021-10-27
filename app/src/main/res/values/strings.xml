@@ -8,4 +8,8 @@
     <string name="menu_main_bottom_write_recipe">래시피 작성</string>
     <string name="menu_main_bottom_my_recipe">나의 레시피</string>
     <string name="menu_main_bottom_my_page">마이페이지</string>
+
+
+    <!--    Splash Activity      -->
+
 </resources>
