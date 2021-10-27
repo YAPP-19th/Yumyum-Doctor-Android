@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
-import com.doctor.yumyum.databinding.FragmentSearchRecipeBinding
-import com.doctor.yumyum.presentation.viewmodel.SearchRecipeViewModel
+import com.doctor.yumyum.databinding.FragmentResearchRecipeBinding
+import com.doctor.yumyum.presentation.viewmodel.ResearchRecipeViewModel
 
-class SearchRecipeFragment :
-    BaseFragment<FragmentSearchRecipeBinding>(R.layout.fragment_search_recipe) {
+class ResearchRecipeFragment :
+    BaseFragment<FragmentResearchRecipeBinding>(R.layout.fragment_research_recipe) {
 
-    private lateinit var viewModel: SearchRecipeViewModel
+    private lateinit var viewModel: ResearchRecipeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,7 +24,7 @@ class SearchRecipeFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(SearchRecipeViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(ResearchRecipeViewModel::class.java)
         binding.viewModel = viewModel
     }
 
