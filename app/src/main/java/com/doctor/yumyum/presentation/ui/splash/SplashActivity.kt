@@ -8,6 +8,7 @@ import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseActivity
 import com.doctor.yumyum.databinding.ActivitySplashBinding
 import com.doctor.yumyum.presentation.viewmodel.SplashViewModel
+import java.util.*
 
 class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_splash) {
     private lateinit var viewModel: SplashViewModel
@@ -26,14 +27,19 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
             viewModel = viewModel
         }
 
-        //네트워크 연결 체크
-        val cm: ConnectivityManager =
-            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val isConnected = cm.activeNetwork != null
+        Timer().schedule(object : TimerTask() {
+            override fun run() {
+                //네트워크 연결 체크
+                val cm: ConnectivityManager =
+                    getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+                val isConnected = cm.activeNetwork != null
 
-        if (!isConnected) {
-            InternetDialog().show(supportFragmentManager, "InternetDialog")
-        }
-        
+                if (!isConnected) {
+                    InternetDialog().show(supportFragmentManager, "InternetDialog")
+                }
+            }
+        }, 1000)
+
+
     }
 }
