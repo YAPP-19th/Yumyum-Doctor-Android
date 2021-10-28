@@ -10,6 +10,8 @@
     <string name="menu_main_bottom_my_page">마이페이지</string>
 
 
-    <!--    Splash Activity      -->
+    <!--   Internet dialog      -->
+    <string name="dialog_msg_internet">인터넷 연결 상태를 확인 후\n다시 시도해 주세요.</string>
+    <string name="dialog_button_internet">다시 시도</string>
 
 </resources>
