@@ -1,12 +1,14 @@
 package com.doctor.yumyum.presentation.ui.splash
 
 import android.content.Context
+import android.content.Intent
 import android.net.ConnectivityManager
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseActivity
 import com.doctor.yumyum.databinding.ActivitySplashBinding
+import com.doctor.yumyum.presentation.ui.main.MainActivity
 import com.doctor.yumyum.presentation.viewmodel.SplashViewModel
 import java.util.*
 
@@ -27,19 +29,9 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
             viewModel = viewModel
         }
 
-        Timer().schedule(object : TimerTask() {
-            override fun run() {
-                //네트워크 연결 체크
-                val cm: ConnectivityManager =
-                    getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-                val isConnected = cm.activeNetwork != null
-
-                if (!isConnected) {
-                    InternetDialog().show(supportFragmentManager, "InternetDialog")
-                }
-            }
-        }, 1000)
-
+        //임시용 main activity로 넘어가게
+        val mainIntent = Intent(this, MainActivity::class.java)
+        startActivity(mainIntent)
 
     }
 }
