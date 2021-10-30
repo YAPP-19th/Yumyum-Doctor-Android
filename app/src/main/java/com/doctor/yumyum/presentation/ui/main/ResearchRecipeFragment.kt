@@ -37,7 +37,7 @@ class ResearchRecipeFragment :
 
         viewModel.mode.observe(viewLifecycleOwner) {
             binding.researchRecipeIbMode.setImageResource(
-                if (it == R.string.food) R.drawable.ic_change_food else R.drawable.ic_change_beverage
+                if (it == R.string.common_food) R.drawable.ic_change_food else R.drawable.ic_change_beverage
             )
         }
         binding.viewModel = viewModel

@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:contentDescription="@string/change_mode"
+                android:contentDescription="@string/common_button_change_mode"
                 android:minHeight="48dp"
                 android:onClick="@{()->viewModel.changeMode()}"
                 android:src="@drawable/ic_change_food"
@@ -72,7 +72,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:contentDescription="@string/brand_icon"
+                    android:contentDescription="@string/common_brand_icon"
                     android:src="@drawable/ic_martini"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -83,7 +83,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    android:text="@string/brand"
+                    android:text="@string/common_brand"
                     android:textColor="@color/black"
                     app:layout_constraintBottom_toBottomOf="@id/research_recipe_iv_brand"
                     app:layout_constraintStart_toEndOf="@id/research_recipe_iv_brand" />
@@ -104,7 +104,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:contentDescription="@string/weekly_ranking_icon"
+                    android:contentDescription="@string/research_icon_weekly_ranking"
                     android:src="@drawable/ic_trophy"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/research_recipe_recyclerview_brand" />
@@ -115,7 +115,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    android:text="@string/weekly_ranking"
+                    android:text="@string/research_icon_weekly_ranking"
                     android:textColor="@color/black"
                     app:layout_constraintBottom_toBottomOf="@id/research_recipe_iv_ranking"
                     app:layout_constraintStart_toEndOf="@id/research_recipe_iv_ranking" />

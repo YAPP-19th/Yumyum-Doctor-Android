@@ -12,16 +12,17 @@ class ResearchRecipeViewModel(private val sharedPreferences: SharedPreferences) 
     @SuppressLint("SupportAnnotationUsage")
     @StringRes
     private val _mode: MutableLiveData<Int> =
-        MutableLiveData(sharedPreferences.getInt("mode", R.string.food))
+        MutableLiveData(sharedPreferences.getInt("mode", R.string.common_food))
     val mode: LiveData<Int>
         get() = _mode
 
     fun changeMode() {
-        _mode.value = if (mode.value == R.string.food) R.string.beverage else R.string.food
+        _mode.value =
+            if (mode.value == R.string.common_food) R.string.common_beverage else R.string.common_food
 
         // 현재 모드 저장
         val editor = sharedPreferences.edit()
-        editor.putInt("mode", mode.value ?: R.string.food)
+        editor.putInt("mode", mode.value ?: R.string.common_food)
         editor.apply()
     }
 }
