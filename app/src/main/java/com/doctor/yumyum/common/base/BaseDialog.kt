@@ -8,7 +8,9 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
 import android.R
 import android.content.Context
+import android.graphics.Color
 import android.graphics.Point
+import android.graphics.drawable.ColorDrawable
 import android.util.Log
 import android.view.*
 
@@ -22,6 +24,10 @@ abstract class BaseDialog<T : ViewDataBinding>(@LayoutRes private val layoutResI
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        dialog?.apply {
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            requestWindowFeature(Window.FEATURE_NO_TITLE)
+        }
         binding = DataBindingUtil.inflate(inflater, layoutResId, container, false)
         return binding.root
     }
@@ -37,8 +43,9 @@ abstract class BaseDialog<T : ViewDataBinding>(@LayoutRes private val layoutResI
         val window: Window = dialog?.window ?: return
         val params: WindowManager.LayoutParams = window.attributes
         params.width = (display.widthPixels * 0.8).toInt()
-        params.height = (display.heightPixels * 0.25).toInt()
 
         dialog?.window!!.attributes = params
+
+
     }
 }

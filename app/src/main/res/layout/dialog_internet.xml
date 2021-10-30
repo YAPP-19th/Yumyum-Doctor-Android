@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="34dp"
             android:layout_marginBottom="80dp"
-            android:gravity="center_horizontal|center_vertical"
+            android:gravity="center"
             android:text="@string/dialog_msg_internet"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -34,18 +34,18 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="80dp"
-            android:layout_marginTop="95dp"
+            android:layout_marginTop="21dp"
             android:layout_marginEnd="80dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/bg_internet_btn"
-            android:gravity="center_vertical|center_horizontal"
+            android:gravity="center"
             android:includeFontPadding="false"
             android:text="@string/dialog_button_internet"
             android:textColor="@color/main_orange"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/internet_tv" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
