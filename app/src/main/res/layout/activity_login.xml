@@ -36,7 +36,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/login_btn_kakao"
             style="@style/font_body1_medium"
             android:layout_width="0dp"
@@ -44,16 +44,21 @@
             android:layout_marginStart="63dp"
             android:layout_marginEnd="63dp"
             android:layout_marginBottom="13dp"
-            android:background="@drawable/bg_login_btn"
             android:backgroundTint="@color/kakao_yellow"
-            android:drawableStart="@drawable/ic_kakao"
+            android:padding="13dp"
+            android:stateListAnimator="@null"
             android:text="@string/login_btn_kakao"
             android:textColor="@color/kakao_brown"
+            app:cornerRadius="30dp"
+            app:icon="@drawable/ic_kakao"
+            app:iconGravity="textStart"
+            app:iconTint="@color/kakao_brown"
             app:layout_constraintBottom_toTopOf="@id/login_btn_google"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatButton
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/login_btn_google"
             style="@style/font_body1_medium"
             android:layout_width="0dp"
@@ -61,12 +66,15 @@
             android:layout_marginStart="63dp"
             android:layout_marginTop="560dp"
             android:layout_marginEnd="63dp"
-            android:drawableStart="@drawable/ic_google"
             android:layout_marginBottom="35dp"
-            android:background="@drawable/bg_login_btn"
             android:backgroundTint="@color/google_blue"
+            android:padding="13dp"
+            android:stateListAnimator="@null"
             android:text="@string/login_btn_google"
             android:textColor="@color/white"
+            app:cornerRadius="30dp"
+            app:icon="@drawable/ic_google"
+            app:iconGravity="textStart"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
