@@ -1,11 +1,28 @@
 <resources>
     <string name="app_name">Yumyum</string>
     <string name="shared_pref_key">Yumyum_DB</string>
+    <string name="common_food">음식</string>
+    <string name="common_beverage">음료</string>
+    <string name="common_button_change_mode">모드 변경 버튼</string>
+    <string name="common_number">1</string>
+    <string name="common_cost_example">12000원</string>
+    <string name="common_brand_logo">브랜드 로고</string>
+    <string name="common_weekly_ranking">주간 랭킹</string>
+    <string name="common_recipe_title">레시피 이름</string>
+    <string name="common_recipe_cost">레시피 가격</string>
+    <string name="common_recipe_image">레시피 이미지</string>
+    <string name="common_like_image">좋아요 아이콘</string>
+    <string name="common_brand_icon">브랜드 아이콘</string>
+    <string name="common_brand">브랜드</string>
 
     <!--    #4 바텀 네비게이션바 초기 설정용 임시 string      -->
     <string name="menu_main_bottom_home">홈</string>
-    <string name="menu_main_bottom_search_recipe">레시피 탐구</string>
+    <string name="menu_main_bottom_research_recipe">레시피 탐구</string>
     <string name="menu_main_bottom_write_recipe">래시피 작성</string>
     <string name="menu_main_bottom_my_recipe">나의 레시피</string>
     <string name="menu_main_bottom_my_page">마이페이지</string>
+
+    <!-- 레시피 탐구 -->
+    <string name="research_icon_ranking_medal">랭킹 메달</string>
+    <string name="research_icon_weekly_ranking">주간 랭킹 아이콘</string>
 </resources>

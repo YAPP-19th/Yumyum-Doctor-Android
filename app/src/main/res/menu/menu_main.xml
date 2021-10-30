@@ -5,8 +5,8 @@
         android:title="@string/menu_main_bottom_home"
         android:icon="@mipmap/ic_launcher"/>
     <item
-        android:id="@+id/menu_main_search_recipe"
-        android:title="@string/menu_main_bottom_search_recipe"
+        android:id="@+id/menu_main_research_recipe"
+        android:title="@string/menu_main_bottom_research_recipe"
         android:icon="@mipmap/ic_launcher"/>
     <item
         android:id="@+id/menu_main_write_recipe"
