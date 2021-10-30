@@ -40,6 +40,7 @@
             android:background="@drawable/bg_internet_btn"
             android:gravity="center"
             android:includeFontPadding="false"
+            android:stateListAnimator="@null"
             android:text="@string/dialog_button_internet"
             android:textColor="@color/main_orange"
             app:layout_constraintBottom_toBottomOf="parent"
