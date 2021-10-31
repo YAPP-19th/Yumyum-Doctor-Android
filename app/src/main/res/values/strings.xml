@@ -11,8 +11,30 @@
 
     <!-- common -->
     <string name="common_cancel">취소</string>
+    <string name="common_next">다음</string>
+
+    <string name="common_food">음식</string>
+    <string name="common_drink">음료</string>
+
+    <string name="common_starbucks">스타벅스</string>
+    <string name="common_amasvin">아마스빈</string>
+    <string name="common_gongcha">공차</string>
+    <string name="common_ediya">이디야</string>
+    <string name="common_cocktail">칵테일</string>
+    <string name="common_etc">기타</string>
 
     <!-- 레시피 작성 -->
     <string name="write_recipe_tv_title">레시피 작성</string>
     <string name="write_first_tv_guide">종류와 브랜드를 선택해주세요</string>
+    <string name="write_second_et_name">레시피이름</string>
+
+    <!--브랜드 선택 다이얼로그 -->
+    <string name="dialog_tv_brand">브랜드 선택</string>
+    <string name="dialog_btn_select">선택</string>
+    <string name="write_second_et_menu">메인메뉴</string>
+    <string name="write_second_tv_add">추가된 재료</string>
+    <string name="write_second_tv_minus">빠지거나 바뀌는 재료</string>
+
+
+
 </resources>
