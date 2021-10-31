@@ -15,7 +15,8 @@
     <color name="gray">#B0B0B0</color>
     <color name="dark_gray">#6B6B6B</color>
     <color name="unselect_orange">#FFD9C7</color>
-    
+
+    <!--    Login Activity-->
     <color name="kakao_yellow">#FED90A</color>
     <color name="kakao_brown">#381E1E</color>
     <color name="google_blue">#4285F4</color>
