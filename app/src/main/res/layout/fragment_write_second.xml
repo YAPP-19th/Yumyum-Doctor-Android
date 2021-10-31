@@ -2,19 +2,122 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
-        <TextView
+        <EditText
+            android:id="@+id/write_second_et_name"
+            style="@style/font_h3_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="83dp"
+            android:background="@null"
+            android:hint="@string/write_second_et_name"
+            android:includeFontPadding="false"
+            android:textColorHint="@color/light_gray"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/write_second_view1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:background="#DFDFDF"
+            app:layout_constraintEnd_toEndOf="@id/write_second_et_name"
+            app:layout_constraintStart_toStartOf="@id/write_second_et_name"
+            app:layout_constraintTop_toBottomOf="@id/write_second_et_name" />
+
+        <EditText
+            android:id="@+id/write_second_et_menu"
+            style="@style/font_h3_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="39dp"
+            android:background="@null"
+            android:hint="@string/write_second_et_menu"
+            android:includeFontPadding="false"
+            android:textColorHint="@color/light_gray"
+            app:layout_constraintStart_toStartOf="@+id/write_second_et_name"
+            app:layout_constraintTop_toBottomOf="@+id/write_second_view1" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:background="#DFDFDF"
+            app:layout_constraintEnd_toEndOf="@id/write_second_et_menu"
+            app:layout_constraintStart_toStartOf="@id/write_second_et_menu"
+            app:layout_constraintTop_toBottomOf="@id/write_second_et_menu" />
+
+
+        <TextView
+            android:id="@+id/write_second_tv_guide"
+            style="@style/font_body1_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:includeFontPadding="false"
+            android:text="@string/write_second_tv_add"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/write_second_et_menu"
+            app:layout_constraintTop_toBottomOf="@+id/view" />
+
+        <Button
+            android:id="@+id/write_second_btn_add"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/ic_pluscircle"
+            app:layout_constraintStart_toStartOf="@id/write_second_tv_guide"
+            app:layout_constraintTop_toBottomOf="@id/write_second_tv_guide" />
+
+        <TextView
+            android:id="@+id/write_second_tv_guide2"
+            style="@style/font_body1_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:includeFontPadding="false"
+            android:text="@string/write_second_tv_minus"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/write_second_btn_add"
+            app:layout_constraintTop_toBottomOf="@+id/write_second_btn_add" />
+
+        <Button
+            android:id="@+id/write_second_btn_minus"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/ic_pluscircle"
+            app:layout_constraintStart_toStartOf="@id/write_second_tv_guide2"
+            app:layout_constraintTop_toBottomOf="@id/write_second_tv_guide2" />
+
+        <Button
+            android:id="@+id/write_second_btn_next"
+            style="@style/font_subtitle_medium"
+            android:layout_width="match_parent"
+            android:layout_height="47dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_bottom_btn"
+            android:includeFontPadding="false"
+            android:stateListAnimator="@null"
+            android:text="@string/common_next"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
