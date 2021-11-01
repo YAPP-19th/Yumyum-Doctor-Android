@@ -33,8 +33,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                     R.id.menu_main_home -> supportFragmentManager.beginTransaction()
                         .replace(R.id.main_fl_frag, HomeFragment()).commit()
 
-                    R.id.menu_main_search_recipe -> supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_fl_frag, SearchRecipeFragment()).commit()
+                    R.id.menu_main_research_recipe -> supportFragmentManager.beginTransaction()
+                        .replace(R.id.main_fl_frag, ResearchRecipeFragment()).commit()
 
                     R.id.menu_main_write_recipe -> {
                         val intent = Intent(this@MainActivity, WriteRecipeActivity::class.java)
