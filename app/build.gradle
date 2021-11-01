@@ -75,8 +75,4 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
     implementation "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
 
-    //JetPack compose Integration
-    implementation "androidx.navigation:navigation-compose:2.4.0-alpha10"
-
-
 }

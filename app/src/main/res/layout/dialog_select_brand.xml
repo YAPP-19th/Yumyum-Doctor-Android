@@ -93,6 +93,7 @@
         android:includeFontPadding="false"
         android:text="@string/dialog_btn_select"
         android:textColor="@color/white"
+        android:stateListAnimator="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/dialog_brand_tv_etc" />
 

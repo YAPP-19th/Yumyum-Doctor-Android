@@ -11,7 +11,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class WriteFragment1 : BaseFragment<FragmentWriteFirstBinding>(R.layout.fragment_write_first) {
 
-    private lateinit var navController: NavController
     private lateinit var bottomSheetDialog : BottomSheetDialog
     private lateinit var bottomSheetView : View
 
@@ -21,9 +20,8 @@ class WriteFragment1 : BaseFragment<FragmentWriteFirstBinding>(R.layout.fragment
         initBinding()
         initDialog()
 
-        navController = Navigation.findNavController(view)
         binding.writeFirstBtnNext.setOnClickListener {
-            navController.navigate(R.id.action_first_write_fragment_to_second_write_fragment)
+            Navigation.findNavController(view).navigate(R.id.action_first_write_fragment_to_second_write_fragment)
         }
     }
 
