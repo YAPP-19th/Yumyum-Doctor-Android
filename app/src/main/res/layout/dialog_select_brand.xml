@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="27dp"
         android:layout_marginTop="20dp"
-        android:includeFontPadding="false"
         android:text="@string/dialog_tv_brand"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -85,9 +84,8 @@
         style="@style/font_subtitle_medium"
         android:layout_width="match_parent"
         android:layout_height="47dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginHorizontal="16dp"
         android:layout_marginTop="27dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/bg_bottom_btn"
         android:includeFontPadding="false"
