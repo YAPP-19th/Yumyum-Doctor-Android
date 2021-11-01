@@ -2,6 +2,7 @@ package com.doctor.yumyum
 
 import android.app.Application
 import android.content.SharedPreferences
+import com.kakao.sdk.common.KakaoSdk
 
 class App : Application() {
     lateinit var sharedPref: SharedPreferences
@@ -12,5 +13,7 @@ class App : Application() {
             getString(R.string.shared_pref_key),
             MODE_PRIVATE
         )
+        KakaoSdk.init(this, getString(R.string.kakao_app_key))
     }
+
 }
