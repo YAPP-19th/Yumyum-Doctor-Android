@@ -9,6 +9,12 @@ import com.doctor.yumyum.common.base.BaseFragment
 import com.doctor.yumyum.databinding.FragmentWriteFirstBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
+/**
+ *  레시피 작성하기 1
+ *  - 음식 or 음료 선택하기
+ *  - 브랜드 선택하기
+ */
+
 class WriteFragment1 : BaseFragment<FragmentWriteFirstBinding>(R.layout.fragment_write_first) {
 
     private lateinit var bottomSheetDialog : BottomSheetDialog
