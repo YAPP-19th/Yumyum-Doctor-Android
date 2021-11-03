@@ -1,5 +1,6 @@
 package com.doctor.yumyum.presentation.ui.login
 
+import android.content.Context
 import android.os.Bundle
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseActivity
@@ -11,15 +12,21 @@ import com.doctor.yumyum.presentation.viewmodel.LoginViewModel
 import com.kakao.sdk.auth.model.OAuthToken
 
 import com.kakao.sdk.auth.LoginClient
+import android.content.pm.PackageManager
+
+import android.content.pm.PackageInfo
+import android.util.Base64
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
 
     val TAG = "로그"
     private lateinit var viewModel: LoginViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         //viewmodel
         viewModel = ViewModelProvider(
             this,
@@ -54,6 +61,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
 
             }
         }
+
     }
 
 }

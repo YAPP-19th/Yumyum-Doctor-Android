@@ -1,5 +1,6 @@
 package com.doctor.yumyum.presentation.ui.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +17,10 @@ class ErrorDialog :BaseDialog<DialogErrorBinding>(R.layout.dialog_error){
         savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        binding.b
+        binding.errorBtn.setOnClickListener {
+            val loginIntent = Intent(this.context, LoginActivity::class.java)
+            startActivity(loginIntent)
+        }
         return binding.root
     }
 }

@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseDialog
 import com.doctor.yumyum.databinding.DialogInternetBinding
-import com.doctor.yumyum.presentation.ui.login.LoginActivity
 
 class InternetDialog : BaseDialog<DialogInternetBinding>(R.layout.dialog_internet) {
     override fun onCreateView(
@@ -18,8 +17,8 @@ class InternetDialog : BaseDialog<DialogInternetBinding>(R.layout.dialog_interne
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         binding.internetBtn.setOnClickListener {
-            val loginIntent = Intent(this.context, LoginActivity::class.java)
-            startActivity(loginIntent)
+            val splashIntent = Intent(this.context, SplashActivity::class.java)
+            startActivity(splashIntent)
         }
         return binding.root
     }
