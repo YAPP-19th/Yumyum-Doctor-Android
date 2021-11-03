@@ -41,9 +41,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
                 // 로그인 callback
                 val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
                     if (error != null) {
-                        Log.e(TAG, "로그인 실패", error)
-                    }
-                    else if (token != null) {
+                        ErrorDialog().apply {
+                            show(supportFragmentManager, "ErrorDialog")
+                        }
+                    } else if (token != null) {
                         Log.i(TAG, "로그인 성공 ${token.accessToken}")
                     }
                 }
