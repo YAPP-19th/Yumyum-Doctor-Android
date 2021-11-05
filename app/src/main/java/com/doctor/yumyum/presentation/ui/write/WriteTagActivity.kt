@@ -39,4 +39,8 @@ class WriteTagActivity : BaseActivity<ActivityWriteTagBinding>(R.layout.activity
         finish()
     }
 
+    fun cancleInput(){
+        finish()
+    }
+
 }
