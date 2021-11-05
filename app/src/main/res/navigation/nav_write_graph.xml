@@ -25,9 +25,6 @@
         <action
             android:id="@+id/action_second_write_fragment_to_third_write_fragment"
             app:destination="@id/third_write_fragment" />
-        <action
-            android:id="@+id/action_second_write_fragment_to_tag_write_fragment"
-            app:destination="@id/tag_write_fragment" />
     </fragment>
 
     <fragment
@@ -58,14 +55,6 @@
         android:name="com.doctor.yumyum.presentation.ui.write.WriteFragment5"
         tools:layout="@layout/fragment_write_fourth"
         android:label="Fifth Write">
-
-    </fragment>
-
-    <fragment
-        android:id="@+id/tag_write_fragment"
-        android:name="com.doctor.yumyum.presentation.ui.write.WriteTagFragment"
-        tools:layout="@layout/fragment_write_tag"
-        android:label="Tag Write">
 
     </fragment>
 
