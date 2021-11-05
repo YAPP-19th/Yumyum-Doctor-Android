@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Yumyum">
         <activity
+            android:name=".presentation.ui.researchlist.ResearchListActivity"
+            android:exported="true" />
+        <activity
             android:name=".presentation.ui.main.MainActivity"
             android:exported="true">
             <intent-filter>

@@ -14,6 +14,8 @@
     <string name="common_like_image">좋아요 아이콘</string>
     <string name="common_brand_icon">브랜드 아이콘</string>
     <string name="common_brand">브랜드</string>
+    <string name="common_sort">정렬</string>
+    <string name="common_filter">필터</string>
 
     <!--    #4 바텀 네비게이션바 초기 설정용 임시 string      -->
     <string name="menu_main_bottom_home">홈</string>
@@ -25,4 +27,8 @@
     <!-- 레시피 탐구 -->
     <string name="research_icon_ranking_medal">랭킹 메달</string>
     <string name="research_icon_weekly_ranking">주간 랭킹 아이콘</string>
+    <!-- 레시피 목록 -->
+    <string name="research_list_title">레시피 목록</string>
+    <string name="research_list_tv_search">해시태그로 검색</string>
+    <string name="research_list_ib_close">해시태그 삭제 버튼</string>
 </resources>
