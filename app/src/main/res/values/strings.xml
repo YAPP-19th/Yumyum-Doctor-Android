@@ -16,6 +16,7 @@
     <string name="common_brand">브랜드</string>
     <string name="common_sort">정렬</string>
     <string name="common_filter">필터</string>
+    <string name="common_iv_bookmark">북마크 이미지</string>
 
     <!--    #4 바텀 네비게이션바 초기 설정용 임시 string      -->
     <string name="menu_main_bottom_home">홈</string>
