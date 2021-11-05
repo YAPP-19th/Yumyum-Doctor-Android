@@ -2,6 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="secondFragment"
+            type="com.doctor.yumyum.presentation.ui.write.WriteFragment2" />
+
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -62,12 +69,12 @@
             app:layout_constraintStart_toStartOf="@+id/write_second_et_menu"
             app:layout_constraintTop_toBottomOf="@+id/write_second_view2" />
 
-        <Button
+        <ImageButton
             android:id="@+id/write_second_btn_add"
             android:layout_width="22dp"
             android:layout_height="22dp"
             android:layout_marginTop="5dp"
-            android:background="@drawable/ic_pluscircle"
+            android:src="@drawable/ic_pluscircle"
             app:layout_constraintStart_toStartOf="@id/write_second_tv_guide_add"
             app:layout_constraintTop_toBottomOf="@id/write_second_tv_guide_add" />
 
@@ -82,12 +89,12 @@
             app:layout_constraintStart_toStartOf="@+id/write_second_btn_add"
             app:layout_constraintTop_toBottomOf="@+id/write_second_btn_add" />
 
-        <Button
+        <ImageButton
             android:id="@+id/write_second_btn_minus"
             android:layout_width="22dp"
             android:layout_height="22dp"
             android:layout_marginTop="5dp"
-            android:background="@drawable/ic_pluscircle"
+            android:src="@drawable/ic_pluscircle"
             app:layout_constraintStart_toStartOf="@id/write_second_tv_guide_minus"
             app:layout_constraintTop_toBottomOf="@id/write_second_tv_guide_minus" />
 
@@ -106,7 +113,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
