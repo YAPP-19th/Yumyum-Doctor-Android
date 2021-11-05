@@ -1,16 +1,11 @@
 package com.doctor.yumyum.presentation.ui.write
 
-
 import android.os.Bundle
 import android.view.View
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
-import androidx.navigation.ui.NavigationUI
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseActivity
 import com.doctor.yumyum.databinding.ActivityWriteRecipeBinding
-import com.doctor.yumyum.presentation.viewmodel.WriteRecipeViewModel
-import com.google.android.material.navigation.NavigationView
 
 class WriteRecipeActivity : BaseActivity<ActivityWriteRecipeBinding>(R.layout.activity_write_recipe), View.OnClickListener{
 
