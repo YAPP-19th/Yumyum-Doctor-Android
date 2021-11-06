@@ -1,4 +1,4 @@
-package com.doctor.yumyum.presentation.viewmodel
+package com.doctor.yumyum.presentation.ui.login
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

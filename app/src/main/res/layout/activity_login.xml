@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.doctor.yumyum.presentation.viewmodel.LoginViewModel" />
+            type="com.doctor.yumyum.presentation.ui.login.LoginViewModel" />
 
     </data>
 
