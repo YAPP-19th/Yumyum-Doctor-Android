@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="tagList"
+            type="String" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+        android:layout_marginEnd="12dp"
+        android:id="@+id/item_tv_ingredients_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/font_body1_medium"
+        android:textColor="@color/dark_gray"
+        android:text="@{tagList}"
+        android:background="@drawable/bg_tag_item"/>
+
+
+    </LinearLayout>
+
+</layout>
