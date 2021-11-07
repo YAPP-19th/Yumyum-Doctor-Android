@@ -10,7 +10,7 @@ object RetrofitClient {
     private const val TIMEOUT_COUNT : Long = 10
 
     fun getClient(): Retrofit {
-        val baseUrl = ""
+        val baseUrl = "http://10.0.2.2:8000"
 
         val baseInterceptor: Interceptor = Interceptor { chain ->
             val builder = chain.request().newBuilder()
