@@ -16,7 +16,7 @@ interface Repository {
     fun setLoginToken(loginToken: String)
 
     // 회원가입
-    fun postAuthCreation(signUpModel: signUpModel):retrofit2.Call<ResponseBody>
+    fun postAuthCreation(signUpModel: signUpModel): retrofit2.Call<ResponseBody>
 }
 
 class RepositoryImpl : Repository {

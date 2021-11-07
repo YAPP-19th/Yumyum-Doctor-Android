@@ -25,6 +25,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
             lifecycleOwner = this@SplashActivity
             viewModel = viewModel
         }
+
         //임시용 main activity로 넘어가게
         val mainIntent = Intent(this, LoginActivity::class.java)
         startActivity(mainIntent)

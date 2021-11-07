@@ -10,5 +10,5 @@ interface AuthCreationService {
     @POST("/api/v1/auth/creation")
     fun signUp(
         @Body signUpModel: signUpModel
-    ):Call<ResponseBody>
+    ): Call<ResponseBody>
 }

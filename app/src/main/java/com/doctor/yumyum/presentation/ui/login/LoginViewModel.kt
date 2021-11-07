@@ -14,7 +14,6 @@ import retrofit2.http.Header
 
 
 class LoginViewModel : BaseViewModel() {
-    val TAG = "로그:LoginViewModel"
     val repository: RepositoryImpl = RepositoryImpl()
     private val _accessToken: MutableLiveData<String> = MutableLiveData()
     val accessToken: LiveData<String>
@@ -25,6 +24,9 @@ class LoginViewModel : BaseViewModel() {
     private val _oauthType: MutableLiveData<String> = MutableLiveData()
     val oauthType: LiveData<String>
         get() = _oauthType
+    private val _errorState: MutableLiveData<Boolean> = MutableLiveData(false)
+    val errorState: LiveData<Boolean>
+        get() = _errorState
 
     fun setAccessToken(t: String) {
         _accessToken.value = t
@@ -39,31 +41,28 @@ class LoginViewModel : BaseViewModel() {
     }
 
     fun signUp() {
-        Log.d(TAG, _accessToken.value.toString())
-        Log.d(TAG, _nickname.value.toString())
-        Log.d(TAG, _oauthType.value.toString())
-
         repository.postAuthCreation(
             signUpModel(
-                _accessToken.value.toString(),
-                _nickname.value.toString(),
-                _oauthType.value.toString()
+                accessToken.value.toString(),
+                nickname.value.toString(),
+                oauthType.value.toString()
             ),
         ).enqueue(object : retrofit2.Callback<ResponseBody> {
 
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 if (response.isSuccessful) {
-                    val a : List<Pair<String, String>> = response.headers().toList()
-                    Log.d(TAG, a.toString())
-                    for (h in a){
-                        Log.d(TAG, "${h.first},${h.second}")
+                    for (h in response.headers().toList()) {
+                        if (h.first == "Authorization") {
+                            repository.setLoginToken(h.second)
+                        }
                     }
-
+                }
+                else {
+                    _errorState.value = true
                 }
             }
-
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                Log.d(TAG, t.message.toString())
+                _errorState.value = true
             }
         })
 

@@ -36,6 +36,15 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
                 // TODO :: 준영
             }
         }
+
+        // 회원가입 에러 처리
+        viewModel.errorState.observe(this) {
+            if (it == true) {
+                ErrorDialog().apply {
+                    show(supportFragmentManager, "ErrorDialog")
+                }
+            }
+        }
     }
 
     fun kakaoLogin() {
