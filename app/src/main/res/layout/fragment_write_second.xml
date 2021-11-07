@@ -61,10 +61,10 @@
         <TextView
             android:id="@+id/write_second_tv_guide_add"
             style="@style/font_body1_medium"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="@string/write_second_tv_add"
+            android:text="@string/write_tv_add"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="@+id/write_second_et_menu"
             app:layout_constraintTop_toBottomOf="@+id/write_second_view2" />
@@ -81,10 +81,10 @@
         <TextView
             android:id="@+id/write_second_tv_guide_minus"
             style="@style/font_body1_medium"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="@string/write_second_tv_minus"
+            android:text="@string/write_tv_minus"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="@+id/write_second_btn_add"
             app:layout_constraintTop_toBottomOf="@+id/write_second_btn_add" />

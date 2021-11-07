@@ -18,6 +18,7 @@
     <string name="common_next">다음</string>
     <string name="common_ok">확인</string>
 
+
     <string name="common_starbucks">스타벅스</string>
     <string name="common_amasvin">아마스빈</string>
     <string name="common_gongcha">공차</string>
@@ -42,13 +43,15 @@
     <!-- 재료(태그) 입력 -->
     <string name="write_tag_tv_title">재료 입력</string>
     <string name="write_tag_type">tagType</string>
+    <string name="write_tag_delete">삭제</string>
+    <string name="write_tag_select_delete">선택 삭제</string>
 
     <!--브랜드 선택 다이얼로그 -->
     <string name="dialog_tv_brand">브랜드 선택</string>
     <string name="dialog_btn_select">선택</string>
     <string name="write_second_et_menu">메인메뉴</string>
-    <string name="write_second_tv_add">추가된 재료</string>
-    <string name="write_second_tv_minus">빠지거나 바뀌는 재료</string>
+    <string name="write_tv_add">추가된 재료</string>
+    <string name="write_tv_minus">빠지거나 바뀌는 재료</string>
 
     <!--   Internet dialog      -->
     <string name="dialog_msg_internet">인터넷 연결 상태를 확인 후\n다시 시도해 주세요.</string>

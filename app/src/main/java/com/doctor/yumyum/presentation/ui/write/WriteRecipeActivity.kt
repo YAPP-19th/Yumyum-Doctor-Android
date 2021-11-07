@@ -19,10 +19,10 @@ class WriteRecipeActivity : BaseActivity<ActivityWriteRecipeBinding>(R.layout.ac
     override fun onClick(v: View?) {
         when(v){
             binding.writeIbBack ->
-                //TODO :: 첫번째 작성하기에서는 뒤로가기 안보이게 하기
+                //TODO :: 첫번째 작성하기에서 뒤로가기를 눌렀을땐 레시피 작성 종료
                 findNavController(R.id.nav_host).popBackStack()
             binding.writeTvCancel ->
-                //TODO :: 다이얼로그 띄우기
+                //TODO :: 정말로~~취소하시겠습니까~~? 다이얼로그 띄우기
                 finish()
         }
     }
