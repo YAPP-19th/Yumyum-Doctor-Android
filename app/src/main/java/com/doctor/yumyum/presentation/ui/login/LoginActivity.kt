@@ -1,20 +1,22 @@
 package com.doctor.yumyum.presentation.ui.login
 
 import android.os.Bundle
+import android.util.Log
+import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseActivity
 import com.doctor.yumyum.databinding.ActivityLoginBinding
-
-import androidx.lifecycle.ViewModelProvider
-import com.kakao.sdk.auth.model.OAuthToken
-
 import com.kakao.sdk.auth.LoginClient
+import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
+import kotlinx.coroutines.*
+import java.lang.Exception
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
 
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
 
-    val TAG = "로그"
     private lateinit var viewModel: LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +32,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
             lifecycleOwner = this@LoginActivity
             viewModel = viewModel
             loginBtnKakao.setOnClickListener {
-                kakaoLogin()
+                CoroutineScope(Dispatchers.IO).launch {
+                    kakaoSignUp()
+                }
             }
             loginBtnGoogle.setOnClickListener {
                 // TODO :: 준영
@@ -47,32 +51,37 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         }
     }
 
-    fun kakaoLogin() {
+    suspend fun kakaoSignUp() {
         viewModel.setOauthType("KAKAO")
+
+        try {
+            val accessToken = kakaoLogin()
+            val nickname = kakaoUserInfo()
+            viewModel.setAccessToken(accessToken)
+            viewModel.setNickname(nickname)
+
+        } catch (e: Exception) {
+            ErrorDialog().apply {
+                show(supportFragmentManager, "ErrorDialog")
+            }
+        }
+        viewModel.signUp()
+    }
+
+    private suspend fun kakaoLogin() = suspendCancellableCoroutine<String> { cont ->
         // 로그인 callback
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             // 로그인 여부
-            if (error != null) {
-                ErrorDialog().apply {
-                    show(supportFragmentManager, "ErrorDialog")
+            if (error == null) {
+                if (token != null) {
+                    cont.resume(token.accessToken)
                 }
-            } else if (token != null) {
-                viewModel.setAccessToken(token.accessToken)
             }
-            // 사용자 정보 요청 여부
-            UserApiClient.instance.me { user, error ->
-                if (error != null) {
-                    ErrorDialog().apply {
-                        show(supportFragmentManager, "ErrorDialog")
-                    }
-                } else if (user != null) {
-                    user.kakaoAccount?.profile?.nickname?.let {
-                        viewModel.setNickname(it)
-                        viewModel.signUp()
-                    }
-                }
+            else {
+                cont.resumeWithException(Throwable())
             }
         }
+
         LoginClient.instance.run {
             // 카카오톡 있을때
             if (this.isKakaoTalkLoginAvailable(this@LoginActivity)) {
@@ -84,4 +93,19 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
             }
         }
     }
+
+    private suspend fun kakaoUserInfo() = suspendCancellableCoroutine<String> { cont ->
+        // 사용자 정보 요청 여부
+        UserApiClient.instance.me { user, error ->
+            if (error == null) {
+                if (user?.kakaoAccount?.profile?.nickname != null) {
+                    cont.resume(user.kakaoAccount?.profile?.nickname.toString())
+                }
+            }
+            else {
+                cont.resumeWithException(Throwable())
+            }
+        }
+    }
+
 }

@@ -29,15 +29,15 @@ class LoginViewModel : BaseViewModel() {
         get() = _errorState
 
     fun setAccessToken(t: String) {
-        _accessToken.value = t
+        _accessToken.postValue(t)
     }
 
     fun setNickname(n: String) {
-        _nickname.value = n
+        _nickname.postValue(n)
     }
 
     fun setOauthType(l: String) {
-        _oauthType.value = l
+        _oauthType.postValue(l)
     }
 
     fun signUp() {
@@ -48,7 +48,6 @@ class LoginViewModel : BaseViewModel() {
                 oauthType.value.toString()
             ),
         ).enqueue(object : retrofit2.Callback<ResponseBody> {
-
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 if (response.isSuccessful) {
                     for (h in response.headers().toList()) {
@@ -56,11 +55,11 @@ class LoginViewModel : BaseViewModel() {
                             repository.setLoginToken(h.second)
                         }
                     }
-                }
-                else {
+                } else {
                     _errorState.value = true
                 }
             }
+
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 _errorState.value = true
             }
