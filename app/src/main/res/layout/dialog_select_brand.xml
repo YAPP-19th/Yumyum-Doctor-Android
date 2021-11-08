@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+    <TextView
+        android:id="@+id/dialog_tv_brand_guide"
+        style="@style/font_body1_medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/dialog_tv_brand"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/dialog_brand_tv_starbucks"
+        style="@style/font_subtitle_regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="@string/common_starbucks"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/dialog_tv_brand_guide"
+        app:layout_constraintTop_toBottomOf="@id/dialog_tv_brand_guide" />
+
+    <TextView
+        android:id="@+id/dialog_brand_tv_amasvin"
+        style="@style/font_subtitle_regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/common_amasvin"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/dialog_brand_tv_starbucks"
+        app:layout_constraintTop_toBottomOf="@id/dialog_brand_tv_starbucks" />
+
+
+    <TextView
+        android:id="@+id/dialog_brand_tv_gongcha"
+        style="@style/font_subtitle_regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/common_gongcha"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/dialog_brand_tv_amasvin"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_brand_tv_amasvin" />
+
+
+    <TextView
+        android:id="@+id/dialog_brand_tv_ediya"
+        style="@style/font_subtitle_regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/common_ediya"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/dialog_brand_tv_gongcha"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_brand_tv_gongcha" />
+
+    <TextView
+        android:id="@+id/dialog_brand_tv_cocktail"
+        style="@style/font_subtitle_regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/common_cocktail"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/dialog_brand_tv_ediya"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_brand_tv_ediya" />
+
+    <TextView
+        android:id="@+id/dialog_brand_tv_etc"
+        style="@style/font_subtitle_regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/common_etc"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/dialog_brand_tv_cocktail"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_brand_tv_cocktail" />
+
+    <Button
+        android:id="@+id/write_first_btn_next"
+        style="@style/font_subtitle_medium"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/bg_bottom_btn"
+        android:includeFontPadding="false"
+        android:text="@string/dialog_btn_select"
+        android:textColor="@color/white"
+        android:stateListAnimator="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dialog_brand_tv_etc" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

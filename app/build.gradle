@@ -81,4 +81,9 @@ dependencies {
     // Google Sign in
     implementation 'com.google.firebase:firebase-auth:21.0.1'
     implementation 'com.google.android.gms:play-services-auth:19.2.0'
+    //Navigation Component
+    def nav_version = "2.3.5"
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
 }
