@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
 import android.view.KeyEvent.KEYCODE_ENTER
+import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.activity.viewModels
 import com.doctor.yumyum.R
@@ -32,6 +33,16 @@ class WriteTagActivity : BaseActivity<ActivityWriteTagBinding>(R.layout.activity
 
         getRequestCode()
 
+        binding.writeTagEtInput.setOnEditorActionListener { v, actionId, event ->
+            var handled = false
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                showToast("엔터 눌렀어용")
+                tagViewModel.setTagItem()
+                binding.writeTagEtInput.text.clear()
+            }
+            handled
+        }
+
     }
 
     private fun initViewModel() {
@@ -39,8 +50,10 @@ class WriteTagActivity : BaseActivity<ActivityWriteTagBinding>(R.layout.activity
     }
 
     private fun initBinding() {
+        binding.lifecycleOwner = this
         binding.tagActivity = this
         binding.tagViewModel =tagViewModel
+        binding.tagAdapter = WriteTagAdapter()
     }
 
     private fun initTagRecycler() {

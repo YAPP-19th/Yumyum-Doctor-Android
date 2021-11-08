@@ -1,14 +1,15 @@
 package com.doctor.yumyum.presentation.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.doctor.yumyum.databinding.ItemInputIngredientBinding
 
 class WriteTagAdapter : RecyclerView.Adapter<WriteTagAdapter.ViewHolder>(){
-    private var tagList: ArrayList<String> = arrayListOf()
+    var tagList: ArrayList<String> = arrayListOf()
 
-    inner class ViewHolder(private val binding: ItemInputIngredientBinding) : RecyclerView.ViewHolder(binding.root){
+    class ViewHolder(private val binding: ItemInputIngredientBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(tagItem : String){
             binding.tagList = tagItem
         }
@@ -27,11 +28,8 @@ class WriteTagAdapter : RecyclerView.Adapter<WriteTagAdapter.ViewHolder>(){
         return tagList.size
     }
 
-    fun updateTagList(newTag : ArrayList<String>){
-        tagList.clear()
-        tagList.addAll(newTag)
-        notifyDataSetChanged()
+    fun updateTagList(newTag : String){
+        tagList.add(0,newTag)
+        notifyItemInserted(0)
     }
-
-
 }

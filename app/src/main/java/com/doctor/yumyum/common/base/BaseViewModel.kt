@@ -16,7 +16,7 @@ abstract class BaseViewModel : ViewModel() {
         data class Toast(val string: String): BaseState()
     }
 
-    private fun toast(message: String) {
+    fun toast(message: String) {
         viewModelScope.launch {
             _baseState.value = BaseState.Toast(message)
         }
