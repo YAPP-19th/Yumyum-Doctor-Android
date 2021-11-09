@@ -42,8 +42,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         }
 
         // 회원가입 에러 처리
-        viewModel.errorState.observe(this) {
-            if (it == true) {
+        viewModel.errorState.observe(this) { error ->
+            if (error == true) {
                 ErrorDialog().apply {
                     show(supportFragmentManager, "ErrorDialog")
                 }
@@ -72,13 +72,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         // 로그인 callback
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             // 로그인 여부
-            if (error == null) {
-                if (token != null) {
-                    cont.resume(token.accessToken)
-                }
+            error?.let {
+                cont.resumeWithException(it)
             }
-            else {
-                cont.resumeWithException(Throwable())
+            token?.let {
+                cont.resume(it.accessToken)
             }
         }
 
@@ -97,13 +95,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     private suspend fun kakaoUserInfo() = suspendCancellableCoroutine<String> { cont ->
         // 사용자 정보 요청 여부
         UserApiClient.instance.me { user, error ->
-            if (error == null) {
-                if (user?.kakaoAccount?.profile?.nickname != null) {
-                    cont.resume(user.kakaoAccount?.profile?.nickname.toString())
-                }
+            error?.let {
+                cont.resumeWithException(it)
             }
-            else {
-                cont.resumeWithException(Throwable())
+            user?.kakaoAccount?.profile?.nickname?.let { nickname ->
+                cont.resume(nickname)
             }
         }
     }
