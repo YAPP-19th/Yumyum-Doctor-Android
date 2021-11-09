@@ -52,20 +52,17 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     }
 
     suspend fun kakaoSignUp() {
-        viewModel.setOauthType("KAKAO")
 
         try {
             val accessToken = kakaoLogin()
             val nickname = kakaoUserInfo()
-            viewModel.setAccessToken(accessToken)
-            viewModel.setNickname(nickname)
+            viewModel.signUp(accessToken, nickname,"KAKAO")
 
         } catch (e: Exception) {
             ErrorDialog().apply {
                 show(supportFragmentManager, "ErrorDialog")
             }
         }
-        viewModel.signUp()
     }
 
     private suspend fun kakaoLogin() = suspendCancellableCoroutine<String> { cont ->
@@ -103,5 +100,4 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
             }
         }
     }
-
 }

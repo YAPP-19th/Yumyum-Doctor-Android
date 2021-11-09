@@ -4,6 +4,7 @@ import com.doctor.yumyum.data.local.LocalDataSourceImpl
 import com.doctor.yumyum.data.model.signUpModel
 import com.doctor.yumyum.data.remote.RemoteDataSourceImpl
 import okhttp3.ResponseBody
+import retrofit2.Response
 
 interface LoginRepository {
     val localDataSource: LocalDataSourceImpl
@@ -14,5 +15,5 @@ interface LoginRepository {
     fun setLoginToken(loginToken: String)
 
     // 회원가입
-    fun postAuthCreation(signUpModel: signUpModel): retrofit2.Call<ResponseBody>
+    suspend fun postAuthCreation(signUpModel: signUpModel): Response<ResponseBody>
 }

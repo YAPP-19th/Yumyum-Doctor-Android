@@ -8,11 +8,11 @@ import okhttp3.ResponseBody
 import retrofit2.Response
 
 interface RemoteDataSource {
-    fun postAuthCreation(signUpModel: signUpModel): retrofit2.Call<ResponseBody>
+    suspend fun postAuthCreation(signUpModel: signUpModel): Response<ResponseBody>
 }
 
 class RemoteDataSourceImpl() : RemoteDataSource {
-    override fun postAuthCreation(signUpModel: signUpModel): retrofit2.Call<ResponseBody> {
+    override suspend fun postAuthCreation(signUpModel: signUpModel): Response<ResponseBody> {
         return RetrofitClient.getClient().create(AuthCreationService::class.java)
             .signUp(signUpModel)
     }
