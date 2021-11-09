@@ -1,6 +1,6 @@
 package com.doctor.yumyum.common.network
 
-import com.doctor.yumyum.data.repository.RepositoryImpl
+import com.doctor.yumyum.data.repository.LoginRepositoryImpl
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit
 
 object RetrofitClient {
     private const val TIMEOUT_COUNT: Long = 10
-    val repository: RepositoryImpl = RepositoryImpl()
+    val repository: LoginRepositoryImpl = LoginRepositoryImpl()
 
     fun getClient(): Retrofit {
         val baseUrl = "http://10.0.2.2:8000"

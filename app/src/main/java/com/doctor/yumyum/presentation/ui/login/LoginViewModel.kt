@@ -5,16 +5,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.common.base.BaseViewModel
 import com.doctor.yumyum.data.model.signUpModel
-import com.doctor.yumyum.data.repository.RepositoryImpl
-import com.google.gson.Gson
+import com.doctor.yumyum.data.repository.LoginRepositoryImpl
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
-import retrofit2.http.Header
 
 
 class LoginViewModel : BaseViewModel() {
-    val repository: RepositoryImpl = RepositoryImpl()
+    val repository = LoginRepositoryImpl()
     private val _accessToken: MutableLiveData<String> = MutableLiveData()
     val accessToken: LiveData<String>
         get() = _accessToken
