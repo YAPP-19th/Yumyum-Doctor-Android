@@ -28,7 +28,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
             viewModel = viewModel
         }
 
-        if (viewModel.loginToken == "") {
+        if (viewModel.loginToken.isNullOrBlank()) {
             startActivity(Intent(this, LoginActivity::class.java))
         }
         else {
