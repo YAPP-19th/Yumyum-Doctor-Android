@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "27677004735",
+    "project_id": "yumyumdoctor-10cc8",
+    "storage_bucket": "yumyumdoctor-10cc8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:27677004735:android:e6c349d5da13ae8377870a",
+        "android_client_info": {
+          "package_name": "com.doctor.yumyum"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "27677004735-8e81cupt5urig21ub7vn2tj774sm53fi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.doctor.yumyum",
+            "certificate_hash": "9708d75694aad56311eef72e24cdaa6c1b08b1c4"
+          }
+        },
+        {
+          "client_id": "27677004735-trso8pm5k2m1quonch3ls616b58go14r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYTBYReyQI_rkSxZAn6UrtFclYYCjqCJk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "27677004735-trso8pm5k2m1quonch3ls616b58go14r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
