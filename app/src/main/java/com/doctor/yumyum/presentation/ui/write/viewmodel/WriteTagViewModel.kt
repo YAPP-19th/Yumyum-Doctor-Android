@@ -29,6 +29,6 @@ class WriteTagViewModel : BaseViewModel(){
                 return
             }
         }
-        _rvTagItem.value = "#${recentTagItem}"
+        _rvTagItem.value = recentTagItem
     }
 }
