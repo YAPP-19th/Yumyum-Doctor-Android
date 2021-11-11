@@ -22,6 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
+        android:background="@drawable/bg_tv_select_brand"
         android:text="@string/common_starbucks"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@id/dialog_tv_brand_guide"
@@ -32,6 +33,7 @@
         style="@style/font_subtitle_regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_tv_select_brand"
         android:text="@string/common_amasvin"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@id/dialog_brand_tv_starbucks"
@@ -43,6 +45,7 @@
         style="@style/font_subtitle_regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_tv_select_brand"
         android:text="@string/common_gongcha"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@+id/dialog_brand_tv_amasvin"
@@ -54,6 +57,7 @@
         style="@style/font_subtitle_regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_tv_select_brand"
         android:text="@string/common_ediya"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@+id/dialog_brand_tv_gongcha"
@@ -64,6 +68,7 @@
         style="@style/font_subtitle_regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_tv_select_brand"
         android:text="@string/common_cocktail"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@+id/dialog_brand_tv_ediya"
@@ -74,12 +79,13 @@
         style="@style/font_subtitle_regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_tv_select_brand"
         android:text="@string/common_etc"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@+id/dialog_brand_tv_cocktail"
         app:layout_constraintTop_toBottomOf="@+id/dialog_brand_tv_cocktail" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/write_first_btn_next"
         style="@style/font_subtitle_medium"
         android:layout_width="match_parent"
@@ -89,9 +95,9 @@
         android:layout_marginBottom="20dp"
         android:background="@drawable/bg_bottom_btn"
         android:includeFontPadding="false"
+        android:stateListAnimator="@null"
         android:text="@string/dialog_btn_select"
         android:textColor="@color/white"
-        android:stateListAnimator="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/dialog_brand_tv_etc" />
 
