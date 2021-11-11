@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Yumyum</string>
     <string name="shared_pref_key">Yumyum_DB</string>
+    <string name="kakao_app_key">44e11b10e2c1d2c273b00e4d466badd2</string>
+
     <string name="common_food">음식</string>
     <string name="common_beverage">음료</string>
     <string name="common_button_change_mode">모드 변경 버튼</string>
@@ -49,7 +51,16 @@
 
     <!--   Internet dialog      -->
     <string name="dialog_msg_internet">인터넷 연결 상태를 확인 후\n다시 시도해 주세요.</string>
-    <string name="dialog_button_internet">다시 시도</string>
+    <string name="dialog_btn_internet">다시 시도</string>
+
+    <!--    Error dialog    -->
+    <string name="dialog_msg_error">오류가 발생하였습니다.\n나중에 다시 시도해 주세요.</string>
+    <string name="dialog_btn_error">확인</string>
+
+    <!--    Login Activity-->
+    <string name="login_tv_start">SNS계정으로 시작하기</string>
+    <string name="login_btn_kakao">카카오톡으로 시작</string>
+    <string name="login_btn_google">구글로 시작</string>
 
     <!-- 레시피 탐구 -->
     <string name="research_icon_ranking_medal">랭킹 메달</string>

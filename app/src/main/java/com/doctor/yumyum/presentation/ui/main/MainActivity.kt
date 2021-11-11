@@ -7,7 +7,6 @@ import com.doctor.yumyum.R
 import com.doctor.yumyum.databinding.ActivityMainBinding
 import com.doctor.yumyum.common.base.BaseActivity
 import com.doctor.yumyum.presentation.ui.write.WriteRecipeActivity
-import com.doctor.yumyum.presentation.viewmodel.MainViewModel
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
