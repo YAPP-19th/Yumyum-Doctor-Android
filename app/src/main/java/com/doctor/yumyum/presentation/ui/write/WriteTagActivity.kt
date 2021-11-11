@@ -36,7 +36,6 @@ class WriteTagActivity : BaseActivity<ActivityWriteTagBinding>(R.layout.activity
         binding.writeTagEtInput.setOnEditorActionListener { v, actionId, event ->
             var handled = false
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                showToast("엔터 눌렀어용")
                 tagViewModel.setTagItem()
                 binding.writeTagEtInput.text.clear()
             }
