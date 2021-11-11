@@ -45,6 +45,7 @@
     <string name="write_tag_type">tagType</string>
     <string name="write_tag_delete">삭제</string>
     <string name="write_tag_select_delete">선택 삭제</string>
+    <string name="write_tag_max_guide">최대<font color="#9AC143">10</font>개</string>
 
     <!--브랜드 선택 다이얼로그 -->
     <string name="dialog_tv_brand">브랜드 선택</string>
@@ -60,6 +61,7 @@
     <!-- 레시피 탐구 -->
     <string name="research_icon_ranking_medal">랭킹 메달</string>
     <string name="research_icon_weekly_ranking">주간 랭킹 아이콘</string>
+
 
 
 </resources>
