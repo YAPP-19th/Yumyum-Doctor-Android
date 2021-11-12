@@ -62,12 +62,12 @@
             app:layout_constraintStart_toStartOf="@+id/write_second_et_menu"
             app:layout_constraintTop_toBottomOf="@+id/write_second_view2" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/write_second_btn_add"
             android:layout_width="22dp"
             android:layout_height="22dp"
             android:layout_marginTop="5dp"
-            android:background="@drawable/ic_pluscircle"
+            android:src="@drawable/ic_pluscircle"
             app:layout_constraintStart_toStartOf="@id/write_second_tv_guide_add"
             app:layout_constraintTop_toBottomOf="@id/write_second_tv_guide_add" />
 
@@ -82,16 +82,16 @@
             app:layout_constraintStart_toStartOf="@+id/write_second_btn_add"
             app:layout_constraintTop_toBottomOf="@+id/write_second_btn_add" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/write_second_btn_minus"
             android:layout_width="22dp"
             android:layout_height="22dp"
             android:layout_marginTop="5dp"
-            android:background="@drawable/ic_pluscircle"
+            android:src="@drawable/ic_pluscircle"
             app:layout_constraintStart_toStartOf="@id/write_second_tv_guide_minus"
             app:layout_constraintTop_toBottomOf="@id/write_second_tv_guide_minus" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/write_second_btn_next"
             style="@style/font_subtitle_medium"
             android:layout_width="0dp"
