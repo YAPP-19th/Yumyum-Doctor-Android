@@ -13,6 +13,10 @@ import com.doctor.yumyum.common.base.BaseActivity
 import com.doctor.yumyum.databinding.ActivityWriteTagBinding
 import com.doctor.yumyum.presentation.adapter.WriteTagAdapter
 import com.doctor.yumyum.presentation.ui.write.viewmodel.WriteTagViewModel
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexWrap
+import com.google.android.flexbox.FlexboxLayoutManager
+import com.google.android.flexbox.JustifyContent
 
 /**
  *  레시피 재료 입력
@@ -56,7 +60,14 @@ class WriteTagActivity : BaseActivity<ActivityWriteTagBinding>(R.layout.activity
     }
 
     private fun initTagRecycler() {
-        binding.writeTagRvInput.adapter = WriteTagAdapter()
+        FlexboxLayoutManager(this).apply {
+            flexWrap = FlexWrap.WRAP
+            flexDirection = FlexDirection.ROW
+            justifyContent = JustifyContent.FLEX_START
+        }.let {
+            binding.writeTagRvInput.layoutManager = it
+            binding.writeTagRvInput.adapter = WriteTagAdapter()
+        }
     }
 
     private fun getRequestCode() {

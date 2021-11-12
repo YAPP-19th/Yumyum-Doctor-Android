@@ -122,11 +122,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="33dp"
                 android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:overScrollMode="never"
                 app:layout_constraintEnd_toEndOf="@id/write_tag_view"
                 app:layout_constraintStart_toStartOf="@id/write_tag_view"
                 app:layout_constraintTop_toBottomOf="@id/write_tag_view"
-                tools:ignore="MissingConstraints"
                 tools:listitem="@layout/item_input_ingredient" />
 
             <TextView
