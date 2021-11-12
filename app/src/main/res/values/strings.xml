@@ -49,6 +49,13 @@
     <string name="write_second_tv_add">추가된 재료</string>
     <string name="write_second_tv_minus">빠지거나 바뀌는 재료</string>
 
+    <!-- 정렬 선택 다이얼로그 -->
+    <string name="sort_recent">최신순</string>
+    <string name="sort_scrap">스크랩순</string>
+    <string name="sort_like">좋아요순</string>
+    <string name="sort_expensive">가격 높은순</string>
+    <string name="sort_cheap">가격 낮은순</string>
+
     <!--   Internet dialog      -->
     <string name="dialog_msg_internet">인터넷 연결 상태를 확인 후\n다시 시도해 주세요.</string>
     <string name="dialog_btn_internet">다시 시도</string>
@@ -65,7 +72,7 @@
     <!-- 레시피 탐구 -->
     <string name="research_icon_ranking_medal">랭킹 메달</string>
     <string name="research_icon_weekly_ranking">주간 랭킹 아이콘</string>
-  
+
     <!-- 레시피 목록 -->
     <string name="research_list_title">레시피 목록</string>
     <string name="research_list_search_with_hashtag">해시태그로 검색</string>
