@@ -1,6 +1,7 @@
 package com.doctor.yumyum.presentation.ui.main
 
 import android.app.Application
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
 import com.doctor.yumyum.databinding.FragmentResearchRecipeBinding
 import com.doctor.yumyum.presentation.ResearchViewModelFactory
+import com.doctor.yumyum.presentation.ui.researchlist.ResearchListActivity
 import com.doctor.yumyum.presentation.viewmodel.ResearchRecipeViewModel
 
 class ResearchRecipeFragment :
@@ -41,6 +43,10 @@ class ResearchRecipeFragment :
             )
         }
         binding.viewModel = viewModel
+        // TODO: 브랜드 아이템 클릭시 이동
+        binding.researchRecipeTvBrand.setOnClickListener {
+            startActivity(Intent(context, ResearchListActivity::class.java))
+        }
         return binding.root
     }
 }
