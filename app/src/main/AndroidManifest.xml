@@ -3,7 +3,6 @@
     package="com.doctor.yumyum">
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
-        android:usesCleartextTraffic="true"
         android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,6 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Yumyum">
+        <activity
+            android:name=".presentation.ui.filter.FilterActivity"
+            android:exported="true" />
         <activity
             android:name=".presentation.ui.login.LoginActivity"/>
        <activity

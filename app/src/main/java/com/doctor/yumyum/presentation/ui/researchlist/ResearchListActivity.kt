@@ -1,10 +1,12 @@
 package com.doctor.yumyum.presentation.ui.researchlist
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseActivity
 import com.doctor.yumyum.databinding.ActivityResearchListBinding
+import com.doctor.yumyum.presentation.ui.filter.FilterActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class ResearchListActivity :
@@ -21,9 +23,19 @@ class ResearchListActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_research_list)
 
         initDialog()
+
+        // 필터 화면으로 이동
+        binding.researchListTvFilter.setOnClickListener {
+            startActivity(
+                Intent(
+                    this,
+                    FilterActivity::class.java
+                )
+            )
+        }
+        // 정렬 다이얼로그 띄우기
         binding.researchListTvSort.setOnClickListener { showBottomSheet() }
     }
 
