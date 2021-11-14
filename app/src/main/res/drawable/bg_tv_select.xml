@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
-        <shape android:shape="rectangle">
+        <shape>
             <corners android:radius="30dp" />
-            <padding
-                android:bottom="12dp"
-                android:left="16dp"
-                android:top="11dp" />
             <stroke
                 android:width="2dp"
                 android:color="@color/main_orange" />
@@ -17,5 +13,5 @@
         android:height="24dp"
         android:drawable="@drawable/ic_select"
         android:end="10dp"
-        android:gravity="end" />
+        android:gravity="end|center_vertical" />
 </layer-list>
