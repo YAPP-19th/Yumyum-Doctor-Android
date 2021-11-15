@@ -64,13 +64,12 @@
             app:layout_constraintTop_toBottomOf="@id/write_tag_toolbar">
 
             <TextView
-                android:id="@+id/write_tag_tv_add_guide"
+                android:id="@+id/write_tag_tv_guide"
                 style="@style/font_body2_medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="23dp"
-                android:text="@{tagViewModel.guideText}"
                 android:textColor="@color/dark_gray"
                 android:visibility="@{tagViewModel.etTagItem == null || tagViewModel.etTagItem.isEmpty == true ? View.INVISIBLE : View.VISIBLE}"
                 app:layout_constraintStart_toStartOf="parent"
@@ -85,14 +84,14 @@
                 android:layout_marginTop="6dp"
                 android:layout_marginEnd="5dp"
                 android:background="@null"
-                android:hint="@{tagViewModel.guideText}"
                 android:inputType="text"
                 android:singleLine="true"
                 android:text="@={tagViewModel.etTagItem}"
                 android:textColor="@color/black"
+                android:textColorHint="@color/light_gray"
                 app:layout_constraintEnd_toStartOf="@id/write_tag_tv_max_guide"
-                app:layout_constraintStart_toStartOf="@id/write_tag_tv_add_guide"
-                app:layout_constraintTop_toBottomOf="@id/write_tag_tv_add_guide" />
+                app:layout_constraintStart_toStartOf="@id/write_tag_tv_guide"
+                app:layout_constraintTop_toBottomOf="@id/write_tag_tv_guide" />
 
             <TextView
                 android:id="@+id/write_tag_tv_max_guide"

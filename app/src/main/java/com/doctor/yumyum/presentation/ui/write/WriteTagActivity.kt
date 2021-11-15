@@ -8,6 +8,7 @@ import android.view.KeyEvent.KEYCODE_ENTER
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.activity.viewModels
+import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseActivity
 import com.doctor.yumyum.databinding.ActivityWriteTagBinding
@@ -38,24 +39,22 @@ class WriteTagActivity : BaseActivity<ActivityWriteTagBinding>(R.layout.activity
         getRequestCode()
 
         binding.writeTagEtInput.setOnEditorActionListener { v, actionId, event ->
-            var handled = false
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 tagViewModel.setTagItem()
                 binding.writeTagEtInput.text.clear()
             }
-            handled
+            false
         }
-
     }
 
     private fun initViewModel() {
-        tagViewModel = WriteTagViewModel()
+        tagViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(WriteTagViewModel::class.java)
     }
 
     private fun initBinding() {
         binding.lifecycleOwner = this
         binding.tagActivity = this
-        binding.tagViewModel =tagViewModel
+        binding.tagViewModel = tagViewModel
         binding.tagAdapter = WriteTagAdapter()
     }
 
@@ -77,7 +76,8 @@ class WriteTagActivity : BaseActivity<ActivityWriteTagBinding>(R.layout.activity
             9002 -> resources.getString(R.string.write_tv_minus)
             else -> ""
         }
-        tagViewModel.setGuideText(guideText)
+        binding.writeTagEtInput.hint = guideText
+        binding.writeTagTvGuide.text = guideText
     }
 
     fun finishInput() {
