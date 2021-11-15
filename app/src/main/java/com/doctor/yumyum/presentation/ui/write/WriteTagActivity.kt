@@ -72,8 +72,8 @@ class WriteTagActivity : BaseActivity<ActivityWriteTagBinding>(R.layout.activity
     private fun getRequestCode() {
         requestCode = intent.extras!!.getInt(resources.getString(R.string.write_tag_type))
         val guideText : String = when(requestCode){
-            9001 -> resources.getString(R.string.write_tv_add)
-            9002 -> resources.getString(R.string.write_tv_minus)
+            WriteFragment2.REQUEST_CODE_ADD_INGREDIENTS -> resources.getString(R.string.write_tv_add)
+            WriteFragment2.REQUEST_CODE_MINUS_INGREDIENTS -> resources.getString(R.string.write_tv_minus)
             else -> ""
         }
         binding.writeTagEtInput.hint = guideText

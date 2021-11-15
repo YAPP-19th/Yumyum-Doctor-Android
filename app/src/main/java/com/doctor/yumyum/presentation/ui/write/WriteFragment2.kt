@@ -20,8 +20,8 @@ class WriteFragment2 : BaseFragment<FragmentWriteSecondBinding>(R.layout.fragmen
     private lateinit var changeIngredients : ActivityResultLauncher<Intent>
 
     companion object {
-        private const val REQUEST_CODE_ADD_INGREDIENTS = 9001
-        private const val REQUEST_CODE_MINUS_INGREDIENTS = 9002
+        const val REQUEST_CODE_ADD_INGREDIENTS = 9001
+        const val REQUEST_CODE_MINUS_INGREDIENTS = 9002
     }
 
 
@@ -29,15 +29,20 @@ class WriteFragment2 : BaseFragment<FragmentWriteSecondBinding>(R.layout.fragmen
         super.onViewCreated(view, savedInstanceState)
 
         initBinding()
+        initListener()
         changeIngredients()
 
-        binding.writeSecondBtnMinus.setOnClickListener(this)
-        binding.writeSecondBtnNext.setOnClickListener(this)
-        binding.writeSecondBtnAdd.setOnClickListener(this)
     }
 
     private fun initBinding() {
         binding.secondFragment = this
+    }
+
+
+    private fun initListener() {
+        binding.writeSecondBtnMinus.setOnClickListener(this)
+        binding.writeSecondBtnNext.setOnClickListener(this)
+        binding.writeSecondBtnAdd.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
