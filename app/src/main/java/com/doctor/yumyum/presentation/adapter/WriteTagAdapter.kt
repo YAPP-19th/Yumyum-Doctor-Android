@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.doctor.yumyum.databinding.ItemInputIngredientBinding
 
 class WriteTagAdapter : RecyclerView.Adapter<WriteTagAdapter.ViewHolder>(){
-    var tagList: ArrayList<String> = arrayListOf()
+    private var tagList: ArrayList<String> = arrayListOf()
 
     class ViewHolder(private val binding: ItemInputIngredientBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(tagItem : String){
@@ -28,10 +28,8 @@ class WriteTagAdapter : RecyclerView.Adapter<WriteTagAdapter.ViewHolder>(){
         return tagList.size
     }
 
-    fun updateTagList(newTag : String){
-        if (!tagList.contains(newTag)){
-            tagList.add(newTag)
-            notifyItemInserted(tagList.size-1)
-        }
+    fun updateTagList(newTagList : ArrayList<String>){
+        tagList = newTagList
+        notifyItemInserted(tagList.size-1)
     }
 }

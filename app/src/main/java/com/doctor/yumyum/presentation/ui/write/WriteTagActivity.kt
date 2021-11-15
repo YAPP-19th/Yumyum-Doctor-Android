@@ -2,12 +2,7 @@ package com.doctor.yumyum.presentation.ui.write
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.KeyEvent
-import android.view.KeyEvent.KEYCODE_ENTER
-import android.view.View
 import android.view.inputmethod.EditorInfo
-import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseActivity
@@ -40,7 +35,7 @@ class WriteTagActivity : BaseActivity<ActivityWriteTagBinding>(R.layout.activity
 
         binding.writeTagEtInput.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                tagViewModel.setTagItem()
+                tagViewModel.validTagItem()
                 binding.writeTagEtInput.text.clear()
             }
             false
@@ -89,5 +84,4 @@ class WriteTagActivity : BaseActivity<ActivityWriteTagBinding>(R.layout.activity
     fun cancleInput(){
         finish()
     }
-
 }

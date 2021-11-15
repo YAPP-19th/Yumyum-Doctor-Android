@@ -6,8 +6,13 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 
 @BindingAdapter("bind_tagList")
-fun bindTagList(recyclerView: RecyclerView, tagItem : String?){
-    tagItem?.run {
-        ((recyclerView.adapter) as WriteTagAdapter).updateTagList("#$this")
+fun bindTagList(rvTagList: RecyclerView, tagList : ArrayList<String>?){
+    tagList?.run {
+        ((rvTagList.adapter) as WriteTagAdapter).updateTagList(this)
     }
+}
+
+@BindingAdapter("bind_tagItem")
+fun bindTagItem(tvTagItem: TextView, tagItem : String){
+    tvTagItem.text= "#$tagItem"
 }

@@ -1,25 +1,27 @@
 package com.doctor.yumyum.presentation.ui.write.viewmodel
 
-
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.common.base.BaseViewModel
 
 class WriteTagViewModel : BaseViewModel(){
+    private val tagList : ArrayList<String> = arrayListOf()
+    private val _rvTagList : MutableLiveData<ArrayList<String>> = MutableLiveData()
+    val rvTagList : LiveData<ArrayList<String>>
+        get() = _rvTagList
+
     val etTagItem : MutableLiveData<String> = MutableLiveData()
 
-    private val _rvTagItem : MutableLiveData<String> = MutableLiveData()
-    val rvTagItem : LiveData<String>
-        get() = _rvTagItem
+    fun validTagItem(){
+        if(!etTagItem.value.isNullOrBlank()){
+            addTagItem(etTagItem.value!!)
+        }else{toast("재료 입력해주세요")}
+    }
 
-    fun setTagItem(){
-        val recentTagItem = this.etTagItem.value.also {
-            if (it.isNullOrBlank()) {
-                toast("재료를 입력해주세요")
-                return
-            }
+    private fun addTagItem(newTag : String){
+        if(!tagList.contains(newTag)){
+            tagList.add(newTag)
+            _rvTagList.value = tagList
         }
-        _rvTagItem.value = recentTagItem
     }
 }

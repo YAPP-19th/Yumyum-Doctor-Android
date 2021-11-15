@@ -21,7 +21,7 @@
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="13dp"
             android:background="@drawable/bg_tag_item"
-            android:text="@{tagList}"
+            bind_tagItem= "@{tagItem}"
             android:textColor="@color/dark_gray" />
 
 
