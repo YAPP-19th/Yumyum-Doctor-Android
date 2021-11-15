@@ -4,7 +4,7 @@
     <data>
 
         <variable
-            name="tagList"
+            name="tagItem"
             type="String" />
     </data>
 
@@ -14,7 +14,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/item_tv_ingredients_tag"
+            android:id="@+id/item_ingredients_tv_tag"
             style="@style/font_body1_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
