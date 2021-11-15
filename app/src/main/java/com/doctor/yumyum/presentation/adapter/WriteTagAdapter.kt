@@ -11,7 +11,7 @@ class WriteTagAdapter : RecyclerView.Adapter<WriteTagAdapter.ViewHolder>(){
 
     class ViewHolder(private val binding: ItemInputIngredientBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(tagItem : String){
-            binding.tagList = tagItem
+            binding.tagItem = tagItem
         }
     }
 
@@ -29,7 +29,9 @@ class WriteTagAdapter : RecyclerView.Adapter<WriteTagAdapter.ViewHolder>(){
     }
 
     fun updateTagList(newTag : String){
-        tagList.add(0,newTag)
-        notifyItemInserted(0)
+        if (!tagList.contains(newTag)){
+            tagList.add(newTag)
+            notifyItemInserted(tagList.size-1)
+        }
     }
 }
