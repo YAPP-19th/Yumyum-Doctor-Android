@@ -2,6 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="secondFragment"
+            type="com.doctor.yumyum.presentation.ui.write.WriteFragment2" />
+
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -54,15 +61,16 @@
         <TextView
             android:id="@+id/write_second_tv_guide_add"
             style="@style/font_body1_medium"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="@string/write_second_tv_add"
+            android:text="@string/write_tv_add"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="@+id/write_second_et_menu"
             app:layout_constraintTop_toBottomOf="@+id/write_second_view2" />
 
         <androidx.appcompat.widget.AppCompatImageButton
+
             android:id="@+id/write_second_btn_add"
             android:layout_width="22dp"
             android:layout_height="22dp"
@@ -74,13 +82,14 @@
         <TextView
             android:id="@+id/write_second_tv_guide_minus"
             style="@style/font_body1_medium"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="@string/write_second_tv_minus"
+            android:text="@string/write_tv_minus"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="@+id/write_second_btn_add"
             app:layout_constraintTop_toBottomOf="@+id/write_second_btn_add" />
+
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/write_second_btn_minus"
@@ -106,7 +115,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="23dp"
             android:textOff="@string/common_food"
-            android:textOn="@string/common_drink"
+            android:textOn="@string/common_beverage"
             android:thumb="@drawable/shape_sw_thumb"
             app:layout_constraintStart_toStartOf="@id/write_first_tv_guide"
             app:layout_constraintTop_toBottomOf="@id/write_first_tv_guide"

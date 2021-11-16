@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="tagAdapter"
+            type="com.doctor.yumyum.presentation.adapter.WriteTagAdapter" />
+
+        <variable
+            name="tagActivity"
+            type="com.doctor.yumyum.presentation.ui.write.WriteTagActivity" />
+
+        <variable
+            name="tagViewModel"
+            type="com.doctor.yumyum.presentation.ui.write.viewmodel.WriteTagViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/write_tag_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/write_tag_ib_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="16dp"
+                android:background="#00000000"
+                android:onClick="@{() -> tagActivity.cancleInput()}"
+                android:src="@drawable/ic_back" />
+
+            <TextView
+                android:id="@+id/write_tv_title"
+                style="@style/font_h3_medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/write_tag_tv_title"
+                android:textColor="@color/black" />
+        </FrameLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/write_tag_toolbar">
+
+            <TextView
+                android:id="@+id/write_tag_tv_guide"
+                style="@style/font_body2_medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="23dp"
+                android:textColor="@color/dark_gray"
+                android:visibility="@{tagViewModel.tagInput == null || tagViewModel.tagInput.isEmpty == true ? View.INVISIBLE : View.VISIBLE}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <EditText
+                android:id="@+id/write_tag_et_input"
+                style="@style/font_h3_regular"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="5dp"
+                android:background="@null"
+                android:inputType="text"
+                android:singleLine="true"
+                android:text="@={tagViewModel.tagInput}"
+                android:textColor="@color/black"
+                android:textColorHint="@color/light_gray"
+                app:layout_constraintEnd_toStartOf="@id/write_tag_tv_max_guide"
+                app:layout_constraintStart_toStartOf="@id/write_tag_tv_guide"
+                app:layout_constraintTop_toBottomOf="@id/write_tag_tv_guide" />
+
+            <TextView
+                android:id="@+id/write_tag_tv_max_guide"
+                style="@style/font_cap"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="@string/write_tag_max_guide"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@id/write_tag_et_input"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/write_tag_et_input" />
+
+            <View
+                android:id="@+id/write_tag_view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="4dp"
+                android:background="@color/light_gray"
+                app:layout_constraintTop_toBottomOf="@id/write_tag_et_input" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/write_tag_rv_input"
+                bind_tagList="@{tagViewModel.tagListLiveData}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="33dp"
+                android:orientation="horizontal"
+                android:overScrollMode="never"
+                app:layout_constraintEnd_toEndOf="@id/write_tag_view"
+                app:layout_constraintStart_toStartOf="@id/write_tag_view"
+                app:layout_constraintTop_toBottomOf="@id/write_tag_view"
+                tools:listitem="@layout/item_input_ingredient" />
+
+            <TextView
+                style="@style/font_body1_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/write_tag_delete"
+                android:textColor="@color/black"
+                android:visibility="@{tagViewModel.tagListLiveData.size() == 0 ? View.INVISIBLE : View.VISIBLE}"
+                app:layout_constraintStart_toStartOf="@id/write_tag_rv_input"
+                app:layout_constraintTop_toBottomOf="@id/write_tag_rv_input" />
+
+            <Button
+                android:id="@+id/write_tag_btn_ok"
+                style="@style/font_subtitle_medium"
+                android:layout_width="0dp"
+                android:layout_height="47dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/bg_bottom_btn"
+                android:backgroundTint="@color/unselect_orange"
+                android:onClick="@{() -> tagActivity.finishInput()}"
+                android:stateListAnimator="@null"
+                android:text="@string/common_ok"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
