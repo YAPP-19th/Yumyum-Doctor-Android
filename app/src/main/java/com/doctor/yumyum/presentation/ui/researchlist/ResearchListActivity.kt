@@ -27,6 +27,7 @@ class ResearchListActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        binding.activity = this
         initDialog()
 
         // 필터 화면으로 이동
