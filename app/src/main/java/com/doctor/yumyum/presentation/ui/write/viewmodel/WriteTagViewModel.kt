@@ -16,9 +16,11 @@ class WriteTagViewModel : BaseViewModel(){
     }
 
     fun validTagItem(){
-        if(!tagInput.value.isNullOrBlank()){
-            addTagItem(tagInput.value!!)
-        }else{toast("재료 입력해주세요")}
+        if (!tagInput.value.isNullOrBlank()) {
+            addTagItem(tagInput.value.toString())
+        } else {
+            toast("재료를 입력해주세요")
+        }
     }
 
     private fun addTagItem(newTag : String){
