@@ -6,6 +6,9 @@
 
     <data>
 
+        <variable
+            name="activity"
+            type="com.doctor.yumyum.presentation.ui.researchlist.ResearchListActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -125,6 +128,7 @@
             android:layout_marginEnd="16dp"
             android:drawablePadding="2dp"
             android:gravity="top"
+            android:onClick="@{()->activity.showBottomSheet()}"
             android:text="@string/common_sort"
             android:textColor="@color/gray"
             app:drawableStartCompat="@drawable/ic_sort"

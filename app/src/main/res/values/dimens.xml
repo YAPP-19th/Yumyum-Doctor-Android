@@ -1,3 +1,6 @@
 <resources>
-        <dimen name="fab_margin">16dp</dimen>
-    </resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="filter_price_width">71dp</dimen>
+    <dimen name="taste_select_width">112dp</dimen>
+    <dimen name="taste_detail_select_width">72dp</dimen>
+</resources>
