@@ -65,7 +65,7 @@ class WriteTagActivity : BaseActivity<ActivityWriteTagBinding>(R.layout.activity
     }
 
     private fun getRequestCode() {
-        requestCode = intent.extras!!.getInt(resources.getString(R.string.write_tag_type))
+        requestCode = intent.extras?.getInt(resources.getString(R.string.write_tag_type)) ?: 0
         val guideText : String = when(requestCode){
             WriteFragment2.REQUEST_CODE_ADD_INGREDIENTS -> resources.getString(R.string.write_tv_add)
             WriteFragment2.REQUEST_CODE_MINUS_INGREDIENTS -> resources.getString(R.string.write_tv_minus)
