@@ -31,15 +31,8 @@ class ResearchListActivity :
 
         // 필터 화면으로 이동
         binding.researchListTvFilter.setOnClickListener {
-            startActivity(
-                Intent(
-                    this,
-                    FilterActivity::class.java
-                )
-            )
+            startActivity(Intent(this, FilterActivity::class.java))
         }
-        // 정렬 다이얼로그 띄우기
-        binding.researchListTvSort.setOnClickListener { showBottomSheet() }
         viewModel.sortType.observe(this) { bottomSheetDialog.dismiss() }
     }
 
@@ -57,7 +50,7 @@ class ResearchListActivity :
         bottomSheetDialog.setContentView(bottomSheetBinding.root)
     }
 
-    private fun showBottomSheet() {
+    fun showBottomSheet() {
         bottomSheetDialog.show()
         viewModel.initSortType()
     }
