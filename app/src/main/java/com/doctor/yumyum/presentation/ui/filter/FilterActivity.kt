@@ -1,12 +1,13 @@
 package com.doctor.yumyum.presentation.ui.filter
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.doctor.yumyum.R
+import com.doctor.yumyum.common.base.BaseActivity
+import com.doctor.yumyum.databinding.ActivityFilterBinding
 
-class FilterActivity : AppCompatActivity() {
+class FilterActivity : BaseActivity<ActivityFilterBinding>(R.layout.activity_filter) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_filter)
+        setContentView(binding.root)
     }
 }
