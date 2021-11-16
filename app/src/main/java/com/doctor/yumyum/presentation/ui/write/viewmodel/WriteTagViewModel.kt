@@ -5,23 +5,26 @@ import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.common.base.BaseViewModel
 
 class WriteTagViewModel : BaseViewModel(){
-    private val tagList : ArrayList<String> = arrayListOf()
-    private val _rvTagList : MutableLiveData<ArrayList<String>> = MutableLiveData()
-    val rvTagList : LiveData<ArrayList<String>>
-        get() = _rvTagList
+    private val _tagListLiveData : MutableLiveData<ArrayList<String>> = MutableLiveData()
+    val tagListLiveData : LiveData<ArrayList<String>>
+        get() = _tagListLiveData
 
-    val etTagItem : MutableLiveData<String> = MutableLiveData()
+    val tagInput : MutableLiveData<String> = MutableLiveData()
+
+    init {
+        _tagListLiveData.value = arrayListOf()
+    }
 
     fun validTagItem(){
-        if(!etTagItem.value.isNullOrBlank()){
-            addTagItem(etTagItem.value!!)
+        if(!tagInput.value.isNullOrBlank()){
+            addTagItem(tagInput.value!!)
         }else{toast("재료 입력해주세요")}
     }
 
     private fun addTagItem(newTag : String){
-        if(!tagList.contains(newTag)){
-            tagList.add(newTag)
-            _rvTagList.value = tagList
+        if(!_tagListLiveData.value?.contains(newTag)!!){
+            _tagListLiveData.value?.add(newTag)
+            _tagListLiveData.value = _tagListLiveData.value
         }
     }
 }

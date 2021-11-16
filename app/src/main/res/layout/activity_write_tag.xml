@@ -71,7 +71,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="23dp"
                 android:textColor="@color/dark_gray"
-                android:visibility="@{tagViewModel.etTagItem == null || tagViewModel.etTagItem.isEmpty == true ? View.INVISIBLE : View.VISIBLE}"
+                android:visibility="@{tagViewModel.tagInput == null || tagViewModel.tagInput.isEmpty == true ? View.INVISIBLE : View.VISIBLE}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -86,7 +86,7 @@
                 android:background="@null"
                 android:inputType="text"
                 android:singleLine="true"
-                android:text="@={tagViewModel.etTagItem}"
+                android:text="@={tagViewModel.tagInput}"
                 android:textColor="@color/black"
                 android:textColorHint="@color/light_gray"
                 app:layout_constraintEnd_toStartOf="@id/write_tag_tv_max_guide"
@@ -116,7 +116,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/write_tag_rv_input"
-                bind_tagList="@{tagViewModel.rvTagList}"
+                bind_tagList="@{tagViewModel.tagListLiveData}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="33dp"
@@ -134,7 +134,7 @@
                 android:layout_marginTop="12dp"
                 android:text="@string/write_tag_delete"
                 android:textColor="@color/black"
-                android:visibility="@{tagViewModel.rvTagList.size() == 0 ? View.INVISIBLE : View.VISIBLE}"
+                android:visibility="@{tagViewModel.tagListLiveData.size() == 0 ? View.INVISIBLE : View.VISIBLE}"
                 app:layout_constraintStart_toStartOf="@id/write_tag_rv_input"
                 app:layout_constraintTop_toBottomOf="@id/write_tag_rv_input" />
 
