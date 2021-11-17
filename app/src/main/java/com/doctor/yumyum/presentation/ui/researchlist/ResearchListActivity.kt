@@ -28,6 +28,7 @@ class ResearchListActivity :
         super.onCreate(savedInstanceState)
 
         binding.activity = this
+        binding.researchListTvBrand.text = intent.extras?.get("brand").toString()
         initDialog()
 
         // 필터 화면으로 이동

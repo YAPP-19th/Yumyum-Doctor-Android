@@ -30,6 +30,12 @@
     <string name="common_ediya">이디야</string>
     <string name="common_cocktail">칵테일</string>
     <string name="common_etc">기타</string>
+    <string name="common_sandwich">샌드위치</string>
+    <string name="common_maratang">마라탕</string>
+    <string name="common_tteokbokki">떡볶이</string>
+    <string name="common_salad">샐러드</string>
+    <string name="common_yogurt">요거트</string>
+    <string name="common_ramen">라면</string>
     <string name="common_price">가격</string>
     <string name="common_unit_money">원</string>
     <string name="common_range">~</string>
