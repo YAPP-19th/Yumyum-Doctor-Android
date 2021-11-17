@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="com.doctor.yumyum.R" />
+
         <variable
             name="viewModel"
             type="com.doctor.yumyum.presentation.viewmodel.ResearchRecipeViewModel" />
@@ -73,9 +75,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:contentDescription="@string/common_brand_icon"
-                    android:src="@drawable/ic_martini"
+                    android:src="@{viewModel.mode == R.string.common_beverage ? @drawable/ic_martini : @drawable/ic_forkknife}"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/ic_martini" />
 
                 <TextView
                     android:id="@+id/research_recipe_tv_brand"
