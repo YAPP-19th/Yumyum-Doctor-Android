@@ -114,6 +114,7 @@
     <!-- 레시피 탐구 -->
     <string name="research_icon_ranking_medal">랭킹 메달</string>
     <string name="research_icon_weekly_ranking">주간 랭킹 아이콘</string>
+    <string name="research_ranking_empty">랭킹에 등록된 레시피가 없습니다.\n나만의 레시피를 공유하고\n주간 랭킹에 도전해보세요!</string>
 
     <!-- 레시피 목록 -->
     <string name="research_list_title">레시피 목록</string>
