@@ -9,6 +9,7 @@ import com.doctor.yumyum.common.base.BaseActivity
 import com.doctor.yumyum.databinding.ActivitySplashBinding
 import com.doctor.yumyum.presentation.ui.login.LoginActivity
 import com.doctor.yumyum.presentation.ui.main.MainActivity
+import com.doctor.yumyum.presentation.ui.nickname.NicknameActivity
 import java.util.*
 
 class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_splash) {
@@ -28,12 +29,13 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
             viewModel = viewModel
         }
 
-        if (viewModel.loginToken.isNullOrBlank()) {
-            startActivity(Intent(this, LoginActivity::class.java))
-        }
-        else {
-            startActivity(Intent(this, MainActivity::class.java))
-        }
+        startActivity(Intent(this, NicknameActivity::class.java))
+//        if (viewModel.loginToken.isNullOrBlank()) {
+//            startActivity(Intent(this, LoginActivity::class.java))
+//        }
+//        else {
+//            startActivity(Intent(this, MainActivity::class.java))
+//        }
 
 
     }
