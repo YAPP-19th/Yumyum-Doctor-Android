@@ -26,5 +26,4 @@ class WriteRecipeActivity : BaseActivity<ActivityWriteRecipeBinding>(R.layout.ac
                 finish()
         }
     }
-
 }
