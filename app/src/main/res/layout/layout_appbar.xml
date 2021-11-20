@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+        <variable
+            name="main"
+            type="String" />
+
+        <variable
+            name="sub"
+            type="String" />
+    </data>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -16,15 +26,18 @@
             android:src="@drawable/ic_back" />
 
         <TextView
-            android:id="@+id/appbar_tv_title"
+            android:id="@+id/appbar_tv_main"
             style="@style/font_h3_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textColor="@color/black" />
+            android:text="@{main}"
+            android:textColor="@color/black"
+            />
 
         <TextView
-            android:id="@+id/appbar_tv_cancel"
+            android:text="@{sub}"
+            android:id="@+id/appbar_tv_sub"
             style="@style/font_body1_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
