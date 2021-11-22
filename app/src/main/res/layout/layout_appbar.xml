@@ -43,7 +43,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end|center_vertical"
             android:layout_marginEnd="16dp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:visibility="gone"/>
 
     </FrameLayout>
 </layout>
