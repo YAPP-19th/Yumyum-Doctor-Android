@@ -12,6 +12,9 @@ class WriteRecipeActivity : BaseActivity<ActivityWriteRecipeBinding>(R.layout.ac
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        binding.writeToolbar.appbarIbBack.setOnClickListener(this)
+        binding.writeToolbar.appbarTvSub.setOnClickListener(this)
+        binding.writeToolbar.appbarTvSub.visibility = View.VISIBLE
     }
 
     override fun onClick(v: View?) {
