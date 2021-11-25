@@ -118,7 +118,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    android:text="@string/research_icon_weekly_ranking"
+                    android:text="@string/common_weekly_ranking"
                     android:textColor="@color/black"
                     app:layout_constraintBottom_toBottomOf="@id/research_recipe_iv_ranking"
                     app:layout_constraintStart_toEndOf="@id/research_recipe_iv_ranking" />
