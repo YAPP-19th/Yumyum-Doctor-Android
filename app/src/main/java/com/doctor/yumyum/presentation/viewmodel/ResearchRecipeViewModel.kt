@@ -1,18 +1,19 @@
 package com.doctor.yumyum.presentation.viewmodel
 
 import android.annotation.SuppressLint
-import android.content.SharedPreferences
 import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseViewModel
+import com.doctor.yumyum.data.repository.MainRepositoryImpl
 
-class ResearchRecipeViewModel(private val sharedPreferences: SharedPreferences) : BaseViewModel() {
+class ResearchRecipeViewModel() : BaseViewModel() {
+    private val repository = MainRepositoryImpl()
+
     @SuppressLint("SupportAnnotationUsage")
     @StringRes
-    private val _mode: MutableLiveData<Int> =
-        MutableLiveData(sharedPreferences.getInt("mode", R.string.common_food))
+    private val _mode: MutableLiveData<Int> = MutableLiveData(repository.getMode())
     val mode: LiveData<Int>
         get() = _mode
 
@@ -21,8 +22,6 @@ class ResearchRecipeViewModel(private val sharedPreferences: SharedPreferences) 
             if (mode.value == R.string.common_food) R.string.common_beverage else R.string.common_food
 
         // 현재 모드 저장
-        val editor = sharedPreferences.edit()
-        editor.putInt("mode", mode.value ?: R.string.common_food)
-        editor.apply()
+        repository.setMode(mode.value ?: R.string.common_food)
     }
 }

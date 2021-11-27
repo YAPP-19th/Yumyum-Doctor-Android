@@ -22,7 +22,7 @@
     <string name="common_cancel">취소</string>
     <string name="common_next">다음</string>
     <string name="common_ok">확인</string>
-
+    <string name="common_brand_en">brand</string>
 
     <string name="common_starbucks">스타벅스</string>
     <string name="common_amasvin">아마스빈</string>
@@ -30,6 +30,12 @@
     <string name="common_ediya">이디야</string>
     <string name="common_cocktail">칵테일</string>
     <string name="common_etc">기타</string>
+    <string name="common_sandwich">샌드위치</string>
+    <string name="common_maratang">마라탕</string>
+    <string name="common_tteokbokki">떡볶이</string>
+    <string name="common_salad">샐러드</string>
+    <string name="common_yogurt">요거트</string>
+    <string name="common_ramen">라면</string>
     <string name="common_price">가격</string>
     <string name="common_unit_money">원</string>
     <string name="common_range">~</string>
@@ -108,6 +114,7 @@
     <!-- 레시피 탐구 -->
     <string name="research_icon_ranking_medal">랭킹 메달</string>
     <string name="research_icon_weekly_ranking">주간 랭킹 아이콘</string>
+    <string name="research_ranking_empty">랭킹에 등록된 레시피가 없습니다.\n나만의 레시피를 공유하고\n주간 랭킹에 도전해보세요!</string>
 
     <!-- 레시피 목록 -->
     <string name="research_list_title">레시피 목록</string>

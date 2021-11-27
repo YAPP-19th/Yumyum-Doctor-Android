@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="com.doctor.yumyum.R" />
+
         <variable
             name="viewModel"
             type="com.doctor.yumyum.presentation.viewmodel.ResearchRecipeViewModel" />
@@ -73,9 +75,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:contentDescription="@string/common_brand_icon"
-                    android:src="@drawable/ic_martini"
+                    android:src="@{viewModel.mode == R.string.common_beverage ? @drawable/ic_martini : @drawable/ic_forkknife}"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/ic_martini" />
 
                 <TextView
                     android:id="@+id/research_recipe_tv_brand"
@@ -115,16 +118,38 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    android:text="@string/research_icon_weekly_ranking"
+                    android:text="@string/common_weekly_ranking"
                     android:textColor="@color/black"
                     app:layout_constraintBottom_toBottomOf="@id/research_recipe_iv_ranking"
                     app:layout_constraintStart_toEndOf="@id/research_recipe_iv_ranking" />
+
+                <TextView
+                    android:id="@+id/research_recipe_tv_empty"
+                    style="@style/font_body1_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="42dp"
+                    android:layout_marginBottom="42dp"
+                    android:background="@drawable/bg_message_empty"
+                    android:drawablePadding="12dp"
+                    android:gravity="center"
+                    android:paddingHorizontal="38dp"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="29dp"
+                    android:text="@string/research_ranking_empty"
+                    android:textColor="@color/black"
+                    app:drawableTopCompat="@drawable/ic_logo_error"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/research_recipe_tv_ranking" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/research_recipe_recyclerview_ranking"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
+                    android:visibility="gone"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toBottomOf="@id/research_recipe_tv_ranking"
                     tools:listitem="@layout/item_research_ranking" />
