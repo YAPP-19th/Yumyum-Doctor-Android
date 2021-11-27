@@ -27,4 +27,8 @@ object SharedPreference {
         pref?.edit()?.putString(LOGIN_TOKEN, loginToken)?.apply()
     }
 
+    // 모드
+    private const val MODE = "MODE"
+    fun getMode(): Int? = pref?.getInt(MODE, R.string.common_food)
+    fun setMode(mode: Int) = pref?.edit()?.putInt(MODE, mode)?.apply()
 }

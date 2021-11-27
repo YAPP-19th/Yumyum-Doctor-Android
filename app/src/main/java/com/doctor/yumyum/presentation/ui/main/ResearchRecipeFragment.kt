@@ -1,7 +1,6 @@
 package com.doctor.yumyum.presentation.ui.main
 
 import android.annotation.SuppressLint
-import android.app.Application
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
 import com.doctor.yumyum.databinding.FragmentResearchRecipeBinding
-import com.doctor.yumyum.presentation.ResearchViewModelFactory
 import com.doctor.yumyum.presentation.adapter.ResearchBrandAdapter
 import com.doctor.yumyum.presentation.ui.researchlist.ResearchListActivity
 import com.doctor.yumyum.presentation.viewmodel.ResearchRecipeViewModel
@@ -19,17 +17,10 @@ import com.doctor.yumyum.presentation.viewmodel.ResearchRecipeViewModel
 class ResearchRecipeFragment :
     BaseFragment<FragmentResearchRecipeBinding>(R.layout.fragment_research_recipe) {
 
-    // TODO: sharedpreferences object 불러오기
-    private val sharedPreferences by lazy {
-        context?.getSharedPreferences(
-            getString(R.string.shared_pref_key),
-            Application.MODE_PRIVATE
-        )
-    }
     private val viewModel by lazy {
         ViewModelProvider(
             this,
-            ResearchViewModelFactory(sharedPreferences!!)
+            ViewModelProvider.NewInstanceFactory()
         )[ResearchRecipeViewModel::class.java]
     }
     private val beverageBrandList: MutableList<Pair<Int, String>> by lazy {
