@@ -63,7 +63,7 @@ class ResearchRecipeFragment :
         // 브랜드 아이템 클릭시 이동
         brandRecyclerAdapter = ResearchBrandAdapter {
             val intent = Intent(context, ResearchListActivity::class.java)
-            intent.putExtra("brand", it)
+            intent.putExtra(getString(R.string.common_brand_en), it)
             startActivity(intent)
         }
         binding.researchRecipeRecyclerviewBrand.adapter = brandRecyclerAdapter
