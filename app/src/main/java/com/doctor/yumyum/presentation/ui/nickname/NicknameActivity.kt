@@ -1,6 +1,10 @@
 package com.doctor.yumyum.presentation.ui.nickname
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.View
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseActivity
@@ -19,6 +23,47 @@ class NicknameActivity : BaseActivity<ActivityNicknameBinding>(R.layout.activity
         binding.apply {
             viewModel = viewModel
             lifecycleOwner = this@NicknameActivity
+            nicknameEtNickname.addTextChangedListener (object : TextWatcher {
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    setMessageNull()
+                }
+
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+                }
+
+                override fun afterTextChanged(p0: Editable?) {
+                    if (nicknameEtNickname.length() > 20) {
+                        setMessageOverflow()
+                    }
+                    else {
+                        setMessageSuccess()
+                    }
+                }
+
+            })
         }
+    }
+
+    fun setMessageNull () {
+        binding.nicknameTvMessage.visibility = View.INVISIBLE
+    }
+
+    fun setMessageSuccess () {
+        binding.nicknameTvMessage.visibility = View.VISIBLE
+        binding.nicknameTvMessage.setTextColor(getColor(R.color.sub_green))
+        binding.nicknameTvMessage.text = getString(R.string.nickname_tv_success)
+    }
+
+    fun setMessageOverlap () {
+        binding.nicknameTvMessage.visibility = View.VISIBLE
+        binding.nicknameTvMessage.setTextColor(getColor(R.color.main_orange))
+        binding.nicknameTvMessage.text = getString(R.string.nickname_tv_overlap)
+    }
+
+    fun setMessageOverflow () {
+        binding.nicknameTvMessage.visibility = View.VISIBLE
+        binding.nicknameTvMessage.setTextColor(getColor(R.color.main_orange))
+        binding.nicknameTvMessage.text = getString(R.string.nickname_tv_overflow)
     }
 }

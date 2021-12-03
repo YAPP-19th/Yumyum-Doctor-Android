@@ -15,28 +15,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <include
             android:id="@+id/research_list_cl_appbar"
-            android:layout_width="0dp"
-            android:layout_height="51dp"
-            android:paddingHorizontal="16dp"
+            layout="@layout/layout_appbar"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/research_list_tv_title"
-                style="@style/font_h3_medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/research_list_title"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintTop_toTopOf="parent"
+            app:main="@{@string/research_list_title}"/>
 
         <View
             android:id="@+id/research_list_divider"
