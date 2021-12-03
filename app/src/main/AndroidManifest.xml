@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.doctor.yumyum">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -11,11 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Yumyum">
         <activity
-            android:name=".presentation.ui.filter.FilterActivity"
+            android:name=".presentation.ui.taste.TasteActivity"
             android:exported="true" />
         <activity
-            android:name=".presentation.ui.login.LoginActivity"/>
-       <activity
+            android:name=".presentation.ui.filter.FilterActivity"
+            android:exported="true" />
+        <activity android:name=".presentation.ui.login.LoginActivity" />
+        <activity
             android:name=".presentation.ui.researchlist.ResearchListActivity"
             android:exported="true" />
         <activity
@@ -30,25 +34,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+        <activity
+            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
-        <intent-filter>
-            <action android:name="android.intent.action.VIEW" />
-            <category android:name="android.intent.category.DEFAULT" />
-            <category android:name="android.intent.category.BROWSABLE" />
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
 
-            <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth“ -->
-            <data android:host="oauth"
-                android:scheme="kakao44e11b10e2c1d2c273b00e4d466badd2" />
-        </intent-filter>
-    </activity>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth“ -->
+                <data
+                    android:host="oauth"
+                    android:scheme="kakao44e11b10e2c1d2c273b00e4d466badd2" />
+            </intent-filter>
+        </activity>
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
-            android:value="@string/kakao_app_key"/>
-        <activity android:name=".presentation.ui.write.WriteRecipeActivity"/>
-        <activity android:name=".presentation.ui.write.WriteTagActivity"/>
+            android:value="@string/kakao_app_key" />
 
+        <activity android:name=".presentation.ui.write.WriteRecipeActivity" />
+        <activity android:name=".presentation.ui.write.WriteTagActivity" />
     </application>
 
 </manifest>
