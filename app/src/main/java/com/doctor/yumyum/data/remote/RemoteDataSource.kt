@@ -1,19 +1,26 @@
 package com.doctor.yumyum.data.remote
 
-import android.telecom.Call
 import com.doctor.yumyum.common.network.RetrofitClient
-import com.doctor.yumyum.data.model.signUpModel
+import com.doctor.yumyum.data.model.SignUpModel
 import com.doctor.yumyum.data.remote.api.AuthCreationService
+import com.doctor.yumyum.data.remote.api.NicknameCreationService
+import com.doctor.yumyum.data.remote.response.GetNicknameResponse
 import okhttp3.ResponseBody
 import retrofit2.Response
 
 interface RemoteDataSource {
-    suspend fun postAuthCreation(signUpModel: signUpModel): Response<ResponseBody>
+    suspend fun postAuthCreation(signUpModel: SignUpModel): Response<ResponseBody>
+    suspend fun getNicknameApi(): Response<GetNicknameResponse>
 }
 
 class RemoteDataSourceImpl() : RemoteDataSource {
-    override suspend fun postAuthCreation(signUpModel: signUpModel): Response<ResponseBody> {
+    override suspend fun postAuthCreation(signUpModel: SignUpModel): Response<ResponseBody> {
         return RetrofitClient.getClient().create(AuthCreationService::class.java)
             .signUp(signUpModel)
+    }
+
+    override suspend fun getNicknameApi(): Response<GetNicknameResponse> {
+        return RetrofitClient.getClient().create(NicknameCreationService::class.java)
+            .getNicknameApi()
     }
 }
