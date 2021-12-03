@@ -60,10 +60,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="38dp"
+            android:hint="@string/nickname_et_hint"
             android:layout_marginEnd="16dp"
             android:background="@null"
             android:text="@={viewModel.nickname}"
             android:textColor="@color/black"
+            android:inputType="textNoSuggestions"
             android:maxLength="20"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -95,6 +97,7 @@
             tools:text="@string/nickname_tv_overflow" />
 
         <Button
+            android:id="@+id/nickname_btn_complete"
             style="@style/font_subtitle_medium"
             android:layout_width="0dp"
             android:layout_height="47dp"

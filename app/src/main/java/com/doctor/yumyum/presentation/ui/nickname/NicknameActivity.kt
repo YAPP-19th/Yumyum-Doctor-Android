@@ -3,6 +3,7 @@ package com.doctor.yumyum.presentation.ui.nickname
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
@@ -25,11 +26,9 @@ class NicknameActivity : BaseActivity<ActivityNicknameBinding>(R.layout.activity
         super.onCreate(savedInstanceState)
 
         init()
-
-        viewModel.nickname.observe(this) {
-                nickname -> binding.nicknameEtNickname.setText(nickname)
+        viewModel.nickname.observe(this) { nickname ->
+            binding.nicknameEtNickname.setText(nickname)
         }
-
         initNickname()
     }
 
@@ -42,13 +41,17 @@ class NicknameActivity : BaseActivity<ActivityNicknameBinding>(R.layout.activity
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
                 override fun afterTextChanged(p0: Editable?) {
-                    if (nicknameEtNickname.length() == 0 ) {
+                    if (nicknameEtNickname.length() < 1) {
                         setMessageNull()
+                        setButtonUnavailable()
                     }
-                    if (nicknameEtNickname.length() > 20) {
+                    if (nicknameEtNickname.length() >= 20) {
                         setMessageOverflow()
-                    } else {
+                        setButtonUnavailable()
+                    }
+                    else {
                         setMessageSuccess()
+                        setButtonAvailable()
                     }
                 }
             })
@@ -81,5 +84,15 @@ class NicknameActivity : BaseActivity<ActivityNicknameBinding>(R.layout.activity
         binding.nicknameTvMessage.visibility = View.VISIBLE
         binding.nicknameTvMessage.setTextColor(getColor(R.color.main_orange))
         binding.nicknameTvMessage.text = getString(R.string.nickname_tv_overflow)
+    }
+
+    fun setButtonUnavailable() {
+        binding.nicknameBtnComplete.background = getDrawable(R.drawable.bg_btn_sub)
+        binding.nicknameBtnComplete.isEnabled = false
+    }
+
+    fun setButtonAvailable() {
+        binding.nicknameBtnComplete.background = getDrawable(R.drawable.bg_btn_main)
+        binding.nicknameBtnComplete.isEnabled = true
     }
 }
