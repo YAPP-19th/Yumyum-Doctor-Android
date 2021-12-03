@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -19,6 +20,9 @@
             android:exported="true" />
         <activity
             android:name=".presentation.ui.nickname.NicknameActivity"
+            android:exported="true" />
+        <activity
+            android:name=".presentation.ui.taste.TasteActivity"
             android:exported="true" />
         <activity
             android:name=".presentation.ui.filter.FilterActivity"
@@ -50,6 +54,7 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
 
                 <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth“ -->
                 <data
