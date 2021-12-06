@@ -96,7 +96,7 @@
             app:layout_constraintTop_toBottomOf="@id/nickname_et_nickname"
             tools:text="@string/nickname_tv_overflow" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/nickname_btn_complete"
             style="@style/font_subtitle_medium"
             android:layout_width="0dp"

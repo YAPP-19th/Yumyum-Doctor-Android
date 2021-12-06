@@ -1,10 +1,12 @@
 package com.doctor.yumyum.presentation.ui.nickname
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
@@ -41,17 +43,18 @@ class NicknameActivity : BaseActivity<ActivityNicknameBinding>(R.layout.activity
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
                 override fun afterTextChanged(p0: Editable?) {
-                    if (nicknameEtNickname.length() < 1) {
+                    if (p0.isNullOrEmpty()) {
                         setMessageNull()
                         setButtonUnavailable()
                     }
-                    if (nicknameEtNickname.length() >= 20) {
-                        setMessageOverflow()
-                        setButtonUnavailable()
-                    }
                     else {
-                        setMessageSuccess()
-                        setButtonAvailable()
+                        if (p0.length >= 20) {
+                            setMessageOverflow()
+                            setButtonUnavailable()
+                        } else {
+                            setMessageSuccess()
+                            setButtonAvailable()
+                        }
                     }
                 }
             })
@@ -86,13 +89,19 @@ class NicknameActivity : BaseActivity<ActivityNicknameBinding>(R.layout.activity
         binding.nicknameTvMessage.text = getString(R.string.nickname_tv_overflow)
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     fun setButtonUnavailable() {
-        binding.nicknameBtnComplete.background = getDrawable(R.drawable.bg_btn_sub)
-        binding.nicknameBtnComplete.isEnabled = false
+        Log.d("로그", "Unavailable")
+        binding.nicknameBtnComplete.apply {
+            setBackgroundResource(R.drawable.bg_btn_sub)
+            isClickable = false
+            background = getDrawable(R.drawable.bg_btn_sub)
+        }
     }
 
     fun setButtonAvailable() {
-        binding.nicknameBtnComplete.background = getDrawable(R.drawable.bg_btn_main)
-        binding.nicknameBtnComplete.isEnabled = true
+        Log.d("로그", "Unavailable")
+        binding.nicknameBtnComplete.setBackgroundResource(R.drawable.bg_btn_main)
+        binding.nicknameBtnComplete.isClickable = true
     }
 }
