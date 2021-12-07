@@ -39,7 +39,7 @@
 
         <TextView
             android:id="@+id/taste_tv_subtitle"
-            style="@style/font_body1_medium"
+            style="@style/font_body1_regular"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -55,6 +55,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            style="@style/font_body1_light"
             android:text="@string/taste_tv_overlap"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
