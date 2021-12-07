@@ -1,19 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.doctor.yumyum.presentation.ui.taste.TasteViewModel" />
     </data>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".presentation.ui.taste.TasteClassFragment">
-        <TextView
-            android:text="@string/taste_tv_class"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
 
-    </FrameLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/taste_class_sweet"
+            style="@style/font_body1_regular"
+            android:layout_width="84dp"
+            android:layout_height="91dp"
+            android:layout_marginTop="40dp"
+            android:background="@{viewModel.tasteClassState.get(viewModel.SWEET) ? @drawable/bg_taste_class_selected : @drawable/bg_taste_class_unselected}"
+            android:drawableTop="@drawable/ic_taste_sweet_unselected"
+            android:onClick="@{()->viewModel.tasteClassChange(viewModel.SWEET)}"
+            android:paddingTop="14dp"
+            android:stateListAnimator="@null"
+            android:text="@{viewModel.a}"
+            android:textColor="@color/gray"
+            app:layout_constraintEnd_toStartOf="@+id/taste_class_salty"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/taste_class_salty"
+            style="@style/font_body1_regular"
+            android:layout_width="84dp"
+            android:layout_height="91dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="18dp"
+            android:background="@drawable/bg_taste_class_unselected"
+            android:drawableTop="@drawable/ic_taste_salty_unselected"
+            android:onClick="@{()->viewModel.tasteClassChange(viewModel.SALTY)}"
+            android:paddingTop="14dp"
+            android:stateListAnimator="@null"
+            android:text="@string/taste_salty"
+            android:textColor="@color/gray"
+            app:layout_constraintEnd_toStartOf="@+id/taste_class_spicy"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/taste_class_sweet"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/taste_class_spicy"
+            style="@style/font_body1_regular"
+            android:layout_width="84dp"
+            android:layout_height="91dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/bg_taste_class_unselected"
+            android:drawableTop="@drawable/ic_taste_spicy_unselected"
+            android:onClick="@{()->viewModel.tasteClassChange(viewModel.SPICY)}"
+            android:paddingTop="14dp"
+            android:stateListAnimator="@null"
+            android:text="@string/taste_spicy"
+            android:textColor="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/taste_class_salty"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/taste_class_bitter"
+            style="@style/font_body1_regular"
+            android:layout_width="84dp"
+            android:layout_height="91dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="18dp"
+            android:background="@drawable/bg_taste_class_unselected"
+            android:drawableTop="@drawable/ic_taste_bitter_unselected"
+            android:onClick="@{()->viewModel.tasteClassChange(viewModel.BITTER)}"
+            android:paddingTop="14dp"
+            android:stateListAnimator="@null"
+            android:text="@string/taste_bitter"
+            android:textColor="@color/gray"
+            app:layout_constraintEnd_toStartOf="@+id/taste_class_sour"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/taste_class_salty" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/taste_class_sour"
+            style="@style/font_body1_regular"
+            android:layout_width="84dp"
+            android:layout_height="91dp"
+
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_taste_class_unselected"
+            android:drawableTop="@drawable/ic_taste_sour_unselected"
+            android:onClick="@{()->viewModel.tasteClassChange(viewModel.SOUR)}"
+            android:paddingTop="14dp"
+            android:stateListAnimator="@null"
+            android:text="@string/taste_sour"
+            android:textColor="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/taste_class_bitter"
+            app:layout_constraintTop_toBottomOf="@id/taste_class_salty" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
