@@ -37,6 +37,9 @@ class TasteActivity : BaseActivity<ActivityTasteBinding>(R.layout.activity_taste
                 visibility = View.VISIBLE
                 text = getString(R.string.common_next)
             }
+            tasteToolbar.appbarIbBack.setOnClickListener {
+                onBackPressed()
+            }
             tasteBtnNext.setOnClickListener {
                 Navigation.findNavController(tasteNav).navigate(R.id.action_tasteClassFragment_to_tasteDetailFragment)
             }
