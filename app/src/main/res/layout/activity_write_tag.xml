@@ -127,6 +127,8 @@
                 tools:listitem="@layout/item_input_ingredient" />
 
             <TextView
+                android:onClick="@{() -> tagActivity.changeInputMode()}"
+                android:id="@+id/write_tag_tv_remove"
                 style="@style/font_body1_regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -2,6 +2,7 @@ package com.doctor.yumyum.presentation.ui.write
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.inputmethod.EditorInfo
 import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
@@ -23,6 +24,7 @@ class WriteTagActivity : BaseActivity<ActivityWriteTagBinding>(R.layout.activity
 
     private lateinit var tagViewModel: WriteTagViewModel
     private var requestCode = 0
+    private var changeInputMode = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,7 +62,9 @@ class WriteTagActivity : BaseActivity<ActivityWriteTagBinding>(R.layout.activity
             justifyContent = JustifyContent.FLEX_START
         }.let {
             binding.writeTagRvInput.layoutManager = it
-            binding.writeTagRvInput.adapter = WriteTagAdapter()
+            binding.writeTagRvInput.adapter = WriteTagAdapter(
+
+            )
         }
     }
 
@@ -74,6 +78,19 @@ class WriteTagActivity : BaseActivity<ActivityWriteTagBinding>(R.layout.activity
         binding.writeTagEtInput.hint = guideText
         binding.writeTagTvGuide.text = guideText
     }
+
+    fun changeInputMode() {
+        if(changeInputMode % 2 == 0){
+            binding.writeTagTvRemove.text = "선택삭제"
+            binding.writeTagTvRemove.setTextColor(resources.getColor(R.color.main_orange))
+            changeInputMode++
+        }else{
+            binding.writeTagTvRemove.text = "삭제"
+            binding.writeTagTvRemove.setTextColor(resources.getColor(R.color.black))
+            changeInputMode = 0
+        }
+    }
+
 
     fun finishInput() {
         val intent = Intent(this, WriteFragment2::class.java)
