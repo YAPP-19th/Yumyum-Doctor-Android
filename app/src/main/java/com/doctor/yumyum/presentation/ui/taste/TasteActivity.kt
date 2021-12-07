@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseActivity
 import com.doctor.yumyum.databinding.ActivityTasteBinding
@@ -33,6 +36,9 @@ class TasteActivity : BaseActivity<ActivityTasteBinding>(R.layout.activity_taste
             tasteToolbar.appbarTvSub.apply {
                 visibility = View.VISIBLE
                 text = getString(R.string.common_next)
+            }
+            tasteBtnNext.setOnClickListener {
+                Navigation.findNavController(tasteNav).navigate(R.id.action_tasteClassFragment_to_tasteDetailFragment)
             }
         }
     }
