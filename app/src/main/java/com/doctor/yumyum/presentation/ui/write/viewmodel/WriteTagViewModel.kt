@@ -29,4 +29,9 @@ class WriteTagViewModel : BaseViewModel(){
             _tagListLiveData.value = _tagListLiveData.value
         }
     }
+
+    fun removeTagItem(removeTag : String){
+        _tagListLiveData.value?.remove(removeTag)
+        _tagListLiveData.value = _tagListLiveData.value
+    }
 }

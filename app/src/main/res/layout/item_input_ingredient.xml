@@ -2,7 +2,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-
         <variable
             name="tagItem"
             type="String" />
@@ -23,8 +22,6 @@
             android:background="@drawable/bg_unselect_tag_item"
             bind_tagItem= "@{tagItem}"
             android:textColor="@color/dark_gray" />
-
-
     </LinearLayout>
 
 </layout>
