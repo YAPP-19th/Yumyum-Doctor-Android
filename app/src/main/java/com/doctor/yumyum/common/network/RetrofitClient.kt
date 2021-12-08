@@ -12,7 +12,7 @@ object RetrofitClient {
     val repository: LoginRepositoryImpl = LoginRepositoryImpl()
 
     fun getClient(): Retrofit {
-        val baseUrl = "http://10.0.2.2:8000"
+        val baseUrl = "http://ec2-13-125-41-23.ap-northeast-2.compute.amazonaws.com:9000"
 
         val baseInterceptor: Interceptor = Interceptor { chain ->
             val builder = chain.request().newBuilder()

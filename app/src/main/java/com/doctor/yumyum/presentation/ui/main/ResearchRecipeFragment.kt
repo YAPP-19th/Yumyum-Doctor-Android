@@ -13,6 +13,10 @@ import com.doctor.yumyum.databinding.FragmentResearchRecipeBinding
 import com.doctor.yumyum.presentation.adapter.ResearchBrandAdapter
 import com.doctor.yumyum.presentation.ui.researchlist.ResearchListActivity
 import com.doctor.yumyum.presentation.viewmodel.ResearchRecipeViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 class ResearchRecipeFragment :
     BaseFragment<FragmentResearchRecipeBinding>(R.layout.fragment_research_recipe) {
@@ -72,6 +76,11 @@ class ResearchRecipeFragment :
 
         viewModel.mode.observe(viewLifecycleOwner) { mode ->
             changeMode(mode)
+        }
+
+        // 주간 랭킹 리스트 조회
+        CoroutineScope(Dispatchers.IO).launch {
+            coroutineScope { viewModel.getRankRecipe("1", 9) }
         }
 
         return binding.root
