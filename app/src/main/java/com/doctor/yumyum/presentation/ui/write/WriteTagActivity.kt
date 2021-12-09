@@ -38,6 +38,7 @@ class WriteTagActivity : BaseActivity<ActivityWriteTagBinding>(R.layout.activity
         initTagRecycler()
         getRequestCode()
 
+        binding.writeTagIbBack.setOnClickListener { finish() }
         binding.writeTagEtInput.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 tagViewModel.validTagItem()
@@ -109,10 +110,6 @@ class WriteTagActivity : BaseActivity<ActivityWriteTagBinding>(R.layout.activity
         val intent = Intent(this, WriteFragment2::class.java)
         intent.putStringArrayListExtra("inputList", tagViewModel.tagListLiveData.value)
         setResult(requestCode, intent)
-        finish()
-    }
-
-    fun cancleInput() {
         finish()
     }
 }

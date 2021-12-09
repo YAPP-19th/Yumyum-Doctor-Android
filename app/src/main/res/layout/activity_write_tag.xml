@@ -39,7 +39,6 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="16dp"
                 android:background="#00000000"
-                android:onClick="@{() -> tagActivity.cancleInput()}"
                 android:src="@drawable/ic_back" />
 
             <TextView
