@@ -9,8 +9,8 @@
             type="com.doctor.yumyum.presentation.ui.write.WriteFragment2" />
 
         <variable
-            name="write2ViewModel"
-            type="com.doctor.yumyum.presentation.ui.write.viewmodel.Write2ViewModel" />
+            name="secondViewModel"
+            type="com.doctor.yumyum.presentation.ui.write.viewmodel.WriteSecondViewModel" />
 
     </data>
 

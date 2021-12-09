@@ -13,8 +13,7 @@ class WriteTagAdapter(private val itemClickListener: (String) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(tagItem: String) {
             binding.tagItem = tagItem
-            binding.root.setOnClickListener {
-                itemClickListener(tagItem)}
+            binding.root.setOnClickListener { itemClickListener(tagItem) }
         }
     }
 

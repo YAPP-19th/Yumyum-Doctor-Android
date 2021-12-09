@@ -21,13 +21,13 @@ import com.google.android.flexbox.JustifyContent
 
 class WriteTagActivity : BaseActivity<ActivityWriteTagBinding>(R.layout.activity_write_tag) {
 
-    private var removeMode = DELETE_STATUS
+    private var deleteMode = DELETE_STATUS
     companion object {
         const val DELETE_STATUS = 1000
         const val SELECT_DELETE_STATUS = 1001
     }
 
-    private var removeItemList = arrayListOf<String>()
+    private var deleteItemList = arrayListOf<String>()
     private val tagViewModel: WriteTagViewModel by viewModels()
     private var requestCode = 0
 
@@ -62,13 +62,13 @@ class WriteTagActivity : BaseActivity<ActivityWriteTagBinding>(R.layout.activity
         }.let { layoutManager ->
             binding.writeTagRvInput.layoutManager = layoutManager
             binding.writeTagRvInput.adapter = WriteTagAdapter {
-                if(removeMode == SELECT_DELETE_STATUS){
-                    if(removeItemList.contains(it)){
+                if(deleteMode == SELECT_DELETE_STATUS){
+                    if(deleteItemList.contains(it)){
                         //TODO: 배경색&글자색 변경
-                        removeItemList.remove(it)
+                        deleteItemList.remove(it)
                     }else{
                         //TODO: 배경색&글자색 변경
-                        removeItemList.add(it)
+                        deleteItemList.add(it)
                     }
                 }
             }
@@ -86,22 +86,22 @@ class WriteTagActivity : BaseActivity<ActivityWriteTagBinding>(R.layout.activity
         binding.writeTagTvGuide.text = guideText
     }
 
-    fun removeClickListener() {
-        when (removeMode) {
+    fun changeModeClickListener() {
+        when (deleteMode) {
             DELETE_STATUS -> {
-                removeMode = SELECT_DELETE_STATUS
+                deleteMode = SELECT_DELETE_STATUS
                 binding.writeTagTvRemove.text = resources.getString(R.string.write_tag_select_delete)
                 binding.writeTagTvRemove.setTextColor(resources.getColor(R.color.main_orange))
             }
             SELECT_DELETE_STATUS -> {
-                removeMode = DELETE_STATUS
+                deleteMode = DELETE_STATUS
                 binding.writeTagTvRemove.text = resources.getString(R.string.write_tag_delete)
                 binding.writeTagTvRemove.setTextColor(resources.getColor(R.color.black))
 
-                removeItemList.forEach {
+                deleteItemList.forEach {
                     tagViewModel.removeTagItem(it)
                 }
-                removeItemList.clear()
+                deleteItemList.clear()
             }
         }
     }

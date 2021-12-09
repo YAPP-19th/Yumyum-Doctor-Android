@@ -11,7 +11,7 @@ import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
 import com.doctor.yumyum.databinding.FragmentWriteSecondBinding
 import com.doctor.yumyum.presentation.adapter.WriteTagAdapter
-import com.doctor.yumyum.presentation.ui.write.viewmodel.Write2ViewModel
+import com.doctor.yumyum.presentation.ui.write.viewmodel.WriteSecondViewModel
 
 /**
  *  레시피 작성하기 2
@@ -21,7 +21,7 @@ import com.doctor.yumyum.presentation.ui.write.viewmodel.Write2ViewModel
 
 class WriteFragment2 : BaseFragment<FragmentWriteSecondBinding>(R.layout.fragment_write_second), View.OnClickListener{
     private lateinit var changeIngredients : ActivityResultLauncher<Intent>
-    private val write2ViewModel: Write2ViewModel by viewModels()
+    private val secondViewModel: WriteSecondViewModel by viewModels()
 
     companion object {
         const val REQUEST_CODE_ADD_INGREDIENTS = 9001
@@ -38,7 +38,7 @@ class WriteFragment2 : BaseFragment<FragmentWriteSecondBinding>(R.layout.fragmen
 
     private fun initBinding() {
         binding.secondFragment = this
-        binding.write2ViewModel = write2ViewModel
+        binding.secondViewModel = secondViewModel
         binding.writeSecondRvPlus.adapter = WriteTagAdapter{}
         binding.writeSecondRvMinus.adapter = WriteTagAdapter{}
     }
@@ -71,11 +71,11 @@ class WriteFragment2 : BaseFragment<FragmentWriteSecondBinding>(R.layout.fragmen
     private fun changeIngredients() {
         changeIngredients = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             if (it.resultCode == REQUEST_CODE_ADD_INGREDIENTS) {
-                write2ViewModel.setAddTagItem(it.data?.getStringArrayListExtra("inputList"))
+                secondViewModel.setAddTagItem(it.data?.getStringArrayListExtra("inputList"))
             }
 
             if(it.resultCode == REQUEST_CODE_MINUS_INGREDIENTS){
-                write2ViewModel.setMinusTagItem(it.data?.getStringArrayListExtra("inputList"))
+                secondViewModel.setMinusTagItem(it.data?.getStringArrayListExtra("inputList"))
             }
         }
     }
