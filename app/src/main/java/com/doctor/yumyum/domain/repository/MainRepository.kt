@@ -9,5 +9,5 @@ interface MainRepository {
 
     fun setMode(mode: Int)
 
-    suspend fun getRecipeRank(categoryType: String, top: Int): Response<RankRecipeResponse>
+    suspend fun getRecipeRank(categoryName: String, top: Int, rankDatePeriod: Int): Response<RankRecipeResponse>
 }

@@ -30,8 +30,9 @@ class ResearchRecipeViewModel : BaseViewModel() {
         repository.setMode(mode.value ?: R.string.common_food)
     }
 
-    suspend fun getRankRecipe(categoryType: String, top: Int) {
-        val response: Response<RankRecipeResponse> = repository.getRecipeRank(categoryType, top)
+    suspend fun getRankRecipe(categoryName: String, top: Int, rankDatePeriod: Int) {
+        val response: Response<RankRecipeResponse> =
+            repository.getRecipeRank(categoryName, top, rankDatePeriod)
 
         if (response.isSuccessful) {
             _rankRecipes.value = response.body()?.topRankingFoods

@@ -10,7 +10,11 @@ import retrofit2.Response
 
 interface RemoteDataSource {
     suspend fun postAuthCreation(signUpModel: signUpModel): Response<ResponseBody>
-    suspend fun getRecipeRank(categoryType: String, top: Int): Response<RankRecipeResponse>
+    suspend fun getRecipeRank(
+        categoryName: String,
+        top: Int,
+        rankDatePeriod: Int
+    ): Response<RankRecipeResponse>
 }
 
 class RemoteDataSourceImpl : RemoteDataSource {
@@ -20,10 +24,11 @@ class RemoteDataSourceImpl : RemoteDataSource {
     }
 
     override suspend fun getRecipeRank(
-        categoryType: String,
-        top: Int
+        categoryName: String,
+        top: Int,
+        rankDatePeriod: Int
     ): Response<RankRecipeResponse> =
         RetrofitClient.getClient().create(RankRecipeService::class.java)
-            .getRecipeRank(categoryType, top)
+            .getRecipeRank(categoryName, top, rankDatePeriod)
 
 }

@@ -80,7 +80,8 @@ class ResearchRecipeFragment :
 
         // 주간 랭킹 리스트 조회
         CoroutineScope(Dispatchers.IO).launch {
-            coroutineScope { viewModel.getRankRecipe("1", 9) }
+            // TODO: mode에 따라 파라미터 바꾸기
+            coroutineScope { viewModel.getRankRecipe(getString(R.string.common_food), 9, 7) }
         }
 
         return binding.root

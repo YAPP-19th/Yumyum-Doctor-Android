@@ -18,7 +18,9 @@ class MainRepositoryImpl : MainRepository {
     override fun setMode(mode: Int) = localDataSource.setMode(mode)
 
     override suspend fun getRecipeRank(
-        categoryType: String,
-        top: Int
-    ): Response<RankRecipeResponse> = remoteDataSource.getRecipeRank(categoryType, top)
+        categoryName: String,
+        top: Int,
+        rankDatePeriod: Int
+    ): Response<RankRecipeResponse> =
+        remoteDataSource.getRecipeRank(categoryName, top, rankDatePeriod)
 }
