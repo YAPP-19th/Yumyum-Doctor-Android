@@ -24,9 +24,14 @@ class WriteTagViewModel : BaseViewModel(){
     }
 
     private fun addTagItem(newTag : String){
-        if(!_tagListLiveData.value?.contains(newTag)!!){
+        if(!_tagListLiveData.value?.contains(newTag)!! && _tagListLiveData.value?.size != 10){
             _tagListLiveData.value?.add(newTag)
             _tagListLiveData.value = _tagListLiveData.value
         }
+    }
+
+    fun removeTagItem(removeTag : String){
+        _tagListLiveData.value?.remove(removeTag)
+        _tagListLiveData.value = _tagListLiveData.value
     }
 }

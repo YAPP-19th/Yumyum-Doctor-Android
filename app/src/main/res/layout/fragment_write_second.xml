@@ -3,9 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.view.View" />
         <variable
             name="secondFragment"
             type="com.doctor.yumyum.presentation.ui.write.WriteFragment2" />
+
+        <variable
+            name="secondViewModel"
+            type="com.doctor.yumyum.presentation.ui.write.viewmodel.WriteSecondViewModel" />
 
     </data>
 
@@ -70,7 +75,7 @@
             app:layout_constraintTop_toBottomOf="@+id/write_second_view2" />
 
         <androidx.appcompat.widget.AppCompatImageButton
-
+            android:visibility="@{write2ViewModel.addListLiveData.size() == 0 ? View.VISIBLE : View.INVISIBLE}"
             android:id="@+id/write_second_btn_add"
             android:layout_width="22dp"
             android:layout_height="22dp"
@@ -78,6 +83,18 @@
             android:src="@drawable/ic_pluscircle"
             app:layout_constraintStart_toStartOf="@id/write_second_tv_guide_add"
             app:layout_constraintTop_toBottomOf="@id/write_second_tv_guide_add" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/write_second_rv_plus"
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="16dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/write_second_tv_guide_add"
+            android:visibility="@{write2ViewModel.addListLiveData.size() == 0 ? View.INVISIBLE : View.VISIBLE}"
+            bind_tagList="@{write2ViewModel.addListLiveData}"/>
 
         <TextView
             android:id="@+id/write_second_tv_guide_minus"
@@ -92,6 +109,7 @@
 
 
         <androidx.appcompat.widget.AppCompatImageButton
+            android:visibility="@{write2ViewModel.minusListLiveData.size() == 0 ? View.VISIBLE : View.INVISIBLE}"
             android:id="@+id/write_second_btn_minus"
             android:layout_width="22dp"
             android:layout_height="22dp"
@@ -99,6 +117,18 @@
             android:src="@drawable/ic_pluscircle"
             app:layout_constraintStart_toStartOf="@id/write_second_tv_guide_minus"
             app:layout_constraintTop_toBottomOf="@id/write_second_tv_guide_minus" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/write_second_rv_minus"
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="16dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/write_second_tv_guide_minus"
+            android:visibility="@{write2ViewModel.minusListLiveData.size() == 0 ? View.INVISIBLE : View.VISIBLE}"
+            bind_tagList="@{write2ViewModel.minusListLiveData}"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/write_second_btn_next"

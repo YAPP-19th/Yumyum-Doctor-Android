@@ -1,22 +1,25 @@
 package com.doctor.yumyum.presentation.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.doctor.yumyum.databinding.ItemInputIngredientBinding
 
-class WriteTagAdapter : RecyclerView.Adapter<WriteTagAdapter.ViewHolder>(){
+class WriteTagAdapter(private val itemClickListener: (String) -> Unit) :
+    RecyclerView.Adapter<WriteTagAdapter.ViewHolder>() {
     private var tagList: ArrayList<String> = arrayListOf()
 
-    class ViewHolder(private val binding: ItemInputIngredientBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(tagItem : String){
+    inner class ViewHolder(private val binding: ItemInputIngredientBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(tagItem: String) {
             binding.tagItem = tagItem
+            binding.root.setOnClickListener { itemClickListener(tagItem) }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemInputIngredientBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemInputIngredientBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -28,8 +31,9 @@ class WriteTagAdapter : RecyclerView.Adapter<WriteTagAdapter.ViewHolder>(){
         return tagList.size
     }
 
-    fun updateTagList(newTagList : ArrayList<String>){
-        tagList = newTagList
-        notifyItemInserted(tagList.size-1)
+    fun updateTagList(newTagList: ArrayList<String>) {
+        tagList.clear()
+        tagList.addAll(newTagList)
+        notifyDataSetChanged()
     }
 }
