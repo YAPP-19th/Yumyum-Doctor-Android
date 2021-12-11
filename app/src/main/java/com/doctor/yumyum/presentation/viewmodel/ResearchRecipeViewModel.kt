@@ -35,7 +35,7 @@ class ResearchRecipeViewModel : BaseViewModel() {
             repository.getRecipeRank(categoryName, top, rankDatePeriod)
 
         if (response.isSuccessful) {
-            _rankRecipes.value = response.body()?.topRankingFoods
+            _rankRecipes.postValue(response.body()?.topRankingFoods)
         }
     }
 }
