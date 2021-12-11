@@ -16,4 +16,8 @@ class UserRepositoryImpl() : UserRepository {
     override suspend fun getNicknameApi(): Response<GetNicknameResponse> {
         return remoteDataSource.getNicknameApi()
     }
+
+    override suspend fun validateNicknameApi(nickname: String): Response<ResponseBody> {
+        return remoteDataSource.validateNicknameApi(nickname)
+    }
 }

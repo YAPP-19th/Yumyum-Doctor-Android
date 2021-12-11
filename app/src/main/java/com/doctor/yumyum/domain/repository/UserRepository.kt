@@ -11,4 +11,5 @@ interface UserRepository {
     val remoteDataSource: RemoteDataSourceImpl
 
     suspend fun getNicknameApi(): Response<GetNicknameResponse>
+    suspend fun validateNicknameApi(nickname: String): Response<ResponseBody>
 }

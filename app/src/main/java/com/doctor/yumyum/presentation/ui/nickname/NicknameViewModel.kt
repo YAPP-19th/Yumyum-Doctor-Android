@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.common.base.BaseViewModel
 import com.doctor.yumyum.data.remote.response.GetNicknameResponse
 import com.doctor.yumyum.data.repository.UserRepositoryImpl
+import okhttp3.ResponseBody
 import retrofit2.Response
 import java.lang.Exception
 
@@ -23,6 +24,17 @@ class NicknameViewModel : BaseViewModel() {
 
         } catch (e: Exception) {
             _errorState.postValue(true)
+        }
+    }
+
+    suspend fun validateNickname(nickname: String): Boolean {
+        try {
+            val nicknameResponse: Response<ResponseBody> =
+                userRepository.validateNicknameApi(nickname)
+            return nicknameResponse.code() == 200
+
+        } catch (e: Exception) {
+            return false
         }
     }
 }

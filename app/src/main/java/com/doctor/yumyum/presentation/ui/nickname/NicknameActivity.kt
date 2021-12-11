@@ -14,6 +14,7 @@ import com.doctor.yumyum.common.base.BaseActivity
 import com.doctor.yumyum.databinding.ActivityNicknameBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class NicknameActivity : BaseActivity<ActivityNicknameBinding>(R.layout.activity_nickname) {
@@ -38,27 +39,33 @@ class NicknameActivity : BaseActivity<ActivityNicknameBinding>(R.layout.activity
         binding.apply {
             viewModel = viewModel
             lifecycleOwner = this@NicknameActivity
-            nicknameEtNickname.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        }
+        binding.nicknameEtNickname.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
-                override fun afterTextChanged(p0: Editable?) {
-                    if (p0.isNullOrEmpty()) {
-                        setMessageNull()
+            override fun afterTextChanged(p0: Editable?) {
+                CoroutineScope(Dispatchers.IO).launch {
+                    val unique = viewModel.validateNickname(p0.toString())
+                    if (!unique) {
+                        setMessageOverlap()
                         setButtonUnavailable()
                     }
-                    else {
-                        if (p0.length >= 20) {
-                            setMessageOverflow()
-                            setButtonUnavailable()
-                        } else {
-                            setMessageSuccess()
-                            setButtonAvailable()
-                        }
+                }
+                if (p0.isNullOrEmpty()) {
+                    setMessageNull()
+                    setButtonUnavailable()
+                } else {
+                    if (p0.length >= 20) {
+                        setMessageOverflow()
+                        setButtonUnavailable()
+                    } else {
+                        setMessageSuccess()
+                        setButtonAvailable()
                     }
                 }
-            })
-        }
+            }
+        })
     }
 
     private fun initNickname() {
@@ -89,18 +96,14 @@ class NicknameActivity : BaseActivity<ActivityNicknameBinding>(R.layout.activity
         binding.nicknameTvMessage.text = getString(R.string.nickname_tv_overflow)
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
     fun setButtonUnavailable() {
-        Log.d("로그", "Unavailable")
         binding.nicknameBtnComplete.apply {
-            setBackgroundResource(R.drawable.bg_btn_sub)
             isClickable = false
             background = getDrawable(R.drawable.bg_btn_sub)
         }
     }
 
     fun setButtonAvailable() {
-        Log.d("로그", "Unavailable")
         binding.nicknameBtnComplete.setBackgroundResource(R.drawable.bg_btn_main)
         binding.nicknameBtnComplete.isClickable = true
     }
