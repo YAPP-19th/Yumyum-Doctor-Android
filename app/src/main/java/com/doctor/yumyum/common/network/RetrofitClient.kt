@@ -14,9 +14,9 @@ object RetrofitClient {
     fun getClient(): Retrofit {
         val baseUrl = "http://10.0.2.2:8000"
 
-        val baseInterceptor: Interceptor = Interceptor { chain ->
+        val baseInterceptor = Interceptor { chain ->
             val builder = chain.request().newBuilder()
-                .addHeader("auth", repository.getLoginToken().toString())
+                .addHeader("Authorization", repository.getLoginToken().toString())
                 .build()
             chain.proceed(builder)
         }
