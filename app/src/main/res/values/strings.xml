@@ -121,5 +121,14 @@
     <string name="research_list_search_with_hashtag">해시태그로 검색</string>
     <string name="research_list_ib_hashtag_reset">해시태그 삭제 버튼</string>
 
+    <!-- 신고하기 -->
+    <string name="report">신고</string>
+    <string name="report_title">신고하기</string>
+    <string name="report_select_reason">신고사유를 선택해주세요</string>
+    <string name="report_reason_duplicate">중복된 레시피를 게시하였습니다.</string>
+    <string name="report_reason_advertising">광고성 레시피를 게시하였습니다.</string>
+    <string name="report_reason_irrelevant">레시피와 관련없는 내용을 게시하였습니다.</string>
+    <string name="report_reason_harmful">가학적이나 유해한 내용을 게시하였습니다.</string>
+    <string name="report_reason_wrong">잘못된 사실을 게시하였습니다.</string>
 
 </resources>
