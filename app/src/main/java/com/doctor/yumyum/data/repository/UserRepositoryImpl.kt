@@ -1,6 +1,7 @@
 package com.doctor.yumyum.data.repository
 
 import com.doctor.yumyum.data.local.LocalDataSourceImpl
+import com.doctor.yumyum.data.model.NicknamePatchModel
 import com.doctor.yumyum.data.remote.RemoteDataSourceImpl
 import com.doctor.yumyum.data.remote.response.GetNicknameResponse
 import com.doctor.yumyum.domain.repository.UserRepository
@@ -19,5 +20,9 @@ class UserRepositoryImpl() : UserRepository {
 
     override suspend fun validateNicknameApi(nickname: String): Response<ResponseBody> {
         return remoteDataSource.validateNicknameApi(nickname)
+    }
+
+    override suspend fun patchNicknameApi(nicknamePatchModel: NicknamePatchModel): Response<ResponseBody> {
+        return remoteDataSource.patchNicknameApi(nicknamePatchModel)
     }
 }

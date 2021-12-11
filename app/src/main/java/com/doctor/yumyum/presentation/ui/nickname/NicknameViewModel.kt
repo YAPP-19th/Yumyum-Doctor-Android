@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.common.base.BaseViewModel
+import com.doctor.yumyum.data.model.NicknamePatchModel
 import com.doctor.yumyum.data.remote.response.GetNicknameResponse
 import com.doctor.yumyum.data.repository.UserRepositoryImpl
 import okhttp3.ResponseBody
@@ -28,13 +29,22 @@ class NicknameViewModel : BaseViewModel() {
     }
 
     suspend fun validateNickname(nickname: String): Boolean {
-        try {
+        return try {
             val nicknameResponse: Response<ResponseBody> =
                 userRepository.validateNicknameApi(nickname)
-            return nicknameResponse.code() == 200
+            nicknameResponse.code() == 200
 
         } catch (e: Exception) {
-            return false
+            false
         }
+    }
+
+    suspend fun patchNickname() {
+        val nicknameResponse: Response<ResponseBody>? =
+            nickname.value?.let { NicknamePatchModel(it) }?.let {
+                userRepository.patchNicknameApi(
+                    it
+                )
+            }
     }
 }
