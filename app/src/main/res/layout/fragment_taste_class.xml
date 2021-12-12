@@ -25,7 +25,7 @@
             android:onClick="@{()->viewModel.tasteClassChange(viewModel.SWEET)}"
             android:paddingTop="14dp"
             android:stateListAnimator="@null"
-            android:text="@{viewModel.a}"
+            android:text="@string/taste_sweet"
             android:textColor="@color/gray"
             app:layout_constraintEnd_toStartOf="@+id/taste_class_salty"
             app:layout_constraintHorizontal_bias="0.5"

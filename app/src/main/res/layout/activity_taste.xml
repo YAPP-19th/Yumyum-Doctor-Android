@@ -23,7 +23,8 @@
             android:layout_height="40dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:sub="@{@string/common_pass}" />
 
         <TextView
             android:id="@+id/taste_tv_title"
@@ -52,10 +53,10 @@
 
         <TextView
             android:id="@+id/taste_tv_overlap"
+            style="@style/font_body1_light"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            style="@style/font_body1_light"
             android:text="@string/taste_tv_overlap"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
