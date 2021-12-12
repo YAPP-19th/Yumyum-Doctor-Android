@@ -24,6 +24,9 @@
             android:name=".presentation.ui.researchlist.ResearchListActivity"
             android:exported="true" />
         <activity
+            android:name=".presentation.ui.report.ReportActivity"
+            android:exported="true" />
+        <activity
             android:name=".presentation.ui.main.MainActivity"
             android:exported="true" />
         <activity

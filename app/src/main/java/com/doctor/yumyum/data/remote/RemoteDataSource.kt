@@ -8,6 +8,8 @@ import com.doctor.yumyum.data.remote.api.NicknameCreationService
 import com.doctor.yumyum.data.remote.api.NicknameService
 import com.doctor.yumyum.data.remote.api.NicknameValidationService
 import com.doctor.yumyum.data.remote.response.GetNicknameResponse
+import com.doctor.yumyum.data.remote.api.RankRecipeService
+import com.doctor.yumyum.data.remote.response.RankRecipeResponse
 import okhttp3.ResponseBody
 import retrofit2.Response
 
@@ -16,6 +18,11 @@ interface RemoteDataSource {
     suspend fun getNicknameApi(): Response<GetNicknameResponse>
     suspend fun validateNicknameApi(nickname: String): Response<ResponseBody>
     suspend fun patchNicknameApi(nicknamePatchModel: NicknamePatchModel): Response<ResponseBody>
+    suspend fun getRecipeRank(
+        categoryName: String,
+        top: Int,
+        rankDatePeriod: Int
+    ): Response<RankRecipeResponse>
 }
 
 class RemoteDataSourceImpl() : RemoteDataSource {
@@ -38,4 +45,12 @@ class RemoteDataSourceImpl() : RemoteDataSource {
         return RetrofitClient.getClient().create(NicknameService::class.java)
             .patchNicknameApi(nicknamePatchModel)
     }
+    
+    override suspend fun getRecipeRank(
+        categoryName: String,
+        top: Int,
+        rankDatePeriod: Int
+    ): Response<RankRecipeResponse> =
+        RetrofitClient.getClient().create(RankRecipeService::class.java)
+            .getRecipeRank(categoryName, top, rankDatePeriod)
 }
