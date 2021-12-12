@@ -38,6 +38,7 @@
             android:layout_marginEnd="80dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/bg_dialog_btn"
+            android:backgroundTint="@color/unselect_orange"
             android:gravity="center"
             android:includeFontPadding="false"
             android:stateListAnimator="@null"

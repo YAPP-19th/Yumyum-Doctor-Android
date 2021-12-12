@@ -10,6 +10,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseActivity
 import com.doctor.yumyum.databinding.ActivityTasteBinding
+import com.doctor.yumyum.presentation.ui.login.ErrorDialog
 import com.doctor.yumyum.presentation.ui.login.LoginViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -22,26 +23,32 @@ class TasteActivity : BaseActivity<ActivityTasteBinding>(R.layout.activity_taste
             ViewModelProvider.NewInstanceFactory()
         )[TasteViewModel::class.java]
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         init()
     }
 
-    fun init(){
-        //binding
+    fun init() {
         binding.apply {
             lifecycleOwner = this@TasteActivity
             viewModel = viewModel
             tasteToolbar.appbarTvSub.apply {
                 visibility = View.VISIBLE
                 text = getString(R.string.common_next)
+                setOnClickListener {
+                    TastePassDialog().apply {
+                        show(supportFragmentManager, "TastePassDialog")
+                    }
+                }
             }
             tasteToolbar.appbarIbBack.setOnClickListener {
                 onBackPressed()
             }
             tasteBtnNext.setOnClickListener {
-                Navigation.findNavController(tasteNav).navigate(R.id.action_tasteClassFragment_to_tasteDetailFragment)
+                Navigation.findNavController(tasteNav)
+                    .navigate(R.id.action_tasteClassFragment_to_tasteDetailFragment)
             }
         }
     }
