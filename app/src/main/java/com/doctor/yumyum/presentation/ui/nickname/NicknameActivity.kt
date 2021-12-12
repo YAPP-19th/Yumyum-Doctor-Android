@@ -57,20 +57,16 @@ class NicknameActivity : BaseActivity<ActivityNicknameBinding>(R.layout.activity
                     val unique = viewModel.validateNickname(p0.toString())
                     if (!unique) {
                         setMessageOverlap()
-                        setButtonUnavailable()
                     }
                 }
                 if (p0.isNullOrEmpty()) {
                     setMessageNull()
-                    setButtonUnavailable()
-                } else {
-                    if (p0.length >= 20) {
-                        setMessageOverflow()
-                        setButtonUnavailable()
-                    } else {
-                        setMessageSuccess()
-                        setButtonAvailable()
-                    }
+                }
+                else if (p0.length >= 20) {
+                    setMessageOverflow()
+                }
+                else {
+                    setMessageSuccess()
                 }
             }
         })
@@ -84,35 +80,47 @@ class NicknameActivity : BaseActivity<ActivityNicknameBinding>(R.layout.activity
 
     fun setMessageNull() {
         binding.nicknameTvMessage.visibility = View.INVISIBLE
+        setButtonUnavailable()
     }
 
     fun setMessageSuccess() {
-        binding.nicknameTvMessage.visibility = View.VISIBLE
-        binding.nicknameTvMessage.setTextColor(getColor(R.color.sub_green))
-        binding.nicknameTvMessage.text = getString(R.string.nickname_tv_success)
+        binding.nicknameTvMessage.apply {
+            visibility = View.VISIBLE
+            setTextColor(getColor(R.color.sub_green))
+            text = getString(R.string.nickname_tv_success)
+        }
+        setButtonAvailable()
     }
 
     fun setMessageOverlap() {
-        binding.nicknameTvMessage.visibility = View.VISIBLE
-        binding.nicknameTvMessage.setTextColor(getColor(R.color.main_orange))
-        binding.nicknameTvMessage.text = getString(R.string.nickname_tv_overlap)
+        binding.nicknameTvMessage.apply {
+            visibility = View.VISIBLE
+            setTextColor(getColor(R.color.main_orange))
+            text = getString(R.string.nickname_tv_overlap)
+        }
+        setButtonUnavailable()
     }
 
     fun setMessageOverflow() {
-        binding.nicknameTvMessage.visibility = View.VISIBLE
-        binding.nicknameTvMessage.setTextColor(getColor(R.color.main_orange))
-        binding.nicknameTvMessage.text = getString(R.string.nickname_tv_overflow)
+        binding.nicknameTvMessage.apply {
+            visibility = View.VISIBLE
+            setTextColor(getColor(R.color.main_orange))
+            text = getString(R.string.nickname_tv_overflow)
+        }
+        setButtonUnavailable()
     }
 
     fun setButtonUnavailable() {
         binding.nicknameBtnComplete.apply {
+            setBackgroundResource(R.drawable.bg_btn_sub)
             isClickable = false
-            background = getDrawable(R.drawable.bg_btn_sub)
         }
     }
 
     fun setButtonAvailable() {
-        binding.nicknameBtnComplete.setBackgroundResource(R.drawable.bg_btn_main)
-        binding.nicknameBtnComplete.isClickable = true
+        binding.nicknameBtnComplete.apply {
+            setBackgroundResource(R.drawable.bg_btn_main)
+            isClickable = true
+        }
     }
 }
