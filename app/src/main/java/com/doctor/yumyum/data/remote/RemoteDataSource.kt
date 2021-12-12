@@ -3,10 +3,8 @@ package com.doctor.yumyum.data.remote
 import com.doctor.yumyum.common.network.RetrofitClient
 import com.doctor.yumyum.data.model.NicknamePatchModel
 import com.doctor.yumyum.data.model.SignUpModel
-import com.doctor.yumyum.data.remote.api.AuthCreationService
-import com.doctor.yumyum.data.remote.api.NicknameCreationService
-import com.doctor.yumyum.data.remote.api.NicknameService
-import com.doctor.yumyum.data.remote.api.NicknameValidationService
+import com.doctor.yumyum.data.remote.api.AuthService
+import com.doctor.yumyum.data.remote.api.UserService
 import com.doctor.yumyum.data.remote.response.GetNicknameResponse
 import com.doctor.yumyum.data.remote.api.RankRecipeService
 import com.doctor.yumyum.data.remote.response.RankRecipeResponse
@@ -14,10 +12,10 @@ import okhttp3.ResponseBody
 import retrofit2.Response
 
 interface RemoteDataSource {
-    suspend fun postAuthCreation(signUpModel: SignUpModel): Response<ResponseBody>
-    suspend fun getNicknameApi(): Response<GetNicknameResponse>
-    suspend fun validateNicknameApi(nickname: String): Response<ResponseBody>
-    suspend fun patchNicknameApi(nicknamePatchModel: NicknamePatchModel): Response<ResponseBody>
+    suspend fun signUp(signUpModel: SignUpModel): Response<ResponseBody>
+    suspend fun getNickname(): Response<GetNicknameResponse>
+    suspend fun validateNickname(nickname: String): Response<ResponseBody>
+    suspend fun patchNickname(nicknamePatchModel: NicknamePatchModel): Response<ResponseBody>
     suspend fun getRecipeRank(
         categoryName: String,
         top: Int,
@@ -26,26 +24,26 @@ interface RemoteDataSource {
 }
 
 class RemoteDataSourceImpl() : RemoteDataSource {
-    override suspend fun postAuthCreation(signUpModel: SignUpModel): Response<ResponseBody> {
-        return RetrofitClient.getClient().create(AuthCreationService::class.java)
+    override suspend fun signUp(signUpModel: SignUpModel): Response<ResponseBody> {
+        return RetrofitClient.getClient().create(AuthService::class.java)
             .signUp(signUpModel)
     }
 
-    override suspend fun getNicknameApi(): Response<GetNicknameResponse> {
-        return RetrofitClient.getClient().create(NicknameCreationService::class.java)
-            .getNicknameApi()
+    override suspend fun getNickname(): Response<GetNicknameResponse> {
+        return RetrofitClient.getClient().create(UserService::class.java)
+            .getNickname()
     }
 
-    override suspend fun validateNicknameApi(nickname: String): Response<ResponseBody> {
-        return RetrofitClient.getClient().create(NicknameValidationService::class.java)
-            .validateNicknameApi(nickname)
+    override suspend fun validateNickname(nickname: String): Response<ResponseBody> {
+        return RetrofitClient.getClient().create(UserService::class.java)
+            .validateNickname(nickname)
     }
 
-    override suspend fun patchNicknameApi(nicknamePatchModel: NicknamePatchModel): Response<ResponseBody> {
-        return RetrofitClient.getClient().create(NicknameService::class.java)
-            .patchNicknameApi(nicknamePatchModel)
+    override suspend fun patchNickname(nicknamePatchModel: NicknamePatchModel): Response<ResponseBody> {
+        return RetrofitClient.getClient().create(UserService::class.java)
+            .patchNickname(nicknamePatchModel)
     }
-    
+
     override suspend fun getRecipeRank(
         categoryName: String,
         top: Int,

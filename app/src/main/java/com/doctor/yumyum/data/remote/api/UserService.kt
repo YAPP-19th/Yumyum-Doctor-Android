@@ -10,21 +10,18 @@ import retrofit2.http.GET
 import retrofit2.http.PATCH
 import retrofit2.http.Query
 
-interface NicknameCreationService {
+interface UserService {
+
     @GET("/api/v1/users/nickname")
-    suspend fun getNicknameApi(): Response<GetNicknameResponse>
-}
+    suspend fun getNickname(): Response<GetNicknameResponse>
 
-interface NicknameValidationService {
     @GET("/api/v1/users/me/nickname/validation")
-    suspend fun validateNicknameApi(
+    suspend fun validateNickname(
         @Query("nickname") nickname: String
-    ):Response<ResponseBody>
-}
+    ): Response<ResponseBody>
 
-interface NicknameService {
     @PATCH("/api/v1/users/me/nickname")
-    suspend fun patchNicknameApi(
+    suspend fun patchNickname(
         @Body nicknamePatchModel: NicknamePatchModel
-    ):Response<ResponseBody>
+    ): Response<ResponseBody>
 }

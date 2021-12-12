@@ -23,7 +23,7 @@ class LoginRepositoryImpl : LoginRepository {
         localDataSource.setLoginToken(loginToken)
     }
 
-    override suspend fun postAuthCreation(signUpModel: SignUpModel): Response<ResponseBody> {
-        return remoteDataSource.postAuthCreation(signUpModel)
+    override suspend fun signUp(signUpModel: SignUpModel): Response<ResponseBody> {
+        return remoteDataSource.signUp(signUpModel)
     }
 }

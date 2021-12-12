@@ -14,15 +14,15 @@ class UserRepositoryImpl() : UserRepository {
     override val remoteDataSource: RemoteDataSourceImpl
         get() = RemoteDataSourceImpl()
 
-    override suspend fun getNicknameApi(): Response<GetNicknameResponse> {
-        return remoteDataSource.getNicknameApi()
+    override suspend fun getNickname(): Response<GetNicknameResponse> {
+        return remoteDataSource.getNickname()
     }
 
-    override suspend fun validateNicknameApi(nickname: String): Response<ResponseBody> {
-        return remoteDataSource.validateNicknameApi(nickname)
+    override suspend fun validateNickname(nickname: String): Response<ResponseBody> {
+        return remoteDataSource.validateNickname(nickname)
     }
 
-    override suspend fun patchNicknameApi(nicknamePatchModel: NicknamePatchModel): Response<ResponseBody> {
-        return remoteDataSource.patchNicknameApi(nicknamePatchModel)
+    override suspend fun patchNickname(nicknamePatchModel: NicknamePatchModel): Response<ResponseBody> {
+        return remoteDataSource.patchNickname(nicknamePatchModel)
     }
 }

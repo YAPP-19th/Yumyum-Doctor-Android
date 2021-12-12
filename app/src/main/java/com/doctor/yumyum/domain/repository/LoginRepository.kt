@@ -15,5 +15,5 @@ interface LoginRepository {
     fun setLoginToken(loginToken: String)
 
     // 회원가입
-    suspend fun postAuthCreation(signUpModel: SignUpModel): Response<ResponseBody>
+    suspend fun signUp(signUpModel: SignUpModel): Response<ResponseBody>
 }

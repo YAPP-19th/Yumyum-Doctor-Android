@@ -11,7 +11,7 @@ interface UserRepository {
     val localDataSource: LocalDataSourceImpl
     val remoteDataSource: RemoteDataSourceImpl
 
-    suspend fun getNicknameApi(): Response<GetNicknameResponse>
-    suspend fun validateNicknameApi(nickname: String): Response<ResponseBody>
-    suspend fun patchNicknameApi(nicknamePatchModel: NicknamePatchModel): Response<ResponseBody>
+    suspend fun getNickname(): Response<GetNicknameResponse>
+    suspend fun validateNickname(nickname: String): Response<ResponseBody>
+    suspend fun patchNickname(nicknamePatchModel: NicknamePatchModel): Response<ResponseBody>
 }

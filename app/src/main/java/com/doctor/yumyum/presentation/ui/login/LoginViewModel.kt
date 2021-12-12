@@ -19,7 +19,7 @@ class LoginViewModel : BaseViewModel() {
 
     suspend fun signUp(accessToken: String, nickname: String, oauthType: String) {
         try {
-            val response: Response<ResponseBody> = repository.postAuthCreation(
+            val response: Response<ResponseBody> = repository.signUp(
                 SignUpModel(
                     accessToken,
                     nickname,

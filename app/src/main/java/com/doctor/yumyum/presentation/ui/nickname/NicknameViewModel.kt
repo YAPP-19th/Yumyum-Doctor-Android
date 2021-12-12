@@ -1,6 +1,5 @@
 package com.doctor.yumyum.presentation.ui.nickname
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.common.base.BaseViewModel
@@ -20,7 +19,7 @@ class NicknameViewModel : BaseViewModel() {
 
     suspend fun getNickname() {
         try {
-            val nicknameResponse: Response<GetNicknameResponse> = userRepository.getNicknameApi()
+            val nicknameResponse: Response<GetNicknameResponse> = userRepository.getNickname()
             nickname.postValue(nicknameResponse.body()?.nickname)
 
         } catch (e: Exception) {
@@ -31,7 +30,7 @@ class NicknameViewModel : BaseViewModel() {
     suspend fun validateNickname(nickname: String): Boolean {
         return try {
             val nicknameResponse: Response<ResponseBody> =
-                userRepository.validateNicknameApi(nickname)
+                userRepository.validateNickname(nickname)
             nicknameResponse.code() == 200
 
         } catch (e: Exception) {
@@ -43,7 +42,7 @@ class NicknameViewModel : BaseViewModel() {
     suspend fun patchNickname(nickname: String) {
         try {
             val nicknameResponse: Response<ResponseBody> =
-                userRepository.patchNicknameApi(NicknamePatchModel(nickname))
+                userRepository.patchNickname(NicknamePatchModel(nickname))
         } catch (e:Exception) {
             _errorState.postValue(true)
         }
