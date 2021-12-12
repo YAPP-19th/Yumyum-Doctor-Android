@@ -22,6 +22,7 @@
     <string name="common_cancel">취소</string>
     <string name="common_next">다음</string>
     <string name="common_ok">확인</string>
+    <string name="common_complete">완료</string>
     <string name="common_brand_en">brand</string>
 
     <string name="common_starbucks">스타벅스</string>
@@ -70,7 +71,6 @@
     <string name="menu_main_bottom_write_recipe">래시피 작성</string>
     <string name="menu_main_bottom_my_recipe">나의 레시피</string>
     <string name="menu_main_bottom_my_page">마이페이지</string>
-
 
     <!-- 레시피 작성 -->
     <string name="write_recipe_tv_title">레시피 작성</string>
@@ -121,7 +121,15 @@
     <string name="research_list_search_with_hashtag">해시태그로 검색</string>
     <string name="research_list_ib_hashtag_reset">해시태그 삭제 버튼</string>
 
-    <!-- 신고하기 -->
+    <!-- 닉네임 Activity -->
+    <string name="nickname_tv_title">입학할 학생의 이름을 입력해주세요</string>
+    <string name="nickname_tv_warning">*실명 사용은 지양해주시길 바랍니다.</string>
+    <string name="nickname_et_hint">닉네임을 입력해주세요</string>
+    <string name="nickname_tv_overlap">*중복된 닉네임 입니다.</string>
+    <string name="nickname_tv_overflow">*최대 20자까지 입력할 수 있습니다.</string>
+    <string name="nickname_tv_success">*사용가능한 닉네임입니다.</string>
+ 
+      <!-- 신고하기 -->
     <string name="report">신고</string>
     <string name="report_title">신고하기</string>
     <string name="report_select_reason">신고사유를 선택해주세요</string>

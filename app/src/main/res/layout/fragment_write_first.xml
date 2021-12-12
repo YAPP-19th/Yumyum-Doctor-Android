@@ -91,7 +91,7 @@
             android:layout_height="47dp"
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/bg_bottom_btn"
+            android:background="@drawable/bg_btn_main"
             android:stateListAnimator="@null"
             android:text="@string/common_next"
             android:textColor="@color/white"
