@@ -11,6 +11,8 @@ import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
 import com.doctor.yumyum.databinding.FragmentResearchRecipeBinding
 import com.doctor.yumyum.presentation.adapter.ResearchBrandAdapter
+import com.doctor.yumyum.presentation.ui.login.ErrorDialog
+import com.doctor.yumyum.presentation.ui.recipedetail.RecipeMenuDialog
 import com.doctor.yumyum.presentation.ui.researchlist.ResearchListActivity
 import com.doctor.yumyum.presentation.viewmodel.ResearchRecipeViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -70,12 +72,19 @@ class ResearchRecipeFragment :
             intent.putExtra(getString(R.string.common_brand_en), it)
             startActivity(intent)
         }
+        //TODO: 레시피 상세 화면으로 이동
+        binding.researchRecipeTvRanking.setOnClickListener {
+            RecipeMenuDialog().show(parentFragmentManager, "RecipeMenuDialog")
+        }
         binding.researchRecipeRecyclerviewBrand.adapter = brandRecyclerAdapter
         brandRecyclerAdapter.setBrandList(beverageBrandList)
         brandRecyclerAdapter.notifyDataSetChanged()
 
         viewModel.mode.observe(viewLifecycleOwner) { mode ->
             changeMode(mode)
+        }
+        viewModel.errorState.observe(viewLifecycleOwner) { errorState ->
+            if (errorState) ErrorDialog().show(parentFragmentManager, "ResearchRecipeFragment")
         }
 
         // 주간 랭킹 리스트 조회
