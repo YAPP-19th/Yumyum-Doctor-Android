@@ -11,8 +11,8 @@
             type="com.doctor.yumyum.presentation.ui.write.WriteFragment2" />
 
         <variable
-            name="secondViewModel"
-            type="com.doctor.yumyum.presentation.ui.write.viewmodel.WriteSecondViewModel" />
+            name="writeViewModel"
+            type="com.doctor.yumyum.presentation.ui.write.viewmodel.WriteViewModel" />
 
     </data>
 
@@ -82,19 +82,19 @@
             android:layout_height="22dp"
             android:layout_marginTop="5dp"
             android:src="@drawable/ic_pluscircle"
-            android:visibility="@{secondViewModel.addTagList.size() == 0 ? View.VISIBLE : View.INVISIBLE}"
+            android:visibility="@{writeViewModel.addTagList.size() == 0 ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintStart_toStartOf="@id/write_second_tv_guide_add"
             app:layout_constraintTop_toBottomOf="@id/write_second_tv_guide_add" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/write_second_rv_plus"
-            bind_tagList="@{secondViewModel.addTagList}"
+            bind_tagList="@{writeViewModel.addTagList}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="12dp"
             android:orientation="horizontal"
-            android:visibility="@{secondViewModel.addTagList.size() == 0 ? View.INVISIBLE : View.VISIBLE}"
+            android:visibility="@{writeViewModel.addTagList.size() == 0 ? View.INVISIBLE : View.VISIBLE}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/write_second_tv_guide_add" />
 
@@ -116,7 +116,7 @@
             android:layout_height="18dp"
             android:layout_marginStart="4dp"
             android:src="@drawable/ic_edit"
-            android:visibility="@{secondViewModel.addTagList.size() == 0 ? View.INVISIBLE : View.VISIBLE}"
+            android:visibility="@{writeViewModel.addTagList.size() == 0 ? View.INVISIBLE : View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="@id/write_second_tv_guide_add"
             app:layout_constraintStart_toEndOf="@id/write_second_tv_guide_add"
             app:layout_constraintTop_toTopOf="@id/write_second_tv_guide_add" />
@@ -127,7 +127,7 @@
             android:layout_height="18dp"
             android:layout_marginStart="4dp"
             android:src="@drawable/ic_edit"
-            android:visibility="@{secondViewModel.minusTagList.size() == 0 ? View.INVISIBLE : View.VISIBLE}"
+            android:visibility="@{writeViewModel.minusTagList.size() == 0 ? View.INVISIBLE : View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="@id/write_second_tv_guide_minus"
             app:layout_constraintStart_toEndOf="@id/write_second_tv_guide_minus"
             app:layout_constraintTop_toTopOf="@id/write_second_tv_guide_minus" />
@@ -139,19 +139,19 @@
             android:layout_height="22dp"
             android:layout_marginTop="5dp"
             android:src="@drawable/ic_pluscircle"
-            android:visibility="@{secondViewModel.minusTagList.size() == 0 ? View.VISIBLE : View.INVISIBLE}"
+            android:visibility="@{writeViewModel.minusTagList.size() == 0 ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintStart_toStartOf="@id/write_second_tv_guide_minus"
             app:layout_constraintTop_toBottomOf="@id/write_second_tv_guide_minus" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/write_second_rv_minus"
-            bind_tagList="@{secondViewModel.minusTagList}"
+            bind_tagList="@{writeViewModel.minusTagList}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="12dp"
             android:orientation="horizontal"
-            android:visibility="@{secondViewModel.minusTagList.size() == 0 ? View.INVISIBLE : View.VISIBLE}"
+            android:visibility="@{writeViewModel.minusTagList.size() == 0 ? View.INVISIBLE : View.VISIBLE}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/write_second_tv_guide_minus" />
 

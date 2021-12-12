@@ -25,6 +25,12 @@ class WriteFragment2 : BaseFragment<FragmentWriteSecondBinding>(R.layout.fragmen
     private lateinit var changeIngredients : ActivityResultLauncher<Intent>
     private var addList : ArrayList<String> = arrayListOf()
     private var minusList : ArrayList<String> = arrayListOf()
+    private val writeViewModel : WriteViewModel by activityViewModels {
+        object : ViewModelProvider.Factory{
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T =
+                WriteViewModel() as T
+        }
+    }
 
     companion object {
         const val REQUEST_CODE_ADD_INGREDIENTS = 9001
@@ -41,7 +47,7 @@ class WriteFragment2 : BaseFragment<FragmentWriteSecondBinding>(R.layout.fragmen
 
     private fun initBinding() {
         binding.secondFragment = this
-        //binding.writeViewModel = writeViewModel
+        binding.writeViewModel = writeViewModel
         binding.writeSecondRvPlus.adapter = WriteTagAdapter{}
         binding.writeSecondRvMinus.adapter = WriteTagAdapter{}
     }
@@ -87,12 +93,12 @@ class WriteFragment2 : BaseFragment<FragmentWriteSecondBinding>(R.layout.fragmen
         changeIngredients = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ it ->
             if (it.resultCode == REQUEST_CODE_ADD_INGREDIENTS) {
                 addList = it.data?.getStringArrayListExtra(resources.getString(R.string.write_intent_inputList)) as ArrayList<String>
-                //writeViewModel.setAddTagItem(addList)
+                writeViewModel.setAddTagItem(addList)
             }
 
             if(it.resultCode == REQUEST_CODE_MINUS_INGREDIENTS){
                 minusList = it.data?.getStringArrayListExtra(resources.getString(R.string.write_intent_inputList)) as ArrayList<String>
-                //writeViewModel.setMinusTagItem(minusList)
+                writeViewModel.setMinusTagItem(minusList)
             }
         }
     }
