@@ -1,24 +1,22 @@
 package com.doctor.yumyum.presentation.ui.write.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.common.base.BaseViewModel
-import retrofit2.http.DELETE
 
 class WriteTagViewModel : BaseViewModel(){
-    private val _tagListLiveData : MutableLiveData<ArrayList<String>> = MutableLiveData()
-    val tagListLiveData : LiveData<ArrayList<String>>
-        get() = _tagListLiveData
+    val tagInput : MutableLiveData<String> = MutableLiveData()
+
+    private val _tagList : MutableLiveData<ArrayList<String>> = MutableLiveData(arrayListOf())
+    val tagList : LiveData<ArrayList<String>>
+        get() = _tagList
+
+    private val _deleteTagList : MutableLiveData<ArrayList<String>> = MutableLiveData(arrayListOf())
 
     private val _deleteStatus : MutableLiveData<Int> = MutableLiveData(DELETE_STATUS)
     val deleteStatus : LiveData<Int>
         get() = _deleteStatus
-
-    val tagInput : MutableLiveData<String> = MutableLiveData()
-
-    init {
-        _tagListLiveData.value = arrayListOf()
-    }
 
     companion object {
         const val DELETE_STATUS = 1000
@@ -34,22 +32,44 @@ class WriteTagViewModel : BaseViewModel(){
     }
 
     private fun addTagItem(newTag : String){
-        if(!_tagListLiveData.value?.contains(newTag)!! && _tagListLiveData.value?.size != 10){
-            _tagListLiveData.value?.add(newTag)
-            _tagListLiveData.value = _tagListLiveData.value
+        if(!_tagList.value?.contains(newTag)!! && _tagList.value?.size != 10){
+            _tagList.value?.add(newTag)
+            _tagList.value = _tagList.value
         }
-    }
-
-    fun removeTagItem(removeTag : String){
-        _tagListLiveData.value?.remove(removeTag)
-        _tagListLiveData.value = _tagListLiveData.value
     }
 
     fun updateDeleteStatus(){
         if(_deleteStatus.value == DELETE_STATUS){
             _deleteStatus.value=SELECT_DELETE_STATUS
-        }else{
+        }else if(_deleteStatus.value == SELECT_DELETE_STATUS){
             _deleteStatus.value= DELETE_STATUS
+            deleteDeleteTagList()
         }
     }
+
+    fun updateDeleteTagList(removeTag : String){
+        if(_deleteTagList.value?.contains(removeTag) == true){
+            // 삭제할 태그 선택 해제
+            _deleteTagList.value?.remove(removeTag)
+            _deleteTagList.value = _deleteTagList.value
+        }else{
+            // 삭제할 태그 선택
+            _deleteTagList.value?.add(removeTag)
+            _deleteTagList.value = _deleteTagList.value
+        }
+        Log.d("WriteTagActivity", "deleteList : ${_deleteTagList.value}")
+    }
+
+    private fun deleteDeleteTagList(){
+        // 선택된 태그들 삭제
+        _deleteTagList.value?.let { _tagList.value?.removeAll(it) }
+        _tagList.value = _tagList.value
+
+        // 삭제할 리스트 초기화
+        _deleteTagList.value?.clear()
+        _deleteStatus.value = _deleteStatus.value
+        Log.d("WriteTagActivity", "tagList : ${_tagList.value}")
+        Log.d("WriteTagActivity", "deleteList : ${_deleteTagList.value}")
+    }
+
 }

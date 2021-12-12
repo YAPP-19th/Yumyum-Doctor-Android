@@ -2,6 +2,7 @@ package com.doctor.yumyum.presentation.ui.write
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.inputmethod.EditorInfo
 import androidx.activity.viewModels
 import com.doctor.yumyum.R
@@ -21,7 +22,6 @@ import com.google.android.flexbox.JustifyContent
 
 class WriteTagActivity : BaseActivity<ActivityWriteTagBinding>(R.layout.activity_write_tag) {
 
-    private var deleteItemList = arrayListOf<String>()
     private val tagViewModel: WriteTagViewModel by viewModels()
     private var requestCode = 0
 
@@ -55,16 +55,10 @@ class WriteTagActivity : BaseActivity<ActivityWriteTagBinding>(R.layout.activity
             justifyContent = JustifyContent.FLEX_START
         }.let { layoutManager ->
             binding.writeTagRvInput.layoutManager = layoutManager
-            binding.writeTagRvInput.adapter = WriteTagAdapter {
-//                if(deleteMode == SELECT_DELETE_STATUS){
-//                    if(deleteItemList.contains(it)){
-//                        //TODO: 배경색&글자색 변경
-//                        deleteItemList.remove(it)
-//                    }else{
-//                        //TODO: 배경색&글자색 변경
-//                        deleteItemList.add(it)
-//                    }
-//                }
+            binding.writeTagRvInput.adapter = WriteTagAdapter { tag -> String
+                if(tagViewModel.deleteStatus.value == 1001){
+                    tagViewModel.updateDeleteTagList(tag)
+                }
             }
         }
     }
@@ -82,7 +76,7 @@ class WriteTagActivity : BaseActivity<ActivityWriteTagBinding>(R.layout.activity
 
     fun finishInput() {
         val intent = Intent(this, WriteFragment2::class.java)
-        intent.putStringArrayListExtra("inputList", tagViewModel.tagListLiveData.value)
+        intent.putStringArrayListExtra("inputList", tagViewModel.tagList.value)
         setResult(requestCode, intent)
         finish()
     }
