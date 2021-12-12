@@ -15,6 +15,8 @@ class ResearchRecipeViewModel : BaseViewModel() {
     private val repository = MainRepositoryImpl()
     private val _rankRecipes: MutableLiveData<List<RankRecipe>> = MutableLiveData()
     val rankRecipes: LiveData<List<RankRecipe>> get() = _rankRecipes
+    private val _errorState: MutableLiveData<Boolean> = MutableLiveData(false)
+    val errorState: LiveData<Boolean> get() = _errorState
 
     @SuppressLint("SupportAnnotationUsage")
     @StringRes
@@ -31,11 +33,15 @@ class ResearchRecipeViewModel : BaseViewModel() {
     }
 
     suspend fun getRankRecipe(categoryName: String, top: Int, rankDatePeriod: Int) {
-        val response: Response<RankRecipeResponse> =
-            repository.getRecipeRank(categoryName, top, rankDatePeriod)
+        try {
+            val response: Response<RankRecipeResponse> =
+                repository.getRecipeRank(categoryName, top, rankDatePeriod)
 
-        if (response.isSuccessful) {
-            _rankRecipes.postValue(response.body()?.topRankingFoods)
+            if (response.isSuccessful) {
+                _rankRecipes.postValue(response.body()?.topRankingFoods)
+            }
+        } catch (e: Exception) {
+            _errorState.postValue(true)
         }
     }
 }
