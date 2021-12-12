@@ -22,6 +22,7 @@ import com.google.android.flexbox.JustifyContent
 
 class WriteTagActivity : BaseActivity<ActivityWriteTagBinding>(R.layout.activity_write_tag) {
 
+    private lateinit var writeTagAdapter: WriteTagAdapter
     private val tagViewModel: WriteTagViewModel by viewModels()
     private var requestCode = 0
 
@@ -40,6 +41,13 @@ class WriteTagActivity : BaseActivity<ActivityWriteTagBinding>(R.layout.activity
             }
             false
         }
+
+        tagViewModel.deleteStatus.observe(this) {
+            writeTagAdapter.updateDeleteStatus(it)
+        }
+        tagViewModel.deleteTagList.observe(this) {
+            writeTagAdapter.updateDeleteTagList(it)
+        }
     }
 
     private fun initBinding() {
@@ -49,17 +57,18 @@ class WriteTagActivity : BaseActivity<ActivityWriteTagBinding>(R.layout.activity
     }
 
     private fun initTagRecycler() {
+        writeTagAdapter = WriteTagAdapter { tag -> String
+            if (tagViewModel.deleteStatus.value == 1001) {
+                tagViewModel.updateDeleteTagList(tag)
+            }
+        }
         FlexboxLayoutManager(this).apply {
             flexWrap = FlexWrap.WRAP
             flexDirection = FlexDirection.ROW
             justifyContent = JustifyContent.FLEX_START
         }.let { layoutManager ->
             binding.writeTagRvInput.layoutManager = layoutManager
-            binding.writeTagRvInput.adapter = WriteTagAdapter { tag -> String
-                if(tagViewModel.deleteStatus.value == 1001){
-                    tagViewModel.updateDeleteTagList(tag)
-                }
-            }
+            binding.writeTagRvInput.adapter = writeTagAdapter
         }
     }
 

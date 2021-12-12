@@ -13,6 +13,8 @@ class WriteTagViewModel : BaseViewModel(){
         get() = _tagList
 
     private val _deleteTagList : MutableLiveData<ArrayList<String>> = MutableLiveData(arrayListOf())
+    val deleteTagList : LiveData<ArrayList<String>>
+        get() = _deleteTagList
 
     private val _deleteStatus : MutableLiveData<Int> = MutableLiveData(DELETE_STATUS)
     val deleteStatus : LiveData<Int>
