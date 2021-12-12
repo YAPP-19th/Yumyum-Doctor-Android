@@ -57,7 +57,6 @@ class WriteTagViewModel : BaseViewModel(){
             _deleteTagList.value?.add(removeTag)
             _deleteTagList.value = _deleteTagList.value
         }
-        Log.d("WriteTagActivity", "deleteList : ${_deleteTagList.value}")
     }
 
     private fun deleteDeleteTagList(){
@@ -68,8 +67,6 @@ class WriteTagViewModel : BaseViewModel(){
         // 삭제할 리스트 초기화
         _deleteTagList.value?.clear()
         _deleteStatus.value = _deleteStatus.value
-        Log.d("WriteTagActivity", "tagList : ${_tagList.value}")
-        Log.d("WriteTagActivity", "deleteList : ${_deleteTagList.value}")
     }
 
 }
