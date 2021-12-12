@@ -1,10 +1,9 @@
 package com.doctor.yumyum.presentation.ui.login
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.common.base.BaseViewModel
-import com.doctor.yumyum.data.model.signUpModel
+import com.doctor.yumyum.data.model.SignUpModel
 import com.doctor.yumyum.data.repository.LoginRepositoryImpl
 import okhttp3.ResponseBody
 import retrofit2.Response
@@ -20,8 +19,8 @@ class LoginViewModel : BaseViewModel() {
 
     suspend fun signUp(accessToken: String, nickname: String, oauthType: String) {
         try {
-            val response: Response<ResponseBody> = repository.postAuthCreation(
-                signUpModel(
+            val response: Response<ResponseBody> = repository.signUp(
+                SignUpModel(
                     accessToken,
                     nickname,
                     oauthType
@@ -34,6 +33,7 @@ class LoginViewModel : BaseViewModel() {
                     }
                 }
             } else {
+
                 _errorState.value = true
             }
         } catch (e: Exception) {

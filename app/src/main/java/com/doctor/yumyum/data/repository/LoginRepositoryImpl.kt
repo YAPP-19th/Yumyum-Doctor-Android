@@ -1,11 +1,10 @@
 package com.doctor.yumyum.data.repository
 
 import com.doctor.yumyum.data.local.LocalDataSourceImpl
-import com.doctor.yumyum.data.model.signUpModel
+import com.doctor.yumyum.data.model.SignUpModel
 import com.doctor.yumyum.data.remote.RemoteDataSourceImpl
 import com.doctor.yumyum.domain.repository.LoginRepository
 import okhttp3.ResponseBody
-import retrofit2.Call
 import retrofit2.Response
 
 
@@ -24,7 +23,7 @@ class LoginRepositoryImpl : LoginRepository {
         localDataSource.setLoginToken(loginToken)
     }
 
-    override suspend fun postAuthCreation(signUpModel: signUpModel): Response<ResponseBody> {
-        return remoteDataSource.postAuthCreation(signUpModel)
+    override suspend fun signUp(signUpModel: SignUpModel): Response<ResponseBody> {
+        return remoteDataSource.signUp(signUpModel)
     }
 }

@@ -1,11 +1,13 @@
 package com.doctor.yumyum.presentation.ui.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseActivity
 import com.doctor.yumyum.databinding.ActivityLoginBinding
+import com.doctor.yumyum.presentation.ui.nickname.NicknameActivity
 import com.kakao.sdk.auth.LoginClient
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
@@ -57,6 +59,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
             val accessToken = kakaoLogin()
             val nickname = kakaoUserInfo()
             viewModel.signUp(accessToken, nickname,"KAKAO")
+            startActivity(Intent(this, NicknameActivity::class.java))
 
         } catch (e: Exception) {
             ErrorDialog().apply {

@@ -7,6 +7,8 @@
 
         <import type="com.doctor.yumyum.R" />
 
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.doctor.yumyum.presentation.viewmodel.ResearchRecipeViewModel" />
@@ -138,6 +140,7 @@
                     android:paddingBottom="29dp"
                     android:text="@string/research_ranking_empty"
                     android:textColor="@color/black"
+                    android:visibility="@{viewModel.rankRecipes.size() == 0? View.VISIBLE : View.GONE}"
                     app:drawableTopCompat="@drawable/ic_logo_error"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
