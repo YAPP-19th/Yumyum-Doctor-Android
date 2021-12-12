@@ -11,6 +11,7 @@ import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
 import com.doctor.yumyum.databinding.FragmentResearchRecipeBinding
 import com.doctor.yumyum.presentation.adapter.ResearchBrandAdapter
+import com.doctor.yumyum.presentation.ui.recipedetail.RecipeMenuDialog
 import com.doctor.yumyum.presentation.ui.researchlist.ResearchListActivity
 import com.doctor.yumyum.presentation.viewmodel.ResearchRecipeViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -69,6 +70,10 @@ class ResearchRecipeFragment :
             val intent = Intent(context, ResearchListActivity::class.java)
             intent.putExtra(getString(R.string.common_brand_en), it)
             startActivity(intent)
+        }
+        //TODO: 레시피 상세 화면으로 이동
+        binding.researchRecipeTvRanking.setOnClickListener {
+            RecipeMenuDialog().show(parentFragmentManager, "RecipeMenuDialog")
         }
         binding.researchRecipeRecyclerviewBrand.adapter = brandRecyclerAdapter
         brandRecyclerAdapter.setBrandList(beverageBrandList)

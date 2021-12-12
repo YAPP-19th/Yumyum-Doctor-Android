@@ -131,4 +131,8 @@
     <string name="report_reason_harmful">가학적이나 유해한 내용을 게시하였습니다.</string>
     <string name="report_reason_wrong">잘못된 사실을 게시하였습니다.</string>
 
+    <!-- 공유하기 -->
+    <string name="share">공유</string>
+    <string name="share_title">공유하기</string>
+
 </resources>
