@@ -47,23 +47,25 @@ class WriteFragment2 : BaseFragment<FragmentWriteSecondBinding>(R.layout.fragmen
         binding.writeSecondBtnMinus.setOnClickListener(this)
         binding.writeSecondBtnNext.setOnClickListener(this)
         binding.writeSecondBtnAdd.setOnClickListener(this)
+        binding.writeSecondIbAddEdit.setOnClickListener(this)
+        binding.writeSecondIbMinusEdit.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         val intent = Intent(context,WriteTagActivity::class.java)
         when(v){
-            binding.writeSecondBtnAdd -> {
+            binding.writeSecondBtnAdd, binding.writeSecondIbAddEdit -> {
                 intent.putExtra(resources.getString(R.string.write_tag_type), REQUEST_CODE_ADD_INGREDIENTS)
                 changeIngredients.launch(intent)
             }
-
             binding.writeSecondBtnNext->
                 findNavController().navigate(R.id.action_second_write_fragment_to_third_write_fragment)
 
-            binding.writeSecondBtnMinus-> {
+            binding.writeSecondBtnMinus, binding.writeSecondIbMinusEdit-> {
                 intent.putExtra(resources.getString(R.string.write_tag_type), REQUEST_CODE_MINUS_INGREDIENTS)
                 changeIngredients.launch(intent)
             }
+
         }
     }
 
