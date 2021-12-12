@@ -1,6 +1,7 @@
 package com.doctor.yumyum.presentation.ui.nickname
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -40,6 +41,13 @@ class NicknameActivity : BaseActivity<ActivityNicknameBinding>(R.layout.activity
             viewModel = viewModel
             lifecycleOwner = this@NicknameActivity
         }
+
+        binding.nicknameBtnComplete.setOnClickListener {
+            CoroutineScope(Dispatchers.IO).launch {
+                viewModel.patchNickname(binding.nicknameEtNickname.text.toString())
+            }
+        }
+
         binding.nicknameEtNickname.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}

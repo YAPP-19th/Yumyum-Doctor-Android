@@ -35,16 +35,17 @@ class NicknameViewModel : BaseViewModel() {
             nicknameResponse.code() == 200
 
         } catch (e: Exception) {
+            _errorState.postValue(true)
             false
         }
     }
 
-    suspend fun patchNickname() {
-        val nicknameResponse: Response<ResponseBody>? =
-            nickname.value?.let { NicknamePatchModel(it) }?.let {
-                userRepository.patchNicknameApi(
-                    it
-                )
-            }
+    suspend fun patchNickname(nickname: String) {
+        try {
+            val nicknameResponse: Response<ResponseBody> =
+                userRepository.patchNicknameApi(NicknamePatchModel(nickname))
+        } catch (e:Exception) {
+            _errorState.postValue(true)
+        }
     }
 }
