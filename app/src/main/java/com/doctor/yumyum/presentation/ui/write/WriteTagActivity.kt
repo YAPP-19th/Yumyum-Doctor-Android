@@ -79,13 +79,19 @@ class WriteTagActivity : BaseActivity<ActivityWriteTagBinding>(R.layout.activity
             WriteFragment2.REQUEST_CODE_MINUS_INGREDIENTS -> resources.getString(R.string.write_tv_minus)
             else -> ""
         }
+        val addList = intent.extras?.getStringArrayList(resources.getString(R.string.write_intent_inputList)) ?: arrayListOf()
+        addList.forEach { tagViewModel.addTagItem(it)}
+
+        val minusList = intent.extras?.getStringArrayList(resources.getString(R.string.write_intent_inputList)) ?: arrayListOf()
+        minusList.forEach { tagViewModel.addTagItem(it)}
+
         binding.writeTagEtInput.hint = guideText
         binding.writeTagTvGuide.text = guideText
     }
 
     fun finishInput() {
         val intent = Intent(this, WriteFragment2::class.java)
-        intent.putStringArrayListExtra("inputList", tagViewModel.tagList.value)
+        intent.putStringArrayListExtra(resources.getString(R.string.write_intent_inputList), tagViewModel.tagList.value)
         setResult(requestCode, intent)
         finish()
     }

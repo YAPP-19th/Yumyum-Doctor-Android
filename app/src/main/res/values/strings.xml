@@ -76,6 +76,7 @@
     <string name="write_recipe_tv_title">레시피 작성</string>
     <string name="write_first_tv_guide">종류와 브랜드를 선택해주세요</string>
     <string name="write_second_et_name">레시피이름</string>
+    <string name="write_intent_inputList">inputList</string>
 
     <!-- 재료(태그) 입력 -->
     <string name="write_tag_tv_title">재료 입력</string>

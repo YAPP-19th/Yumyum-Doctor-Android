@@ -33,7 +33,7 @@ class WriteTagViewModel : BaseViewModel(){
         }
     }
 
-    private fun addTagItem(newTag : String){
+    fun addTagItem(newTag : String){
         if(!_tagList.value?.contains(newTag)!! && _tagList.value?.size != 10){
             _tagList.value?.add(newTag)
             _tagList.value = _tagList.value
