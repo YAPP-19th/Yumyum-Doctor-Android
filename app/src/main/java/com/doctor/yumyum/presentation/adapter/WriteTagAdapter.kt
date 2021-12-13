@@ -60,11 +60,9 @@ class WriteTagAdapter(private val itemClickListener: (String) -> Unit) :
     fun updateDeleteTagList(newDeleteList :ArrayList<String>){
         deleteTagList.clear()
         deleteTagList.addAll(newDeleteList)
-        Log.d("Adapter", " tagList :${deleteTagList}")
     }
 
     fun updateDeleteStatus(newStatus : Int){
         deleteStatus = newStatus
-        Log.d("Adapter","status :${deleteStatus}")
     }
 }

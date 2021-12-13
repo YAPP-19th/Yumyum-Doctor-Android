@@ -58,7 +58,7 @@ class WriteTagActivity : BaseActivity<ActivityWriteTagBinding>(R.layout.activity
 
     private fun initTagRecycler() {
         writeTagAdapter = WriteTagAdapter { tag -> String
-            if (tagViewModel.deleteStatus.value == 1001) {
+            if (tagViewModel.deleteStatus.value == WriteTagViewModel.SELECT_DELETE_STATUS) {
                 tagViewModel.updateDeleteTagList(tag)
             }
         }
