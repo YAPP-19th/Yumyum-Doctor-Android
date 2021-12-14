@@ -83,7 +83,6 @@
             android:layout_height="22dp"
             android:layout_marginTop="5dp"
             android:src="@drawable/ic_pluscircle"
-            android:visibility="@{writeViewModel.addTagList.size() == 0 ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintStart_toStartOf="@id/write_second_tv_guide_add"
             app:layout_constraintTop_toBottomOf="@id/write_second_tv_guide_add" />
 
@@ -142,7 +141,6 @@
             android:layout_height="22dp"
             android:layout_marginTop="5dp"
             android:src="@drawable/ic_pluscircle"
-            android:visibility="@{writeViewModel.minusTagList.size() == 0 ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintStart_toStartOf="@id/write_second_tv_guide_minus"
             app:layout_constraintTop_toBottomOf="@id/write_second_tv_guide_minus" />
 
