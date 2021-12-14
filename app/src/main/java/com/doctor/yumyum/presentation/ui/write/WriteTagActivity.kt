@@ -2,6 +2,7 @@ package com.doctor.yumyum.presentation.ui.write
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.inputmethod.EditorInfo
 import androidx.activity.viewModels
 import com.doctor.yumyum.R
@@ -21,13 +22,7 @@ import com.google.android.flexbox.JustifyContent
 
 class WriteTagActivity : BaseActivity<ActivityWriteTagBinding>(R.layout.activity_write_tag) {
 
-    private var deleteMode = DELETE_STATUS
-    companion object {
-        const val DELETE_STATUS = 1000
-        const val SELECT_DELETE_STATUS = 1001
-    }
-
-    private var deleteItemList = arrayListOf<String>()
+    private lateinit var writeTagAdapter: WriteTagAdapter
     private val tagViewModel: WriteTagViewModel by viewModels()
     private var requestCode = 0
 
@@ -46,6 +41,13 @@ class WriteTagActivity : BaseActivity<ActivityWriteTagBinding>(R.layout.activity
             }
             false
         }
+
+        tagViewModel.deleteStatus.observe(this) {
+            writeTagAdapter.updateDeleteStatus(it)
+        }
+        tagViewModel.deleteTagList.observe(this) {
+            writeTagAdapter.updateDeleteTagList(it)
+        }
     }
 
     private fun initBinding() {
@@ -55,23 +57,18 @@ class WriteTagActivity : BaseActivity<ActivityWriteTagBinding>(R.layout.activity
     }
 
     private fun initTagRecycler() {
+        writeTagAdapter = WriteTagAdapter { tag -> String
+            if (tagViewModel.deleteStatus.value == WriteTagViewModel.SELECT_DELETE_STATUS) {
+                tagViewModel.updateDeleteTagList(tag)
+            }
+        }
         FlexboxLayoutManager(this).apply {
             flexWrap = FlexWrap.WRAP
             flexDirection = FlexDirection.ROW
             justifyContent = JustifyContent.FLEX_START
         }.let { layoutManager ->
             binding.writeTagRvInput.layoutManager = layoutManager
-            binding.writeTagRvInput.adapter = WriteTagAdapter {
-                if(deleteMode == SELECT_DELETE_STATUS){
-                    if(deleteItemList.contains(it)){
-                        //TODO: 배경색&글자색 변경
-                        deleteItemList.remove(it)
-                    }else{
-                        //TODO: 배경색&글자색 변경
-                        deleteItemList.add(it)
-                    }
-                }
-            }
+            binding.writeTagRvInput.adapter = writeTagAdapter
         }
     }
 
@@ -82,33 +79,19 @@ class WriteTagActivity : BaseActivity<ActivityWriteTagBinding>(R.layout.activity
             WriteFragment2.REQUEST_CODE_MINUS_INGREDIENTS -> resources.getString(R.string.write_tv_minus)
             else -> ""
         }
+        val addList = intent.extras?.getStringArrayList(resources.getString(R.string.write_intent_inputList)) ?: arrayListOf()
+        addList.forEach { tagViewModel.addTagItem(it)}
+
+        val minusList = intent.extras?.getStringArrayList(resources.getString(R.string.write_intent_inputList)) ?: arrayListOf()
+        minusList.forEach { tagViewModel.addTagItem(it)}
+
         binding.writeTagEtInput.hint = guideText
         binding.writeTagTvGuide.text = guideText
     }
 
-    fun changeModeClickListener() {
-        when (deleteMode) {
-            DELETE_STATUS -> {
-                deleteMode = SELECT_DELETE_STATUS
-                binding.writeTagTvRemove.text = resources.getString(R.string.write_tag_select_delete)
-                binding.writeTagTvRemove.setTextColor(resources.getColor(R.color.main_orange))
-            }
-            SELECT_DELETE_STATUS -> {
-                deleteMode = DELETE_STATUS
-                binding.writeTagTvRemove.text = resources.getString(R.string.write_tag_delete)
-                binding.writeTagTvRemove.setTextColor(resources.getColor(R.color.black))
-
-                deleteItemList.forEach {
-                    tagViewModel.removeTagItem(it)
-                }
-                deleteItemList.clear()
-            }
-        }
-    }
-
     fun finishInput() {
         val intent = Intent(this, WriteFragment2::class.java)
-        intent.putStringArrayListExtra("inputList", tagViewModel.tagListLiveData.value)
+        intent.putStringArrayListExtra(resources.getString(R.string.write_intent_inputList), tagViewModel.tagList.value)
         setResult(requestCode, intent)
         finish()
     }

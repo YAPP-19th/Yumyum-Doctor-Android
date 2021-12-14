@@ -114,7 +114,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/write_tag_rv_input"
-                bind_tagList="@{tagViewModel.tagListLiveData}"
+                bind_tagList="@{tagViewModel.tagList}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="33dp"
@@ -126,15 +126,15 @@
                 tools:listitem="@layout/item_input_ingredient" />
 
             <TextView
-                android:onClick="@{() -> tagActivity.changeModeClickListener()}"
+                android:onClick="@{() -> tagViewModel.updateDeleteStatus()}"
                 android:id="@+id/write_tag_tv_remove"
                 style="@style/font_body1_regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="@string/write_tag_delete"
-                android:textColor="@color/black"
-                android:visibility="@{tagViewModel.tagListLiveData.size() == 0 ? View.INVISIBLE : View.VISIBLE}"
+                android:text="@{tagViewModel.deleteStatus == tagViewModel.DELETE_STATUS ? @string/write_tag_delete : @string/write_tag_select_delete}"
+                android:textColor="@{tagViewModel.deleteStatus == tagViewModel.DELETE_STATUS ? @color/black : @color/main_orange}"
+                android:visibility="@{tagViewModel.tagList.size() == 0 ? View.INVISIBLE : View.VISIBLE}"
                 app:layout_constraintStart_toStartOf="@id/write_tag_rv_input"
                 app:layout_constraintTop_toBottomOf="@id/write_tag_rv_input" />
 
@@ -146,8 +146,8 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="20dp"
+                android:backgroundTint="@{tagViewModel.tagList.size() == 0 ? @color/unselect_orange : @color/main_orange}"
                 android:background="@drawable/bg_btn_main"
-                android:backgroundTint="@{tagViewModel.tagListLiveData.size() == 0 ? @color/unselect_orange : @color/main_orange}"
                 android:onClick="@{() -> tagActivity.finishInput()}"
                 android:stateListAnimator="@null"
                 android:text="@string/common_ok"
