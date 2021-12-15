@@ -22,10 +22,13 @@
     <style name="MYBottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/bg_dialog_select_brand</item>
     </style>
+
     <style name="Theme.Yumyum.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
     <style name="Theme.Yumyum.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
     <style name="Theme.Yumyum.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

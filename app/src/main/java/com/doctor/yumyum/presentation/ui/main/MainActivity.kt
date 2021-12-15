@@ -2,6 +2,7 @@ package com.doctor.yumyum.presentation.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
 import com.doctor.yumyum.databinding.ActivityMainBinding
@@ -29,6 +30,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         binding.apply {
             lifecycleOwner = this@MainActivity
             viewModel = viewModel
+            mainNvBottom.menu.getItem(2).isEnabled = false
             mainNvBottom.setOnItemSelectedListener { it ->
                 when (it.itemId) {
                     R.id.menu_main_home -> supportFragmentManager.beginTransaction()
@@ -37,22 +39,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                     R.id.menu_main_research_recipe -> supportFragmentManager.beginTransaction()
                         .replace(R.id.main_fl_frag, ResearchRecipeFragment()).commit()
 
-                    R.id.menu_main_write_recipe -> {
-                        val intent = Intent(this@MainActivity, WriteRecipeActivity::class.java)
-                        startActivity(intent)
-                    }
-
                     R.id.menu_main_my_recipe -> supportFragmentManager.beginTransaction()
                         .replace(R.id.main_fl_frag, MyRecipeFragment()).commit()
 
                     R.id.menu_main_my_page -> supportFragmentManager.beginTransaction()
                         .replace(R.id.main_fl_frag, MyPageFragment()).commit()
 
-                    else -> supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_fl_frag, HomeFragment()).commit()
-
                 }
                 return@setOnItemSelectedListener true
+            }
+            mainBtnWrite.setOnClickListener {
+                startActivity(Intent(this@MainActivity, WriteRecipeActivity::class.java))
             }
         }
 

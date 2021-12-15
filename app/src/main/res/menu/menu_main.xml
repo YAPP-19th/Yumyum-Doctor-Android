@@ -2,22 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menu_main_home"
-        android:title="@string/menu_main_bottom_home"
-        android:icon="@drawable/ic_menu_home"/>
+        android:icon="@drawable/ic_menu_home"
+        android:title="@string/menu_main_bottom_home" />
     <item
         android:id="@+id/menu_main_research_recipe"
-        android:title="@string/menu_main_bottom_research_recipe"
-        android:icon="@drawable/ic_menu_research_recipe"/>
+        android:icon="@drawable/ic_menu_research_recipe"
+        android:title="@string/menu_main_bottom_research_recipe" />
     <item
         android:id="@+id/menu_main_write_recipe"
-        android:title="@string/menu_main_bottom_write_recipe"
-        android:icon="@mipmap/ic_launcher"/>
+        android:icon="@null"
+        android:title="@string/menu_main_bottom_write_recipe" />
     <item
         android:id="@+id/menu_main_my_recipe"
-        android:title="@string/menu_main_bottom_my_recipe"
-        android:icon="@drawable/ic_menu_my_recipe"/>
+        android:icon="@drawable/ic_menu_my_recipe"
+        android:title="@string/menu_main_bottom_my_recipe" />
     <item
         android:id="@+id/menu_main_my_page"
-        android:title="@string/menu_main_bottom_my_page"
-        android:icon="@drawable/ic_menu_my_page"/>
+        android:icon="@drawable/ic_menu_my_page"
+        android:title="@string/menu_main_bottom_my_page" />
 </menu>
