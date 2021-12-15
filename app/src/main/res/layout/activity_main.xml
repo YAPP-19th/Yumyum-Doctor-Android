@@ -31,7 +31,7 @@
             android:layout_height="@dimen/bottom_navi_height"
             android:layout_gravity="bottom|center_horizontal"
             android:background="@drawable/bg_main_navi"
-            android:elevation="10dp"
+            android:elevation="30dp"
             app:itemIconTint="@drawable/selector_menu"
             app:itemTextColor="@drawable/selector_menu"
             app:labelVisibilityMode="unlabeled"
@@ -47,12 +47,10 @@
             android:layout_gravity="bottom|center_horizontal"
             android:layout_marginBottom="17dp"
             android:background="@drawable/bg_main_fab"
-            android:elevation="10dp"
+            android:elevation="50dp"
             android:shadowColor="@color/main_orange"
             android:src="@drawable/ic_plus"
             android:stateListAnimator="@null" />
-
-
     </FrameLayout>
 
 
