@@ -1,4 +1,5 @@
 <resources>
+    <dimen name="bottom_navi_height">51dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="filter_price_width">71dp</dimen>
     <dimen name="taste_select_width">112dp</dimen>
