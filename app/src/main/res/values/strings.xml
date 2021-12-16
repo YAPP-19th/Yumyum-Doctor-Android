@@ -78,6 +78,8 @@
     <string name="write_second_et_name">레시피이름</string>
     <string name="write_intent_inputList">inputList</string>
     <string name="write_third_tv_menu_guide">메뉴 종류</string>
+    <string name="write_fourth_tv_taste_guide">맛(중복선택가능)</string>
+    <string name="write_fourth_tv_detail_taste_guide">세부 맛(중복선택가능)</string>
 
     <!-- 재료(태그) 입력 -->
     <string name="write_tag_tv_title">재료 입력</string>
@@ -146,5 +148,6 @@
     <string name="share_title">공유하기</string>
     <string name="write_third_tv_price_guide">총 금액</string>
     <string name="write_third_won">원</string>
+
 
 </resources>
