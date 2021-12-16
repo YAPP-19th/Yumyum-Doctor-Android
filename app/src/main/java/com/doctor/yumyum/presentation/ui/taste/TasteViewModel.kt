@@ -6,30 +6,24 @@ import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.common.base.BaseViewModel
 
 class TasteViewModel : BaseViewModel() {
-    private val _tasteClassState: MutableLiveData<MutableMap<String, Boolean>> =
-        MutableLiveData(
-            mutableMapOf(
-                "SWEET" to false,
-                "SALTY" to false,
-                "SPICY" to false,
-                "BITTER" to false,
-                "SOUR" to false
-            )
-        )
-    val tasteClassState: LiveData<MutableMap<String, Boolean>>
-        get() = _tasteClassState
+    private val _tasteClassState: MutableLiveData<MutableSet<String>> =
+        MutableLiveData(mutableSetOf())
+    var tasteClassState: LiveData<MutableSet<String>> = _tasteClassState
 
     fun tasteClassChange(taste: String) {
-        val temp = _tasteClassState.value?.get(taste)
-        if (temp != null) {
-            _tasteClassState.value?.put(taste, !temp)
+        if (_tasteClassState.value?.contains(taste) == true) {
+            _tasteClassState.value!!.remove(taste)
+        } else {
+            _tasteClassState.value?.add(taste)
         }
+        _tasteClassState.value = _tasteClassState.value
     }
+
     companion object {
-        const val SWEET = "SWEET"
-        const val SALTY = "SALTY"
-        const val SPICY = "SPICY"
-        const val BITTER = "BITTER"
-        const val SOUR = "SOUR"
+        const val SWEET = "단맛"
+        const val SALTY = "짠맛"
+        const val SPICY = "매운맛"
+        const val BITTER = "쓴맛"
+        const val SOUR = "신맛"
     }
 }
