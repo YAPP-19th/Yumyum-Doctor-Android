@@ -22,8 +22,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/bottom_navi_height">
-
         </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/bg_main_navi_shadow"
+            android:layout_gravity="bottom"
+            />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/main_nv_bottom"
@@ -40,6 +46,14 @@
         </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 
+        <View
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/bg_main_fab_shadow"
+            android:elevation="50dp" />
+
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/main_btn_write"
             android:layout_width="50dp"
@@ -51,6 +65,7 @@
             android:shadowColor="@color/main_orange"
             android:src="@drawable/ic_plus"
             android:stateListAnimator="@null" />
+
     </FrameLayout>
 
 
