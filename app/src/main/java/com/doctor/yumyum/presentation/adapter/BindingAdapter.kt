@@ -1,5 +1,6 @@
 package com.doctor.yumyum.presentation.adapter
 
+
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter

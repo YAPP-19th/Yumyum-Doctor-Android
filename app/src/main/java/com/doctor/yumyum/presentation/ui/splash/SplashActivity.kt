@@ -9,7 +9,6 @@ import com.doctor.yumyum.common.base.BaseActivity
 import com.doctor.yumyum.databinding.ActivitySplashBinding
 import com.doctor.yumyum.presentation.ui.login.LoginActivity
 import com.doctor.yumyum.presentation.ui.main.MainActivity
-import com.kakao.sdk.user.UserApiClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
