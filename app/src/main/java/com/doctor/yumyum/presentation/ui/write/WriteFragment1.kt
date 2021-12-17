@@ -2,11 +2,16 @@ package com.doctor.yumyum.presentation.ui.write
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
 import com.doctor.yumyum.databinding.FragmentWriteFirstBinding
+import com.doctor.yumyum.presentation.ui.write.viewmodel.WriteViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 /**
@@ -19,20 +24,31 @@ class WriteFragment1 : BaseFragment<FragmentWriteFirstBinding>(R.layout.fragment
 
     private lateinit var bottomSheetDialog : BottomSheetDialog
     private lateinit var bottomSheetView : View
+    private val writeViewModel : WriteViewModel by activityViewModels {
+        object : ViewModelProvider.Factory{
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T =
+                WriteViewModel() as T
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initBinding()
         initDialog()
+        initListener()
 
+    }
+
+    private fun initListener() {
         binding.writeFirstBtnNext.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_first_write_fragment_to_second_write_fragment)
+            findNavController().navigate(R.id.action_first_write_fragment_to_second_write_fragment)
         }
     }
 
     private fun initBinding() {
         binding.firstFragment = this
+        binding.viewModel = writeViewModel
     }
 
     private fun initDialog() {

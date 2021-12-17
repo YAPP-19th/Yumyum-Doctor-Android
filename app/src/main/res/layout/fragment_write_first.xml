@@ -3,9 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="firstFragment"
             type="com.doctor.yumyum.presentation.ui.write.WriteFragment1" />
+
+        <variable
+            name="viewModel"
+            type="com.doctor.yumyum.presentation.ui.write.viewmodel.WriteViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,6 +35,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="23dp"
+            android:checked="@{viewModel.mode}"
+            android:onCheckedChanged="@{(_, isChecked)-> viewModel.setMode(isChecked)}"
             android:textOff="@string/common_food"
             android:textOn="@string/common_beverage"
             android:thumb="@drawable/shape_sw_thumb"
@@ -43,8 +50,8 @@
             style="@style/font_body2_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="23dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="23dp"
             android:includeFontPadding="false"
             android:text="@string/dialog_tv_brand"
             android:textColor="@color/dark_gray"
@@ -53,13 +60,13 @@
 
 
         <TextView
-            android:onClick="@{()-> firstFragment.showBottomSheet()}"
             android:id="@+id/write_first_tv_select_brand"
             style="@style/font_h3_regular"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
             android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="6dp"
+            android:onClick="@{()-> firstFragment.showBottomSheet()}"
             android:paddingVertical="6dp"
             android:text="@string/common_starbucks"
             android:textColor="@color/black"
