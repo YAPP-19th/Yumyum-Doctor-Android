@@ -22,15 +22,17 @@
         android:background="@color/white">
 
         <EditText
+            android:layout_marginHorizontal="16dp"
             android:id="@+id/write_second_et_name"
             style="@style/font_h3_regular"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="83dp"
             android:background="@null"
             android:hint="@string/write_second_et_name"
+            android:maxLines="1"
             android:textColorHint="@color/light_gray"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,7 +46,9 @@
             app:layout_constraintTop_toBottomOf="@id/write_second_et_name" />
 
         <EditText
+            android:maxLines="1"
             android:id="@+id/write_second_et_menu"
+            android:text="@={writeViewModel.mainIngredient}"
             style="@style/font_h3_regular"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -53,6 +57,7 @@
             android:hint="@string/write_second_et_menu"
             android:textColorHint="@color/light_gray"
             app:layout_constraintStart_toStartOf="@+id/write_second_et_name"
+            app:layout_constraintEnd_toEndOf="@id/write_second_et_name"
             app:layout_constraintTop_toBottomOf="@+id/write_second_view1" />
 
         <View

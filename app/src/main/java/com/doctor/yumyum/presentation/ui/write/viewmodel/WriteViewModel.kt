@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.common.base.BaseViewModel
 
 class WriteViewModel : BaseViewModel()  {
+    val mainIngredient : MutableLiveData<String> = MutableLiveData()
+
     private val _addTagList : MutableLiveData<ArrayList<String>> = MutableLiveData()
     val addTagList : LiveData<ArrayList<String>>
         get() = _addTagList
