@@ -2,6 +2,8 @@ package com.doctor.yumyum.presentation.ui.write
 
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -10,6 +12,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
+import com.doctor.yumyum.databinding.DialogSelectBrandBinding
 import com.doctor.yumyum.databinding.FragmentWriteFirstBinding
 import com.doctor.yumyum.presentation.ui.write.viewmodel.WriteViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -22,10 +25,10 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class WriteFragment1 : BaseFragment<FragmentWriteFirstBinding>(R.layout.fragment_write_first) {
 
-    private lateinit var bottomSheetDialog : BottomSheetDialog
-    private lateinit var bottomSheetView : View
-    private val writeViewModel : WriteViewModel by activityViewModels {
-        object : ViewModelProvider.Factory{
+    private lateinit var bottomSheetDialog: BottomSheetDialog
+    private lateinit var bottomSheetView: View
+    private val writeViewModel: WriteViewModel by activityViewModels {
+        object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T =
                 WriteViewModel() as T
         }
@@ -53,11 +56,23 @@ class WriteFragment1 : BaseFragment<FragmentWriteFirstBinding>(R.layout.fragment
 
     private fun initDialog() {
         bottomSheetView = layoutInflater.inflate(R.layout.dialog_select_brand, null)
+        val bottomSheetBinding = DataBindingUtil.inflate<DialogSelectBrandBinding>(
+            layoutInflater,
+            R.layout.dialog_select_brand,
+            bottomSheetView as ViewGroup,
+            false
+        )
+
+        bottomSheetBinding.apply {
+            lifecycleOwner = this@WriteFragment1
+            viewModel = writeViewModel
+        }
+
         bottomSheetDialog = BottomSheetDialog(requireContext())
-        bottomSheetDialog.setContentView(bottomSheetView)
+        bottomSheetDialog.setContentView(bottomSheetBinding.root)
     }
 
-    fun showBottomSheet(){
+    fun showBottomSheet() {
         bottomSheetDialog.show()
     }
 }
