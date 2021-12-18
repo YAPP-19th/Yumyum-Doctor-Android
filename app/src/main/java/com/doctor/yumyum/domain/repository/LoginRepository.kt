@@ -15,6 +15,9 @@ interface LoginRepository {
     fun getLoginToken(): String?
     fun setLoginToken(loginToken: String)
 
+    fun getLoginMode(): String?
+    fun setLoginMode(loginMode: String)
+
     // 회원가입
     suspend fun signUp(signUpModel: SignUpModel): Response<ResponseBody>
     suspend fun signIn(signInModel: SignInModel): Response<ResponseBody>

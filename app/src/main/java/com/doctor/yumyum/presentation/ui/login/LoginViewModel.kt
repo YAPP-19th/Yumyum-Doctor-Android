@@ -31,6 +31,7 @@ class LoginViewModel : BaseViewModel() {
                 for (h in response.headers().toList()) {
                     if (h.first == "Authorization") {
                         repository.setLoginToken(h.second)
+                        repository.setLoginMode(oauthType)
                     }
                 }
             } else if (response.code() == 409) {
@@ -54,6 +55,7 @@ class LoginViewModel : BaseViewModel() {
                 for (h in response.headers().toList()) {
                     if (h.first == "Authorization") {
                         repository.setLoginToken(h.second)
+                        repository.setLoginMode(oauthType)
                     }
                 }
             } else {

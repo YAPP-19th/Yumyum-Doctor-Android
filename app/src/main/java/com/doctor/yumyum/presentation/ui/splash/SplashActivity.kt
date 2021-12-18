@@ -10,6 +10,9 @@ import com.doctor.yumyum.databinding.ActivitySplashBinding
 import com.doctor.yumyum.presentation.ui.login.LoginActivity
 import com.doctor.yumyum.presentation.ui.main.MainActivity
 import com.doctor.yumyum.presentation.ui.nickname.NicknameActivity
+import com.kakao.sdk.auth.AuthApiClient
+import com.kakao.sdk.auth.TokenManager
+import com.kakao.sdk.user.UserApiClient
 import java.util.*
 
 class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_splash) {
@@ -29,8 +32,9 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
             viewModel = viewModel
         }
 
+        Log.d("로그", TokenManager.instance.getToken().toString())
 
-        startActivity(Intent(this, LoginActivity::class.java))
+//        startActivity(Intent(this, LoginActivity::class.java))
 //        if (viewModel.loginToken.isNullOrBlank()) {
 //            startActivity(Intent(this, LoginActivity::class.java))
 //        }
