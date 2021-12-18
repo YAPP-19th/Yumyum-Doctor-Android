@@ -1,6 +1,5 @@
 package com.doctor.yumyum.presentation.ui.taste
 
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.lifecycle.LiveData
@@ -8,31 +7,35 @@ import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.common.base.BaseViewModel
 
 class TasteViewModel : BaseViewModel() {
-    private val _tasteState: MutableLiveData<MutableList<String>> =
+    private val _tasteClassState: MutableLiveData<MutableList<String>> =
         MutableLiveData(mutableListOf())
-    var tasteState: LiveData<MutableList<String>> = _tasteState
+    var tasteClassState: LiveData<MutableList<String>> = _tasteClassState
+
+    private val _tasteDetailState: MutableLiveData<MutableList<String>> =
+        MutableLiveData(mutableListOf())
+    var tasteDetailState: LiveData<MutableList<String>> = _tasteDetailState
 
     private val _mode: MutableLiveData<Int> = MutableLiveData(0)
     val mode: LiveData<Int> = _mode
 
     fun tasteClassChange(taste: String) {
-        if (_tasteState.value?.contains(taste) == true) {
-            _tasteState.value!!.remove(taste)
+        if (_tasteClassState.value?.contains(taste) == true) {
+            _tasteClassState.value!!.remove(taste)
         } else {
-            _tasteState.value?.add(taste)
+            _tasteClassState.value?.add(taste)
         }
-        _tasteState.value = _tasteState.value
+        _tasteClassState.value = _tasteClassState.value
     }
 
     fun tasteDetailChange(view: View) {
         view as Button
         val taste: String = view.text as String
-        if (_tasteState.value?.contains(taste) == true) {
-            _tasteState.value!!.remove(taste)
+        if (_tasteDetailState.value?.contains(taste) == true) {
+            _tasteDetailState.value!!.remove(taste)
         } else {
-            _tasteState.value?.add(taste)
+            _tasteDetailState.value?.add(taste)
         }
-        _tasteState.value = _tasteState.value
+        _tasteDetailState.value = _tasteDetailState.value
     }
 
     fun setMode(mode: Int) {

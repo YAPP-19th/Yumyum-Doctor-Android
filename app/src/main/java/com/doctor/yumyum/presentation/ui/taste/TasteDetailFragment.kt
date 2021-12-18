@@ -18,6 +18,6 @@ class TasteDetailFragment :
         super.onViewCreated(view, savedInstanceState)
         viewModel.setMode(1)
         binding.viewModel = viewModel
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = requireActivity()
     }
 }

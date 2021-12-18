@@ -19,7 +19,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/taste_detail_btn_sweet"
             style="@style/font_body1_medium"
-            bind_tasteDetail="@{viewModel.tasteState}"
+            bind_tasteDetail="@{viewModel.tasteDetailState}"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginTop="29dp"
@@ -42,7 +42,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/taste_detail_btn_light"
             style="@style/font_body1_medium"
-            bind_tasteDetail="@{viewModel.tasteState}"
+            bind_tasteDetail="@{viewModel.tasteDetailState}"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginStart="24dp"
@@ -65,7 +65,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/taste_detail_btn_sour"
             style="@style/font_body1_medium"
-            bind_tasteDetail="@{viewModel.tasteState}"
+            bind_tasteDetail="@{viewModel.tasteDetailState}"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginTop="12dp"
@@ -88,7 +88,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/taste_detail_btn_cool"
             style="@style/font_body1_medium"
-            bind_tasteDetail="@{viewModel.tasteState}"
+            bind_tasteDetail="@{viewModel.tasteDetailState}"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginStart="16dp"
@@ -111,7 +111,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/taste_detail_btn_salty"
             style="@style/font_body1_medium"
-            bind_tasteDetail="@{viewModel.tasteState}"
+            bind_tasteDetail="@{viewModel.tasteDetailState}"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginStart="16dp"
@@ -134,7 +134,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/taste_detail_btn_greasy"
             style="@style/font_body1_medium"
-            bind_tasteDetail="@{viewModel.tasteState}"
+            bind_tasteDetail="@{viewModel.tasteDetailState}"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginTop="12dp"
@@ -157,7 +157,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/taste_detail_btn_attractive"
             style="@style/font_body1_medium"
-            bind_tasteDetail="@{viewModel.tasteState}"
+            bind_tasteDetail="@{viewModel.tasteDetailState}"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginStart="24dp"
@@ -181,7 +181,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/taste_detail_btn_spicy"
             style="@style/font_body1_medium"
-            bind_tasteDetail="@{viewModel.tasteState}"
+            bind_tasteDetail="@{viewModel.tasteDetailState}"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginTop="12dp"
@@ -204,7 +204,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/taste_detail_btn_hot"
             style="@style/font_body1_medium"
-            bind_tasteDetail="@{viewModel.tasteState}"
+            bind_tasteDetail="@{viewModel.tasteDetailState}"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginStart="16dp"
@@ -227,7 +227,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/taste_detail_btn_neat"
             style="@style/font_body1_medium"
-            bind_tasteDetail="@{viewModel.tasteState}"
+            bind_tasteDetail="@{viewModel.tasteDetailState}"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginStart="16dp"
@@ -250,7 +250,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/taste_detail_btn_savory"
             style="@style/font_body1_medium"
-            bind_tasteDetail="@{viewModel.tasteState}"
+            bind_tasteDetail="@{viewModel.tasteDetailState}"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginTop="12dp"
@@ -273,7 +273,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/taste_detail_btn_refresh"
             style="@style/font_body1_medium"
-            bind_tasteDetail="@{viewModel.tasteState}"
+            bind_tasteDetail="@{viewModel.tasteDetailState}"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginStart="24dp"

@@ -36,6 +36,29 @@ class TasteActivity : BaseActivity<ActivityTasteBinding>(R.layout.activity_taste
             if (mode == 0) setStateClass()
             else setStateDetail()
         }
+
+
+        viewModel.tasteClassState.observe(this) { tasteClassState ->
+            if (viewModel.mode.value == 0) {
+                if (tasteClassState.size == 0) {
+                    setButtonUnavailable()
+                }
+                else {
+                    setButtonAvailable()
+                }
+            }
+        }
+
+        viewModel.tasteDetailState.observe(this) { tasteDetailState ->
+            if (viewModel.mode.value == 1) {
+                if (tasteDetailState.size == 0) {
+                    setButtonUnavailable()
+                }
+                else {
+                    setButtonAvailable()
+                }
+            }
+        }
     }
 
     fun init() {
@@ -54,14 +77,11 @@ class TasteActivity : BaseActivity<ActivityTasteBinding>(R.layout.activity_taste
             tasteToolbar.appbarIbBack.setOnClickListener {
                 onBackPressed()
             }
-            tasteBtnNext.setOnClickListener {
-                Navigation.findNavController(tasteNav)
-                    .navigate(R.id.action_tasteClassFragment_to_tasteDetailFragment)
-            }
         }
     }
 
-    fun setStateClass () {
+    private fun setStateClass() {
+        if (viewModel.tasteClassState.value?.size == 0) setButtonUnavailable()
         binding.tasteTvSubtitle.text = getString(R.string.taste_tv_class)
         binding.tasteBtnNext.text = getString(R.string.common_next)
         binding.tasteBtnNext.setOnClickListener {
@@ -69,11 +89,27 @@ class TasteActivity : BaseActivity<ActivityTasteBinding>(R.layout.activity_taste
                 .navigate(R.id.action_tasteClassFragment_to_tasteDetailFragment)
         }
     }
-    fun setStateDetail () {
+
+    private fun setStateDetail() {
+        if (viewModel.tasteDetailState.value?.size == 0) setButtonUnavailable()
         binding.tasteTvSubtitle.text = getString(R.string.taste_tv_detail)
         binding.tasteBtnNext.text = getString(R.string.common_complete)
         binding.tasteBtnNext.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
+        }
+    }
+
+    private fun setButtonUnavailable() {
+        binding.tasteBtnNext.apply {
+            setBackgroundResource(R.drawable.bg_btn_sub)
+            isClickable = false
+        }
+    }
+
+    private fun setButtonAvailable() {
+        binding.tasteBtnNext.apply {
+            setBackgroundResource(R.drawable.bg_btn_main)
+            isClickable = true
         }
     }
 }
