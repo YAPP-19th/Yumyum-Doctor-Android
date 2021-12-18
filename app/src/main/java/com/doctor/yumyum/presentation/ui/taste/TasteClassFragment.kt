@@ -6,12 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
 import com.doctor.yumyum.databinding.FragmentTasteClassBinding
-import com.doctor.yumyum.presentation.viewmodel.MyPageViewModel
 
 class TasteClassFragment :
     BaseFragment<FragmentTasteClassBinding>(R.layout.fragment_taste_class) {

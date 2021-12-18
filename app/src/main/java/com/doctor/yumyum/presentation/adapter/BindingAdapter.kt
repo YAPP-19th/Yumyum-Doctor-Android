@@ -1,6 +1,10 @@
 package com.doctor.yumyum.presentation.adapter
 
+<<<<<<< HEAD
 
+=======
+import android.widget.Button
+>>>>>>> 1dbf8d8... [Feat] Taste Detail 맛 선택 로직
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
@@ -43,3 +47,13 @@ fun bindBrandBackGround(textView: TextView, tempCategory : String?){
     }
 }
 
+@BindingAdapter("bind_tasteDetail")
+fun bindTasteDetail(button: Button, tasteList: List<String>) {
+    if (tasteList.contains(button.text)) {
+        button.background = ContextCompat.getDrawable(button.context, R.drawable.bg_taste_detail_selected)
+    }
+    else {
+
+        button.background = ContextCompat.getDrawable(button.context, R.drawable.bg_taste_detail_unselected)
+    }
+}
