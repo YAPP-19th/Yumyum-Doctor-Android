@@ -3,10 +3,12 @@ package com.doctor.yumyum.data.remote
 import com.doctor.yumyum.common.network.RetrofitClient
 import com.doctor.yumyum.data.model.NicknamePatchModel
 import com.doctor.yumyum.data.model.SignUpModel
+import com.doctor.yumyum.data.model.UserFlavorModel
 import com.doctor.yumyum.data.remote.api.AuthService
 import com.doctor.yumyum.data.remote.api.UserService
 import com.doctor.yumyum.data.remote.response.GetNicknameResponse
 import com.doctor.yumyum.data.remote.api.RankRecipeService
+import com.doctor.yumyum.data.remote.api.UserFlavorService
 import com.doctor.yumyum.data.remote.response.RankRecipeResponse
 import okhttp3.ResponseBody
 import retrofit2.Response
@@ -21,6 +23,8 @@ interface RemoteDataSource {
         top: Int,
         rankDatePeriod: Int
     ): Response<RankRecipeResponse>
+
+    suspend fun putFlavor(userFlavorModel: UserFlavorModel): Response<ResponseBody>
 }
 
 class RemoteDataSourceImpl() : RemoteDataSource {
@@ -51,4 +55,8 @@ class RemoteDataSourceImpl() : RemoteDataSource {
     ): Response<RankRecipeResponse> =
         RetrofitClient.getClient().create(RankRecipeService::class.java)
             .getRecipeRank(categoryName, top, rankDatePeriod)
+
+    override suspend fun putFlavor(userFlavorModel: UserFlavorModel): Response<ResponseBody> =
+        RetrofitClient.getClient().create(UserFlavorService::class.java)
+            .putFlavor(userFlavorModel)
 }

@@ -8,9 +8,6 @@ import okhttp3.ResponseBody
 import retrofit2.Response
 
 interface UserRepository {
-    val localDataSource: LocalDataSourceImpl
-    val remoteDataSource: RemoteDataSourceImpl
-
     suspend fun getNickname(): Response<GetNicknameResponse>
     suspend fun validateNickname(nickname: String): Response<ResponseBody>
     suspend fun patchNickname(nicknamePatchModel: NicknamePatchModel): Response<ResponseBody>
