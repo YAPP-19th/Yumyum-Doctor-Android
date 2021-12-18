@@ -3,9 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
+        <variable
+            name="writeFirst"
+            type="com.doctor.yumyum.presentation.ui.write.WriteFragment1" />
+
         <variable
             name="viewModel"
             type="com.doctor.yumyum.presentation.ui.write.viewmodel.WriteViewModel" />
+
+        <import type="android.widget.TextView" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,7 +32,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:text="@{viewModel.mode == true ? @string/common_starbucks : @string/common_sandwich}"
             android:id="@+id/dialog_brand_tv_starbucks"
             style="@style/font_subtitle_regular"
             android:layout_width="0dp"
@@ -33,9 +39,10 @@
             android:layout_marginStart="19dp"
             android:layout_marginTop="18dp"
             android:layout_marginEnd="21dp"
-            android:background="@drawable/bg_tv_select"
+            android:onClick="@{(view) -> writeFirst.onClickBrand(view)}"
             android:paddingHorizontal="16dp"
             android:paddingVertical="11dp"
+            android:text="@{viewModel.mode == true ? @string/common_starbucks : @string/common_sandwich}"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +54,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
-            android:background="@drawable/bg_tv_select"
+            android:onClick="@{(view) -> writeFirst.onClickBrand(view)}"
             android:paddingHorizontal="16dp"
             android:paddingVertical="11dp"
             android:text="@{viewModel.mode == true ? @string/common_amasvin : @string/common_maratang}"
@@ -63,7 +70,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
-            android:background="@drawable/bg_tv_select"
+            android:onClick="@{(view) -> writeFirst.onClickBrand(view)}"
             android:paddingHorizontal="16dp"
             android:paddingVertical="11dp"
             android:text="@{viewModel.mode == true ? @string/common_gongcha : @string/common_tteokbokki}"
@@ -79,7 +86,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
-            android:background="@drawable/bg_tv_select"
+            android:onClick="@{(view) -> writeFirst.onClickBrand(view)}"
             android:paddingHorizontal="16dp"
             android:paddingVertical="11dp"
             android:text="@{viewModel.mode == true ? @string/common_ediya : @string/common_salad}"
@@ -94,7 +101,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
-            android:background="@drawable/bg_tv_select"
+            android:onClick="@{(view) -> writeFirst.onClickBrand(view)}"
             android:paddingHorizontal="16dp"
             android:paddingVertical="11dp"
             android:text="@{viewModel.mode == true ? @string/common_cocktail : @string/common_yogurt}"
@@ -109,7 +116,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
-            android:background="@drawable/bg_tv_select"
+            android:onClick="@{(view) -> writeFirst.onClickBrand(view)}"
             android:paddingHorizontal="16dp"
             android:paddingVertical="11dp"
             android:text="@{viewModel.mode == true ? @string/common_etc : @string/common_ramen}"
