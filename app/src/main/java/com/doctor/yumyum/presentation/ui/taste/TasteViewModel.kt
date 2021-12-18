@@ -12,6 +12,9 @@ class TasteViewModel : BaseViewModel() {
         MutableLiveData(mutableListOf())
     var tasteState: LiveData<MutableList<String>> = _tasteState
 
+    private val _mode: MutableLiveData<Int> = MutableLiveData(0)
+    val mode: LiveData<Int> = _mode
+
     fun tasteClassChange(taste: String) {
         if (_tasteState.value?.contains(taste) == true) {
             _tasteState.value!!.remove(taste)
@@ -30,6 +33,10 @@ class TasteViewModel : BaseViewModel() {
             _tasteState.value?.add(taste)
         }
         _tasteState.value = _tasteState.value
+    }
+
+    fun setMode(mode: Int) {
+        _mode.value = mode
     }
 
     companion object {
