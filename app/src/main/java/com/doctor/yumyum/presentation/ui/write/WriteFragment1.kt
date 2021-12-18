@@ -24,7 +24,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 class WriteFragment1 : BaseFragment<FragmentWriteFirstBinding>(R.layout.fragment_write_first) {
 
     private lateinit var brandSelectDialog: BottomSheetDialog
-    private lateinit var brandSelectBinding : DialogSelectBrandBinding
+    private lateinit var brandSelectBinding: DialogSelectBrandBinding
     private lateinit var brandSelectView: View
     private val writeViewModel: WriteViewModel by activityViewModels {
         object : ViewModelProvider.Factory {
@@ -41,7 +41,7 @@ class WriteFragment1 : BaseFragment<FragmentWriteFirstBinding>(R.layout.fragment
         initListener()
 
         writeViewModel.initCategory()
-        writeViewModel.category.observe(viewLifecycleOwner){brandSelectDialog.dismiss()}
+        writeViewModel.category.observe(viewLifecycleOwner) { brandSelectDialog.dismiss() }
     }
 
     private fun initListener() {

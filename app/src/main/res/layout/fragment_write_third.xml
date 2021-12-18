@@ -66,7 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="23dp"
-            android:text="@string/write_third_tv_price_guide"
+            android:text="@string/common_total_price"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="@id/write_third_rv_minus"
             app:layout_constraintTop_toBottomOf="@id/write_third_rv_minus" />
@@ -92,7 +92,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:text="@string/write_third_won"
+            android:text="@string/common_unit_money"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@id/write_third_et_price"
             app:layout_constraintEnd_toEndOf="parent"

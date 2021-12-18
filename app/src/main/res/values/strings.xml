@@ -39,6 +39,7 @@
     <string name="common_ramen">라면</string>
     <string name="common_price">가격</string>
     <string name="common_unit_money">원</string>
+    <string name="common_total_price">총 금액</string>
     <string name="common_range">~</string>
     <string name="common_taste">맛</string>
     <string name="common_taste_detail">세부 맛</string>
@@ -146,8 +147,6 @@
     <!-- 공유하기 -->
     <string name="share">공유</string>
     <string name="share_title">공유하기</string>
-    <string name="write_third_tv_price_guide">총 금액</string>
-    <string name="write_third_won">원</string>
 
 
 </resources>
