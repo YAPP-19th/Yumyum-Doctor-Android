@@ -1,5 +1,6 @@
 package com.doctor.yumyum.presentation.ui.write.viewmodel
 
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.lifecycle.LiveData
@@ -28,6 +29,10 @@ class WriteViewModel : BaseViewModel()  {
     private val _minusTagList : MutableLiveData<ArrayList<String>> = MutableLiveData()
     val minusTagList : LiveData<ArrayList<String>>
         get() = _minusTagList
+
+    private var _privateMode : MutableLiveData<Boolean> = MutableLiveData()
+    val privateMode : LiveData<Boolean>
+        get() = _privateMode
 
     fun setMode(isTurnOn: Boolean) {
         _mode.value = isTurnOn
@@ -58,6 +63,11 @@ class WriteViewModel : BaseViewModel()  {
 
     fun setMinusTagItem(newTagList: ArrayList<String>?){
         _minusTagList.value = newTagList
+    }
+
+    fun setPrivateMode(isTurnOn: Boolean) {
+        _privateMode.value = isTurnOn
+        Log.d("ViewModel",isTurnOn.toString())
     }
 
 }
