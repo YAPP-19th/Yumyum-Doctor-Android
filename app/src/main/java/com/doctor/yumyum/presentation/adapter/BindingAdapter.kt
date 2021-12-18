@@ -33,7 +33,6 @@ fun bindTasteDetail(button: Button, tasteList: List<String>) {
         button.background = ContextCompat.getDrawable(button.context, R.drawable.bg_taste_detail_selected)
     }
     else {
-
         button.background = ContextCompat.getDrawable(button.context, R.drawable.bg_taste_detail_unselected)
     }
 }
