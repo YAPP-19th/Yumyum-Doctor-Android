@@ -113,6 +113,7 @@ class NicknameActivity : BaseActivity<ActivityNicknameBinding>(R.layout.activity
     fun setButtonUnavailable() {
         binding.nicknameBtnComplete.apply {
             setBackgroundResource(R.drawable.bg_btn_sub)
+            background = getDrawable(R.drawable.bg_btn_sub)
             isClickable = false
         }
     }
