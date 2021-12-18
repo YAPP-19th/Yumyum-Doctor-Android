@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="writeFirst"
             type="com.doctor.yumyum.presentation.ui.write.WriteFragment1" />
@@ -39,7 +38,8 @@
             android:layout_marginStart="19dp"
             android:layout_marginTop="18dp"
             android:layout_marginEnd="21dp"
-            android:onClick="@{(view) -> writeFirst.onClickBrand(view)}"
+            bind_brandBackground="@{viewModel.tempCategory}"
+            android:onClick="@{(view) -> viewModel.setTempCategory(view)}"
             android:paddingHorizontal="16dp"
             android:paddingVertical="11dp"
             android:text="@{viewModel.mode == true ? @string/common_starbucks : @string/common_sandwich}"
@@ -53,8 +53,8 @@
             style="@style/font_subtitle_regular"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:onClick="@{(view) -> writeFirst.onClickBrand(view)}"
+            bind_brandBackground="@{viewModel.tempCategory}"
+            android:onClick="@{(view) -> viewModel.setTempCategory(view)}"
             android:paddingHorizontal="16dp"
             android:paddingVertical="11dp"
             android:text="@{viewModel.mode == true ? @string/common_amasvin : @string/common_maratang}"
@@ -70,7 +70,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
-            android:onClick="@{(view) -> writeFirst.onClickBrand(view)}"
+            bind_brandBackground="@{viewModel.tempCategory}"
+            android:onClick="@{(view) -> viewModel.setTempCategory(view)}"
             android:paddingHorizontal="16dp"
             android:paddingVertical="11dp"
             android:text="@{viewModel.mode == true ? @string/common_gongcha : @string/common_tteokbokki}"
@@ -86,7 +87,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
-            android:onClick="@{(view) -> writeFirst.onClickBrand(view)}"
+            bind_brandBackground="@{viewModel.tempCategory}"
+            android:onClick="@{(view) -> viewModel.setTempCategory(view)}"
             android:paddingHorizontal="16dp"
             android:paddingVertical="11dp"
             android:text="@{viewModel.mode == true ? @string/common_ediya : @string/common_salad}"
@@ -101,7 +103,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
-            android:onClick="@{(view) -> writeFirst.onClickBrand(view)}"
+            bind_brandBackground="@{viewModel.tempCategory}"
+            android:onClick="@{(view) -> viewModel.setTempCategory(view)}"
             android:paddingHorizontal="16dp"
             android:paddingVertical="11dp"
             android:text="@{viewModel.mode == true ? @string/common_cocktail : @string/common_yogurt}"
@@ -116,7 +119,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
-            android:onClick="@{(view) -> writeFirst.onClickBrand(view)}"
+            bind_brandBackground="@{viewModel.tempCategory}"
+            android:onClick="@{(view) -> viewModel.setTempCategory(view)}"
             android:paddingHorizontal="16dp"
             android:paddingVertical="11dp"
             android:text="@{viewModel.mode == true ? @string/common_etc : @string/common_ramen}"

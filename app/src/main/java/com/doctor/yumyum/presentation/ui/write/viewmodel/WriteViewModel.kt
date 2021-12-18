@@ -1,11 +1,9 @@
 package com.doctor.yumyum.presentation.ui.write.viewmodel
 
-import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseViewModel
 
 class WriteViewModel : BaseViewModel()  {
@@ -37,9 +35,16 @@ class WriteViewModel : BaseViewModel()  {
 
     fun initCategory(){
         _category.value = "샌드위치"
+        if(_mode.value == true){
+            _tempCategory.value = "스타벅스"
+        }else{
+            _tempCategory.value = "샌드위치"
+        }
     }
 
-    fun setTempCategory(tempText : String ){
+    fun setTempCategory(view : View ){
+        view as TextView
+        val tempText = view.text.toString()
         _tempCategory.value = tempText
     }
 

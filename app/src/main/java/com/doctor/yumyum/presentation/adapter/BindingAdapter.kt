@@ -26,3 +26,12 @@ fun bindStartCompat(textView: TextView, condition: Boolean) {
     textView.setCompoundDrawablesWithIntrinsicBounds(src, null, null, null)
 }
 
+@BindingAdapter("bind_brandBackground")
+fun bindBrandBackGround(textView: TextView, tempCategory : String?){
+    if(textView.text == tempCategory){
+        textView.background = ContextCompat.getDrawable(textView.context , R.drawable.bg_tv_select)
+    }else{
+        textView.background = null
+    }
+}
+

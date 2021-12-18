@@ -82,17 +82,4 @@ class WriteFragment1 : BaseFragment<FragmentWriteFirstBinding>(R.layout.fragment
     fun showBottomSheet() {
         bottomSheetDialog.show()
     }
-
-    fun onClickBrand(v : View){
-        v as TextView
-        val tempText = v.text.toString()
-        writeViewModel.setTempCategory(tempText)
-        writeViewModel.tempCategory.observe(this){
-            if(tempText == it){
-                v.background = context?.getDrawable(R.drawable.bg_tv_select)
-            }else{
-                v.background = null
-            }
-        }
-    }
 }
