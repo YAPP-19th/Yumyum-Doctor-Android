@@ -14,6 +14,9 @@
         android:theme="@style/Theme.Yumyum"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".presentation.ui.recipedetail.RecipeDetailActivity"
+            android:exported="true" />
+        <activity
             android:name=".presentation.ui.nickname.NicknameActivity"
             android:exported="true" />
         <activity
