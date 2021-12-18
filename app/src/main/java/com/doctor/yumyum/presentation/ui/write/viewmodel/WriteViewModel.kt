@@ -1,11 +1,13 @@
 package com.doctor.yumyum.presentation.ui.write.viewmodel
 
+import android.net.Uri
 import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.common.base.BaseViewModel
+import okhttp3.MultipartBody
 
 class WriteViewModel : BaseViewModel()  {
     private var _mode : MutableLiveData<Boolean> = MutableLiveData()
@@ -35,6 +37,10 @@ class WriteViewModel : BaseViewModel()  {
     private var _privateMode : MutableLiveData<Boolean> = MutableLiveData()
     val privateMode : LiveData<Boolean>
         get() = _privateMode
+
+    private var _reviewImageList : MutableLiveData<MutableList<Uri>> = MutableLiveData()
+    val reviewImageList : LiveData<MutableList<Uri>>
+        get() = _reviewImageList
 
     fun setMode(isTurnOn: Boolean) {
         _mode.value = isTurnOn
@@ -69,7 +75,10 @@ class WriteViewModel : BaseViewModel()  {
 
     fun setPrivateMode(isTurnOn: Boolean) {
         _privateMode.value = isTurnOn
-        Log.d("ViewModel",isTurnOn.toString())
+    }
+
+    fun setReviewImageList(newList : MutableList<Uri>){
+        _reviewImageList.value = newList
     }
 
 }

@@ -37,9 +37,10 @@
             app:layout_constraintTop_toTopOf="@id/write_fifth_tv_photo_guide" />
 
         <androidx.appcompat.widget.AppCompatImageButton
+            android:scaleType="fitXY"
             android:id="@+id/write_fifth_ib_image1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="77dp"
+            android:layout_height="72dp"
             android:layout_marginStart="17dp"
             android:layout_marginTop="8dp"
             android:background="@color/white"
