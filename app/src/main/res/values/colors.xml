@@ -17,6 +17,10 @@
     <color name="unselect_orange">#FFD9C7</color>
     <color name="empty">#F2F2F2</color>
 
+    <color name="fab_start">#F55800</color>
+    <color name="fab_center">#FF7935</color>
+    <color name="fab_end">#FFC2B5</color>
+
     <!--    Login Activity-->
     <color name="kakao_yellow">#FED90A</color>
     <color name="kakao_brown">#381E1E</color>

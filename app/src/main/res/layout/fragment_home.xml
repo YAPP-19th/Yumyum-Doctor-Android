@@ -6,13 +6,13 @@
 
         <variable
             name="viewModel"
-            type="com.doctor.yumyum.presentation.viewmodel.HomeViewModel" />
+            type="com.doctor.yumyum.presentation.ui.home.HomeViewModel" />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.ui.main.HomeFragment">
+        tools:context=".presentation.ui.home.HomeFragment">
 
         <TextView
             android:layout_width="match_parent"

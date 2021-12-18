@@ -1,6 +1,9 @@
 <resources>
+    <dimen name="bottom_navi_height">51dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="filter_price_width">71dp</dimen>
     <dimen name="taste_select_width">112dp</dimen>
     <dimen name="taste_detail_select_width">72dp</dimen>
+    <dimen name="weekly_ranking_image_width">119dp</dimen>
+    <dimen name="weekly_ranking_image_height">103dp</dimen>
 </resources>

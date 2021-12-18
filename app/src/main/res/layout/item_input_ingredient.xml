@@ -2,10 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-
         <variable
             name="tagItem"
             type="String" />
+
+        <variable
+            name="viewModel"
+            type="com.doctor.yumyum.presentation.ui.write.viewmodel.WriteTagViewModel" />
     </data>
 
     <LinearLayout
@@ -20,11 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="13dp"
-            android:background="@drawable/bg_tag_item"
-            bind_tagItem= "@{tagItem}"
-            android:textColor="@color/dark_gray" />
-
-
+            bind_tagItem ="@{tagItem}"/>
     </LinearLayout>
 
 </layout>

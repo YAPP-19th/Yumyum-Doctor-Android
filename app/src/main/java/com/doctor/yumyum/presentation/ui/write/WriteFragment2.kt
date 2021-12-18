@@ -5,10 +5,15 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
 import com.doctor.yumyum.databinding.FragmentWriteSecondBinding
+import com.doctor.yumyum.presentation.adapter.WriteTagAdapter
+import com.doctor.yumyum.presentation.ui.write.viewmodel.WriteViewModel
 
 /**
  *  레시피 작성하기 2
@@ -18,12 +23,19 @@ import com.doctor.yumyum.databinding.FragmentWriteSecondBinding
 
 class WriteFragment2 : BaseFragment<FragmentWriteSecondBinding>(R.layout.fragment_write_second), View.OnClickListener{
     private lateinit var changeIngredients : ActivityResultLauncher<Intent>
+    private var addList : ArrayList<String> = arrayListOf()
+    private var minusList : ArrayList<String> = arrayListOf()
+    private val writeViewModel : WriteViewModel by activityViewModels {
+        object : ViewModelProvider.Factory{
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T =
+                WriteViewModel() as T
+        }
+    }
 
     companion object {
         const val REQUEST_CODE_ADD_INGREDIENTS = 9001
         const val REQUEST_CODE_MINUS_INGREDIENTS = 9002
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -31,18 +43,21 @@ class WriteFragment2 : BaseFragment<FragmentWriteSecondBinding>(R.layout.fragmen
         initBinding()
         initListener()
         changeIngredients()
-
     }
 
     private fun initBinding() {
         binding.secondFragment = this
+        binding.writeViewModel = writeViewModel
+        binding.writeSecondRvPlus.adapter = WriteTagAdapter{}
+        binding.writeSecondRvMinus.adapter = WriteTagAdapter{}
     }
-
 
     private fun initListener() {
         binding.writeSecondBtnMinus.setOnClickListener(this)
         binding.writeSecondBtnNext.setOnClickListener(this)
         binding.writeSecondBtnAdd.setOnClickListener(this)
+        binding.writeSecondIbAddEdit.setOnClickListener(this)
+        binding.writeSecondIbMinusEdit.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -52,28 +67,38 @@ class WriteFragment2 : BaseFragment<FragmentWriteSecondBinding>(R.layout.fragmen
                 intent.putExtra(resources.getString(R.string.write_tag_type), REQUEST_CODE_ADD_INGREDIENTS)
                 changeIngredients.launch(intent)
             }
+            binding.writeSecondBtnMinus -> {
+                intent.putExtra(resources.getString(R.string.write_tag_type), REQUEST_CODE_MINUS_INGREDIENTS)
+                changeIngredients.launch(intent)
+            }
+            binding.writeSecondIbAddEdit -> {
+                intent.putExtra(resources.getString(R.string.write_tag_type), REQUEST_CODE_ADD_INGREDIENTS)
+                intent.putStringArrayListExtra(resources.getString(R.string.write_intent_inputList), addList)
+                changeIngredients.launch(intent)
+            }
+            binding.writeSecondIbMinusEdit -> {
+                intent.putExtra(resources.getString(R.string.write_tag_type), REQUEST_CODE_MINUS_INGREDIENTS)
+                intent.putStringArrayListExtra(resources.getString(R.string.write_intent_inputList), addList)
+                changeIngredients.launch(intent)
+            }
 
             binding.writeSecondBtnNext->
                 findNavController().navigate(R.id.action_second_write_fragment_to_third_write_fragment)
 
-            binding.writeSecondBtnMinus-> {
-                intent.putExtra(resources.getString(R.string.write_tag_type), REQUEST_CODE_MINUS_INGREDIENTS)
-                changeIngredients.launch(intent)
-            }
         }
     }
 
     //TagActivity가 종료되었을 때
     private fun changeIngredients() {
-        changeIngredients = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+        changeIngredients = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ it ->
             if (it.resultCode == REQUEST_CODE_ADD_INGREDIENTS) {
-                //TODO :: Recycler 아이템 업데이트
-                showToast("추가하는 재료 입력 완료")
+                addList = it.data?.getStringArrayListExtra(resources.getString(R.string.write_intent_inputList)) as ArrayList<String>
+                writeViewModel.setAddTagItem(addList)
             }
 
             if(it.resultCode == REQUEST_CODE_MINUS_INGREDIENTS){
-                //TODO :: Recycler 아이템 업데이트
-                showToast("빼거나 수정하는 재료 입력 완료")
+                minusList = it.data?.getStringArrayListExtra(resources.getString(R.string.write_intent_inputList)) as ArrayList<String>
+                writeViewModel.setMinusTagItem(minusList)
             }
         }
     }

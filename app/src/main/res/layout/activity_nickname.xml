@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.doctor.yumyum.presentation.ui.nickname.NicknameViewModel" />
+
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.ui.nickname.NicknameActivity">
+
+        <include
+            android:id="@+id/nickname_toolbar"
+            layout="@layout/layout_appbar"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/nickname_tv_title"
+            style="@style/font_h2"
+            android:layout_width="0dp"
+            android:layout_height="29dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/nickname_tv_title"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nickname_toolbar" />
+
+        <TextView
+            android:id="@+id/nickname_tv_warning"
+            style="@style/font_body1_regular"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/nickname_tv_warning"
+            android:textColor="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nickname_tv_title" />
+
+        <EditText
+            android:id="@+id/nickname_et_nickname"
+            style="@style/font_h3_regular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="38dp"
+            android:layout_marginEnd="16dp"
+            android:background="@null"
+            android:hint="@string/nickname_et_hint"
+            android:inputType="textNoSuggestions"
+            android:maxLength="20"
+            android:text="@={viewModel.nickname}"
+            android:textColor="@color/black"
+            android:textCursorDrawable="@drawable/cursor_et_nickname"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nickname_tv_warning"
+            tools:text="일일일일일일일일일일일일일일일일일일일일" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/main_orange"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nickname_et_nickname" />
+
+        <TextView
+            android:id="@+id/nickname_tv_message"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginEnd="16dp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nickname_et_nickname"
+            tools:text="@string/nickname_tv_overflow" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/nickname_btn_complete"
+            style="@style/font_subtitle_medium"
+            android:layout_width="0dp"
+            android:layout_height="47dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="45dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bg_btn_main"
+            android:stateListAnimator="@null"
+            android:text="@string/common_complete"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nickname_tv_message" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

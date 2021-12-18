@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.doctor.yumyum.presentation.ui.report.ReportViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.ui.report.ReportActivity">
+
+        <include
+            android:id="@+id/report_toolbar"
+            layout="@layout/layout_appbar"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:main="@{@string/report_title}" />
+
+        <TextView
+            android:id="@+id/report_tv_title"
+            style="@style/font_h2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/report_select_reason"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/report_toolbar" />
+
+        <TextView
+            android:id="@+id/report_tv_reason_duplicate"
+            style="@style/font_body1_regular"
+            bind_startCompat="@{viewModel.reportType == viewModel.REASON_DUPLICATE}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="21dp"
+            android:drawablePadding="6dp"
+            android:gravity="center_vertical"
+            android:onClick="@{() -> viewModel.setReportType(viewModel.REASON_DUPLICATE)}"
+            android:text="@string/report_reason_duplicate"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/report_tv_title"
+            tools:drawableStart="@drawable/ic_report_selected" />
+
+        <TextView
+            android:id="@+id/report_tv_reason_advertising"
+            style="@style/font_body1_regular"
+            bind_startCompat="@{viewModel.reportType == viewModel.REASON_ADVERTISING}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:drawablePadding="6dp"
+            android:gravity="center_vertical"
+            android:onClick="@{() -> viewModel.setReportType(viewModel.REASON_ADVERTISING)}"
+            android:text="@string/report_reason_advertising"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/report_tv_reason_duplicate"
+            tools:drawableStart="@drawable/ic_report_unselected" />
+
+        <TextView
+            android:id="@+id/report_tv_reason_irrelevant"
+            style="@style/font_body1_regular"
+            bind_startCompat="@{viewModel.reportType == viewModel.REASON_IRRELEVANT}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:drawablePadding="6dp"
+            android:gravity="center_vertical"
+            android:onClick="@{() -> viewModel.setReportType(viewModel.REASON_IRRELEVANT)}"
+            android:text="@string/report_reason_irrelevant"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/report_tv_reason_advertising"
+            tools:drawableStart="@drawable/ic_report_unselected" />
+
+        <TextView
+            android:id="@+id/report_tv_reason_harmful"
+            style="@style/font_body1_regular"
+            bind_startCompat="@{viewModel.reportType == viewModel.REASON_HARMFUL}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:drawablePadding="6dp"
+            android:gravity="center_vertical"
+            android:onClick="@{() -> viewModel.setReportType(viewModel.REASON_HARMFUL)}"
+            android:text="@string/report_reason_harmful"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/report_tv_reason_irrelevant"
+            tools:drawableStart="@drawable/ic_report_unselected" />
+
+        <TextView
+            android:id="@+id/report_tv_reason_wrong"
+            style="@style/font_body1_regular"
+            bind_startCompat="@{viewModel.reportType == viewModel.REASON_WRONG}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:drawablePadding="6dp"
+            android:gravity="center_vertical"
+            android:onClick="@{() -> viewModel.setReportType(viewModel.REASON_WRONG)}"
+            android:text="@string/report_reason_wrong"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/report_tv_reason_harmful"
+            tools:drawableStart="@drawable/ic_report_unselected" />
+
+        <TextView
+            android:id="@+id/report_tv_reason_etc"
+            style="@style/font_body1_regular"
+            bind_startCompat="@{viewModel.reportType == viewModel.REASON_ETC}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:drawablePadding="6dp"
+            android:gravity="center_vertical"
+            android:onClick="@{() -> viewModel.setReportType(viewModel.REASON_ETC)}"
+            android:text="@string/common_etc"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/report_tv_reason_wrong"
+            tools:drawableStart="@drawable/ic_report_unselected" />
+
+        <TextView
+            android:id="@+id/report_tv_report"
+            style="@style/font_subtitle_medium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_btn_main"
+            android:gravity="center"
+            android:paddingVertical="16dp"
+            android:text="@string/report"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

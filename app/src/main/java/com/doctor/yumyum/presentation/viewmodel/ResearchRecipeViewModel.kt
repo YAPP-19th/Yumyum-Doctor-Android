@@ -6,10 +6,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseViewModel
+import com.doctor.yumyum.data.model.RankRecipe
+import com.doctor.yumyum.data.remote.response.RankRecipeResponse
 import com.doctor.yumyum.data.repository.MainRepositoryImpl
+import retrofit2.Response
 
-class ResearchRecipeViewModel() : BaseViewModel() {
+class ResearchRecipeViewModel : BaseViewModel() {
     private val repository = MainRepositoryImpl()
+    private val _rankRecipes: MutableLiveData<List<RankRecipe>> = MutableLiveData()
+    val rankRecipes: LiveData<List<RankRecipe>> get() = _rankRecipes
+    private val _errorState: MutableLiveData<Boolean> = MutableLiveData(false)
+    val errorState: LiveData<Boolean> get() = _errorState
 
     @SuppressLint("SupportAnnotationUsage")
     @StringRes
@@ -23,5 +30,18 @@ class ResearchRecipeViewModel() : BaseViewModel() {
 
         // 현재 모드 저장
         repository.setMode(mode.value ?: R.string.common_food)
+    }
+
+    suspend fun getRankRecipe(categoryName: String, top: Int, rankDatePeriod: Int) {
+        try {
+            val response: Response<RankRecipeResponse> =
+                repository.getRecipeRank(categoryName, top, rankDatePeriod)
+
+            if (response.isSuccessful) {
+                _rankRecipes.postValue(response.body()?.topRankingFoods)
+            }
+        } catch (e: Exception) {
+            _errorState.postValue(true)
+        }
     }
 }

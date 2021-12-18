@@ -1,8 +1,7 @@
 package com.doctor.yumyum.presentation.adapter
 
-import android.util.Log
-import android.widget.Button
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.doctor.yumyum.R
@@ -15,6 +14,14 @@ fun bindTagList(rvTagList: RecyclerView, tagList: ArrayList<String>?) {
 }
 
 @BindingAdapter("bind_tagItem")
-fun bindTagItem(tvTagItem: TextView, tagItem: String) {
-    tvTagItem.text = "#$tagItem"
+fun bindTagItem(tvTagItem: TextView, tagItem : String){
+    tvTagItem.text= "#$tagItem"
+    tvTagItem.setTextColor(tvTagItem.context.getColor(R.color.dark_gray))
+    tvTagItem.background = tvTagItem.context.getDrawable(R.drawable.bg_unselect_tag_item)
+}
+
+@BindingAdapter("bind_startCompat")
+fun bindStartCompat(textView: TextView, condition: Boolean) {
+    val src = if (condition) ContextCompat.getDrawable(textView.context, R.drawable.ic_report_selected) else ContextCompat.getDrawable(textView.context, R.drawable.ic_report_unselected)
+    textView.setCompoundDrawablesWithIntrinsicBounds(src, null, null, null)
 }
