@@ -33,11 +33,10 @@ class LoginViewModel : BaseViewModel() {
                     }
                 }
             } else {
-
-                _errorState.value = true
+                _errorState.postValue(true)
             }
         } catch (e: Exception) {
-            _errorState.value = true
+            _errorState.postValue(true)
         }
     }
 }
