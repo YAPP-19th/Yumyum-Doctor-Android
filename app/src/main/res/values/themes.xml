@@ -11,6 +11,7 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:windowLightStatusBar">true</item>
 
         <item name="bottomSheetDialogTheme">@style/MyBottomSheetDialogTheme</item>
     </style>
@@ -22,10 +23,13 @@
     <style name="MYBottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/bg_dialog_select_brand</item>
     </style>
+
     <style name="Theme.Yumyum.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
     <style name="Theme.Yumyum.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
     <style name="Theme.Yumyum.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
