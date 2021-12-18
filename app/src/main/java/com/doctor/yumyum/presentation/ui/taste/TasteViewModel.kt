@@ -29,7 +29,6 @@ class TasteViewModel : BaseViewModel() {
         } else {
             _tasteState.value?.add(taste)
         }
-        Log.d("로그", taste)
         _tasteState.value = _tasteState.value
     }
 
