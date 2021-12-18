@@ -44,6 +44,9 @@ class WriteFragment1 : BaseFragment<FragmentWriteFirstBinding>(R.layout.fragment
         initBinding()
         initDialog()
         initListener()
+
+        writeViewModel.initCategory()
+        writeViewModel.category.observe(viewLifecycleOwner){bottomSheetDialog.dismiss()}
     }
 
     private fun initListener() {

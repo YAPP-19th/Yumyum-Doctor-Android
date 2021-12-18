@@ -134,6 +134,7 @@
             android:layout_marginTop="27dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/bg_btn_main"
+            android:onClick="@{() -> viewModel.setCategory()}"
             android:includeFontPadding="false"
             android:stateListAnimator="@null"
             android:text="@string/dialog_btn_select"

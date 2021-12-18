@@ -68,7 +68,7 @@
             android:layout_marginTop="6dp"
             android:onClick="@{()-> firstFragment.showBottomSheet()}"
             android:paddingVertical="6dp"
-            android:text="@string/common_starbucks"
+            android:text="@{viewModel.category}"
             android:textColor="@color/black"
             app:layout_constraintTop_toBottomOf="@id/write_first_tv_brand" />
 

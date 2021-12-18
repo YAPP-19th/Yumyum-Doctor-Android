@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseViewModel
 
 class WriteViewModel : BaseViewModel()  {
@@ -32,6 +33,10 @@ class WriteViewModel : BaseViewModel()  {
 
     fun setMode(isTurnOn: Boolean) {
         _mode.value = isTurnOn
+    }
+
+    fun initCategory(){
+        _category.value = "샌드위치"
     }
 
     fun setTempCategory(tempText : String ){
