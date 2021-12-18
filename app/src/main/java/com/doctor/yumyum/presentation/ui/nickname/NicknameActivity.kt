@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseActivity
 import com.doctor.yumyum.databinding.ActivityNicknameBinding
+import com.doctor.yumyum.presentation.ui.taste.TasteActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -46,6 +47,7 @@ class NicknameActivity : BaseActivity<ActivityNicknameBinding>(R.layout.activity
             CoroutineScope(Dispatchers.IO).launch {
                 viewModel.patchNickname(binding.nicknameEtNickname.text.toString())
             }
+            startActivity(Intent(this, TasteActivity::class.java))
         }
 
         binding.nicknameEtNickname.addTextChangedListener(object : TextWatcher {

@@ -40,23 +40,15 @@ class TasteActivity : BaseActivity<ActivityTasteBinding>(R.layout.activity_taste
 
         viewModel.tasteClassState.observe(this) { tasteClassState ->
             if (viewModel.mode.value == 0) {
-                if (tasteClassState.size == 0) {
-                    setButtonUnavailable()
-                }
-                else {
-                    setButtonAvailable()
-                }
+                if (tasteClassState.size == 0) setButtonUnavailable()
+                else setButtonAvailable()
             }
         }
 
         viewModel.tasteDetailState.observe(this) { tasteDetailState ->
             if (viewModel.mode.value == 1) {
-                if (tasteDetailState.size == 0) {
-                    setButtonUnavailable()
-                }
-                else {
-                    setButtonAvailable()
-                }
+                if (tasteDetailState.size == 0) setButtonUnavailable()
+                else setButtonAvailable()
             }
         }
     }
@@ -95,6 +87,9 @@ class TasteActivity : BaseActivity<ActivityTasteBinding>(R.layout.activity_taste
         binding.tasteTvSubtitle.text = getString(R.string.taste_tv_detail)
         binding.tasteBtnNext.text = getString(R.string.common_complete)
         binding.tasteBtnNext.setOnClickListener {
+            CoroutineScope(Dispatchers.IO).launch {
+                viewModel.putFlavor()
+            }
             startActivity(Intent(this, MainActivity::class.java))
         }
     }

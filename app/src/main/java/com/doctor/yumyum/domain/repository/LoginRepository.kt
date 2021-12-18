@@ -8,8 +8,6 @@ import okhttp3.ResponseBody
 import retrofit2.Response
 
 interface LoginRepository {
-    val localDataSource: LocalDataSourceImpl
-    val remoteDataSource: RemoteDataSourceImpl
 
     // 로그인 토큰
     fun getLoginToken(): String?

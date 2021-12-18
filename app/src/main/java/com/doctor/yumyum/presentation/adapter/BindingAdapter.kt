@@ -1,10 +1,7 @@
 package com.doctor.yumyum.presentation.adapter
 
-<<<<<<< HEAD
 
-=======
 import android.widget.Button
->>>>>>> 1dbf8d8... [Feat] Taste Detail 맛 선택 로직
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
