@@ -30,12 +30,13 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
         }
 
 
-        if (viewModel.loginToken.isNullOrBlank()) {
-            startActivity(Intent(this, LoginActivity::class.java))
-        }
-        else {
-            startActivity(Intent(this, MainActivity::class.java))
-        }
+        startActivity(Intent(this, LoginActivity::class.java))
+//        if (viewModel.loginToken.isNullOrBlank()) {
+//            startActivity(Intent(this, LoginActivity::class.java))
+//        }
+//        else {
+//            startActivity(Intent(this, MainActivity::class.java))
+//        }
 
     }
 }

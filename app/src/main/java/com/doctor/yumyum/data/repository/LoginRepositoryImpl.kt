@@ -1,6 +1,7 @@
 package com.doctor.yumyum.data.repository
 
 import com.doctor.yumyum.data.local.LocalDataSourceImpl
+import com.doctor.yumyum.data.model.SignInModel
 import com.doctor.yumyum.data.model.SignUpModel
 import com.doctor.yumyum.data.remote.RemoteDataSourceImpl
 import com.doctor.yumyum.domain.repository.LoginRepository
@@ -25,5 +26,9 @@ class LoginRepositoryImpl : LoginRepository {
 
     override suspend fun signUp(signUpModel: SignUpModel): Response<ResponseBody> {
         return remoteDataSource.signUp(signUpModel)
+    }
+
+    override suspend fun signIn(signInModel: SignInModel): Response<ResponseBody> {
+        return remoteDataSource.signIn(signInModel)
     }
 }
