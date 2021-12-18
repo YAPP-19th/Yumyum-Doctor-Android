@@ -31,6 +31,7 @@ class LoginViewModel : BaseViewModel() {
                 for (h in response.headers().toList()) {
                     if (h.first == "Authorization") {
                         repository.setLoginToken(h.second)
+                        Log.d("로그 jwt", h.second)
                     }
                 }
             } else {

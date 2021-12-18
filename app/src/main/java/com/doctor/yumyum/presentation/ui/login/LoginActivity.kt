@@ -42,6 +42,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
                 // TODO :: 준영
             }
         }
+        ErrorDialog().apply {
+            show(supportFragmentManager, "ErrorDialog")
+        }
 
         // 회원가입 에러 처리
         viewModel.errorState.observe(this) { error ->
