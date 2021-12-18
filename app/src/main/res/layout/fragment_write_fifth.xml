@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.doctor.yumyum.presentation.ui.write.viewmodel.WriteViewModel" />
@@ -51,23 +52,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
-            android:visibility="invisible"
             android:background="@color/white"
             android:src="@drawable/ic_write_image"
-            app:layout_constraintStart_toEndOf="@id/write_fifth_ib_image1"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@id/write_fifth_ib_image1"
-            app:layout_constraintTop_toTopOf="@id/write_fifth_ib_image1"/>
+            app:layout_constraintStart_toEndOf="@id/write_fifth_ib_image1"
+            app:layout_constraintTop_toTopOf="@id/write_fifth_ib_image1" />
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/write_fifth_ib_image3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
-            android:visibility="invisible"
             android:background="@color/white"
             android:src="@drawable/ic_write_image"
-            app:layout_constraintStart_toEndOf="@id/write_fifth_ib_image2"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@id/write_fifth_ib_image2"
+            app:layout_constraintStart_toEndOf="@id/write_fifth_ib_image2"
             app:layout_constraintTop_toTopOf="@id/write_fifth_ib_image2" />
 
         <TextView
@@ -83,15 +84,17 @@
 
         <EditText
             android:id="@+id/write_fifth_et_review"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/write_fifth_review_height"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/bg_write_et_review"
             android:gravity="top"
-            android:inputType="text"
+            android:inputType="textMultiLine"
             android:maxLength="110"
             android:padding="10dp"
+            android:scrollHorizontally="false"
+            android:text="@={viewModel.reviewText}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/write_fifth_tv_review_guide" />
@@ -121,8 +124,8 @@
             android:id="@+id/write_fifth_sw_recipe_private"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:includeFontPadding="false"
             android:checked="@{viewModel.privateMode}"
+            android:includeFontPadding="false"
             android:onCheckedChanged="@{(_, isChecked)-> viewModel.setPrivateMode(isChecked)}"
             android:thumb="@drawable/recipe_private_sw_thumb"
             app:layout_constraintStart_toStartOf="@id/write_fifth_tv_private_guide"

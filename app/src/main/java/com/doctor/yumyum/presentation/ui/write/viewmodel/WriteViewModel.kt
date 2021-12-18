@@ -30,6 +30,8 @@ class WriteViewModel : BaseViewModel()  {
     val minusTagList : LiveData<ArrayList<String>>
         get() = _minusTagList
 
+    var reviewText : MutableLiveData<String> = MutableLiveData()
+
     private var _privateMode : MutableLiveData<Boolean> = MutableLiveData()
     val privateMode : LiveData<Boolean>
         get() = _privateMode
