@@ -1,21 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/write_fifth_tv_photo_guide"
+            style="@style/font_subtitle_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="다섯"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="40dp"
+            android:text="사진"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            style="@style/font_body1_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text="(필수, 최대3장)"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/write_fifth_tv_photo_guide"
+            app:layout_constraintStart_toEndOf="@id/write_fifth_tv_photo_guide"
+            app:layout_constraintTop_toTopOf="@id/write_fifth_tv_photo_guide" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/write_fifth_ib_image1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/white"
+            android:src="@drawable/ic_write_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/write_fifth_tv_photo_guide" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/write_fifth_ib_image2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:visibility="invisible"
+            android:background="@color/white"
+            android:src="@drawable/ic_write_image"
+            app:layout_constraintStart_toEndOf="@id/write_fifth_ib_image1"
+            app:layout_constraintBottom_toBottomOf="@id/write_fifth_ib_image1"
+            app:layout_constraintTop_toTopOf="@id/write_fifth_ib_image1"/>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/write_fifth_ib_image3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:visibility="invisible"
+            android:background="@color/white"
+            android:src="@drawable/ic_write_image"
+            app:layout_constraintStart_toEndOf="@id/write_fifth_ib_image2"
+            app:layout_constraintBottom_toBottomOf="@id/write_fifth_ib_image2"
+            app:layout_constraintTop_toTopOf="@id/write_fifth_ib_image2" />
+
+        <TextView
+            android:id="@+id/write_fifth_tv_review_guide"
+            style="@style/font_subtitle_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="리뷰"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@id/write_fifth_tv_photo_guide"
+            app:layout_constraintTop_toBottomOf="@id/write_fifth_ib_image1" />
+
+        <EditText
+            android:id="@+id/write_fifth_et_review"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/write_fifth_review_height"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_write_et_review"
+            android:gravity="top"
+            android:inputType="text"
+            android:maxLength="110"
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/write_fifth_tv_review_guide" />
+
+        <TextView
+            android:id="@+id/write_fifth_tv_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="0/110"
+            app:layout_constraintBottom_toBottomOf="@id/write_fifth_et_review"
+            app:layout_constraintEnd_toEndOf="@id/write_fifth_et_review" />
+
+        <TextView
+            android:id="@+id/write_fifth_tv_private_guide"
+            style="@style/font_subtitle_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="레시피 비공개"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@id/write_fifth_tv_review_guide"
+            app:layout_constraintTop_toBottomOf="@id/write_fifth_et_review" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/write_fifth_sw_recipe_private"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:minWidth="42dp"
+            android:thumb="@drawable/recipe_private_sw_thumb"
+            app:layout_constraintStart_toStartOf="@id/write_fifth_tv_private_guide"
+            app:layout_constraintTop_toBottomOf="@id/write_fifth_tv_private_guide"
+            app:showText="false"
+            app:track="@drawable/recipe_private_sw_track" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/write_finish"
+            style="@style/font_subtitle_medium"
+            android:layout_width="0dp"
+            android:layout_height="47dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_btn_main"
+            android:stateListAnimator="@null"
+            android:text="@string/common_complete"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
