@@ -81,6 +81,10 @@
     <string name="write_third_tv_menu_guide">메뉴 종류</string>
     <string name="write_fourth_tv_taste_guide">맛(중복선택가능)</string>
     <string name="write_fourth_tv_detail_taste_guide">세부 맛(중복선택가능)</string>
+    <string name="write_fifth_tv_photo">사진</string>
+    <string name="write_fifth_photo_guide">(필수, 최대3장)</string>
+    <string name="write_fifth_tv_review">리뷰</string>
+    <string name="write_fifth_tv_private">레시피 비공개</string>
 
     <!-- 재료(태그) 입력 -->
     <string name="write_tag_tv_title">재료 입력</string>
@@ -147,6 +151,7 @@
     <!-- 공유하기 -->
     <string name="share">공유</string>
     <string name="share_title">공유하기</string>
+
 
 
 </resources>

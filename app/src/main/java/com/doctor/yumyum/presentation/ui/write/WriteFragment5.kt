@@ -87,7 +87,7 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                binding.writeFifthTvCount.text = "${s.toString().length} / 110 "
+                binding.writeFifthTvCount.text = "${s.toString().length}/110 "
             }
 
             override fun afterTextChanged(s: Editable?) {

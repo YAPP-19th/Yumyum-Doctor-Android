@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="40dp"
-            android:text="사진"
+            android:text="@string/write_fifth_tv_photo"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
-            android:text="(필수, 최대3장)"
+            android:text="@string/write_fifth_photo_guide"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@id/write_fifth_tv_photo_guide"
             app:layout_constraintStart_toEndOf="@id/write_fifth_tv_photo_guide"
@@ -78,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="리뷰"
+            android:text="@string/write_fifth_tv_review"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="@id/write_fifth_tv_photo_guide"
             app:layout_constraintTop_toBottomOf="@id/write_fifth_ib_image1" />
@@ -106,7 +106,6 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:text="0/110"
             app:layout_constraintBottom_toBottomOf="@id/write_fifth_et_review"
             app:layout_constraintEnd_toEndOf="@id/write_fifth_et_review" />
 
@@ -116,7 +115,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="레시피 비공개"
+            android:text="@string/write_fifth_tv_private"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="@id/write_fifth_tv_review_guide"
             app:layout_constraintTop_toBottomOf="@id/write_fifth_et_review" />
