@@ -1,10 +1,13 @@
 package com.doctor.yumyum.presentation.ui.write.viewmodel
 
+import android.net.Uri
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.common.base.BaseViewModel
+import okhttp3.MultipartBody
 
 class WriteViewModel : BaseViewModel()  {
     private var _mode : MutableLiveData<Boolean> = MutableLiveData()
@@ -28,6 +31,16 @@ class WriteViewModel : BaseViewModel()  {
     private val _minusTagList : MutableLiveData<ArrayList<String>> = MutableLiveData()
     val minusTagList : LiveData<ArrayList<String>>
         get() = _minusTagList
+
+    var reviewText : MutableLiveData<String> = MutableLiveData()
+
+    private var _privateMode : MutableLiveData<Boolean> = MutableLiveData()
+    val privateMode : LiveData<Boolean>
+        get() = _privateMode
+
+    private var _reviewImageList : MutableLiveData<MutableList<Uri>> = MutableLiveData()
+    val reviewImageList : LiveData<MutableList<Uri>>
+        get() = _reviewImageList
 
     fun setMode(isTurnOn: Boolean) {
         _mode.value = isTurnOn
@@ -58,6 +71,14 @@ class WriteViewModel : BaseViewModel()  {
 
     fun setMinusTagItem(newTagList: ArrayList<String>?){
         _minusTagList.value = newTagList
+    }
+
+    fun setPrivateMode(isTurnOn: Boolean) {
+        _privateMode.value = isTurnOn
+    }
+
+    fun setReviewImageList(newList : MutableList<Uri>){
+        _reviewImageList.value = newList
     }
 
 }

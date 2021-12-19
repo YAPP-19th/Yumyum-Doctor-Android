@@ -18,9 +18,9 @@ import com.doctor.yumyum.presentation.ui.write.viewmodel.WriteViewModel
  *  - 가격 입력하기
  */
 
-class WriteFragment3 : BaseFragment<FragmentWriteThirdBinding>(R.layout.fragment_write_third){
-    private val writeViewModel : WriteViewModel by activityViewModels {
-        object : ViewModelProvider.Factory{
+class WriteFragment3 : BaseFragment<FragmentWriteThirdBinding>(R.layout.fragment_write_third) {
+    private val writeViewModel: WriteViewModel by activityViewModels {
+        object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T =
                 WriteViewModel() as T
         }
@@ -31,14 +31,14 @@ class WriteFragment3 : BaseFragment<FragmentWriteThirdBinding>(R.layout.fragment
 
         initBinding()
 
-        binding.writeThirdBtnNext.setOnClickListener{
+        binding.writeThirdBtnNext.setOnClickListener {
             findNavController().navigate(R.id.action_third_write_fragment_to_fourth_write_fragment)
         }
     }
 
     private fun initBinding() {
-        binding.viewModel= writeViewModel
-        binding.writeThirdRvAdd.adapter = WriteTagAdapter{}
-        binding.writeThirdRvMinus.adapter = WriteTagAdapter{}
+        binding.viewModel = writeViewModel
+        binding.writeThirdRvAdd.adapter = WriteTagAdapter {}
+        binding.writeThirdRvMinus.adapter = WriteTagAdapter {}
     }
 }
