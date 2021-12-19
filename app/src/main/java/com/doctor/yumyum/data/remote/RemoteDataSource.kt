@@ -7,7 +7,9 @@ import com.doctor.yumyum.data.remote.api.AuthService
 import com.doctor.yumyum.data.remote.api.UserService
 import com.doctor.yumyum.data.remote.response.GetNicknameResponse
 import com.doctor.yumyum.data.remote.api.RankRecipeService
+import com.doctor.yumyum.data.remote.api.RecipeService
 import com.doctor.yumyum.data.remote.response.RankRecipeResponse
+import com.doctor.yumyum.data.remote.response.RecipeDetailResponse
 import okhttp3.ResponseBody
 import retrofit2.Response
 
@@ -21,6 +23,8 @@ interface RemoteDataSource {
         top: Int,
         rankDatePeriod: Int
     ): Response<RankRecipeResponse>
+
+    suspend fun getRecipeDetail(recipeId: Int): Response<RecipeDetailResponse>
 }
 
 class RemoteDataSourceImpl() : RemoteDataSource {
@@ -51,4 +55,9 @@ class RemoteDataSourceImpl() : RemoteDataSource {
     ): Response<RankRecipeResponse> =
         RetrofitClient.getClient().create(RankRecipeService::class.java)
             .getRecipeRank(categoryName, top, rankDatePeriod)
+
+    override suspend fun getRecipeDetail(
+        recipeId: Int
+    ): Response<RecipeDetailResponse> =
+        RetrofitClient.getClient().create(RecipeService::class.java).getRecipeDetail(recipeId)
 }

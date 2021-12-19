@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -10,8 +11,7 @@
             type="com.doctor.yumyum.presentation.ui.recipedetail.RecipeDetailViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".presentation.ui.recipedetail.RecipeDetailActivity">
@@ -60,8 +60,8 @@
         <ScrollView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/recipe_detail_iv_recipe">
 
@@ -77,6 +77,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="12dp"
+                    android:text="@{viewModel.recipeBrand}"
                     android:textColor="@color/gray"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -88,9 +89,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:background="@null"
-                    android:src="@drawable/ic_like_unclicked"
+                    android:src="@{viewModel.isLike() ? @drawable/ic_like_clicked : @drawable/ic_like_unclicked}"
                     app:layout_constraintEnd_toStartOf="@id/recipe_detail_ib_bookmark"
-                    app:layout_constraintTop_toTopOf="@id/recipe_detail_ib_bookmark" />
+                    app:layout_constraintTop_toTopOf="@id/recipe_detail_ib_bookmark"
+                    tools:src="@drawable/ic_like_unclicked" />
 
                 <ImageButton
                     android:id="@+id/recipe_detail_ib_bookmark"
@@ -99,9 +101,10 @@
                     android:layout_marginTop="12dp"
                     android:layout_marginEnd="16dp"
                     android:background="@null"
-                    android:src="@drawable/ic_bookmark_unclicked"
+                    android:src="@{viewModel.isBookmark() ? @drawable/ic_bookmark_clicked : @drawable/ic_bookmark_unclicked}"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/ic_bookmark_unclicked" />
 
                 <TextView
                     android:id="@+id/recipe_detail_tv_title"
@@ -109,6 +112,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
+                    android:text="@{viewModel.recipeTitle}"
                     android:textColor="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -132,6 +136,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="1dp"
                     android:layout_marginBottom="3dp"
+                    android:text="@{viewModel.recipeLikeCount.toString()}"
                     android:textColor="@color/black"
                     app:layout_constraintBottom_toBottomOf="@id/recipe_detail_iv_like"
                     app:layout_constraintStart_toEndOf="@id/recipe_detail_iv_like"
@@ -155,6 +160,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="21dp"
+                    android:text="@{viewModel.authorName}"
                     android:textColor="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/recipe_detail_iv_author"
@@ -169,11 +175,14 @@
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/bg_recipe_content"
+                    android:enabled="false"
                     android:gravity="start"
+                    android:importantForAutofill="no"
                     android:inputType="textMultiLine"
                     android:minLines="5"
                     android:paddingHorizontal="12dp"
                     android:paddingVertical="7dp"
+                    android:text="@{viewModel.content}"
                     android:textColor="@color/dark_gray"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -181,7 +190,7 @@
                     tools:text="@string/common_recipe_title" />
 
                 <TextView
-                    android:id="@+id/recipe_detail_tv_main_menu"
+                    android:id="@+id/recipe_detail_tv_main_menu_title"
                     style="@style/font_body1_medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -191,6 +200,16 @@
                     android:textColor="@color/black"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/recipe_detail_et_content" />
+
+                <TextView
+                    android:id="@+id/recipe_detail_tv_main_menu"
+                    bind_tagItem="@{viewModel.mainMenu}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="11dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/recipe_detail_tv_main_menu_title" />
 
                 <TextView
                     android:id="@+id/recipe_detail_tv_plus"
@@ -253,13 +272,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="11dp"
+                    android:text="@string/common_taste"
                     android:textColor="@color/black"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/recipe_detail_rv_minus"
-                    tools:text="@string/common_taste" />
+                    app:layout_constraintTop_toBottomOf="@id/recipe_detail_rv_minus" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recipe_detail_rv_taste"
+                    bind_tasteTagList="@{viewModel.tasteTagList}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -278,10 +298,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="11dp"
+                    android:text="@string/common_price"
                     android:textColor="@color/black"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/recipe_detail_rv_taste"
-                    tools:text="@string/common_price" />
+                    app:layout_constraintTop_toBottomOf="@id/recipe_detail_rv_taste" />
 
                 <TextView
                     android:id="@+id/recipe_detail_tv_price"
@@ -290,6 +310,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="5dp"
+                    android:text="@{viewModel.recipePrice.toString()}"
                     android:textColor="@color/black"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/recipe_detail_tv_price_title"
