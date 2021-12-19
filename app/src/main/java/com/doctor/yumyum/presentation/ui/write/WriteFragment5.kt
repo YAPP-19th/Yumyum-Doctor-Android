@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -51,17 +52,18 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
                     //어떤 이미지도 선택하지 않은 경우 예외 처리 필요
                     return@registerForActivityResult
                 } else {
-                    it.data!!
+                    it.data
                 }
 
                 //이미지를 여러장 선택한 경우
-                val clipData = intentResult.clipData!!
                 val images = writeViewModel.reviewImageList.value?.toMutableList() ?: arrayListOf()
-                for (i in 0 until clipData.itemCount) {
-                    val uri = clipData.getItemAt(i).uri
-                    val path = uriToPath(requireContext(), uri)
-                    images.add(uri)
-                    if (images.size == 3) break
+                intentResult?.clipData?.apply {
+                    for (i in 0 until this.itemCount) {
+                        val uri = this.getItemAt(i).uri
+                        val path = uriToPath(requireContext(), uri)
+                        images.add(uri)
+                        if (images.size == 3) break
+                    }
                 }
                 writeViewModel.setReviewImageList(images)
             }
