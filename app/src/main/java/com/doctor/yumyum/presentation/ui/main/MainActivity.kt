@@ -2,13 +2,13 @@ package com.doctor.yumyum.presentation.ui.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
 import com.doctor.yumyum.databinding.ActivityMainBinding
 import com.doctor.yumyum.common.base.BaseActivity
 import com.doctor.yumyum.presentation.ui.home.HomeFragment
 import com.doctor.yumyum.presentation.ui.mypage.MyPageFragment
+import com.doctor.yumyum.presentation.ui.myrecipe.MyRecipeFragment
 import com.doctor.yumyum.presentation.ui.write.WriteRecipeActivity
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
