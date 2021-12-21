@@ -109,7 +109,8 @@
                     android:paddingHorizontal="16dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintStart_toStartOf="@id/my_recipe_tv_best_guide"
-                    app:layout_constraintTop_toBottomOf="@id/my_recipe_tv_best_guide" />
+                    app:layout_constraintTop_toBottomOf="@id/my_recipe_tv_best_guide"
+                    tools:listitem="@layout/item_best_recipe" />
 
                 <View
                     android:id="@+id/my_recipe_divider2"
@@ -165,7 +166,6 @@
                     app:layout_constraintTop_toTopOf="@id/my_recipe_ib_sort" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    tools:listitem="@layout/item_research_recipe"
                     android:id="@+id/my_recipe_rv_post"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -173,7 +173,8 @@
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     app:layout_constraintStart_toStartOf="@id/my_recipe_tv_my_post"
                     app:layout_constraintTop_toBottomOf="@id/my_recipe_tv_my_post"
-                    app:spanCount="2" />
+                    app:spanCount="2"
+                    tools:listitem="@layout/item_research_recipe" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
