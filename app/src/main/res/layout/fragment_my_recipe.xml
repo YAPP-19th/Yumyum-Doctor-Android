@@ -9,6 +9,10 @@
             name="viewModel"
             type="com.doctor.yumyum.presentation.ui.myrecipe.MyRecipeViewModel" />
 
+        <variable
+            name="myRecipeFragment"
+            type="com.doctor.yumyum.presentation.ui.myrecipe.MyRecipeFragment" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -161,6 +165,7 @@
                     android:layout_marginEnd="8dp"
                     android:background="@color/white"
                     android:src="@drawable/ic_filter"
+                    android:onClick="@{() -> myRecipeFragment.showBottomSheet()}"
                     app:layout_constraintBottom_toBottomOf="@id/my_recipe_ib_sort"
                     app:layout_constraintEnd_toStartOf="@id/my_recipe_ib_sort"
                     app:layout_constraintTop_toTopOf="@id/my_recipe_ib_sort" />

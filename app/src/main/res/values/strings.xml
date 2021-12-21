@@ -109,6 +109,7 @@
     <string name="sort_like">좋아요순</string>
     <string name="sort_expensive">가격 높은순</string>
     <string name="sort_cheap">가격 낮은순</string>
+    <string name="sort_abc">가나다순</string>
 
     <!--   Internet dialog      -->
     <string name="dialog_msg_internet">인터넷 연결 상태를 확인 후\n다시 시도해 주세요.</string>
