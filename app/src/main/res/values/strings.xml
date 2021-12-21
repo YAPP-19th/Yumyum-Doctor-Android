@@ -24,6 +24,9 @@
     <string name="common_ok">확인</string>
     <string name="common_complete">완료</string>
     <string name="common_brand_en">brand</string>
+    <string name="common_public">공개</string>
+    <string name="common_private">비공개</string>
+
 
     <string name="common_starbucks">스타벅스</string>
     <string name="common_amasvin">아마스빈</string>
@@ -157,6 +160,7 @@
     <string name="my_recipe_tv_change_order">순서 수정</string>
     <string name="my_recipe_tv_my_post">내가 쓴 글</string>
     <string name="my_recipe_tv_scrap">스크랩</string>
+    <string name="filter_private_guide">공개 여부</string>
 
 
 </resources>
