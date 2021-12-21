@@ -152,6 +152,11 @@
     <string name="share">공유</string>
     <string name="share_title">공유하기</string>
 
+    <!-- 나의 레시피 -->
+    <string name="my_recipe_tv_best_recipe">최애레시피</string>
+    <string name="my_recipe_tv_change_order">순서 수정</string>
+    <string name="my_recipe_tv_my_post">내가 쓴 글</string>
+    <string name="my_recipe_tv_scrap">스크랩</string>
 
 
 </resources>

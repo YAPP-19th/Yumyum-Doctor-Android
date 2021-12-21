@@ -71,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="12dp"
-                    android:text="최애레시피"
+                    android:text="@string/my_recipe_tv_best_recipe"
                     android:textColor="@color/black"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -83,7 +83,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="17dp"
                     android:layout_marginEnd="16dp"
-                    android:text="순서 수정"
+                    android:text="@string/my_recipe_tv_change_order"
                     android:textColor="@color/dark_gray"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -125,7 +125,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="16dp"
-                    android:text="내가 쓴 글"
+                    android:text="@string/my_recipe_tv_my_post"
                     android:textColor="@color/black"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/my_recipe_divider2" />
@@ -136,7 +136,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
-                    android:text="스크랩"
+                    android:text="@string/my_recipe_tv_scrap"
                     android:textColor="@color/gray"
                     app:layout_constraintBottom_toBottomOf="@id/my_recipe_tv_my_post"
                     app:layout_constraintStart_toEndOf="@id/my_recipe_tv_my_post"
@@ -165,6 +165,7 @@
                     app:layout_constraintTop_toTopOf="@id/my_recipe_ib_sort" />
 
                 <androidx.recyclerview.widget.RecyclerView
+                    tools:listitem="@layout/item_research_recipe"
                     android:id="@+id/my_recipe_rv_post"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
