@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="fragment"
+            type="com.doctor.yumyum.presentation.ui.myrecipe.MyPageFilterActivity" />
+    </data>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,7 +19,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/filter_cl_appbar"
             android:layout_width="match_parent"
-            android:layout_height="51dp"
+            android:layout_height="44dp"
             android:paddingHorizontal="16dp">
 
             <TextView
@@ -25,6 +31,16 @@
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:layout_marginTop="15dp"
+                android:id="@+id/filter_ib_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:src="@drawable/ic_back"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -59,8 +75,6 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/my_filter_tv_private"
                     android:id="@+id/my_filter_tv_public"
                     style="@style/font_body1_regular"
                     android:layout_width="@dimen/taste_select_width"
@@ -72,6 +86,8 @@
                     android:paddingBottom="11dp"
                     android:text="@string/common_public"
                     android:textColor="@color/gray"
+                    app:layout_constraintEnd_toStartOf="@id/my_filter_tv_private"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/my_filter_tv_private_guide" />
 
                 <TextView
@@ -86,8 +102,8 @@
                     android:paddingBottom="11dp"
                     android:text="@string/common_private"
                     android:textColor="@color/gray"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="@id/my_filter_tv_public"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/my_filter_tv_public"
                     app:layout_constraintTop_toTopOf="@id/my_filter_tv_public"
                     app:layout_constraintVertical_bias="0.0" />
@@ -270,8 +286,8 @@
                         style="@style/font_body1_regular"
                         android:layout_width="@dimen/taste_select_width"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
                         android:layout_marginStart="20dp"
+                        android:layout_marginTop="12dp"
                         android:background="@drawable/bg_taste_unselected"
                         android:gravity="center"
                         android:paddingTop="10dp"
