@@ -45,6 +45,10 @@ class RecipeDetailActivity :
         CoroutineScope(Dispatchers.IO).launch {
             viewModel.getRecipeDetail(recipeId)
         }
+
+        viewModel.errorState.observe(this) { resId ->
+            showToast(getString(resId))
+        }
     }
 
     private fun setLayoutHeight() {

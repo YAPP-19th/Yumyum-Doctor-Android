@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -11,7 +12,7 @@
             type="com.doctor.yumyum.presentation.ui.recipedetail.RecipeDetailViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".presentation.ui.recipedetail.RecipeDetailActivity">
@@ -20,6 +21,7 @@
             android:id="@+id/recipe_detail_iv_recipe"
             android:layout_width="0dp"
             android:layout_height="300dp"
+            android:contentDescription="@string/common_recipe_image"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_recipe_sample"
             app:layout_constraintEnd_toEndOf="parent"
@@ -42,6 +44,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="10dp"
             android:background="@null"
+            android:contentDescription="@string/common_back_icon"
             android:src="@drawable/ic_back_white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -53,6 +56,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="4dp"
             android:background="@null"
+            android:contentDescription="@string/common_menu_icon"
             android:src="@drawable/ic_menu_white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -95,7 +99,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:background="@null"
-                    android:src="@{viewModel.isLike() ? @drawable/ic_like_clicked : @drawable/ic_like_unclicked}"
+                    android:contentDescription="@string/common_like_image"
+                    android:onClick="@{()->viewModel.setLikeState(viewModel.recipeId)}"
+                    android:src="@{viewModel.isLike ? @drawable/ic_like_clicked : @drawable/ic_like_unclicked}"
                     app:layout_constraintEnd_toStartOf="@id/recipe_detail_ib_bookmark"
                     app:layout_constraintTop_toTopOf="@id/recipe_detail_ib_bookmark"
                     tools:src="@drawable/ic_like_unclicked" />
@@ -107,7 +113,9 @@
                     android:layout_marginTop="12dp"
                     android:layout_marginEnd="16dp"
                     android:background="@null"
-                    android:src="@{viewModel.isBookmark() ? @drawable/ic_bookmark_clicked : @drawable/ic_bookmark_unclicked}"
+                    android:contentDescription="@string/common_iv_bookmark"
+                    android:onClick="@{()->viewModel.setBookmarkState(viewModel.recipeId)}"
+                    android:src="@{viewModel.isBookmark ? @drawable/ic_bookmark_clicked : @drawable/ic_bookmark_unclicked}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:src="@drawable/ic_bookmark_unclicked" />
@@ -131,6 +139,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="3dp"
+                    android:contentDescription="@string/common_like_image"
                     android:src="@drawable/ic_like"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/recipe_detail_tv_title" />
@@ -155,6 +164,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="22dp"
+                    android:contentDescription="@string/recipe_detail_iv_book"
                     android:src="@drawable/ic_book"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/recipe_detail_tv_like" />
@@ -193,6 +203,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/recipe_detail_tv_author"
+                    tools:ignore="LabelFor"
                     tools:text="@string/common_recipe_title" />
 
                 <TextView

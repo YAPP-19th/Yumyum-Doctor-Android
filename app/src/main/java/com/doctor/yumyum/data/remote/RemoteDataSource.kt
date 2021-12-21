@@ -27,9 +27,13 @@ interface RemoteDataSource {
     ): Response<RankRecipeResponse>
 
     suspend fun getRecipeDetail(recipeId: Int): Response<RecipeDetailResponse>
+    suspend fun postLike(recipeId: Int): Response<ResponseBody>
+    suspend fun deleteLike(recipeId: Int): Response<ResponseBody>
+    suspend fun postBookmark(recipeId: Int): Response<ResponseBody>
+    suspend fun deleteBookmark(recipeId: Int): Response<ResponseBody>
 }
 
-class RemoteDataSourceImpl() : RemoteDataSource {
+class RemoteDataSourceImpl : RemoteDataSource {
     override suspend fun signUp(signUpModel: SignUpModel): Response<ResponseBody> =
         RetrofitClient.getClient().create(AuthService::class.java)
             .signUp(signUpModel)
@@ -64,4 +68,16 @@ class RemoteDataSourceImpl() : RemoteDataSource {
         recipeId: Int
     ): Response<RecipeDetailResponse> =
         RetrofitClient.getClient().create(RecipeService::class.java).getRecipeDetail(recipeId)
+
+    override suspend fun postLike(recipeId: Int): Response<ResponseBody> =
+        RetrofitClient.getClient().create(RecipeService::class.java).postLike(recipeId)
+
+    override suspend fun deleteLike(recipeId: Int): Response<ResponseBody> =
+        RetrofitClient.getClient().create(RecipeService::class.java).deleteLike(recipeId)
+
+    override suspend fun postBookmark(recipeId: Int): Response<ResponseBody> =
+        RetrofitClient.getClient().create(RecipeService::class.java).postBookmark(recipeId)
+
+    override suspend fun deleteBookmark(recipeId: Int): Response<ResponseBody> =
+        RetrofitClient.getClient().create(RecipeService::class.java).deleteBookmark(recipeId)
 }
