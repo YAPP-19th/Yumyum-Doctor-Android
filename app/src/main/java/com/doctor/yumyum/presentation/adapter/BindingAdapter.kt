@@ -13,6 +13,13 @@ fun bindTagList(rvTagList: RecyclerView, tagList: ArrayList<String>?) {
     }
 }
 
+@BindingAdapter("bind_tasteTagList")
+fun bindTasteTagList(rvTagList: RecyclerView, tagList: ArrayList<String>?) {
+    tagList?.run {
+        ((rvTagList.adapter) as TasteTagAdapter).updateTagList(this)
+    }
+}
+
 @BindingAdapter("bind_tagItem")
 fun bindTagItem(tvTagItem: TextView, tagItem : String){
     tvTagItem.text= "#$tagItem"
