@@ -12,8 +12,6 @@ class MyPageFilterActivity :
 
         binding.lifecycleOwner = this
         binding.fragment = this
-        binding.filterIbBack.setOnClickListener {
-            finish()
-        }
+        binding.writeToolbar.appbarIbBack.setOnClickListener { finish() }
     }
 }

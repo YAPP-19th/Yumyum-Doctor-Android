@@ -10,41 +10,17 @@
     </data>
 
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".presentation.ui.myrecipe.MyPageFilterActivity">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/filter_cl_appbar"
-            android:layout_width="match_parent"
-            android:layout_height="44dp"
-            android:paddingHorizontal="16dp">
-
-            <TextView
-                android:id="@+id/my_filter_tv_title"
-                style="@style/font_h3_medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/common_filter"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageButton
-                android:layout_marginTop="15dp"
-                android:id="@+id/filter_ib_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#00000000"
-                android:src="@drawable/ic_back"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <include
+            android:id="@+id/write_toolbar"
+            layout="@layout/layout_appbar"
+            app:main="@{@string/common_filter}" />
 
         <View
             android:id="@+id/research_list_divider"
