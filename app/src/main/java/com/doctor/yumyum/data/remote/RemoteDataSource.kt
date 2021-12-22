@@ -9,11 +9,8 @@ import com.doctor.yumyum.data.remote.api.AuthService
 import com.doctor.yumyum.data.remote.api.UserService
 import com.doctor.yumyum.data.remote.response.GetNicknameResponse
 import com.doctor.yumyum.data.remote.api.RankRecipeService
-<<<<<<< HEAD
 import com.doctor.yumyum.data.remote.api.UserFlavorService
-=======
 import com.doctor.yumyum.data.remote.api.RecipeService
->>>>>>> 349f3c15439312ba0414ea32ad55e28e8d696cd2
 import com.doctor.yumyum.data.remote.response.RankRecipeResponse
 import com.doctor.yumyum.data.remote.response.RecipeDetailResponse
 import okhttp3.ResponseBody
