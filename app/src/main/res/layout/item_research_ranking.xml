@@ -55,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
-            android:textColor="#B0B0B0"
+            android:textColor="@color/gray"
             app:layout_constraintStart_toEndOf="@id/research_ranking_cv_recipe"
             app:layout_constraintTop_toTopOf="@id/research_ranking_cv_recipe"
             tools:text="@string/common_brand" />
