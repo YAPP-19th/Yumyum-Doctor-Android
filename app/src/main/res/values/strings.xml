@@ -25,8 +25,6 @@
     <string name="common_ok">확인</string>
     <string name="common_complete">완료</string>
     <string name="common_brand_en">brand</string>
-    <string name="common_yes">네</string>
-    <string name="common_no">아니오</string>
     <string name="common_public">공개</string>
     <string name="common_private">비공개</string>
     <string name="common_back_icon">뒤로가기 아이콘</string>
