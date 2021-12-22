@@ -33,8 +33,16 @@ class TasteActivity : BaseActivity<ActivityTasteBinding>(R.layout.activity_taste
         init()
 
         viewModel.mode.observe(this) { mode ->
-            if (mode == 0) setStateClass()
-            else setStateDetail()
+            if (mode == 0) {
+                if (viewModel.tasteClassState.value?.size == 0 ) setButtonUnavailable()
+                else setButtonAvailable()
+                setStateClass()
+            }
+            else {
+                if (viewModel.tasteDetailState.value?.size == 0 ) setButtonUnavailable()
+                else setButtonAvailable()
+                setStateDetail()
+            }
         }
 
 
