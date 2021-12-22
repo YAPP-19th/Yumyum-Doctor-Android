@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View" />
 
         <variable
             name="viewModel"
@@ -111,6 +112,7 @@
                     android:clipToPadding="false"
                     android:orientation="horizontal"
                     android:paddingHorizontal="16dp"
+                    android:visibility="@{viewModel.bestRecipeList.size() == 0 ? View.GONE : View.VISIBLE}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintStart_toStartOf="@id/my_recipe_tv_best_guide"
                     app:layout_constraintTop_toBottomOf="@id/my_recipe_tv_best_guide"
@@ -129,6 +131,7 @@
                     android:paddingHorizontal="24dp"
                     android:paddingTop="19dp"
                     android:paddingBottom="26dp"
+                    android:visibility="@{viewModel.bestRecipeList.size() == 0 ? View.VISIBLE : View.GONE}"
                     android:text="@string/best_recipe_empty"
                     android:textColor="@color/dark_gray"
                     app:drawableTopCompat="@drawable/ic_heart"
@@ -143,7 +146,7 @@
                     android:layout_height="14dp"
                     android:layout_marginTop="28dp"
                     android:background="@color/layout_empty"
-                    app:layout_constraintTop_toBottomOf="@id/my_recipe_tv_best_empty" />
+                    app:layout_constraintTop_toBottomOf="@id/my_recipe_tv_best_empty"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/my_recipe_tv_my_post"
@@ -197,6 +200,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="9dp"
+                    android:visibility="@{viewModel.myRecipeList.size() == 0? View.GONE : View.VISIBLE}"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     app:layout_constraintStart_toStartOf="@id/my_recipe_tv_my_post"
                     app:layout_constraintTop_toBottomOf="@id/my_recipe_tv_my_post"
@@ -210,6 +214,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="45dp"
                     android:background="@drawable/bg_message_empty"
+                    android:visibility="@{viewModel.myRecipeList.size() == 0? View.VISIBLE : View.GONE}"
                     android:drawablePadding="12dp"
                     android:gravity="center"
                     android:paddingHorizontal="20dp"
