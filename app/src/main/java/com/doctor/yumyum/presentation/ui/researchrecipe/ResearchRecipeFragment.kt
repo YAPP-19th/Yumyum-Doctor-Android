@@ -86,7 +86,7 @@ class ResearchRecipeFragment :
 
             // 주간 랭킹 리스트 조회
             CoroutineScope(Dispatchers.IO).launch {
-                viewModel.getRankRecipe(getString(mode), 9, 7)
+                viewModel.getRankRecipe(getString(mode), top = 9, rankDatePeriod = 7)
             }
         }
 
