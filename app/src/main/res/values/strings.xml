@@ -27,6 +27,10 @@
     <string name="common_brand_en">brand</string>
     <string name="common_yes">네</string>
     <string name="common_no">아니오</string>
+    <string name="common_public">공개</string>
+    <string name="common_private">비공개</string>
+    <string name="common_back_icon">뒤로가기 아이콘</string>
+    <string name="common_menu_icon">메뉴 아이콘</string>
 
     <string name="common_starbucks">스타벅스</string>
     <string name="common_amasvin">아마스빈</string>
@@ -42,6 +46,7 @@
     <string name="common_ramen">라면</string>
     <string name="common_price">가격</string>
     <string name="common_unit_money">원</string>
+    <string name="common_total_price">총 금액</string>
     <string name="common_range">~</string>
     <string name="common_taste">맛</string>
     <string name="common_taste_detail">세부 맛</string>
@@ -80,6 +85,13 @@
     <string name="write_first_tv_guide">종류와 브랜드를 선택해주세요</string>
     <string name="write_second_et_name">레시피이름</string>
     <string name="write_intent_inputList">inputList</string>
+    <string name="write_third_tv_menu_guide">메뉴 종류</string>
+    <string name="write_fourth_tv_taste_guide">맛(중복선택가능)</string>
+    <string name="write_fourth_tv_detail_taste_guide">세부 맛(중복선택가능)</string>
+    <string name="write_fifth_tv_photo">사진</string>
+    <string name="write_fifth_photo_guide">(필수, 최대3장)</string>
+    <string name="write_fifth_tv_review">리뷰</string>
+    <string name="write_fifth_tv_private">레시피 비공개</string>
 
     <!-- 재료(태그) 입력 -->
     <string name="write_tag_tv_title">재료 입력</string>
@@ -101,6 +113,7 @@
     <string name="sort_like">좋아요순</string>
     <string name="sort_expensive">가격 높은순</string>
     <string name="sort_cheap">가격 낮은순</string>
+    <string name="sort_abc">가나다순</string>
 
     <!--   Internet dialog      -->
     <string name="dialog_msg_internet">인터넷 연결 상태를 확인 후\n다시 시도해 주세요.</string>
@@ -134,6 +147,9 @@
     <string name="dialog_pass_taste">입맛 설정을 건너뛰시겠습니까?</string>
     <string name="dialog_msg_taste">*추후 마이페이지에서 다시 설정 가능합니다.</string>
 
+    <!-- 레시피 상세 -->
+    <string name="recipe_detail_iv_book">책 아이콘</string>
+
     <!-- 닉네임 Activity -->
     <string name="nickname_tv_title">입학할 학생의 이름을 입력해주세요</string>
     <string name="nickname_tv_warning">*실명 사용은 지양해주시길 바랍니다.</string>
@@ -141,8 +157,8 @@
     <string name="nickname_tv_overlap">*중복된 닉네임 입니다.</string>
     <string name="nickname_tv_overflow">*최대 20자까지 입력할 수 있습니다.</string>
     <string name="nickname_tv_success">*사용가능한 닉네임입니다.</string>
- 
-      <!-- 신고하기 -->
+
+    <!-- 신고하기 -->
     <string name="report">신고</string>
     <string name="report_title">신고하기</string>
     <string name="report_select_reason">신고사유를 선택해주세요</string>
@@ -155,5 +171,17 @@
     <!-- 공유하기 -->
     <string name="share">공유</string>
     <string name="share_title">공유하기</string>
+
+    <!-- 나의 레시피 -->
+    <string name="my_recipe_tv_best_recipe">최애레시피</string>
+    <string name="my_recipe_tv_change_order">순서 수정</string>
+    <string name="my_recipe_tv_my_post">내가 쓴 글</string>
+    <string name="my_recipe_tv_scrap">스크랩</string>
+    <string name="filter_private_guide">공개 여부</string>
+
+    <!-- 오류 메시지 -->
+    <string name="error_recipe_detail">레시피 상세 정보를 불러올 수 없습니다.</string>
+    <string name="error_like">like 상태를 변경할 수 없습니다.</string>
+    <string name="error_bookmark">bookmark 상태를 변경할 수 없습니다.</string>
 
 </resources>

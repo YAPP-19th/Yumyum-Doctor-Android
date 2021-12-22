@@ -14,6 +14,13 @@ fun bindTagList(rvTagList: RecyclerView, tagList: ArrayList<String>?) {
     }
 }
 
+@BindingAdapter("bind_tasteTagList")
+fun bindTasteTagList(rvTagList: RecyclerView, tagList: ArrayList<String>?) {
+    tagList?.run {
+        ((rvTagList.adapter) as TasteTagAdapter).updateTagList(this)
+    }
+}
+
 @BindingAdapter("bind_tagItem")
 fun bindTagItem(tvTagItem: TextView, tagItem : String){
     tvTagItem.text= "#$tagItem"
@@ -34,5 +41,14 @@ fun bindTasteDetail(button: Button, tasteList: List<String>) {
     }
     else {
         button.background = ContextCompat.getDrawable(button.context, R.drawable.bg_taste_detail_unselected)
+    }
+}
+
+@BindingAdapter("bind_brandBackground")
+fun bindBrandBackGround(textView: TextView, tempCategory : String?){
+    if(textView.text == tempCategory){
+        textView.background = ContextCompat.getDrawable(textView.context , R.drawable.bg_tv_select)
+    }else{
+        textView.background = null
     }
 }
