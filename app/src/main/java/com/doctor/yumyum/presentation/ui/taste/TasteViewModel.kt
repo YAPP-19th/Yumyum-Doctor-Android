@@ -27,7 +27,7 @@ class TasteViewModel : BaseViewModel() {
 
     fun tasteClassChange(taste: String) {
         if (_tasteClassState.value?.contains(taste) == true) {
-            _tasteClassState.value!!.remove(taste)
+            _tasteClassState.value?.remove(taste)
         } else {
             _tasteClassState.value?.add(taste)
         }
@@ -38,7 +38,7 @@ class TasteViewModel : BaseViewModel() {
         view as Button
         val taste: String = view.text as String
         if (_tasteDetailState.value?.contains(taste) == true) {
-            _tasteDetailState.value!!.remove(taste)
+            _tasteDetailState.value?.remove(taste)
         } else {
             _tasteDetailState.value?.add(taste)
         }
