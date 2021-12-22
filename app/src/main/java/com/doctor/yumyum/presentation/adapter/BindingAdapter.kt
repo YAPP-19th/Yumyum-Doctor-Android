@@ -34,31 +34,21 @@ fun bindStartCompat(textView: TextView, condition: Boolean) {
     textView.setCompoundDrawablesWithIntrinsicBounds(src, null, null, null)
 }
 
-<<<<<<< HEAD
-@BindingAdapter("bind_brandBackground")
-fun bindBrandBackGround(textView: TextView, tempCategory : String?){
-    if(textView.text == tempCategory){
-        textView.background = ContextCompat.getDrawable(textView.context , R.drawable.bg_tv_select)
-    }else{
-        textView.background = null
-    }
-}
-
-=======
->>>>>>> 1dbf8d8... [Feat] Taste Detail 맛 선택 로직
 @BindingAdapter("bind_tasteDetail")
 fun bindTasteDetail(button: Button, tasteList: List<String>) {
     if (tasteList.contains(button.text)) {
         button.background = ContextCompat.getDrawable(button.context, R.drawable.bg_taste_detail_selected)
     }
     else {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> 1dbf8d8... [Feat] Taste Detail 맛 선택 로직
-=======
->>>>>>> 90d6813... [Feat] 입맛 설정 프래그먼트 상태에 따른 뷰 상태 및 로직 변경
         button.background = ContextCompat.getDrawable(button.context, R.drawable.bg_taste_detail_unselected)
+    }
+}
+
+@BindingAdapter("bind_brandBackground")
+fun bindBrandBackGround(textView: TextView, tempCategory : String?){
+    if(textView.text == tempCategory){
+        textView.background = ContextCompat.getDrawable(textView.context , R.drawable.bg_tv_select)
+    }else{
+        textView.background = null
     }
 }

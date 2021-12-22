@@ -9,6 +9,7 @@ import com.doctor.yumyum.data.remote.api.AuthService
 import com.doctor.yumyum.data.remote.api.UserService
 import com.doctor.yumyum.data.remote.response.GetNicknameResponse
 import com.doctor.yumyum.data.remote.api.RankRecipeService
+import com.doctor.yumyum.data.remote.api.UserFlavorService
 import com.doctor.yumyum.data.remote.api.RecipeService
 import com.doctor.yumyum.data.remote.api.UserFlavorService
 import com.doctor.yumyum.data.remote.response.RankRecipeResponse
@@ -28,6 +29,7 @@ interface RemoteDataSource {
         rankDatePeriod: Int
     ): Response<RankRecipeResponse>
 
+    suspend fun putFlavor(userFlavorModel: UserFlavorModel): Response<ResponseBody>
     suspend fun getRecipeDetail(recipeId: Int): Response<RecipeDetailResponse>
     suspend fun postLike(recipeId: Int): Response<ResponseBody>
     suspend fun deleteLike(recipeId: Int): Response<ResponseBody>
@@ -67,6 +69,9 @@ class RemoteDataSourceImpl : RemoteDataSource {
         RetrofitClient.getClient().create(RankRecipeService::class.java)
             .getRecipeRank(categoryName, top, rankDatePeriod)
 
+    override suspend fun putFlavor(userFlavorModel: UserFlavorModel): Response<ResponseBody> =
+        RetrofitClient.getClient().create(UserFlavorService::class.java)
+            .putFlavor(userFlavorModel)
     override suspend fun getRecipeDetail(
         recipeId: Int
     ): Response<RecipeDetailResponse> =

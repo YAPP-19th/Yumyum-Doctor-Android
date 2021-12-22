@@ -45,7 +45,6 @@ class TasteActivity : BaseActivity<ActivityTasteBinding>(R.layout.activity_taste
             }
         }
 
-
         viewModel.tasteClassState.observe(this) { tasteClassState ->
             if (viewModel.mode.value == 0) {
                 if (tasteClassState.size == 0) setButtonUnavailable()
