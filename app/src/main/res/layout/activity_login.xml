@@ -53,6 +53,7 @@
             app:cornerRadius="30dp"
             app:icon="@drawable/ic_kakao"
             app:iconGravity="textStart"
+            app:iconTint="@color/kakao_brown"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
