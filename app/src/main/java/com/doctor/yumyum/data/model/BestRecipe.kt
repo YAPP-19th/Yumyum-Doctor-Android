@@ -1,0 +1,13 @@
+package com.doctor.yumyum.data.model
+
+
+import com.google.gson.annotations.SerializedName
+
+data class BestRecipe(
+    @SerializedName("categoryName")val categoryName: String,
+    @SerializedName("foodImages")val foodImages: List<Any>,
+    @SerializedName("foodTitle")val foodTitle: String,
+    @SerializedName("id")val id: Int,
+    @SerializedName("meFavorite")val meFavorite: Boolean,
+    @SerializedName("price")val price: Int
+)
