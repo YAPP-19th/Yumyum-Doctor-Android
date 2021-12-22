@@ -35,15 +35,6 @@ fun bindStartCompat(textView: TextView, condition: Boolean) {
     textView.setCompoundDrawablesWithIntrinsicBounds(src, null, null, null)
 }
 
-@BindingAdapter("bind_brandBackground")
-fun bindBrandBackGround(textView: TextView, tempCategory : String?){
-    if(textView.text == tempCategory){
-        textView.background = ContextCompat.getDrawable(textView.context , R.drawable.bg_tv_select)
-    }else{
-        textView.background = null
-    }
-}
-
 @BindingAdapter("bind_tasteDetail")
 fun bindTasteDetail(button: Button, tasteList: List<String>) {
     if (tasteList.contains(button.text)) {
@@ -51,5 +42,14 @@ fun bindTasteDetail(button: Button, tasteList: List<String>) {
     }
     else {
         button.background = ContextCompat.getDrawable(button.context, R.drawable.bg_taste_detail_unselected)
+    }
+}
+
+@BindingAdapter("bind_brandBackground")
+fun bindBrandBackGround(textView: TextView, tempCategory : String?){
+    if(textView.text == tempCategory){
+        textView.background = ContextCompat.getDrawable(textView.context , R.drawable.bg_tv_select)
+    }else{
+        textView.background = null
     }
 }
