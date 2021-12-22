@@ -1,5 +1,6 @@
 package com.doctor.yumyum.presentation.adapter
 
+import android.widget.Button
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
@@ -41,6 +42,16 @@ fun bindStartCompat(textView: TextView, condition: Boolean) {
     textView.setCompoundDrawablesWithIntrinsicBounds(src, null, null, null)
 }
 
+@BindingAdapter("bind_tasteDetail")
+fun bindTasteDetail(button: Button, tasteList: List<String>) {
+    if (tasteList.contains(button.text)) {
+        button.background = ContextCompat.getDrawable(button.context, R.drawable.bg_taste_detail_selected)
+    }
+    else {
+        button.background = ContextCompat.getDrawable(button.context, R.drawable.bg_taste_detail_unselected)
+    }
+}
+
 @BindingAdapter("bind_brandBackground")
 fun bindBrandBackGround(textView: TextView, tempCategory : String?){
     if(textView.text == tempCategory){
@@ -49,4 +60,3 @@ fun bindBrandBackGround(textView: TextView, tempCategory : String?){
         textView.background = null
     }
 }
-

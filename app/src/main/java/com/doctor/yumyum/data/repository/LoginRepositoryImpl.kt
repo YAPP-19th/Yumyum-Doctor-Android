@@ -10,9 +10,9 @@ import retrofit2.Response
 
 
 class LoginRepositoryImpl : LoginRepository {
-    override val localDataSource: LocalDataSourceImpl
+    private val localDataSource: LocalDataSourceImpl
         get() = LocalDataSourceImpl()
-    override val remoteDataSource: RemoteDataSourceImpl
+    private val remoteDataSource: RemoteDataSourceImpl
         get() = RemoteDataSourceImpl()
 
     override fun getLoginToken(): String? = localDataSource.getLoginToken()

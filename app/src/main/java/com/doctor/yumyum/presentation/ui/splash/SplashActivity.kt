@@ -43,6 +43,5 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
             }
             startActivity(Intent(this, MainActivity::class.java))
         }
-
     }
 }

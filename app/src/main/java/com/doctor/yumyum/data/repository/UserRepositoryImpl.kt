@@ -9,9 +9,9 @@ import okhttp3.ResponseBody
 import retrofit2.Response
 
 class UserRepositoryImpl() : UserRepository {
-    override val localDataSource: LocalDataSourceImpl
+    private val localDataSource: LocalDataSourceImpl
         get() = LocalDataSourceImpl()
-    override val remoteDataSource: RemoteDataSourceImpl
+    private val remoteDataSource: RemoteDataSourceImpl
         get() = RemoteDataSourceImpl()
 
     override suspend fun getNickname(): Response<GetNicknameResponse> {
