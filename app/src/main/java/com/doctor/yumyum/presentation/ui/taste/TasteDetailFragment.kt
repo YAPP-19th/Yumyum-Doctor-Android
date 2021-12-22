@@ -16,7 +16,7 @@ class TasteDetailFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.setMode(1)
+        viewModel.setMode(viewModel.MODE_DETAIL)
         binding.viewModel = viewModel
         binding.lifecycleOwner = requireActivity()
     }

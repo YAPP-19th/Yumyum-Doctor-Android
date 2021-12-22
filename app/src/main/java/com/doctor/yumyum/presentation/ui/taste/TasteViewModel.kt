@@ -22,8 +22,12 @@ class TasteViewModel : BaseViewModel() {
         MutableLiveData(mutableListOf())
     var tasteDetailState: LiveData<MutableList<String>> = _tasteDetailState
 
-    private val _mode: MutableLiveData<Int> = MutableLiveData(0)
+    val MODE_DETAIL = 1
+    val MODE_CLASS = 0
+    private val _mode: MutableLiveData<Int> = MutableLiveData(MODE_CLASS)
     val mode: LiveData<Int> = _mode
+
+
 
     fun tasteClassChange(taste: String) {
         if (_tasteClassState.value?.contains(taste) == true) {
