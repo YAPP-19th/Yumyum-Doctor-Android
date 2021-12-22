@@ -25,6 +25,9 @@
             android:name=".presentation.ui.taste.TasteActivity"
             android:exported="true" />
         <activity
+            android:name=".presentation.ui.taste.TasteActivity"
+            android:exported="true" />
+        <activity
             android:name=".presentation.ui.filter.FilterActivity"
             android:exported="true" />
         <activity android:name=".presentation.ui.login.LoginActivity" />
@@ -54,7 +57,6 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
 
                 <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth“ -->
                 <data

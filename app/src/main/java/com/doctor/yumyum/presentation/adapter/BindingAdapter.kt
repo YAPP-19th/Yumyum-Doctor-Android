@@ -1,6 +1,5 @@
 package com.doctor.yumyum.presentation.adapter
 
-
 import android.widget.Button
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -35,6 +34,7 @@ fun bindStartCompat(textView: TextView, condition: Boolean) {
     textView.setCompoundDrawablesWithIntrinsicBounds(src, null, null, null)
 }
 
+<<<<<<< HEAD
 @BindingAdapter("bind_brandBackground")
 fun bindBrandBackGround(textView: TextView, tempCategory : String?){
     if(textView.text == tempCategory){
@@ -44,12 +44,21 @@ fun bindBrandBackGround(textView: TextView, tempCategory : String?){
     }
 }
 
+=======
+>>>>>>> 1dbf8d8... [Feat] Taste Detail 맛 선택 로직
 @BindingAdapter("bind_tasteDetail")
 fun bindTasteDetail(button: Button, tasteList: List<String>) {
     if (tasteList.contains(button.text)) {
         button.background = ContextCompat.getDrawable(button.context, R.drawable.bg_taste_detail_selected)
     }
     else {
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1dbf8d8... [Feat] Taste Detail 맛 선택 로직
+=======
+>>>>>>> 90d6813... [Feat] 입맛 설정 프래그먼트 상태에 따른 뷰 상태 및 로직 변경
         button.background = ContextCompat.getDrawable(button.context, R.drawable.bg_taste_detail_unselected)
     }
 }

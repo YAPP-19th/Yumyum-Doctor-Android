@@ -9,6 +9,8 @@ import com.doctor.yumyum.common.base.BaseActivity
 import com.doctor.yumyum.databinding.ActivitySplashBinding
 import com.doctor.yumyum.presentation.ui.login.LoginActivity
 import com.doctor.yumyum.presentation.ui.main.MainActivity
+import com.doctor.yumyum.presentation.ui.nickname.NicknameActivity
+import com.doctor.yumyum.presentation.ui.taste.TasteActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -44,6 +46,5 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
             }
             startActivity(Intent(this, MainActivity::class.java))
         }
-
     }
 }

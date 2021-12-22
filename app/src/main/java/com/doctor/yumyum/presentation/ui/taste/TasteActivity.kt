@@ -33,8 +33,31 @@ class TasteActivity : BaseActivity<ActivityTasteBinding>(R.layout.activity_taste
         init()
 
         viewModel.mode.observe(this) { mode ->
-            if (mode == 0) setStateClass()
-            else setStateDetail()
+            if (mode == 0) {
+                if (viewModel.tasteClassState.value?.size == 0 ) setButtonUnavailable()
+                else setButtonAvailable()
+                setStateClass()
+            }
+            else {
+                if (viewModel.tasteDetailState.value?.size == 0 ) setButtonUnavailable()
+                else setButtonAvailable()
+                setStateDetail()
+            }
+        }
+
+
+        viewModel.tasteClassState.observe(this) { tasteClassState ->
+            if (viewModel.mode.value == 0) {
+                if (tasteClassState.size == 0) setButtonUnavailable()
+                else setButtonAvailable()
+            }
+        }
+
+        viewModel.tasteDetailState.observe(this) { tasteDetailState ->
+            if (viewModel.mode.value == 1) {
+                if (tasteDetailState.size == 0) setButtonUnavailable()
+                else setButtonAvailable()
+            }
         }
 
 
@@ -68,6 +91,13 @@ class TasteActivity : BaseActivity<ActivityTasteBinding>(R.layout.activity_taste
             }
             tasteToolbar.appbarIbBack.setOnClickListener {
                 onBackPressed()
+            }
+            tasteToolbar.appbarIbBack.setOnClickListener {
+                onBackPressed()
+            }
+            tasteBtnNext.setOnClickListener {
+                Navigation.findNavController(tasteNav)
+                    .navigate(R.id.action_tasteClassFragment_to_tasteDetailFragment)
             }
         }
     }
