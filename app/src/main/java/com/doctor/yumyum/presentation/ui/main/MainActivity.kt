@@ -9,6 +9,7 @@ import com.doctor.yumyum.common.base.BaseActivity
 import com.doctor.yumyum.presentation.ui.home.HomeFragment
 import com.doctor.yumyum.presentation.ui.mypage.MyPageFragment
 import com.doctor.yumyum.presentation.ui.myrecipe.MyRecipeFragment
+import com.doctor.yumyum.presentation.ui.researchrecipe.ResearchRecipeFragment
 import com.doctor.yumyum.presentation.ui.write.WriteRecipeActivity
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
