@@ -75,6 +75,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    app:layout_constraintHorizontal_chainStyle="packed"
                     android:id="@+id/my_filter_tv_public"
                     style="@style/font_body1_regular"
                     android:layout_width="@dimen/taste_select_width"
@@ -91,7 +92,8 @@
                     app:layout_constraintTop_toBottomOf="@id/my_filter_tv_private_guide" />
 
                 <TextView
-
+                    android:layout_marginStart="20dp"
+                    app:layout_constraintHorizontal_chainStyle="packed"
                     android:id="@+id/my_filter_tv_private"
                     style="@style/font_body1_regular"
                     android:layout_width="@dimen/taste_select_width"
