@@ -166,6 +166,8 @@
     <string name="my_recipe_tv_my_post">내가 쓴 글</string>
     <string name="my_recipe_tv_scrap">스크랩</string>
     <string name="filter_private_guide">공개 여부</string>
+    <string name="best_recipe_empty">아직 최애레시피가 없어요\n<font color="#000000"><b>레시피 상세</b></font>에서 최애레시피\n등록해보세요!</string>
+    <string name="my_post_empty">아직 등록된 레시피가 없습니다.\n새로운 레시피를 등록하거나\n레시피 탐색에서 레시피를 찾아 보세요!</string>
 
     <!-- 오류 메시지 -->
     <string name="error_recipe_detail">레시피 상세 정보를 불러올 수 없습니다.</string>

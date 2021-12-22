@@ -116,12 +116,34 @@
                     app:layout_constraintTop_toBottomOf="@id/my_recipe_tv_best_guide"
                     tools:listitem="@layout/item_best_recipe" />
 
+                <TextView
+                    android:id="@+id/my_recipe_tv_best_empty"
+                    style="@style/font_body1_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="23dp"
+                    android:layout_marginBottom="28dp"
+                    android:background="@drawable/bg_message_empty"
+                    android:drawablePadding="7dp"
+                    android:gravity="center"
+                    android:paddingHorizontal="24dp"
+                    android:paddingTop="19dp"
+                    android:paddingBottom="26dp"
+                    android:text="@string/best_recipe_empty"
+                    android:textColor="@color/dark_gray"
+                    app:drawableTopCompat="@drawable/ic_heart"
+                    app:layout_constraintBottom_toTopOf="@id/my_recipe_divider2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/my_recipe_tv_best_guide" />
+
                 <View
                     android:id="@+id/my_recipe_divider2"
                     android:layout_width="match_parent"
                     android:layout_height="14dp"
+                    android:layout_marginTop="28dp"
                     android:background="@color/layout_empty"
-                    app:layout_constraintTop_toBottomOf="@id/my_recipe_rv_best_recipe" />
+                    app:layout_constraintTop_toBottomOf="@id/my_recipe_tv_best_empty" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/my_recipe_tv_my_post"
@@ -180,6 +202,26 @@
                     app:layout_constraintTop_toBottomOf="@id/my_recipe_tv_my_post"
                     app:spanCount="2"
                     tools:listitem="@layout/item_research_recipe" />
+
+                <TextView
+                    android:id="@+id/my_recipe_tv_post_empty"
+                    style="@style/font_body1_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="45dp"
+                    android:background="@drawable/bg_message_empty"
+                    android:drawablePadding="12dp"
+                    android:gravity="center"
+                    android:paddingHorizontal="20dp"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="28dp"
+                    android:text="@string/my_post_empty"
+                    android:textColor="@color/black"
+                    app:drawableTopCompat="@drawable/ic_logo_error"
+                    app:layout_constraintTop_toBottomOf="@id/my_recipe_tv_my_post"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
