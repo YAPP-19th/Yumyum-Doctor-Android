@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -9,15 +10,155 @@
             type="com.doctor.yumyum.presentation.ui.home.HomeViewModel" />
     </data>
 
-    <FrameLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".presentation.ui.home.HomeFragment">
+        android:layout_height="match_parent">
 
-        <TextView
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/home_cl_appbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/menu_main_bottom_home"
-            style="@style/font_h1"/>
-    </FrameLayout>
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="51dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginBottom="15dp"
+                    android:src="@drawable/ic_logo_home"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/home_ib_mode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:contentDescription="@string/common_button_change_mode"
+                    android:minHeight="48dp"
+                    android:onClick="@{()->viewModel.changeMode()}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:src="@drawable/ic_change_food" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/home_tv_greeting"
+                style="@style/font_h2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/home_cl_appbar"
+                tools:text="@string/menu_main_bottom_home" />
+
+            <TextView
+                android:id="@+id/home_tv_favorite"
+                style="@style/font_body1_medium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="3dp"
+                android:text="@string/home_tv_favorite"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/home_tv_greeting" />
+
+            <TextView
+                android:id="@+id/home_tv_check"
+                style="@style/font_body1_light"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="@string/home_tv_check"
+                app:layout_constraintStart_toEndOf="@id/home_tv_favorite"
+                app:layout_constraintTop_toBottomOf="@id/home_tv_greeting" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/home_rv_favorite_recipe"
+                android:layout_width="0dp"
+                android:layout_height="170dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/home_tv_favorite" />
+
+            <ImageView
+                android:id="@+id/home_iv_my_recipe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:src="@drawable/ic_pencil"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/home_rv_favorite_recipe" />
+
+            <TextView
+                android:id="@+id/home_tv_my_recipe"
+                style="@style/font_h3_bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="33dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/home_tv_my_recipe"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/home_iv_my_recipe"
+                app:layout_constraintTop_toBottomOf="@id/home_rv_favorite_recipe" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/home_rv_brand"
+                android:layout_width="0dp"
+                android:layout_height="102dp"
+                android:layout_marginTop="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/home_tv_my_recipe" />
+
+            <ImageView
+                android:id="@+id/home_iv_today_recipe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/ic_round_like"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/home_rv_brand" />
+
+            <TextView
+                android:id="@+id/home_tv_today_recipe"
+                style="@style/font_h3_bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/home_tv_today_recipe"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/home_iv_today_recipe"
+                app:layout_constraintTop_toBottomOf="@id/home_rv_brand" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/home_rv_today_recipe"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="29dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/home_tv_today_recipe"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 </layout>
