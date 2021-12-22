@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.doctor.yumyum.presentation.ui.login.LoginViewModel" />
@@ -18,17 +19,17 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintVertical_bias="0.35"
             android:src="@drawable/ic_logo_login"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.35" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="22dp"
+            android:layout_marginBottom="16dp"
             android:gravity="center"
             android:text="@string/login_tv_start"
             android:textColor="@color/dark_gray"
@@ -43,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="63dp"
             android:layout_marginEnd="63dp"
-            android:layout_marginBottom="13dp"
+            android:layout_marginBottom="53dp"
             android:backgroundTint="@color/kakao_yellow"
             android:padding="13dp"
             android:stateListAnimator="@null"
@@ -52,31 +53,10 @@
             app:cornerRadius="30dp"
             app:icon="@drawable/ic_kakao"
             app:iconGravity="textStart"
-            app:iconTint="@color/kakao_brown"
-            app:layout_constraintBottom_toTopOf="@id/login_btn_google"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/login_btn_google"
-            style="@style/font_body1_medium"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="63dp"
-            android:layout_marginEnd="63dp"
-            android:layout_marginBottom="35dp"
-            android:backgroundTint="@color/google_blue"
-            android:padding="13dp"
-            android:stateListAnimator="@null"
-            android:text="@string/login_btn_google"
-            android:textColor="@color/white"
-            app:cornerRadius="30dp"
-            app:icon="@drawable/ic_google"
-            app:iconGravity="textStart"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

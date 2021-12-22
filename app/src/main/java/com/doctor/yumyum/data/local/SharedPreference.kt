@@ -26,7 +26,7 @@ object SharedPreference {
 
     // 로그인 모드
     private const val LOGIN_MODE = "LOGIN_MODE"
-    fun getLoginMode(): String? = pref?.getString(LOGIN_MODE, "")
+    fun getLoginMode(): String? = pref?.getString(LOGIN_MODE, "KAKAO")
     fun setLoginMode(loginMode: String) = pref?.edit()?.putString(LOGIN_MODE, loginMode)?.apply()
 
 

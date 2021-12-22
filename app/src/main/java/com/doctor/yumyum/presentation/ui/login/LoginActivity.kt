@@ -38,9 +38,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
                     kakaoSignUp()
                 }
             }
-            loginBtnGoogle.setOnClickListener {
-                // TODO :: 준영
-            }
         }
         ErrorDialog().apply {
             show(supportFragmentManager, "ErrorDialog")
