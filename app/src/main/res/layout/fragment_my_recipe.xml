@@ -99,7 +99,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="4dp"
                     android:background="@color/white"
-                    android:src="@drawable/ic_sort"
+                    android:src="@drawable/ic_change_order"
                     app:layout_constraintBottom_toBottomOf="@id/my_recipe_tv_change_order"
                     app:layout_constraintEnd_toStartOf="@id/my_recipe_tv_change_order"
                     app:layout_constraintTop_toTopOf="@id/my_recipe_tv_change_order" />
