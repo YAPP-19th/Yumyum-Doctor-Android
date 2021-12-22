@@ -2,15 +2,12 @@ package com.doctor.yumyum.presentation.ui.splash
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseActivity
 import com.doctor.yumyum.databinding.ActivitySplashBinding
 import com.doctor.yumyum.presentation.ui.login.LoginActivity
 import com.doctor.yumyum.presentation.ui.main.MainActivity
-import com.doctor.yumyum.presentation.ui.nickname.NicknameActivity
-import com.doctor.yumyum.presentation.ui.taste.TasteActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
