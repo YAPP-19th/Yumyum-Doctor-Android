@@ -16,11 +16,11 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/home_cl_appbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/home_cl_appbar"
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:orientation="horizontal"
@@ -59,10 +59,11 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="14dp"
                 android:layout_marginEnd="16dp"
+                android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/home_cl_appbar"
-                tools:text="@string/menu_main_bottom_home" />
+                tools:text="@string/home_tv_favorite" />
 
             <TextView
                 android:id="@+id/home_tv_favorite"
@@ -72,6 +73,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="3dp"
                 android:text="@string/home_tv_favorite"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/home_tv_greeting" />
 
@@ -82,6 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 android:text="@string/home_tv_check"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toEndOf="@id/home_tv_favorite"
                 app:layout_constraintTop_toBottomOf="@id/home_tv_greeting" />
 
@@ -113,6 +116,7 @@
                 android:layout_marginTop="33dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/home_tv_my_recipe"
+                android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/home_iv_my_recipe"
                 app:layout_constraintTop_toBottomOf="@id/home_rv_favorite_recipe" />
@@ -145,6 +149,7 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/home_tv_today_recipe"
+                android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/home_iv_today_recipe"
                 app:layout_constraintTop_toBottomOf="@id/home_rv_brand" />
@@ -156,7 +161,7 @@
                 android:layout_marginTop="29dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/home_tv_today_recipe"/>
+                app:layout_constraintTop_toBottomOf="@id/home_tv_today_recipe" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
