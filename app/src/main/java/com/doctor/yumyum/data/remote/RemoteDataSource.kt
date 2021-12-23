@@ -28,7 +28,6 @@ interface RemoteDataSource {
         rankDatePeriod: Int
     ): Response<RankRecipeResponse>
 
-    suspend fun putFlavor(userFlavorModel: UserFlavorModel): Response<ResponseBody>
     suspend fun getRecipeDetail(recipeId: Int): Response<RecipeDetailResponse>
     suspend fun postLike(recipeId: Int): Response<ResponseBody>
     suspend fun deleteLike(recipeId: Int): Response<ResponseBody>
