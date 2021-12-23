@@ -1,6 +1,6 @@
 package com.doctor.yumyum.data.repository
 
-import com.doctor.yumyum.data.remote.RemoteDataSourceImpl
+import com.doctor.yumyum.data.remote.datasource.RecipeDataSourceImp
 import com.doctor.yumyum.data.remote.response.RecipeDetailResponse
 import com.doctor.yumyum.domain.repository.RecipeRepository
 import okhttp3.ResponseBody
@@ -8,21 +8,21 @@ import retrofit2.Response
 
 class RecipeRepositoryImpl : RecipeRepository {
 
-    private val remoteDataSource: RemoteDataSourceImpl
-        get() = RemoteDataSourceImpl()
+    private val recipeDataSource: RecipeDataSourceImp
+        get() = RecipeDataSourceImp()
 
     override suspend fun getRecipeDetail(recipeId: Int): Response<RecipeDetailResponse> =
-        remoteDataSource.getRecipeDetail(recipeId)
+        recipeDataSource.getRecipeDetail(recipeId)
 
     override suspend fun postLike(recipeId: Int): Response<ResponseBody> =
-        remoteDataSource.postLike(recipeId)
+        recipeDataSource.postLike(recipeId)
 
     override suspend fun deleteLike(recipeId: Int): Response<ResponseBody> =
-        remoteDataSource.deleteLike(recipeId)
+        recipeDataSource.deleteLike(recipeId)
 
     override suspend fun postBookmark(recipeId: Int): Response<ResponseBody> =
-        remoteDataSource.postBookmark(recipeId)
+        recipeDataSource.postBookmark(recipeId)
 
     override suspend fun deleteBookmark(recipeId: Int): Response<ResponseBody> =
-        remoteDataSource.deleteBookmark(recipeId)
+        recipeDataSource.deleteBookmark(recipeId)
 }
