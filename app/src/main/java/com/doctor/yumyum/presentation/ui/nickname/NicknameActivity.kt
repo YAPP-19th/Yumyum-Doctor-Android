@@ -43,6 +43,10 @@ class NicknameActivity : BaseActivity<ActivityNicknameBinding>(R.layout.activity
             lifecycleOwner = this@NicknameActivity
         }
 
+        binding.nicknameToolbar.appbarIbBack.setOnClickListener {
+            onBackPressed()
+        }
+
         binding.nicknameBtnComplete.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
                 viewModel.patchNickname(binding.nicknameEtNickname.text.toString())
