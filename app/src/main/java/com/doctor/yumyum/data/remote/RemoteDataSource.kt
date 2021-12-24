@@ -33,6 +33,7 @@ interface RemoteDataSource {
     suspend fun deleteLike(recipeId: Int): Response<ResponseBody>
     suspend fun postBookmark(recipeId: Int): Response<ResponseBody>
     suspend fun deleteBookmark(recipeId: Int): Response<ResponseBody>
+    suspend fun postFlavor(flavorModel: UserFlavorModel): Response<ResponseBody>
 }
 
 class RemoteDataSourceImpl : RemoteDataSource {
@@ -66,10 +67,6 @@ class RemoteDataSourceImpl : RemoteDataSource {
         RetrofitClient.getClient().create(RankRecipeService::class.java)
             .getRecipeRank(categoryName, top, rankDatePeriod)
 
-    override suspend fun putFlavor(userFlavorModel: UserFlavorModel): Response<ResponseBody> =
-        RetrofitClient.getClient().create(UserFlavorService::class.java)
-            .putFlavor(userFlavorModel)
-
     override suspend fun getRecipeDetail(
         recipeId: Int
     ): Response<RecipeDetailResponse> =
@@ -86,4 +83,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
 
     override suspend fun deleteBookmark(recipeId: Int): Response<ResponseBody> =
         RetrofitClient.getClient().create(RecipeService::class.java).deleteBookmark(recipeId)
+
+    override suspend fun postFlavor(flavorModel: UserFlavorModel): Response<ResponseBody> =
+        RetrofitClient.getClient().create(UserFlavorService::class.java).postFlavor(flavorModel)
 }

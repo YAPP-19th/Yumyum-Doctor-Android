@@ -53,7 +53,7 @@ class TasteViewModel : BaseViewModel() {
         _mode.value = mode
     }
 
-    suspend fun putFlavor(): Boolean {
+    suspend fun postFlavor(): Boolean {
         return try {
             val flavorList: List<String>? = tasteClassState.value
                 ?.let { list1 -> tasteDetailState.value?.let { list2 -> list1 + list2 } }

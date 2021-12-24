@@ -10,7 +10,7 @@ import retrofit2.http.PUT
 interface UserFlavorService {
 
     @PUT("/api/v1/users/me/flavors")
-    suspend fun putFlavor(
+    suspend fun postFlavor(
         @Body userFlavorModel: UserFlavorModel
     ): Response<ResponseBody>
 }

@@ -11,6 +11,6 @@ class UserFlavorRepositoryImpl : UserFlavorRepository{
         get() = RemoteDataSourceImpl()
 
     override suspend fun putFlavor(userFlavorModel: UserFlavorModel): Response<ResponseBody> {
-        return remoteDataSource.putFlavor(userFlavorModel)
+        return remoteDataSource.postFlavor(userFlavorModel)
     }
 }
