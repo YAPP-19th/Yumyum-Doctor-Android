@@ -1,18 +1,17 @@
 package com.doctor.yumyum.presentation.ui.taste
 
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.common.base.BaseViewModel
 import com.doctor.yumyum.data.model.UserFlavorModel
-import com.doctor.yumyum.data.repository.UserFlavorRepositoryImpl
+import com.doctor.yumyum.data.repository.UserRepositoryImpl
 import okhttp3.ResponseBody
 import retrofit2.Response
 
 class TasteViewModel : BaseViewModel() {
-    private val userFlavorRepository = UserFlavorRepositoryImpl()
+    private val userRepository = UserRepositoryImpl()
 
     private val _tasteClassState: MutableLiveData<MutableList<String>> =
         MutableLiveData(mutableListOf())
@@ -60,7 +59,7 @@ class TasteViewModel : BaseViewModel() {
                 ?.toList()
 
             if (flavorList != null) {
-                val userFlavorResponse: Response<ResponseBody> = userFlavorRepository.putFlavor(
+                val userFlavorResponse: Response<ResponseBody> = userRepository.postFlavor(
                     UserFlavorModel(flavorList)
                 )
 //                if (userFlavorResponse.code() == 403) {
