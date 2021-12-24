@@ -9,7 +9,6 @@ import com.doctor.yumyum.data.remote.api.AuthService
 import com.doctor.yumyum.data.remote.api.UserService
 import com.doctor.yumyum.data.remote.response.GetNicknameResponse
 import com.doctor.yumyum.data.remote.api.RankRecipeService
-import com.doctor.yumyum.data.remote.api.UserFlavorService
 import com.doctor.yumyum.data.remote.api.RecipeService
 import com.doctor.yumyum.data.remote.response.RankRecipeResponse
 import com.doctor.yumyum.data.remote.response.RecipeDetailResponse
@@ -17,11 +16,6 @@ import okhttp3.ResponseBody
 import retrofit2.Response
 
 interface RemoteDataSource {
-    suspend fun signUp(signUpModel: SignUpModel): Response<ResponseBody>
-    suspend fun signIn(signInModel: SignInModel): Response<ResponseBody>
-    suspend fun getNickname(): Response<GetNicknameResponse>
-    suspend fun validateNickname(nickname: String): Response<ResponseBody>
-    suspend fun patchNickname(nicknamePatchModel: NicknamePatchModel): Response<ResponseBody>
     suspend fun getRecipeRank(
         categoryName: String,
         top: Int,
@@ -36,27 +30,6 @@ interface RemoteDataSource {
 }
 
 class RemoteDataSourceImpl : RemoteDataSource {
-    override suspend fun signUp(signUpModel: SignUpModel): Response<ResponseBody> =
-        RetrofitClient.getClient().create(AuthService::class.java)
-            .signUp(signUpModel)
-
-    override suspend fun signIn(signInModel: SignInModel): Response<ResponseBody> =
-        RetrofitClient.getClient().create(AuthService::class.java).signIn(signInModel)
-
-    override suspend fun getNickname(): Response<GetNicknameResponse> {
-        return RetrofitClient.getClient().create(UserService::class.java)
-            .getNickname()
-    }
-
-    override suspend fun validateNickname(nickname: String): Response<ResponseBody> {
-        return RetrofitClient.getClient().create(UserService::class.java)
-            .validateNickname(nickname)
-    }
-
-    override suspend fun patchNickname(nicknamePatchModel: NicknamePatchModel): Response<ResponseBody> {
-        return RetrofitClient.getClient().create(UserService::class.java)
-            .patchNickname(nicknamePatchModel)
-    }
 
     override suspend fun getRecipeRank(
         categoryName: String,
@@ -65,10 +38,6 @@ class RemoteDataSourceImpl : RemoteDataSource {
     ): Response<RankRecipeResponse> =
         RetrofitClient.getClient().create(RankRecipeService::class.java)
             .getRecipeRank(categoryName, top, rankDatePeriod)
-
-    override suspend fun putFlavor(userFlavorModel: UserFlavorModel): Response<ResponseBody> =
-        RetrofitClient.getClient().create(UserFlavorService::class.java)
-            .putFlavor(userFlavorModel)
 
     override suspend fun getRecipeDetail(
         recipeId: Int

@@ -3,7 +3,7 @@ package com.doctor.yumyum.data.repository
 import com.doctor.yumyum.data.local.LocalDataSourceImpl
 import com.doctor.yumyum.data.model.SignInModel
 import com.doctor.yumyum.data.model.SignUpModel
-import com.doctor.yumyum.data.remote.RemoteDataSourceImpl
+import com.doctor.yumyum.data.remote.datasource.AuthDataSourceImpl
 import com.doctor.yumyum.domain.repository.LoginRepository
 import okhttp3.ResponseBody
 import retrofit2.Response
@@ -12,8 +12,8 @@ import retrofit2.Response
 class LoginRepositoryImpl : LoginRepository {
     private val localDataSource: LocalDataSourceImpl
         get() = LocalDataSourceImpl()
-    private val remoteDataSource: RemoteDataSourceImpl
-        get() = RemoteDataSourceImpl()
+    private val authDataSource: AuthDataSourceImpl
+        get() = AuthDataSourceImpl()
 
     override fun getLoginToken(): String? = localDataSource.getLoginToken()
 
@@ -28,8 +28,8 @@ class LoginRepositoryImpl : LoginRepository {
     }
 
     override suspend fun signUp(signUpModel: SignUpModel): Response<ResponseBody> =
-        remoteDataSource.signUp(signUpModel)
+        authDataSource.signUp(signUpModel)
 
     override suspend fun signIn(signInModel: SignInModel): Response<ResponseBody> =
-        remoteDataSource.signIn(signInModel)
+        authDataSource.signIn(signInModel)
 }

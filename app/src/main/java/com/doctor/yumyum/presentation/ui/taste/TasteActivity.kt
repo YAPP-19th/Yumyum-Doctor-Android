@@ -1,19 +1,13 @@
 package com.doctor.yumyum.presentation.ui.taste
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseActivity
 import com.doctor.yumyum.databinding.ActivityTasteBinding
-import com.doctor.yumyum.presentation.ui.login.ErrorDialog
-import com.doctor.yumyum.presentation.ui.login.LoginViewModel
 import com.doctor.yumyum.presentation.ui.main.MainActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -117,7 +111,7 @@ class TasteActivity : BaseActivity<ActivityTasteBinding>(R.layout.activity_taste
         binding.tasteBtnNext.text = getString(R.string.common_complete)
         binding.tasteBtnNext.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
-                viewModel.putFlavor()
+                viewModel.postFlavor()
             }
             startActivity(Intent(this, MainActivity::class.java))
         }
