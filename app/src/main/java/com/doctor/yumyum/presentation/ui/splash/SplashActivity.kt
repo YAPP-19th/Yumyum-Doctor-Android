@@ -35,13 +35,16 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
         }
 
         if (viewModel.loginToken.isNullOrBlank()) {
-            startActivity(Intent(this, LoginActivity::class.java))
-        }
-        else {
+            startActivity(Intent(this, LoginActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            })
+            finish()
+        } else {
             CoroutineScope(Dispatchers.IO).launch {
                 viewModel.signIn()
+                startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+                finish()
             }
-            startActivity(Intent(this, MainActivity::class.java))
         }
     }
 }

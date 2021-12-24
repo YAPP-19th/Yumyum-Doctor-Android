@@ -34,12 +34,11 @@ class TasteActivity : BaseActivity<ActivityTasteBinding>(R.layout.activity_taste
 
         viewModel.mode.observe(this) { mode ->
             if (mode == 0) {
-                if (viewModel.tasteClassState.value?.size == 0 ) setButtonUnavailable()
+                if (viewModel.tasteClassState.value?.size == 0) setButtonUnavailable()
                 else setButtonAvailable()
                 setStateClass()
-            }
-            else {
-                if (viewModel.tasteDetailState.value?.size == 0 ) setButtonUnavailable()
+            } else {
+                if (viewModel.tasteDetailState.value?.size == 0) setButtonUnavailable()
                 else setButtonAvailable()
                 setStateDetail()
             }
@@ -119,7 +118,13 @@ class TasteActivity : BaseActivity<ActivityTasteBinding>(R.layout.activity_taste
             CoroutineScope(Dispatchers.IO).launch {
                 viewModel.putFlavor()
             }
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(
+                Intent(
+                    this,
+                    MainActivity::class.java
+                ).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                })
         }
     }
 

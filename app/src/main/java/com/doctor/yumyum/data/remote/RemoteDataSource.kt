@@ -33,6 +33,7 @@ interface RemoteDataSource {
     suspend fun deleteLike(recipeId: Int): Response<ResponseBody>
     suspend fun postBookmark(recipeId: Int): Response<ResponseBody>
     suspend fun deleteBookmark(recipeId: Int): Response<ResponseBody>
+    suspend fun putFlavor(flavorModel: UserFlavorModel): Response<ResponseBody>
 }
 
 class RemoteDataSourceImpl : RemoteDataSource {
