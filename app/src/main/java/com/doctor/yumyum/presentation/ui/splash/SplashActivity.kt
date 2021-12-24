@@ -30,6 +30,8 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
             viewModel = viewModel
         }
 
+        window.statusBarColor = getColor(R.color.main_orange)
+
         viewModel.errorState.observe(this) { error ->
             if (error) startActivity(Intent(this, LoginActivity::class.java))
         }

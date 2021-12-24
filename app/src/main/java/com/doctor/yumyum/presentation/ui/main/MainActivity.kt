@@ -1,6 +1,7 @@
 package com.doctor.yumyum.presentation.ui.main
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
@@ -26,6 +27,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             this,
             ViewModelProvider.NewInstanceFactory()
         )[MainViewModel::class.java]
+
+        window.statusBarColor = Color.WHITE
 
         //binding
         binding.apply {
