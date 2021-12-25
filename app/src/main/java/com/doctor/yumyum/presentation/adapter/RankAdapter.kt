@@ -7,17 +7,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.doctor.yumyum.R
-import com.doctor.yumyum.data.model.RankRecipe
+import com.doctor.yumyum.data.model.RecipeModel
 import com.doctor.yumyum.databinding.ItemResearchRankingBinding
 
 class RankAdapter(private val itemClickListener: (Int) -> Unit) :
     RecyclerView.Adapter<RankAdapter.ViewHolder>() {
-    private val rankList: ArrayList<RankRecipe> = arrayListOf()
+    private val rankList: ArrayList<RecipeModel> = arrayListOf()
 
     inner class ViewHolder(private val binding: ItemResearchRankingBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(recipe: RankRecipe) {
+        fun bind(recipe: RecipeModel) {
             binding.researchRankingTvRank.text = (adapterPosition + 1).toString()
             binding.researchRankingTvBrand.text = recipe.categoryName
             binding.researchRankingTvTitle.text = recipe.foodName
@@ -56,7 +56,7 @@ class RankAdapter(private val itemClickListener: (Int) -> Unit) :
     override fun getItemCount(): Int = rankList.size
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setRankList(newRankList: ArrayList<RankRecipe>) {
+    fun setRankList(newRankList: ArrayList<RecipeModel>) {
         rankList.clear()
         rankList.addAll(newRankList)
         notifyDataSetChanged()
