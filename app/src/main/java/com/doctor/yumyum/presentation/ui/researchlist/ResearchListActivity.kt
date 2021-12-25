@@ -1,5 +1,6 @@
 package com.doctor.yumyum.presentation.ui.researchlist
 
+import ResearchListAdapter
 import android.content.Intent
 import android.os.Bundle
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import com.doctor.yumyum.common.base.BaseActivity
 import com.doctor.yumyum.databinding.ActivityResearchListBinding
 import com.doctor.yumyum.databinding.DialogSelectSortBinding
 import com.doctor.yumyum.presentation.ui.filter.FilterActivity
+import com.doctor.yumyum.presentation.ui.recipedetail.RecipeDetailActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.launch
 
@@ -38,9 +40,31 @@ class ResearchListActivity :
         binding.researchListTvFilter.setOnClickListener {
             startActivity(Intent(this, FilterActivity::class.java))
         }
+        val researchListAdapter = ResearchListAdapter { recipeId ->
+            val intent = Intent(this, RecipeDetailActivity::class.java)
+            intent.putExtra("recipeId", recipeId)
+            startActivity(intent)
+        }
+        binding.researchListRvRecipe.adapter = researchListAdapter
+
         viewModel.sortType.observe(this) { bottomSheetDialog.dismiss() }
         lifecycleScope.launch {
-            viewModel.searchRecipeList(categoryName, "", "", 0, 100000, "like", "asc", "2021-12-26T12:12:12", 0, 10)
+            viewModel.searchRecipeList(
+                categoryName,
+                "",
+                "",
+                0,
+                100000,
+                "like",
+                "asc",
+                "2021-12-26T12:12:12",
+                0,
+                10
+            )
+        }
+
+        viewModel.recipeList.observe(this) {
+            researchListAdapter.setRecipeList(it)
         }
     }
 

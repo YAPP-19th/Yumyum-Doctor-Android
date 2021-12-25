@@ -23,7 +23,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:main="@{@string/research_list_title}"/>
+            app:main="@{@string/research_list_title}" />
 
         <View
             android:id="@+id/research_list_divider"
@@ -124,11 +124,13 @@
             app:layout_constraintTop_toTopOf="@id/research_list_tv_brand" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/research_list_rv_recipe"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
+            android:layout_height="0dp"
             android:layout_marginTop="4dp"
+            android:paddingHorizontal="8dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/research_list_tv_brand"
             app:spanCount="2"
             tools:listitem="@layout/item_research_recipe" />

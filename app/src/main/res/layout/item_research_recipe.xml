@@ -1,60 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="8dp">
+<layout>
 
-    <ImageView
-        android:id="@+id/item_research_recipe_iv_image"
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/common_recipe_image"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_recipe_sample"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:padding="8dp">
 
-    <TextView
-        android:id="@+id/item_research_recipe_tv_brand"
-        style="@style/font_body2_medium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:textColor="@color/gray"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/item_research_recipe_iv_image"
-        tools:text="@string/common_brand" />
+        <ImageView
+            android:id="@+id/item_research_recipe_iv_image"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/common_recipe_image"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_recipe_sample"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/item_research_recipe_tv_title"
-        style="@style/font_body1_regular"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/item_research_recipe_tv_brand"
-        tools:text="@string/common_recipe_title" />
+        <TextView
+            android:id="@+id/item_research_recipe_tv_brand"
+            style="@style/font_body2_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:textColor="@color/gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_research_recipe_iv_image"
+            tools:text="@string/common_brand" />
 
-    <TextView
-        android:id="@+id/item_research_recipe_tv_cost"
-        style="@style/font_body1_medium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/item_research_recipe_tv_title"
-        tools:text="@string/common_cost_example" />
+        <TextView
+            android:id="@+id/item_research_recipe_tv_title"
+            style="@style/font_body1_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_research_recipe_tv_brand"
+            tools:text="@string/common_recipe_title" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:contentDescription="@string/common_iv_bookmark"
-        android:src="@drawable/ic_bookmark_unclicked"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/item_research_recipe_iv_image" />
+        <TextView
+            android:id="@+id/item_research_recipe_tv_cost"
+            style="@style/font_body1_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_research_recipe_tv_title"
+            tools:text="@string/common_cost_example" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:contentDescription="@string/common_iv_bookmark"
+            android:src="@drawable/ic_bookmark_unclicked"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_research_recipe_iv_image" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
