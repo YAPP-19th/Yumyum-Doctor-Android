@@ -53,6 +53,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 startActivity(Intent(this@MainActivity, WriteRecipeActivity::class.java))
             }
         }
+    }
 
+    fun replaceMyRecipe() {
+        binding.mainNvBottom.selectedItemId = R.id.menu_main_my_recipe
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_fl_frag, MyRecipeFragment()).commit()
     }
 }
