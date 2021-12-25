@@ -1,9 +1,8 @@
 package com.doctor.yumyum.data.remote.api
 
 import com.doctor.yumyum.data.model.NicknamePatchModel
-import com.doctor.yumyum.data.model.SignUpModel
 import com.doctor.yumyum.data.model.UserFlavorModel
-import com.doctor.yumyum.data.remote.response.GetNicknameResponse
+import com.doctor.yumyum.data.remote.response.NicknameResponse
 import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -11,7 +10,7 @@ import retrofit2.http.*
 interface UserService {
 
     @GET("/api/v1/users/nickname")
-    suspend fun getNickname(): Response<GetNicknameResponse>
+    suspend fun getNickname(): Response<NicknameResponse>
 
     @GET("/api/v1/users/me/nickname/validation")
     suspend fun validateNickname(
@@ -27,4 +26,5 @@ interface UserService {
     suspend fun postFlavor(
         @Body userFlavorModel: UserFlavorModel
     ): Response<ResponseBody>
+
 }

@@ -24,6 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:orientation="horizontal"
+                android:paddingHorizontal="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -31,7 +32,6 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
                     android:layout_marginBottom="15dp"
                     android:src="@drawable/ic_logo_home"
                     app:layout_constraintBottom_toBottomOf="parent"
