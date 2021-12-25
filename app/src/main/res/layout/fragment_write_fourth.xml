@@ -14,22 +14,125 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:text="@string/write_fourth_tv_taste_guide"
+            android:text="@string/common_taste"
             android:textColor="@color/black"
             android:layout_marginStart="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/write_fourth_rv_main_taste"
-            android:layout_width="0dp"
+        <TextView
+            android:layout_marginStart="2dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintStart_toEndOf="@id/write_fourth_tv_taste_guide"
+            style="@style/font_body2_light"
+            android:textColor="@color/black"
+            android:text="@string/common_multi_selectable"
+            app:layout_constraintBottom_toBottomOf="@id/write_fourth_tv_taste_guide"/>
+
+        <TextView
+            android:id="@+id/write_fourth_tv_sweet"
+            style="@style/font_body1_regular"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/bg_filter_taste_unselected"
+            android:gravity="center_vertical"
+            android:paddingStart="8dp"
+            android:drawablePadding="8dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="7dp"
+            android:text="@string/taste_sweet"
+            android:textColor="@color/gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/write_fourth_tv_salty"
+            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintTop_toBottomOf="@id/write_fourth_tv_taste_guide"
-            app:spanCount="3"
-            tools:ignore="MissingConstraints" />
+            app:drawableStartCompat="@drawable/ic_write_sweet_unselected" />
+
+        <TextView
+            android:id="@+id/write_fourth_tv_salty"
+            style="@style/font_body1_regular"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/bg_filter_taste_unselected"
+            android:gravity="center_vertical"
+            android:paddingStart="8dp"
+            android:drawablePadding="8dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="7dp"
+            android:text="@string/taste_salty"
+            android:textColor="@color/gray"
+            android:layout_marginStart="10dp"
+            app:layout_constraintEnd_toStartOf="@id/write_fourth_tv_spicy"
+            app:layout_constraintStart_toEndOf="@id/write_fourth_tv_sweet"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintTop_toBottomOf="@id/write_fourth_tv_taste_guide"
+            app:drawableStartCompat="@drawable/ic_write_salty_unselected" />
+
+        <TextView
+            android:id="@+id/write_fourth_tv_spicy"
+            style="@style/font_body1_regular"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/bg_filter_taste_unselected"
+            android:gravity="center_vertical"
+            android:paddingStart="8dp"
+            android:drawablePadding="4dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="7dp"
+            android:text="@string/taste_spicy"
+            android:textColor="@color/gray"
+            android:layout_marginStart="10dp"
+            app:layout_constraintStart_toEndOf="@id/write_fourth_tv_salty"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintTop_toBottomOf="@id/write_fourth_tv_taste_guide"
+            app:drawableStartCompat="@drawable/ic_write_spicy_unselected" />
+
+        <TextView
+            android:id="@+id/write_fourth_tv_bitter"
+            style="@style/font_body1_regular"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_filter_taste_unselected"
+            android:gravity="center_vertical"
+            android:paddingStart="8dp"
+            android:drawablePadding="8dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="7dp"
+            android:text="@string/taste_bitter"
+            android:textColor="@color/gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/write_fourth_tv_sour"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintTop_toBottomOf="@id/write_fourth_tv_salty"
+            app:drawableStartCompat="@drawable/ic_write_bitter_unselected" />
+
+        <TextView
+            android:id="@+id/write_fourth_tv_sour"
+            style="@style/font_body1_regular"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_filter_taste_unselected"
+            android:gravity="center_vertical"
+            android:paddingStart="8dp"
+            android:drawablePadding="8dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="7dp"
+            android:text="@string/taste_sour"
+            android:textColor="@color/gray"
+            android:layout_marginStart="10dp"
+            app:layout_constraintStart_toEndOf="@id/write_fourth_tv_bitter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintTop_toTopOf="@id/write_fourth_tv_bitter"
+            app:layout_constraintBottom_toBottomOf="@id/write_fourth_tv_bitter"
+            app:drawableStartCompat="@drawable/ic_write_sour_unselected" />
+
 
         <TextView
             android:id="@+id/write_fourth_tv_detail_taste_guide"
@@ -37,23 +140,36 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
-            android:text="@string/write_fourth_tv_detail_taste_guide"
+            android:layout_marginTop="24dp"
+            android:text="@string/common_taste_detail"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/write_fourth_rv_main_taste" />
+            app:layout_constraintTop_toBottomOf="@id/write_fourth_tv_bitter" />
+
+        <TextView
+            android:layout_marginStart="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/write_fourth_tv_detail_taste_guide"
+            app:layout_constraintBottom_toBottomOf="@id/write_fourth_tv_detail_taste_guide"
+            style="@style/font_body2_light"
+            android:textColor="@color/black"
+            android:text="@string/common_multi_selectable"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/write_fourth_rv_detail_taste"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="28dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginEnd="11dp"
             android:layout_marginTop="25dp"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/write_fourth_tv_detail_taste_guide"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:spanCount="3"
-            tools:ignore="MissingConstraints" />
+            tools:listitem="item_write_detail_taste"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/write_fourth_btn_next"
