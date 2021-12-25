@@ -19,6 +19,10 @@ class ResearchListViewModel : BaseViewModel() {
     val tmpSortType: LiveData<Int> get() = _tmpSortType
     private val _errorState: MutableLiveData<Int> = MutableLiveData()
     val errorState: LiveData<Int> get() = _errorState
+    private var _searchType: MutableLiveData<Int> = MutableLiveData(SORT_RECENT)
+    val searchType: LiveData<Int> get() = _searchType
+    private var _tmpSearchType: MutableLiveData<Int> = MutableLiveData()
+    val tmpSearchType: LiveData<Int> get() = _tmpSearchType
 
     private val _recipeList = MutableLiveData<ArrayList<RecipeModel>>()
     val recipeList: LiveData<ArrayList<RecipeModel>> get() = _recipeList
@@ -33,6 +37,18 @@ class ResearchListViewModel : BaseViewModel() {
 
     fun setSortType() {
         _sortType.value = tmpSortType.value
+    }
+
+    fun initSearchType() {
+        _tmpSearchType.value = SEARCH_HASHTAG
+    }
+
+    fun setTmpSearchType(type: Int) {
+        _tmpSearchType.value = type
+    }
+
+    fun setSearchType() {
+        _searchType.value = tmpSearchType.value
     }
 
     suspend fun searchRecipeList(
@@ -93,5 +109,7 @@ class ResearchListViewModel : BaseViewModel() {
         const val SORT_EXPENSIVE = 4
         const val SORT_CHEAP = 5
         const val ERROR_BOOKMARK = R.string.error_bookmark
+        const val SEARCH_HASHTAG = 11
+        const val SEARCH_TASTE = 12
     }
 }

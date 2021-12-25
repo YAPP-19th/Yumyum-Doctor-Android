@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseActivity
 import com.doctor.yumyum.databinding.ActivityResearchListBinding
+import com.doctor.yumyum.databinding.DialogSelectSearchBinding
 import com.doctor.yumyum.databinding.DialogSelectSortBinding
 import com.doctor.yumyum.presentation.ui.filter.FilterActivity
 import com.doctor.yumyum.presentation.ui.recipedetail.RecipeDetailActivity
@@ -19,7 +20,8 @@ import kotlinx.coroutines.launch
 class ResearchListActivity :
     BaseActivity<ActivityResearchListBinding>(R.layout.activity_research_list) {
 
-    private lateinit var bottomSheetDialog: BottomSheetDialog
+    private lateinit var sortDialog: BottomSheetDialog
+    private lateinit var searchDialog: BottomSheetDialog
 
     private val viewModel by lazy {
         ViewModelProvider(
@@ -36,7 +38,8 @@ class ResearchListActivity :
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         binding.researchListTvBrand.text = categoryName
-        initDialog()
+        initSortDialog()
+        initSearchDialog()
 
         // 필터 화면으로 이동
         binding.researchListTvFilter.setOnClickListener {
@@ -50,7 +53,8 @@ class ResearchListActivity :
             viewModel.setBookmarkState(recipe)
         })
         binding.researchListRvRecipe.adapter = researchListAdapter
-        viewModel.sortType.observe(this) { bottomSheetDialog.dismiss() }
+        viewModel.sortType.observe(this) { sortDialog.dismiss() }
+        viewModel.searchType.observe(this) { searchDialog.dismiss() }
         lifecycleScope.launch {
             viewModel.searchRecipeList(
                 categoryName,
@@ -74,7 +78,7 @@ class ResearchListActivity :
         }
     }
 
-    private fun initDialog() {
+    private fun initSortDialog() {
         val bottomSheetView = layoutInflater.inflate(R.layout.dialog_select_sort, null)
         val bottomSheetBinding = DataBindingUtil.inflate<DialogSelectSortBinding>(
             layoutInflater,
@@ -84,12 +88,31 @@ class ResearchListActivity :
         )
         bottomSheetBinding.lifecycleOwner = this
         bottomSheetBinding.viewModel = viewModel
-        bottomSheetDialog = BottomSheetDialog(this)
-        bottomSheetDialog.setContentView(bottomSheetBinding.root)
+        sortDialog = BottomSheetDialog(this)
+        sortDialog.setContentView(bottomSheetBinding.root)
     }
 
-    fun showBottomSheet() {
-        bottomSheetDialog.show()
+    fun showSortDialog() {
+        sortDialog.show()
         viewModel.initSortType()
+    }
+
+    private fun initSearchDialog() {
+        val bottomSheetView = layoutInflater.inflate(R.layout.dialog_select_search, null)
+        val bottomSheetBinding = DataBindingUtil.inflate<DialogSelectSearchBinding>(
+            layoutInflater,
+            R.layout.dialog_select_search,
+            bottomSheetView as ViewGroup,
+            false
+        )
+        bottomSheetBinding.lifecycleOwner = this
+        bottomSheetBinding.viewModel = viewModel
+        searchDialog = BottomSheetDialog(this)
+        searchDialog.setContentView(bottomSheetBinding.root)
+    }
+
+    fun showSearchDialog() {
+        searchDialog.show()
+        viewModel.initSearchType()
     }
 }
