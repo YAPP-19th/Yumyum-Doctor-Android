@@ -33,6 +33,8 @@ class ResearchListActivity :
 
         val categoryName = intent.extras?.get(getString(R.string.common_brand_en)).toString()
         binding.activity = this
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
         binding.researchListTvBrand.text = categoryName
         initDialog()
 

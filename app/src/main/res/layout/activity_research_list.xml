@@ -6,9 +6,15 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="activity"
             type="com.doctor.yumyum.presentation.ui.researchlist.ResearchListActivity" />
+
+        <variable
+            name="viewModel"
+            type="com.doctor.yumyum.presentation.ui.researchlist.ResearchListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -129,11 +135,34 @@
             android:layout_height="0dp"
             android:layout_marginTop="4dp"
             android:paddingHorizontal="8dp"
+            android:visibility="@{viewModel.recipeList.size() == 0 ? View.GONE : View.VISIBLE}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/research_list_tv_brand"
             app:spanCount="2"
             tools:listitem="@layout/item_research_recipe" />
+
+        <TextView
+            android:id="@+id/research_recipe_tv_empty"
+            style="@style/font_body1_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="42dp"
+            android:layout_marginBottom="42dp"
+            android:background="@drawable/bg_message_empty"
+            android:drawablePadding="12dp"
+            android:gravity="center"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="30dp"
+            android:paddingBottom="36dp"
+            android:text="@string/research_list_empty"
+            android:textColor="@color/black"
+            android:visibility="@{viewModel.recipeList.size() == 0? View.VISIBLE : View.GONE}"
+            app:drawableTopCompat="@drawable/ic_logo_error"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/research_list_tv_brand" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
