@@ -1,4 +1,4 @@
-package com.doctor.yumyum.presentation.ui.main
+package com.doctor.yumyum.presentation.ui.researchrecipe
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -10,11 +10,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
 import com.doctor.yumyum.databinding.FragmentResearchRecipeBinding
+import com.doctor.yumyum.presentation.adapter.RankAdapter
 import com.doctor.yumyum.presentation.adapter.ResearchBrandAdapter
 import com.doctor.yumyum.presentation.ui.login.ErrorDialog
-import com.doctor.yumyum.presentation.ui.recipedetail.RecipeMenuDialog
+import com.doctor.yumyum.presentation.ui.recipedetail.RecipeDetailActivity
 import com.doctor.yumyum.presentation.ui.researchlist.ResearchListActivity
-import com.doctor.yumyum.presentation.viewmodel.ResearchRecipeViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
@@ -65,6 +65,11 @@ class ResearchRecipeFragment :
         }
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.researchRecipeRecyclerviewRanking.adapter = RankAdapter { recipeId ->
+            val intent = Intent(context, RecipeDetailActivity::class.java)
+            intent.putExtra("recipeId", recipeId)
+            startActivity(intent)
+        }
 
         // 브랜드 아이템 클릭시 이동
         brandRecyclerAdapter = ResearchBrandAdapter {
@@ -72,25 +77,22 @@ class ResearchRecipeFragment :
             intent.putExtra(getString(R.string.common_brand_en), it)
             startActivity(intent)
         }
-        //TODO: 레시피 상세 화면으로 이동
-        binding.researchRecipeTvRanking.setOnClickListener {
-            RecipeMenuDialog().show(parentFragmentManager, "RecipeMenuDialog")
-        }
         binding.researchRecipeRecyclerviewBrand.adapter = brandRecyclerAdapter
         brandRecyclerAdapter.setBrandList(beverageBrandList)
         brandRecyclerAdapter.notifyDataSetChanged()
 
         viewModel.mode.observe(viewLifecycleOwner) { mode ->
             changeMode(mode)
-        }
-        viewModel.errorState.observe(viewLifecycleOwner) { errorState ->
-            if (errorState) ErrorDialog().show(parentFragmentManager, "ResearchRecipeFragment")
+
+            // 주간 랭킹 리스트 조회
+            CoroutineScope(Dispatchers.IO).launch {
+                viewModel.getRankRecipe(getString(mode), top = 9, rankDatePeriod = 7)
+            }
         }
 
-        // 주간 랭킹 리스트 조회
-        CoroutineScope(Dispatchers.IO).launch {
-            // TODO: mode에 따라 파라미터 바꾸기
-            coroutineScope { viewModel.getRankRecipe(getString(R.string.common_food), 9, 7) }
+        viewModel.errorState.observe(viewLifecycleOwner) { resId ->
+            showToast(getString(resId))
+            ErrorDialog().show(parentFragmentManager, "ResearchRecipeFragment")
         }
 
         return binding.root

@@ -11,7 +11,12 @@ import com.doctor.yumyum.databinding.FragmentHomeBinding
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
-    private lateinit var viewModel: HomeViewModel
+    private val viewModel by lazy {
+        ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        )[HomeViewModel::class.java]
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,7 +27,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+
         binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+
+        viewModel.mode.observe(viewLifecycleOwner) {
+            binding.homeIbMode.setImageResource(
+                if (it == R.string.common_food) R.drawable.ic_change_food else R.drawable.ic_change_beverage)
+        }
     }
 }

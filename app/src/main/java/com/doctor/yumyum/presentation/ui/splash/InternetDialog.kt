@@ -14,7 +14,7 @@ class InternetDialog : BaseDialog<DialogInternetBinding>(R.layout.dialog_interne
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         super.onCreateView(inflater, container, savedInstanceState)
         binding.internetBtn.setOnClickListener {
             val splashIntent = Intent(this.context, SplashActivity::class.java)

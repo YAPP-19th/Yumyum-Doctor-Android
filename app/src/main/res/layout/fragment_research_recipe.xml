@@ -11,14 +11,14 @@
 
         <variable
             name="viewModel"
-            type="com.doctor.yumyum.presentation.viewmodel.ResearchRecipeViewModel" />
+            type="com.doctor.yumyum.presentation.ui.researchrecipe.ResearchRecipeViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.ui.main.ResearchRecipeFragment">
+        tools:context=".presentation.ui.researchrecipe.ResearchRecipeFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/research_recipe_cl_appbar"
@@ -149,10 +149,11 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/research_recipe_recyclerview_ranking"
+                    bind_rankList="@{viewModel.rankRecipes}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    android:visibility="gone"
+                    android:visibility="@{viewModel.rankRecipes.size() == 0 ? View.GONE : View.VISIBLE}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toBottomOf="@id/research_recipe_tv_ranking"
                     tools:listitem="@layout/item_research_ranking" />

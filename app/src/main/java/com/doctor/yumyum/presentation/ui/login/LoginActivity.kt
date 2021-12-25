@@ -38,9 +38,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
                     kakaoSignUp()
                 }
             }
-            loginBtnGoogle.setOnClickListener {
-                // TODO :: 준영
-            }
         }
 
         // 회원가입 에러 처리

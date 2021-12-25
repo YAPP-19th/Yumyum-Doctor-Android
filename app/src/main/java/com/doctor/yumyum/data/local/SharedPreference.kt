@@ -20,12 +20,15 @@ object SharedPreference {
 
     // 로그인 토큰
     private const val LOGIN_TOKEN = "LOGIN_TOKEN"
-    fun getLoginToken(): String? {
-        return pref?.getString(LOGIN_TOKEN, "")
-    }
-    fun setLoginToken(loginToken: String) {
+    fun getLoginToken(): String? = pref?.getString(LOGIN_TOKEN, "")
+    fun setLoginToken(loginToken: String) =
         pref?.edit()?.putString(LOGIN_TOKEN, loginToken)?.apply()
-    }
+
+    // 로그인 모드
+    private const val LOGIN_MODE = "LOGIN_MODE"
+    fun getLoginMode(): String? = pref?.getString(LOGIN_MODE, "KAKAO")
+    fun setLoginMode(loginMode: String) = pref?.edit()?.putString(LOGIN_MODE, loginMode)?.apply()
+
 
     // 모드
     private const val MODE = "MODE"

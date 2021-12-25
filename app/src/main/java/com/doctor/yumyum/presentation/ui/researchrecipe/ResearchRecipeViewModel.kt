@@ -1,4 +1,4 @@
-package com.doctor.yumyum.presentation.viewmodel
+package com.doctor.yumyum.presentation.ui.researchrecipe
 
 import android.annotation.SuppressLint
 import androidx.annotation.StringRes
@@ -13,10 +13,10 @@ import retrofit2.Response
 
 class ResearchRecipeViewModel : BaseViewModel() {
     private val repository = MainRepositoryImpl()
-    private val _rankRecipes: MutableLiveData<List<RankRecipe>> = MutableLiveData()
-    val rankRecipes: LiveData<List<RankRecipe>> get() = _rankRecipes
-    private val _errorState: MutableLiveData<Boolean> = MutableLiveData(false)
-    val errorState: LiveData<Boolean> get() = _errorState
+    private val _rankRecipes: MutableLiveData<ArrayList<RankRecipe>> = MutableLiveData()
+    val rankRecipes: LiveData<ArrayList<RankRecipe>> get() = _rankRecipes
+    private val _errorState: MutableLiveData<Int> = MutableLiveData()
+    val errorState: LiveData<Int> get() = _errorState
 
     @SuppressLint("SupportAnnotationUsage")
     @StringRes
@@ -39,9 +39,11 @@ class ResearchRecipeViewModel : BaseViewModel() {
 
             if (response.isSuccessful) {
                 _rankRecipes.postValue(response.body()?.topRankingFoods)
+            } else {
+                _errorState.postValue(R.string.error_weekly_ranking)
             }
         } catch (e: Exception) {
-            _errorState.postValue(true)
+            _errorState.postValue(R.string.error_weekly_ranking)
         }
     }
 }

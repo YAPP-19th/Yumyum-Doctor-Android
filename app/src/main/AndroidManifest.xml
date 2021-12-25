@@ -3,6 +3,8 @@
     package="com.doctor.yumyum">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
 
     <application
         android:name=".App"
@@ -14,7 +16,13 @@
         android:theme="@style/Theme.Yumyum"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".presentation.ui.recipedetail.RecipeDetailActivity"
+            android:exported="true" />
+        <activity
             android:name=".presentation.ui.nickname.NicknameActivity"
+            android:exported="true" />
+        <activity
+            android:name=".presentation.ui.taste.TasteActivity"
             android:exported="true" />
         <activity
             android:name=".presentation.ui.filter.FilterActivity"
@@ -60,6 +68,7 @@
 
         <activity android:name=".presentation.ui.write.WriteRecipeActivity" />
         <activity android:name=".presentation.ui.write.WriteTagActivity" />
+        <activity android:name=".presentation.ui.myrecipe.MyPageFilterActivity"/>
     </application>
 
 </manifest>

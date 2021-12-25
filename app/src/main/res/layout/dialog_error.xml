@@ -40,6 +40,7 @@
             android:background="@drawable/bg_dialog_btn"
             android:gravity="center"
             android:includeFontPadding="false"
+            android:backgroundTint="@color/unselect_orange"
             android:stateListAnimator="@null"
             android:text="@string/dialog_btn_error"
             android:textColor="@color/main_orange"

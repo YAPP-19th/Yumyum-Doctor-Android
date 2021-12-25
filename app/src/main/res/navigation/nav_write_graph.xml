@@ -53,7 +53,7 @@
     <fragment
         android:id="@+id/fifth_write_fragment"
         android:name="com.doctor.yumyum.presentation.ui.write.WriteFragment5"
-        tools:layout="@layout/fragment_write_fourth"
+        tools:layout="@layout/fragment_write_fifth"
         android:label="Fifth Write">
 
     </fragment>

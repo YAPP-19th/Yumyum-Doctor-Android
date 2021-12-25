@@ -88,6 +88,27 @@
                 app:layout_constraintStart_toEndOf="@id/home_tv_favorite"
                 app:layout_constraintTop_toBottomOf="@id/home_tv_greeting" />
 
+            <TextView
+                android:id="@+id/home_tv_favorite_empty"
+                style="@style/font_body1_medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="38dp"
+                android:layout_marginBottom="43dp"
+                android:background="@drawable/bg_message_empty"
+                android:drawablePadding="7dp"
+                android:paddingHorizontal="27dp"
+                android:paddingTop="24dp"
+                android:paddingBottom="28dp"
+                android:text="@string/home_tv_favorite_empty"
+                android:textColor="@color/dark_gray"
+                android:visibility="invisible"
+                app:drawableTopCompat="@drawable/ic_heart"
+                app:layout_constraintBottom_toTopOf="@id/home_tv_my_recipe"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/home_tv_check" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/home_rv_favorite_recipe"
                 android:layout_width="0dp"

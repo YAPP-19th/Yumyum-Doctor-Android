@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_taste_graph"
+    app:startDestination="@id/tasteClassFragment">
+
+    <fragment
+        android:id="@+id/tasteClassFragment"
+        android:name="com.doctor.yumyum.presentation.ui.taste.TasteClassFragment"
+        android:label="TasteClassFragment" >
+        <action
+            android:id="@+id/action_tasteClassFragment_to_tasteDetailFragment"
+            app:destination="@id/tasteDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tasteDetailFragment"
+        android:name="com.doctor.yumyum.presentation.ui.taste.TasteDetailFragment"
+        android:label="TasteDetailFragment" />
+</navigation>
