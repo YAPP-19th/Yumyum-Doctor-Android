@@ -3,12 +3,14 @@ package com.doctor.yumyum.presentation.ui.researchlist
 import ResearchListAdapter
 import android.content.Intent
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseActivity
+import com.doctor.yumyum.common.utils.dpToIntPx
 import com.doctor.yumyum.databinding.ActivityResearchListBinding
 import com.doctor.yumyum.databinding.DialogSelectSortBinding
 import com.doctor.yumyum.presentation.ui.filter.FilterActivity
@@ -42,11 +44,11 @@ class ResearchListActivity :
         binding.researchListTvFilter.setOnClickListener {
             startActivity(Intent(this, FilterActivity::class.java))
         }
-        val researchListAdapter = ResearchListAdapter { recipeId ->
+        val researchListAdapter = ResearchListAdapter({ recipeId ->
             val intent = Intent(this, RecipeDetailActivity::class.java)
             intent.putExtra("recipeId", recipeId)
             startActivity(intent)
-        }
+        }, calculateImageHeight())
         binding.researchListRvRecipe.adapter = researchListAdapter
 
         viewModel.sortType.observe(this) { bottomSheetDialog.dismiss() }
@@ -87,5 +89,13 @@ class ResearchListActivity :
     fun showBottomSheet() {
         bottomSheetDialog.show()
         viewModel.initSortType()
+    }
+
+    private fun calculateImageHeight(): Int {
+        // weight 길이에 따른 이미지 뷰 height 설정
+        val displayMetrics = DisplayMetrics()
+        this.windowManager?.defaultDisplay?.getMetrics(displayMetrics)
+        val imageWidth = (displayMetrics.widthPixels - dpToIntPx(16f * 3)) / 2
+        return (imageWidth * 0.8).toInt()
     }
 }

@@ -6,7 +6,10 @@ import com.bumptech.glide.Glide
 import com.doctor.yumyum.data.model.RankRecipe
 import com.doctor.yumyum.databinding.ItemResearchRecipeBinding
 
-class ResearchListAdapter(private val itemClickListener: (Int) -> Unit) :
+class ResearchListAdapter(
+    private val itemClickListener: (Int) -> Unit,
+    private val deviceHeight: Int
+) :
     RecyclerView.Adapter<ResearchListAdapter.ViewHolder>() {
     private val recipeList: ArrayList<RankRecipe> = arrayListOf()
 
@@ -14,6 +17,7 @@ class ResearchListAdapter(private val itemClickListener: (Int) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(recipe: RankRecipe) {
+            binding.itemResearchRecipeIvImage.layoutParams.height = deviceHeight
             binding.itemResearchRecipeTvBrand.text = recipe.categoryName
             binding.itemResearchRecipeTvTitle.text = recipe.foodName
             binding.itemResearchRecipeTvCost.text = "${recipe.price}원"
