@@ -4,21 +4,21 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.doctor.yumyum.R
-import com.doctor.yumyum.data.model.RankRecipe
+import com.doctor.yumyum.data.model.RecipeModel
 import com.doctor.yumyum.databinding.ItemResearchRecipeBinding
 
 class ResearchListAdapter(
     private val itemClickListener: (Int) -> Unit,
-    private val bookmarkClickListener: (RankRecipe) -> Unit,
+    private val bookmarkClickListener: (RecipeModel) -> Unit,
     private val deviceHeight: Int
 ) :
     RecyclerView.Adapter<ResearchListAdapter.ViewHolder>() {
-    private val recipeList: ArrayList<RankRecipe> = arrayListOf()
+    private val recipeList: ArrayList<RecipeModel> = arrayListOf()
 
     inner class ViewHolder(private val binding: ItemResearchRecipeBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(recipe: RankRecipe) {
+        fun bind(recipe: RecipeModel) {
             binding.itemResearchRecipeIvImage.layoutParams.height = deviceHeight
             binding.itemResearchRecipeTvBrand.text = recipe.categoryName
             binding.itemResearchRecipeTvTitle.text = recipe.foodName
@@ -55,7 +55,7 @@ class ResearchListAdapter(
     override fun getItemCount(): Int = recipeList.size
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setRecipeList(newRecipeList: ArrayList<RankRecipe>) {
+    fun setRecipeList(newRecipeList: ArrayList<RecipeModel>) {
         recipeList.clear()
         recipeList.addAll(newRecipeList)
         notifyDataSetChanged()

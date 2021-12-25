@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseViewModel
-import com.doctor.yumyum.data.model.RankRecipe
+import com.doctor.yumyum.data.model.RecipeModel
 import com.doctor.yumyum.data.repository.RecipeRepositoryImpl
 import kotlinx.coroutines.launch
 import okhttp3.ResponseBody
@@ -20,8 +20,8 @@ class ResearchListViewModel : BaseViewModel() {
     private val _errorState: MutableLiveData<Int> = MutableLiveData()
     val errorState: LiveData<Int> get() = _errorState
 
-    private val _recipeList = MutableLiveData<ArrayList<RankRecipe>>()
-    val recipeList: LiveData<ArrayList<RankRecipe>> get() = _recipeList
+    private val _recipeList = MutableLiveData<ArrayList<RecipeModel>>()
+    val recipeList: LiveData<ArrayList<RecipeModel>> get() = _recipeList
 
     fun initSortType() {
         _tmpSortType.value = sortType.value
@@ -68,7 +68,7 @@ class ResearchListViewModel : BaseViewModel() {
         }
     }
 
-    fun setBookmarkState(recipe: RankRecipe) {
+    fun setBookmarkState(recipe: RecipeModel) {
         viewModelScope.launch {
             try {
                 val response: Response<ResponseBody> =

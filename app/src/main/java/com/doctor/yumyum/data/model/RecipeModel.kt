@@ -2,7 +2,7 @@ package com.doctor.yumyum.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class RankRecipe(
+data class RecipeModel(
     @SerializedName("id") val id: Int,
     @SerializedName("foodTitle") val foodName: String,
     @SerializedName("categoryName") val categoryName: String,

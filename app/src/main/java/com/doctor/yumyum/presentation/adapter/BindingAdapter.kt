@@ -6,7 +6,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.doctor.yumyum.R
-import com.doctor.yumyum.data.model.RankRecipe
+import com.doctor.yumyum.data.model.RecipeModel
 
 @BindingAdapter("bind_tagList")
 fun bindTagList(rvTagList: RecyclerView, tagList: ArrayList<String>?) {
@@ -23,7 +23,7 @@ fun bindTasteTagList(rvTagList: RecyclerView, tagList: ArrayList<String>?) {
 }
 
 @BindingAdapter("bind_rankList")
-fun bindRankList(rvTagList: RecyclerView, rankList: ArrayList<RankRecipe>?) {
+fun bindRankList(rvTagList: RecyclerView, rankList: ArrayList<RecipeModel>?) {
     rankList?.run {
         ((rvTagList.adapter) as RankAdapter).setRankList(this)
     }

@@ -6,15 +6,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseViewModel
-import com.doctor.yumyum.data.model.RankRecipe
+import com.doctor.yumyum.data.model.RecipeModel
 import com.doctor.yumyum.data.remote.response.RankRecipeResponse
 import com.doctor.yumyum.data.repository.MainRepositoryImpl
 import retrofit2.Response
 
 class ResearchRecipeViewModel : BaseViewModel() {
     private val repository = MainRepositoryImpl()
-    private val _rankRecipes: MutableLiveData<ArrayList<RankRecipe>> = MutableLiveData()
-    val rankRecipes: LiveData<ArrayList<RankRecipe>> get() = _rankRecipes
+    private val _rankRecipes: MutableLiveData<ArrayList<RecipeModel>> = MutableLiveData()
+    val rankRecipes: LiveData<ArrayList<RecipeModel>> get() = _rankRecipes
     private val _errorState: MutableLiveData<Int> = MutableLiveData()
     val errorState: LiveData<Int> get() = _errorState
 
