@@ -2,6 +2,6 @@ package com.doctor.yumyum.data.model
 
 import java.io.Serializable
 
-data class NicknamePatchModel(
+data class Nickname(
     val nickname: String,
 ) : Serializable

@@ -3,7 +3,7 @@ package com.doctor.yumyum.presentation.ui.nickname
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.common.base.BaseViewModel
-import com.doctor.yumyum.data.model.NicknamePatchModel
+import com.doctor.yumyum.data.model.Nickname
 import com.doctor.yumyum.data.remote.response.NicknameResponse
 import com.doctor.yumyum.data.repository.UserRepositoryImpl
 import okhttp3.ResponseBody
@@ -42,7 +42,7 @@ class NicknameViewModel : BaseViewModel() {
     suspend fun patchNickname(nickname: String) {
         try {
             val nicknameResponse: Response<ResponseBody> =
-                userRepository.patchNickname(NicknamePatchModel(nickname))
+                userRepository.patchNickname(Nickname(nickname))
         } catch (e:Exception) {
             _errorState.postValue(true)
         }
