@@ -2,9 +2,14 @@ package com.doctor.yumyum.presentation.ui.researchlist
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseViewModel
 import com.doctor.yumyum.data.model.RankRecipe
 import com.doctor.yumyum.data.repository.RecipeRepositoryImpl
+import kotlinx.coroutines.launch
+import okhttp3.ResponseBody
+import retrofit2.Response
 
 class ResearchListViewModel : BaseViewModel() {
     val repository = RecipeRepositoryImpl()
@@ -12,6 +17,8 @@ class ResearchListViewModel : BaseViewModel() {
     val sortType: LiveData<Int> get() = _sortType
     private var _tmpSortType: MutableLiveData<Int> = MutableLiveData()
     val tmpSortType: LiveData<Int> get() = _tmpSortType
+    private val _errorState: MutableLiveData<Int> = MutableLiveData()
+    val errorState: LiveData<Int> get() = _errorState
 
     private val _recipeList = MutableLiveData<ArrayList<RankRecipe>>()
     val recipeList: LiveData<ArrayList<RankRecipe>> get() = _recipeList
@@ -61,11 +68,30 @@ class ResearchListViewModel : BaseViewModel() {
         }
     }
 
+    fun setBookmarkState(recipe: RankRecipe) {
+        viewModelScope.launch {
+            try {
+                val response: Response<ResponseBody> =
+                    if (recipe.isBookmark) repository.deleteBookmark(recipe.id)
+                    else repository.postBookmark(recipe.id)
+
+                if (response.isSuccessful) {
+                    recipe.isBookmark = !recipe.isBookmark
+                } else {
+                    _errorState.postValue(ERROR_BOOKMARK)
+                }
+            } catch (e: Exception) {
+                _errorState.postValue(ERROR_BOOKMARK)
+            }
+        }
+    }
+
     companion object {
         const val SORT_RECENT = 1
         const val SORT_SCRAP = 2
         const val SORT_LIKE = 3
         const val SORT_EXPENSIVE = 4
         const val SORT_CHEAP = 5
+        const val ERROR_BOOKMARK = R.string.error_bookmark
     }
 }

@@ -59,10 +59,12 @@
             app:layout_constraintTop_toBottomOf="@id/item_research_recipe_tv_title"
             tools:text="@string/common_cost_example" />
 
-        <ImageView
+        <ImageButton
+            android:id="@+id/item_research_recipe_ib_bookmark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:background="@null"
             android:contentDescription="@string/common_iv_bookmark"
             android:src="@drawable/ic_bookmark_unclicked"
             app:layout_constraintEnd_toEndOf="parent"

@@ -3,11 +3,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.doctor.yumyum.R
 import com.doctor.yumyum.data.model.RankRecipe
 import com.doctor.yumyum.databinding.ItemResearchRecipeBinding
 
 class ResearchListAdapter(
     private val itemClickListener: (Int) -> Unit,
+    private val bookmarkClickListener: (RankRecipe) -> Unit,
     private val deviceHeight: Int
 ) :
     RecyclerView.Adapter<ResearchListAdapter.ViewHolder>() {
@@ -22,6 +24,12 @@ class ResearchListAdapter(
             binding.itemResearchRecipeTvTitle.text = recipe.foodName
             binding.itemResearchRecipeTvCost.text = "${recipe.price}원"
             binding.root.setOnClickListener { itemClickListener(recipe.id) }
+            binding.itemResearchRecipeIbBookmark.setOnClickListener { bookmarkClickListener(recipe) }
+
+            if (recipe.isBookmark)
+                binding.itemResearchRecipeIbBookmark.setImageResource(R.drawable.ic_bookmark_clicked)
+            else
+                binding.itemResearchRecipeIbBookmark.setImageResource(R.drawable.ic_bookmark_unclicked)
 
             if (recipe.foodImages.size > 0) {
                 Glide

@@ -10,6 +10,6 @@ data class RankRecipe(
     @SerializedName("numberOfLikes") val numberOfLikes: Int,
     @SerializedName("foodimages") val foodImages: ArrayList<FoodImage>,
     @SerializedName("meLike") val isLike: Boolean,
-    @SerializedName("meBookmark") val isBookmark: Boolean,
+    @SerializedName("meBookmark") var isBookmark: Boolean,
     @SerializedName("meFavorite") val isFavorite: Boolean
 )

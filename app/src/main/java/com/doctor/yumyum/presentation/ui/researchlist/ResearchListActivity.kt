@@ -14,6 +14,7 @@ import com.doctor.yumyum.common.utils.dpToIntPx
 import com.doctor.yumyum.databinding.ActivityResearchListBinding
 import com.doctor.yumyum.databinding.DialogSelectSortBinding
 import com.doctor.yumyum.presentation.ui.filter.FilterActivity
+import com.doctor.yumyum.presentation.ui.login.ErrorDialog
 import com.doctor.yumyum.presentation.ui.recipedetail.RecipeDetailActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.launch
@@ -48,9 +49,10 @@ class ResearchListActivity :
             val intent = Intent(this, RecipeDetailActivity::class.java)
             intent.putExtra("recipeId", recipeId)
             startActivity(intent)
+        }, { recipe ->
+            viewModel.setBookmarkState(recipe)
         }, calculateImageHeight())
         binding.researchListRvRecipe.adapter = researchListAdapter
-
         viewModel.sortType.observe(this) { bottomSheetDialog.dismiss() }
         lifecycleScope.launch {
             viewModel.searchRecipeList(
@@ -69,6 +71,9 @@ class ResearchListActivity :
 
         viewModel.recipeList.observe(this) {
             researchListAdapter.setRecipeList(it)
+        }
+        viewModel.errorState.observe(this) { resId ->
+            showToast(getString(resId))
         }
     }
 
