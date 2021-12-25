@@ -5,16 +5,15 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:layout_marginEnd="17dp">
+        android:layout_marginBottom="12dp">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/item_tv_detail_taste"
             style="@style/font_body1_regular"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="90dp"
+            android:layout_height="40dp"
             android:background="@drawable/bg_filter_taste_unselected"
-            android:gravity="center"
+            android:gravity="center_horizontal"
             android:paddingStart="12dp"
             android:paddingEnd="5dp"
             android:drawablePadding="4dp"
