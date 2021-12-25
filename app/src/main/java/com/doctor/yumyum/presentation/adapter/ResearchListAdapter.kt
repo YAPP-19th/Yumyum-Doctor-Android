@@ -9,8 +9,7 @@ import com.doctor.yumyum.databinding.ItemResearchRecipeBinding
 
 class ResearchListAdapter(
     private val itemClickListener: (Int) -> Unit,
-    private val bookmarkClickListener: (RecipeModel) -> Unit,
-    private val deviceHeight: Int
+    private val bookmarkClickListener: (RecipeModel) -> Unit
 ) :
     RecyclerView.Adapter<ResearchListAdapter.ViewHolder>() {
     private val recipeList: ArrayList<RecipeModel> = arrayListOf()
@@ -19,7 +18,6 @@ class ResearchListAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(recipe: RecipeModel) {
-            binding.itemResearchRecipeIvImage.layoutParams.height = deviceHeight
             binding.itemResearchRecipeTvBrand.text = recipe.categoryName
             binding.itemResearchRecipeTvTitle.text = recipe.foodName
             binding.itemResearchRecipeTvCost.text = "${recipe.price}원"
