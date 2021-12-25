@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseActivity
 import com.doctor.yumyum.databinding.ActivityResearchListBinding
 import com.doctor.yumyum.databinding.DialogSelectSortBinding
 import com.doctor.yumyum.presentation.ui.filter.FilterActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import kotlinx.coroutines.launch
 
 class ResearchListActivity :
     BaseActivity<ActivityResearchListBinding>(R.layout.activity_research_list) {
@@ -27,9 +29,9 @@ class ResearchListActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val categoryName = intent.extras?.get(getString(R.string.common_brand_en)).toString()
         binding.activity = this
-        binding.researchListTvBrand.text =
-            intent.extras?.get(getString(R.string.common_brand_en)).toString()
+        binding.researchListTvBrand.text = categoryName
         initDialog()
 
         // 필터 화면으로 이동
@@ -37,6 +39,9 @@ class ResearchListActivity :
             startActivity(Intent(this, FilterActivity::class.java))
         }
         viewModel.sortType.observe(this) { bottomSheetDialog.dismiss() }
+        lifecycleScope.launch {
+            viewModel.searchRecipeList(categoryName, "", "", 0, 100000, "like", "asc", "2021-12-26T12:12:12", 0, 10)
+        }
     }
 
     private fun initDialog() {

@@ -5,6 +5,7 @@ import com.doctor.yumyum.data.remote.api.RankRecipeService
 import com.doctor.yumyum.data.remote.api.RecipeService
 import com.doctor.yumyum.data.remote.response.RankRecipeResponse
 import com.doctor.yumyum.data.remote.response.RecipeDetailResponse
+import com.doctor.yumyum.data.remote.response.SearchRecipeResponse
 import okhttp3.ResponseBody
 import retrofit2.Response
 
@@ -20,6 +21,18 @@ interface RecipeDataSource {
     suspend fun deleteLike(recipeId: Int): Response<ResponseBody>
     suspend fun postBookmark(recipeId: Int): Response<ResponseBody>
     suspend fun deleteBookmark(recipeId: Int): Response<ResponseBody>
+    suspend fun searchRecipeList(
+        categoryName: String,
+        flavors: String,
+        tags: String,
+        minPrice: Int,
+        maxPrice: Int,
+        sort: String,
+        order: String,
+        firstSearchTime: String,
+        offset: Int,
+        pageSize: Int
+    ): Response<SearchRecipeResponse>
 }
 
 class RecipeDataSourceImp : RecipeDataSource {
@@ -47,5 +60,31 @@ class RecipeDataSourceImp : RecipeDataSource {
 
     override suspend fun deleteBookmark(recipeId: Int): Response<ResponseBody> =
         RetrofitClient.getClient().create(RecipeService::class.java).deleteBookmark(recipeId)
+
+    override suspend fun searchRecipeList(
+        categoryName: String,
+        flavors: String,
+        tags: String,
+        minPrice: Int,
+        maxPrice: Int,
+        sort: String,
+        order: String,
+        firstSearchTime: String,
+        offset: Int,
+        pageSize: Int
+    ): Response<SearchRecipeResponse> =
+        RetrofitClient.getClient().create(RecipeService::class.java)
+            .searchRecipeList(
+                categoryName,
+                flavors,
+                tags,
+                minPrice,
+                maxPrice,
+                sort,
+                order,
+                firstSearchTime,
+                offset,
+                pageSize
+            )
 }
 
