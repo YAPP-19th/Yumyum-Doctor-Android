@@ -15,6 +15,9 @@ import com.doctor.yumyum.presentation.ui.filter.FilterActivity
 import com.doctor.yumyum.presentation.ui.recipedetail.RecipeDetailActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.launch
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+
 
 class ResearchListActivity :
     BaseActivity<ActivityResearchListBinding>(R.layout.activity_research_list) {
@@ -31,6 +34,9 @@ class ResearchListActivity :
     private var categoryName = ""
     private var sort = "id"
     private var order = "desc"
+    private var minPrice: Int? = null
+    private var maxPrice: Int? = null
+    private lateinit var filterLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,9 +48,21 @@ class ResearchListActivity :
         binding.researchListTvBrand.text = categoryName
         initDialog()
 
+        filterLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                if (it.resultCode == RESULT_OK && it.data != null) {
+                    minPrice = it.data?.extras?.get("minPrice") as Int?
+                    maxPrice = it.data?.extras?.get("maxPrice") as Int?
+                    searchRecipeList()
+                }
+            }
+
         // 필터 화면으로 이동
         binding.researchListTvFilter.setOnClickListener {
-            startActivity(Intent(this, FilterActivity::class.java))
+            val intent = Intent(this, FilterActivity::class.java)
+            intent.putExtra("minPrice", minPrice)
+            intent.putExtra("maxPrice", maxPrice)
+            filterLauncher.launch(intent)
         }
         val researchListAdapter = ResearchListAdapter({ recipeId ->
             val intent = Intent(this, RecipeDetailActivity::class.java)
@@ -111,8 +129,8 @@ class ResearchListActivity :
                 categoryName,
                 "",
                 "",
-                0,
-                100000,
+                minPrice,
+                maxPrice,
                 sort,
                 order,
                 "2022-12-26T12:12:12",
