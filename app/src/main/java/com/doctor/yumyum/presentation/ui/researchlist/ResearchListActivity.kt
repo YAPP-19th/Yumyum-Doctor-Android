@@ -28,10 +28,14 @@ class ResearchListActivity :
         )[ResearchListViewModel::class.java]
     }
 
+    private var categoryName = ""
+    private var sort = "id"
+    private var order = "desc"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val categoryName = intent.extras?.get(getString(R.string.common_brand_en)).toString()
+        categoryName = intent.extras?.get(getString(R.string.common_brand_en)).toString()
         binding.activity = this
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
@@ -50,20 +54,28 @@ class ResearchListActivity :
             viewModel.setBookmarkState(recipe)
         })
         binding.researchListRvRecipe.adapter = researchListAdapter
-        viewModel.sortType.observe(this) { bottomSheetDialog.dismiss() }
-        lifecycleScope.launch {
-            viewModel.searchRecipeList(
-                categoryName,
-                "",
-                "",
-                0,
-                100000,
-                "like",
-                "asc",
-                "2021-12-26T12:12:12",
-                0,
-                10
-            )
+
+        viewModel.sortType.observe(this) { type ->
+            when (type) {
+                ResearchListViewModel.SORT_RECENT -> {
+                    sort = "id"
+                    order = "desc"
+                }
+                ResearchListViewModel.SORT_LIKE -> {
+                    sort = "like"
+                    order = "desc"
+                }
+                ResearchListViewModel.SORT_EXPENSIVE -> {
+                    sort = "price"
+                    order = "desc"
+                }
+                ResearchListViewModel.SORT_CHEAP -> {
+                    sort = "price"
+                    order = "asc"
+                }
+            }
+            bottomSheetDialog.dismiss()
+            searchRecipeList()
         }
 
         viewModel.recipeList.observe(this) {
@@ -91,5 +103,22 @@ class ResearchListActivity :
     fun showBottomSheet() {
         bottomSheetDialog.show()
         viewModel.initSortType()
+    }
+
+    private fun searchRecipeList() {
+        lifecycleScope.launch {
+            viewModel.searchRecipeList(
+                categoryName,
+                "",
+                "",
+                0,
+                100000,
+                sort,
+                order,
+                "2022-12-26T12:12:12",
+                0,
+                10
+            )
+        }
     }
 }
