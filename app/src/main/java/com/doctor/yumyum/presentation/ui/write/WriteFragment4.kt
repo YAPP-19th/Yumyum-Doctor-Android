@@ -49,14 +49,25 @@ class WriteFragment4 : BaseFragment<FragmentWriteFourthBinding>(R.layout.fragmen
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        detailTasteAdapter = DetailTasteAdapter {  }
-        binding.writeFourthRvDetailTaste.adapter = detailTasteAdapter
-        detailTasteAdapter.setTasteList(detailTasteList)
+
+        initRecycler()
 
         binding.viewModel = writeViewModel
         binding.writeFourthBtnNext.setOnClickListener {
             findNavController().navigate(R.id.action_fourth_write_fragment_to_fifth_write_fragment)
         }
+
+        writeViewModel.tasteList.observe(requireActivity()){
+            detailTasteAdapter.updateSelectedList(it)
+        }
+    }
+
+    private fun initRecycler() {
+        detailTasteAdapter = DetailTasteAdapter {
+            writeViewModel.updateTasteList(it)
+        }
+        binding.writeFourthRvDetailTaste.adapter = detailTasteAdapter
+        detailTasteAdapter.setTasteList(detailTasteList)
     }
 
 }

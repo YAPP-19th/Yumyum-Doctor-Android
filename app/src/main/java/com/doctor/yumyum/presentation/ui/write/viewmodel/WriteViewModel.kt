@@ -95,6 +95,7 @@ class WriteViewModel : BaseViewModel()  {
             _tasteList.value?.add(newTaste)
         }
         _tasteList.value = _tasteList.value
+        Log.d("tastList","${_tasteList.value}")
     }
 
     companion object {
