@@ -24,8 +24,6 @@
         <include
             android:id="@+id/research_list_cl_appbar"
             layout="@layout/layout_appbar"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -35,7 +33,7 @@
             android:id="@+id/research_list_divider"
             android:layout_width="match_parent"
             android:layout_height="6dp"
-            android:background="#F8F8F8"
+            android:background="@color/layout_empty"
             app:layout_constraintTop_toBottomOf="@id/research_list_cl_appbar" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,43 +43,38 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="22dp"
             android:background="@drawable/bg_search"
+            android:onClick="@{()->activity.showSearchDialog()}"
             app:layout_constraintTop_toBottomOf="@id/research_list_divider">
 
-            <EditText
+            <TextView
                 android:id="@+id/research_list_et_search"
                 style="@style/font_body1_medium"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:drawableStart="@drawable/ic_search"
                 android:drawablePadding="6dp"
                 android:gravity="top"
-                android:hint="@string/research_list_search_with_hashtag"
-                android:importantForAutofill="no"
-                android:inputType="text"
                 android:paddingVertical="8dp"
                 android:paddingStart="10dp"
                 android:paddingEnd="2dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/light_gray"
+                android:text="@string/research_list_search"
+                android:textColor="@color/light_gray"
+                app:drawableStartCompat="@drawable/ic_search"
                 app:layout_constraintEnd_toStartOf="@id/research_list_ib_close"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="TouchTargetSizeCheck" />
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/research_list_ib_close"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="7dp"
                 android:layout_marginBottom="1dp"
-                android:background="@null"
                 android:contentDescription="@string/research_list_ib_hashtag_reset"
                 android:src="@drawable/ic_close"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -121,7 +114,7 @@
             android:layout_marginEnd="16dp"
             android:drawablePadding="2dp"
             android:gravity="top"
-            android:onClick="@{()->activity.showBottomSheet()}"
+            android:onClick="@{()->activity.showSortDialog()}"
             android:text="@string/common_sort"
             android:textColor="@color/gray"
             app:drawableStartCompat="@drawable/ic_sort_gray"
