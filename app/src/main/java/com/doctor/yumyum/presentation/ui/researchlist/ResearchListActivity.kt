@@ -119,7 +119,7 @@ class ResearchListActivity :
                     order = "asc"
                 }
             }
-            bottomSheetDialog.dismiss()
+            sortDialog.dismiss()
             searchRecipeList()
 
             // 정렬 아이콘 상태 변경
