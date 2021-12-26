@@ -37,13 +37,12 @@ class FilterActivity : BaseActivity<ActivityFilterBinding>(R.layout.activity_fil
                 showToast(getString(R.string.error_filter_price_range))
             } else {
                 // 레시피 목록으로 최소 가격과 최대 가격 전달
-                val intent = Intent(this, FilterActivity::class.java)
-                intent.putExtra("minPrice", minPrice)
-                intent.putExtra("maxPrice", maxPrice)
-                setResult(RESULT_OK, intent)
-                finish()
+                setFilterResult(minPrice, maxPrice)
             }
         }
+
+        // 필터 초기화
+        binding.filterIbReset.setOnClickListener { setFilterResult(null, null) }
 
         // edit text 입력 중 배경 변경
         val focusChangeListener = View.OnFocusChangeListener { view, hasFocus ->
@@ -53,5 +52,13 @@ class FilterActivity : BaseActivity<ActivityFilterBinding>(R.layout.activity_fil
         }
         binding.filterEtPriceLower.onFocusChangeListener = focusChangeListener
         binding.filterEtPriceUpper.onFocusChangeListener = focusChangeListener
+    }
+
+    private fun setFilterResult(minPrice: Int?, maxPrice: Int?) {
+        val intent = Intent(this, FilterActivity::class.java)
+        intent.putExtra("minPrice", minPrice)
+        intent.putExtra("maxPrice", maxPrice)
+        setResult(RESULT_OK, intent)
+        finish()
     }
 }

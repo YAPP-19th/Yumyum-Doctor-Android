@@ -138,6 +138,7 @@
     <string name="research_list_ib_hashtag_reset">해시태그 삭제 버튼</string>
     <string name="research_list_empty">아직 등록된 레시피가 없습니다.</string>
     <string name="search_list_empty">해당하는 레시피가 없습니다.</string>
+    <string name="filter_reset_icon">필터 초기화 아이콘</string>
 
     <!-- 레시피 상세 -->
     <string name="recipe_detail_iv_book">책 아이콘</string>

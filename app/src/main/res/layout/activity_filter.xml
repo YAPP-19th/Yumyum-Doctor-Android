@@ -26,6 +26,18 @@
             app:layout_constraintTop_toTopOf="parent"
             app:main="@{@string/common_filter}" />
 
+        <ImageButton
+            android:id="@+id/filter_ib_reset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@null"
+            android:contentDescription="@string/filter_reset_icon"
+            android:src="@drawable/ic_refresh"
+            app:layout_constraintBottom_toBottomOf="@id/filter_appbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/filter_appbar" />
+
         <View
             android:id="@+id/filter_divider"
             android:layout_width="match_parent"
@@ -62,7 +74,8 @@
             app:layout_constraintEnd_toStartOf="@id/filter_tv_price_lower"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/filter_tv_price" />
+            app:layout_constraintTop_toBottomOf="@id/filter_tv_price"
+            tools:ignore="LabelFor" />
 
         <TextView
             android:id="@+id/filter_tv_price_lower"
@@ -97,6 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="11dp"
             android:background="@drawable/bg_price_unedited"
+            android:importantForAutofill="no"
             android:inputType="numberDecimal"
             android:paddingHorizontal="8dp"
             android:paddingTop="6dp"
@@ -105,7 +119,8 @@
             android:textColorHint="@color/dark_gray"
             app:layout_constraintEnd_toStartOf="@id/filter_tv_price_upper"
             app:layout_constraintStart_toEndOf="@id/filter_tv_price_range"
-            app:layout_constraintTop_toTopOf="@id/filter_et_price_lower" />
+            app:layout_constraintTop_toTopOf="@id/filter_et_price_lower"
+            tools:ignore="LabelFor" />
 
         <TextView
             android:id="@+id/filter_tv_price_upper"
