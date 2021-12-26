@@ -7,4 +7,5 @@
     <dimen name="weekly_ranking_image_width">119dp</dimen>
     <dimen name="weekly_ranking_image_height">103dp</dimen>
     <dimen name="write_fifth_review_height">121dp</dimen>
+    <dimen name="write_taste_width">100dp</dimen>
 </resources>
