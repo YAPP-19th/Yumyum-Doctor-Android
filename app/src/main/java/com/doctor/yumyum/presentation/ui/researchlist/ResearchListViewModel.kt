@@ -88,10 +88,9 @@ class ResearchListViewModel : BaseViewModel() {
 
     companion object {
         const val SORT_RECENT = 1
-        const val SORT_SCRAP = 2
-        const val SORT_LIKE = 3
-        const val SORT_EXPENSIVE = 4
-        const val SORT_CHEAP = 5
+        const val SORT_LIKE = 2
+        const val SORT_EXPENSIVE = 3
+        const val SORT_CHEAP = 4
         const val ERROR_BOOKMARK = R.string.error_bookmark
     }
 }

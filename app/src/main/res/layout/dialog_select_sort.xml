@@ -45,23 +45,6 @@
             app:layout_constraintTop_toBottomOf="@id/dialog_tv_sort_guide" />
 
         <TextView
-            android:id="@+id/dialog_sort_tv_scrap"
-            style="@style/font_subtitle_regular"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:background="@{viewModel.tmpSortType == viewModel.SORT_SCRAP ? @drawable/bg_tv_select : null}"
-            android:onClick="@{() -> viewModel.setTmpSortType(viewModel.SORT_SCRAP)}"
-            android:paddingHorizontal="16dp"
-            android:paddingTop="11dp"
-            android:paddingBottom="12dp"
-            android:text="@string/sort_scrap"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="@id/dialog_sort_tv_recent"
-            app:layout_constraintStart_toStartOf="@id/dialog_sort_tv_recent"
-            app:layout_constraintTop_toBottomOf="@id/dialog_sort_tv_recent" />
-
-        <TextView
             android:id="@+id/dialog_sort_tv_like"
             style="@style/font_subtitle_regular"
             android:layout_width="0dp"
@@ -74,9 +57,9 @@
             android:paddingBottom="12dp"
             android:text="@string/sort_like"
             android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="@id/dialog_sort_tv_scrap"
-            app:layout_constraintStart_toStartOf="@+id/dialog_sort_tv_scrap"
-            app:layout_constraintTop_toBottomOf="@+id/dialog_sort_tv_scrap" />
+            app:layout_constraintEnd_toEndOf="@id/dialog_sort_tv_recent"
+            app:layout_constraintStart_toStartOf="@+id/dialog_sort_tv_recent"
+            app:layout_constraintTop_toBottomOf="@+id/dialog_sort_tv_recent" />
 
         <TextView
             android:id="@+id/dialog_sort_tv_expensive"
