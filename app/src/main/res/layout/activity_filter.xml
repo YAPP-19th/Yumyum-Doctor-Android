@@ -57,6 +57,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/filter_divider" />
 
+        <TextView
+            style="@style/font_body2_light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@string/filter_guide"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/filter_tv_price"
+            app:layout_constraintStart_toEndOf="@id/filter_tv_price" />
+
         <EditText
             android:id="@+id/filter_et_price_lower"
             style="@style/font_body1_regular"
