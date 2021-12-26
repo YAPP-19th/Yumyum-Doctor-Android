@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.common.base.BaseViewModel
+import com.doctor.yumyum.data.model.FoodFlavor
 import okhttp3.MultipartBody
 
 class WriteViewModel : BaseViewModel()  {
@@ -41,6 +42,10 @@ class WriteViewModel : BaseViewModel()  {
     private var _reviewImageList : MutableLiveData<MutableList<Uri>> = MutableLiveData()
     val reviewImageList : LiveData<MutableList<Uri>>
         get() = _reviewImageList
+
+    private var _tasteList : MutableLiveData<ArrayList<String>> = MutableLiveData(arrayListOf())
+    val tasteList : LiveData<ArrayList<String>>
+        get() = _tasteList
 
     fun setMode(isTurnOn: Boolean) {
         _mode.value = isTurnOn
@@ -79,6 +84,25 @@ class WriteViewModel : BaseViewModel()  {
 
     fun setReviewImageList(newList : MutableList<Uri>){
         _reviewImageList.value = newList
+    }
+
+    fun updateTasteList(view : View){
+        view as TextView
+        val newTaste = view.text.toString()
+        if (_tasteList.value?.contains(newTaste) == true){
+            _tasteList.value?.remove(newTaste)
+        }else{
+            _tasteList.value?.add(newTaste)
+        }
+        _tasteList.value = _tasteList.value
+    }
+
+    companion object {
+        const val SWEET = "단맛"
+        const val SALTY = "짠맛"
+        const val SPICY = "매운맛"
+        const val BITTER = "쓴맛"
+        const val SOUR = "신맛"
     }
 
 }

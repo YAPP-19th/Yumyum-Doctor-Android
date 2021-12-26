@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="com.doctor.yumyum.R" />
+        <import type="android.widget.TextView"/>
         <variable
             name="viewModel"
             type="com.doctor.yumyum.presentation.ui.write.viewmodel.WriteViewModel" />
@@ -36,108 +38,113 @@
             android:text="@string/common_multi_selectable"
             app:layout_constraintBottom_toBottomOf="@id/write_fourth_tv_taste_guide"/>
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
+            android:onClick="@{(view) -> viewModel.updateTasteList(view)}"
             android:id="@+id/write_fourth_tv_sweet"
             style="@style/font_body1_regular"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:background="@drawable/bg_filter_taste_unselected"
+            android:background="@{viewModel.tasteList.contains(viewModel.SWEET) == true ? @drawable/bg_filter_taste_selected : @drawable/bg_filter_taste_unselected}"
             android:gravity="center_vertical"
             android:paddingStart="8dp"
             android:drawablePadding="8dp"
             android:paddingTop="6dp"
             android:paddingBottom="7dp"
             android:text="@string/taste_sweet"
-            android:textColor="@color/gray"
+            android:textColor="@{viewModel.tasteList.contains(viewModel.SWEET) == true ? @color/black : @color/gray}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/write_fourth_tv_salty"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintTop_toBottomOf="@id/write_fourth_tv_taste_guide"
-            app:drawableStartCompat="@drawable/ic_write_sweet_unselected" />
+            android:drawableStart="@{viewModel.tasteList.contains(viewModel.SWEET) == true ? @drawable/ic_write_sweet_selected : @drawable/ic_write_sweet_unselected }" />
 
         <TextView
+            android:onClick="@{(view) -> viewModel.updateTasteList(view)}"
             android:id="@+id/write_fourth_tv_salty"
             style="@style/font_body1_regular"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:background="@drawable/bg_filter_taste_unselected"
+            android:background="@{viewModel.tasteList.contains(viewModel.SALTY) == true ? @drawable/bg_filter_taste_selected : @drawable/bg_filter_taste_unselected}"
             android:gravity="center_vertical"
             android:paddingStart="8dp"
             android:drawablePadding="8dp"
             android:paddingTop="6dp"
             android:paddingBottom="7dp"
             android:text="@string/taste_salty"
-            android:textColor="@color/gray"
+            android:textColor="@{viewModel.tasteList.contains(viewModel.SALTY) == true ? @color/black : @color/gray}"
             android:layout_marginStart="10dp"
             app:layout_constraintEnd_toStartOf="@id/write_fourth_tv_spicy"
             app:layout_constraintStart_toEndOf="@id/write_fourth_tv_sweet"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintTop_toBottomOf="@id/write_fourth_tv_taste_guide"
-            app:drawableStartCompat="@drawable/ic_write_salty_unselected" />
+            android:drawableStart="@{viewModel.tasteList.contains(viewModel.SALTY) == true ? @drawable/ic_write_salty_selected : @drawable/ic_write_salty_unselected }" />
 
         <TextView
+            android:onClick="@{(view) -> viewModel.updateTasteList(view)}"
             android:id="@+id/write_fourth_tv_spicy"
             style="@style/font_body1_regular"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:background="@drawable/bg_filter_taste_unselected"
+            android:background="@{viewModel.tasteList.contains(viewModel.SPICY) == true ? @drawable/bg_filter_taste_selected : @drawable/bg_filter_taste_unselected}"
             android:gravity="center_vertical"
             android:paddingStart="8dp"
             android:drawablePadding="4dp"
             android:paddingTop="6dp"
             android:paddingBottom="7dp"
             android:text="@string/taste_spicy"
-            android:textColor="@color/gray"
+            android:textColor="@{viewModel.tasteList.contains(viewModel.SPICY) == true ? @color/black : @color/gray}"
             android:layout_marginStart="10dp"
             app:layout_constraintStart_toEndOf="@id/write_fourth_tv_salty"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintTop_toBottomOf="@id/write_fourth_tv_taste_guide"
-            app:drawableStartCompat="@drawable/ic_write_spicy_unselected" />
+            android:drawableStart="@{viewModel.tasteList.contains(viewModel.SPICY) == true ? @drawable/ic_write_spicy_selected : @drawable/ic_write_spicy_unselected }" />
 
         <TextView
+            android:onClick="@{(view) -> viewModel.updateTasteList(view)}"
             android:id="@+id/write_fourth_tv_bitter"
             style="@style/font_body1_regular"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@drawable/bg_filter_taste_unselected"
+            android:background="@{viewModel.tasteList.contains(viewModel.BITTER) == true ? @drawable/bg_filter_taste_selected : @drawable/bg_filter_taste_unselected}"
             android:gravity="center_vertical"
             android:paddingStart="8dp"
             android:drawablePadding="8dp"
             android:paddingTop="6dp"
             android:paddingBottom="7dp"
             android:text="@string/taste_bitter"
-            android:textColor="@color/gray"
+            android:textColor="@{viewModel.tasteList.contains(viewModel.BITTER) == true ? @color/black : @color/gray}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/write_fourth_tv_sour"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintTop_toBottomOf="@id/write_fourth_tv_salty"
-            app:drawableStartCompat="@drawable/ic_write_bitter_unselected" />
+            android:drawableStart="@{viewModel.tasteList.contains(viewModel.BITTER) == true ? @drawable/ic_write_bitter_selected : @drawable/ic_write_bitter_unselected }" />
 
         <TextView
+            android:onClick="@{(view) -> viewModel.updateTasteList(view)}"
             android:id="@+id/write_fourth_tv_sour"
             style="@style/font_body1_regular"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_filter_taste_unselected"
+            android:background="@{viewModel.tasteList.contains(viewModel.SOUR) == true ? @drawable/bg_filter_taste_selected : @drawable/bg_filter_taste_unselected}"
             android:gravity="center_vertical"
             android:paddingStart="8dp"
             android:drawablePadding="8dp"
             android:paddingTop="6dp"
             android:paddingBottom="7dp"
             android:text="@string/taste_sour"
-            android:textColor="@color/gray"
+            android:textColor="@{viewModel.tasteList.contains(viewModel.SOUR) == true ? @color/black : @color/gray}"
             android:layout_marginStart="10dp"
             app:layout_constraintStart_toEndOf="@id/write_fourth_tv_bitter"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintTop_toTopOf="@id/write_fourth_tv_bitter"
             app:layout_constraintBottom_toBottomOf="@id/write_fourth_tv_bitter"
-            app:drawableStartCompat="@drawable/ic_write_sour_unselected" />
+            android:drawableStart="@{viewModel.tasteList.contains(viewModel.SOUR) == true ? @drawable/ic_write_sour_selected : @drawable/ic_write_sour_unselected }" />
 
 
         <TextView

@@ -7,7 +7,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp">
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/item_tv_detail_taste"
             style="@style/font_body1_regular"
             android:layout_width="90dp"
