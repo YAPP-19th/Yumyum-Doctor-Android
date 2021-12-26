@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.ui.search.SearchHashtagActivity">
+
+        <ImageButton
+            android:id="@+id/search_hashtag_ib_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="23dp"
+            android:background="@null"
+            android:contentDescription="@string/common_back_icon"
+            android:src="@drawable/ic_back_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/search_hashtag_cl_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bg_search"
+            app:layout_constraintBottom_toBottomOf="@id/search_hashtag_ib_back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/search_hashtag_ib_back"
+            app:layout_constraintTop_toTopOf="@id/search_hashtag_ib_back">
+
+            <EditText
+                android:id="@+id/search_hashtag_et_search"
+                style="@style/font_h3_medium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:drawablePadding="6dp"
+                android:gravity="top"
+                android:hint="@string/research_list_search_with_hashtag"
+                android:importantForAutofill="no"
+                android:inputType="textImeMultiLine"
+                android:paddingVertical="7dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="2dp"
+                android:textColor="@color/dark_gray"
+                android:textColorHint="@color/light_gray"
+                app:drawableStartCompat="@drawable/ic_search"
+                app:layout_constraintEnd_toStartOf="@id/search_hashtag_ib_close"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/search_hashtag_ib_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="7dp"
+                android:layout_marginBottom="1dp"
+                android:contentDescription="@string/research_list_ib_hashtag_reset"
+                android:src="@drawable/ic_close"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/search_hashtag_btn_search"
+            style="@style/font_subtitle_medium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_btn_main"
+            android:stateListAnimator="@null"
+            android:text="@string/common_search"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
