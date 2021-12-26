@@ -37,10 +37,10 @@
             app:layout_constraintBottom_toBottomOf="@id/write_fourth_tv_taste_guide"
             app:layout_constraintStart_toEndOf="@id/write_fourth_tv_taste_guide" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/write_fourth_tv_sweet"
             style="@style/font_body1_regular"
-            android:layout_width="100dp"
+            android:layout_width="@dimen/write_taste_width"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:background="@{viewModel.tasteList.contains(viewModel.SWEET) == true ? @drawable/bg_filter_taste_selected : @drawable/bg_filter_taste_unselected}"
@@ -61,7 +61,7 @@
         <TextView
             android:id="@+id/write_fourth_tv_salty"
             style="@style/font_body1_regular"
-            android:layout_width="100dp"
+            android:layout_width="@dimen/write_taste_width"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="24dp"
@@ -83,7 +83,7 @@
         <TextView
             android:id="@+id/write_fourth_tv_spicy"
             style="@style/font_body1_regular"
-            android:layout_width="100dp"
+            android:layout_width="@dimen/write_taste_width"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="24dp"
@@ -105,7 +105,7 @@
         <TextView
             android:id="@+id/write_fourth_tv_bitter"
             style="@style/font_body1_regular"
-            android:layout_width="100dp"
+            android:layout_width="@dimen/write_taste_width"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="@{viewModel.tasteList.contains(viewModel.BITTER) == true ? @drawable/bg_filter_taste_selected : @drawable/bg_filter_taste_unselected}"
@@ -126,7 +126,7 @@
         <TextView
             android:id="@+id/write_fourth_tv_sour"
             style="@style/font_body1_regular"
-            android:layout_width="100dp"
+            android:layout_width="@dimen/write_taste_width"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:background="@{viewModel.tasteList.contains(viewModel.SOUR) == true ? @drawable/bg_filter_taste_selected : @drawable/bg_filter_taste_unselected}"
