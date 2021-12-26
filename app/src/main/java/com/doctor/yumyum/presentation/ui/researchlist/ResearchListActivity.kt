@@ -1,6 +1,7 @@
 package com.doctor.yumyum.presentation.ui.researchlist
 
 import ResearchListAdapter
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.ViewGroup
@@ -38,6 +39,7 @@ class ResearchListActivity :
     private var maxPrice: Int? = null
     private lateinit var filterLauncher: ActivityResultLauncher<Intent>
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -48,11 +50,26 @@ class ResearchListActivity :
         binding.researchListTvBrand.text = categoryName
         initDialog()
 
+        // 필터 화면에서 돌아왔을 때
         filterLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 if (it.resultCode == RESULT_OK && it.data != null) {
                     minPrice = it.data?.extras?.get("minPrice") as Int?
                     maxPrice = it.data?.extras?.get("maxPrice") as Int?
+
+                    // 필터 아이콘 상태 변경
+                    if (minPrice == null && maxPrice == null) {
+                        // 적용하지 않은 상태
+                        binding.researchListTvFilter.setCompoundDrawablesWithIntrinsicBounds(
+                            getDrawable(R.drawable.ic_filter_gray), null, null, null
+                        )
+                    } else {
+                        // 적용한 상태
+                        binding.researchListTvFilter.setCompoundDrawablesWithIntrinsicBounds(
+                            getDrawable(R.drawable.ic_filter_green), null, null, null
+                        )
+                    }
+
                     searchRecipeList()
                 }
             }
@@ -73,11 +90,15 @@ class ResearchListActivity :
         })
         binding.researchListRvRecipe.adapter = researchListAdapter
 
+        // 정렬 타입 변화 확인
         viewModel.sortType.observe(this) { type ->
+            var src = getDrawable(R.drawable.ic_sort_green)
+
             when (type) {
                 ResearchListViewModel.SORT_RECENT -> {
                     sort = "id"
                     order = "desc"
+                    src = getDrawable(R.drawable.ic_sort_gray)
                 }
                 ResearchListViewModel.SORT_LIKE -> {
                     sort = "like"
@@ -94,6 +115,11 @@ class ResearchListActivity :
             }
             bottomSheetDialog.dismiss()
             searchRecipeList()
+
+            // 정렬 아이콘 상태 변경
+            binding.researchListTvSort.setCompoundDrawablesWithIntrinsicBounds(
+                src, null, null, null
+            )
         }
 
         viewModel.recipeList.observe(this) {
