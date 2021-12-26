@@ -8,6 +8,7 @@ import com.doctor.yumyum.databinding.ActivityFilterBinding
 class FilterActivity : BaseActivity<ActivityFilterBinding>(R.layout.activity_filter) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+
+        binding.filterAppbar.appbarIbBack.setOnClickListener { finish() }
     }
 }
