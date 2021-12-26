@@ -10,463 +10,157 @@
             type="com.doctor.yumyum.presentation.ui.filter.FilterViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".presentation.ui.filter.FilterActivity">
 
-        <!-- TODO: app bar -->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/filter_cl_appbar"
+        <include
+            android:id="@+id/filter_appbar"
+            layout="@layout/layout_appbar"
             android:layout_width="match_parent"
-            android:layout_height="51dp"
-            android:paddingHorizontal="16dp">
+            android:layout_height="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:main="@{@string/common_filter}" />
 
-            <TextView
-                android:id="@+id/research_list_tv_title"
-                style="@style/font_h3_medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/common_filter"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageButton
+            android:id="@+id/filter_ib_reset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@null"
+            android:contentDescription="@string/filter_reset_icon"
+            android:src="@drawable/ic_refresh"
+            app:layout_constraintBottom_toBottomOf="@id/filter_appbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/filter_appbar" />
 
         <View
-            android:id="@+id/research_list_divider"
+            android:id="@+id/filter_divider"
             android:layout_width="match_parent"
             android:layout_height="6dp"
-            android:background="#F8F8F8"
-            app:layout_constraintTop_toBottomOf="@id/research_list_cl_appbar" />
+            android:background="@color/layout_empty"
+            app:layout_constraintTop_toBottomOf="@id/filter_appbar" />
 
+        <TextView
+            android:id="@+id/filter_tv_price"
+            style="@style/font_subtitle_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="21dp"
+            android:text="@string/common_price"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/filter_divider" />
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <TextView
+            style="@style/font_body2_light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@string/filter_guide"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/filter_tv_price"
+            app:layout_constraintStart_toEndOf="@id/filter_tv_price" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="20dp">
+        <EditText
+            android:id="@+id/filter_et_price_lower"
+            style="@style/font_body1_regular"
+            android:layout_width="@dimen/filter_price_width"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:background="@drawable/bg_price_unedited"
+            android:importantForAutofill="no"
+            android:inputType="numberDecimal"
+            android:paddingHorizontal="8dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="7dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/dark_gray"
+            app:layout_constraintEnd_toStartOf="@id/filter_tv_price_lower"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/filter_tv_price"
+            tools:ignore="LabelFor" />
 
-                <TextView
-                    android:id="@+id/filter_tv_price"
-                    style="@style/font_subtitle_medium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="21dp"
-                    android:text="@string/common_price"
-                    android:textColor="@color/black"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/filter_tv_price_lower"
+            style="@style/font_body1_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@string/common_unit_money"
+            android:textColor="@color/gray"
+            app:layout_constraintBottom_toBottomOf="@id/filter_et_price_lower"
+            app:layout_constraintEnd_toStartOf="@id/filter_tv_price_range"
+            app:layout_constraintStart_toEndOf="@id/filter_et_price_lower"
+            app:layout_constraintTop_toTopOf="@id/filter_et_price_lower" />
 
-                <EditText
-                    android:id="@+id/filter_et_price_lower"
-                    style="@style/font_body1_regular"
-                    android:layout_width="@dimen/filter_price_width"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="17dp"
-                    android:background="@drawable/bg_price_unedited"
-                    android:importantForAutofill="no"
-                    android:inputType="numberDecimal"
-                    android:paddingHorizontal="8dp"
-                    android:paddingTop="6dp"
-                    android:paddingBottom="7dp"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/dark_gray"
-                    app:layout_constraintEnd_toStartOf="@id/filter_tv_price_lower"
-                    app:layout_constraintHorizontal_chainStyle="packed"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/filter_tv_price" />
+        <TextView
+            android:id="@+id/filter_tv_price_range"
+            style="@style/font_body1_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:text="@string/common_range"
+            android:textColor="@color/gray"
+            app:layout_constraintBottom_toBottomOf="@id/filter_et_price_lower"
+            app:layout_constraintEnd_toStartOf="@id/filter_et_price_upper"
+            app:layout_constraintStart_toEndOf="@id/filter_tv_price_lower"
+            app:layout_constraintTop_toTopOf="@id/filter_et_price_lower" />
 
-                <TextView
-                    android:id="@+id/filter_tv_price_lower"
-                    style="@style/font_body1_regular"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:text="@string/common_unit_money"
-                    android:textColor="@color/gray"
-                    app:layout_constraintBottom_toBottomOf="@id/filter_et_price_lower"
-                    app:layout_constraintEnd_toStartOf="@id/filter_tv_price_range"
-                    app:layout_constraintStart_toEndOf="@id/filter_et_price_lower"
-                    app:layout_constraintTop_toTopOf="@id/filter_et_price_lower" />
+        <EditText
+            android:id="@+id/filter_et_price_upper"
+            style="@style/font_body1_regular"
+            android:layout_width="@dimen/filter_price_width"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:background="@drawable/bg_price_unedited"
+            android:importantForAutofill="no"
+            android:inputType="numberDecimal"
+            android:paddingHorizontal="8dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="7dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/dark_gray"
+            app:layout_constraintEnd_toStartOf="@id/filter_tv_price_upper"
+            app:layout_constraintStart_toEndOf="@id/filter_tv_price_range"
+            app:layout_constraintTop_toTopOf="@id/filter_et_price_lower"
+            tools:ignore="LabelFor" />
 
-                <TextView
-                    android:id="@+id/filter_tv_price_range"
-                    style="@style/font_body1_regular"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="11dp"
-                    android:text="@string/common_range"
-                    android:textColor="@color/gray"
-                    app:layout_constraintBottom_toBottomOf="@id/filter_et_price_lower"
-                    app:layout_constraintEnd_toStartOf="@id/filter_et_price_upper"
-                    app:layout_constraintStart_toEndOf="@id/filter_tv_price_lower"
-                    app:layout_constraintTop_toTopOf="@id/filter_et_price_lower" />
+        <TextView
+            android:id="@+id/filter_tv_price_upper"
+            style="@style/font_body1_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@string/common_unit_money"
+            android:textColor="@color/gray"
+            app:layout_constraintBottom_toBottomOf="@id/filter_et_price_lower"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/filter_et_price_upper"
+            app:layout_constraintTop_toTopOf="@id/filter_et_price_lower" />
 
-                <EditText
-                    android:id="@+id/filter_et_price_upper"
-                    style="@style/font_body1_regular"
-                    android:layout_width="@dimen/filter_price_width"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="11dp"
-                    android:background="@drawable/bg_price_unedited"
-                    android:inputType="numberDecimal"
-                    android:paddingHorizontal="8dp"
-                    android:paddingTop="6dp"
-                    android:paddingBottom="7dp"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/dark_gray"
-                    app:layout_constraintEnd_toStartOf="@id/filter_tv_price_upper"
-                    app:layout_constraintStart_toEndOf="@id/filter_tv_price_range"
-                    app:layout_constraintTop_toTopOf="@id/filter_et_price_lower" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/filter_btn_select"
+            style="@style/font_subtitle_medium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_btn_main"
+            android:stateListAnimator="@null"
+            android:text="@string/dialog_btn_select"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-                <TextView
-                    android:id="@+id/filter_tv_price_upper"
-                    style="@style/font_body1_regular"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:text="@string/common_unit_money"
-                    android:textColor="@color/gray"
-                    app:layout_constraintBottom_toBottomOf="@id/filter_et_price_lower"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/filter_et_price_upper"
-                    app:layout_constraintTop_toTopOf="@id/filter_et_price_lower" />
-
-                <TextView
-                    android:id="@+id/filter_tv_taste"
-                    style="@style/font_subtitle_medium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="36dp"
-                    android:text="@string/common_taste"
-                    android:textColor="@color/black"
-                    app:layout_constraintStart_toStartOf="@id/filter_tv_price"
-                    app:layout_constraintTop_toBottomOf="@id/filter_et_price_lower" />
-
-                <TextView
-                    android:id="@+id/filter_tv_taste_guide"
-                    style="@style/font_body2_light"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:text="@string/common_multi_selectable"
-                    app:layout_constraintBottom_toBottomOf="@id/filter_tv_taste"
-                    app:layout_constraintStart_toEndOf="@id/filter_tv_taste" />
-
-                <GridLayout
-                    android:id="@+id/filter_gl_taste"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="26dp"
-                    android:columnCount="2"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/filter_tv_taste">
-
-                    <TextView
-                        android:id="@+id/filter_tv_taste_sweet"
-                        style="@style/font_body1_regular"
-                        android:layout_width="@dimen/taste_select_width"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bg_filter_taste_unselected"
-                        android:gravity="center"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="11dp"
-                        android:text="@string/taste_sweet"
-                        android:textColor="@color/gray" />
-
-                    <TextView
-                        android:id="@+id/filter_tv_taste_salty"
-                        style="@style/font_body1_regular"
-                        android:layout_width="@dimen/taste_select_width"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:background="@drawable/bg_filter_taste_unselected"
-                        android:gravity="center"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="11dp"
-                        android:text="@string/taste_salty"
-                        android:textColor="@color/gray" />
-
-                    <TextView
-                        android:id="@+id/filter_tv_taste_sour"
-                        style="@style/font_body1_regular"
-                        android:layout_width="@dimen/taste_select_width"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:background="@drawable/bg_filter_taste_unselected"
-                        android:gravity="center"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="11dp"
-                        android:text="@string/taste_sour"
-                        android:textColor="@color/gray" />
-
-                    <TextView
-                        android:id="@+id/filter_tv_taste_spicy"
-                        style="@style/font_body1_regular"
-                        android:layout_width="@dimen/taste_select_width"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="12dp"
-                        android:background="@drawable/bg_filter_taste_unselected"
-                        android:gravity="center"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="11dp"
-                        android:text="@string/taste_spicy"
-                        android:textColor="@color/gray" />
-
-                    <TextView
-                        android:id="@+id/filter_tv_taste_bitter"
-                        style="@style/font_body1_regular"
-                        android:layout_width="@dimen/taste_select_width"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:background="@drawable/bg_filter_taste_unselected"
-                        android:gravity="center"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="11dp"
-                        android:text="@string/taste_bitter"
-                        android:textColor="@color/gray" />
-
-                </GridLayout>
-
-                <TextView
-                    android:id="@+id/filter_tv_taste_detail"
-                    style="@style/font_subtitle_medium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="27dp"
-                    android:text="@string/common_taste_detail"
-                    android:textColor="@color/black"
-                    app:layout_constraintStart_toStartOf="@id/filter_tv_price"
-                    app:layout_constraintTop_toBottomOf="@id/filter_gl_taste" />
-
-                <TextView
-                    android:id="@+id/filter_tv_taste_detail_description"
-                    style="@style/font_body2_light"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:text="@string/common_multi_selectable"
-                    app:layout_constraintBottom_toBottomOf="@id/filter_tv_taste_detail"
-                    app:layout_constraintStart_toEndOf="@id/filter_tv_taste_detail" />
-
-                <TextView
-                    android:id="@+id/filter_tv_taste_detail_sweet"
-                    style="@style/font_body1_regular"
-                    android:layout_width="@dimen/taste_detail_select_width"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="21dp"
-                    android:layout_marginTop="29dp"
-                    android:background="@drawable/bg_filter_taste_detail_unselected"
-                    android:gravity="center"
-                    android:paddingTop="4dp"
-                    android:paddingBottom="5dp"
-                    android:text="@string/taste_detail_sweet"
-                    android:textColor="@color/gray"
-                    app:layout_constraintEnd_toStartOf="@id/filter_tv_taste_detail_light"
-                    app:layout_constraintHorizontal_chainStyle="spread_inside"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/filter_tv_taste_detail" />
-
-                <TextView
-                    android:id="@+id/filter_tv_taste_detail_light"
-                    style="@style/font_body1_regular"
-                    android:layout_width="@dimen/taste_detail_select_width"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_filter_taste_detail_unselected"
-                    android:gravity="center"
-                    android:paddingTop="4dp"
-                    android:paddingBottom="5dp"
-                    android:text="@string/taste_detail_light"
-                    android:textColor="@color/gray"
-                    app:layout_constraintEnd_toStartOf="@id/filter_tv_taste_detail_sour"
-                    app:layout_constraintStart_toEndOf="@id/filter_tv_taste_detail_sweet"
-                    app:layout_constraintTop_toTopOf="@id/filter_tv_taste_detail_sweet" />
-
-                <TextView
-                    android:id="@+id/filter_tv_taste_detail_sour"
-                    style="@style/font_body1_regular"
-                    android:layout_width="@dimen/taste_detail_select_width"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_filter_taste_detail_unselected"
-                    android:gravity="center"
-                    android:paddingTop="4dp"
-                    android:paddingBottom="5dp"
-                    android:text="@string/taste_detail_sour"
-                    android:textColor="@color/gray"
-                    app:layout_constraintEnd_toStartOf="@id/filter_tv_taste_detail_cool"
-                    app:layout_constraintStart_toEndOf="@id/filter_tv_taste_detail_light"
-                    app:layout_constraintTop_toTopOf="@id/filter_tv_taste_detail_light" />
-
-                <TextView
-                    android:id="@+id/filter_tv_taste_detail_cool"
-                    style="@style/font_body1_regular"
-                    android:layout_width="@dimen/taste_detail_select_width"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="21dp"
-                    android:background="@drawable/bg_filter_taste_detail_unselected"
-                    android:gravity="center"
-                    android:paddingTop="4dp"
-                    android:paddingBottom="5dp"
-                    android:text="@string/taste_detail_cool"
-                    android:textColor="@color/gray"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/filter_tv_taste_detail_sour"
-                    app:layout_constraintTop_toTopOf="@id/filter_tv_taste_detail_sour" />
-
-                <TextView
-                    android:id="@+id/filter_tv_taste_detail_salty"
-                    style="@style/font_body1_regular"
-                    android:layout_width="@dimen/taste_detail_select_width"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:background="@drawable/bg_filter_taste_detail_unselected"
-                    android:gravity="center"
-                    android:paddingTop="4dp"
-                    android:paddingBottom="5dp"
-                    android:text="@string/taste_detail_salty"
-                    android:textColor="@color/gray"
-                    app:layout_constraintEnd_toStartOf="@id/filter_tv_taste_detail_greasy"
-                    app:layout_constraintHorizontal_chainStyle="spread_inside"
-                    app:layout_constraintStart_toStartOf="@id/filter_tv_taste_detail_sweet"
-                    app:layout_constraintTop_toBottomOf="@id/filter_tv_taste_detail_sweet" />
-
-                <TextView
-                    android:id="@+id/filter_tv_taste_detail_greasy"
-                    style="@style/font_body1_regular"
-                    android:layout_width="@dimen/taste_detail_select_width"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_filter_taste_detail_unselected"
-                    android:gravity="center"
-                    android:paddingTop="4dp"
-                    android:paddingBottom="5dp"
-                    android:text="@string/taste_detail_greasy"
-                    android:textColor="@color/gray"
-                    app:layout_constraintEnd_toStartOf="@id/filter_tv_taste_detail_attractive"
-                    app:layout_constraintStart_toEndOf="@id/filter_tv_taste_detail_salty"
-                    app:layout_constraintTop_toTopOf="@id/filter_tv_taste_detail_salty" />
-
-                <TextView
-                    android:id="@+id/filter_tv_taste_detail_attractive"
-                    style="@style/font_body1_regular"
-                    android:layout_width="@dimen/taste_detail_select_width"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_filter_taste_detail_unselected"
-                    android:gravity="center"
-                    android:paddingTop="4dp"
-                    android:paddingBottom="5dp"
-                    android:text="@string/taste_detail_attractive"
-                    android:textColor="@color/gray"
-                    app:layout_constraintEnd_toStartOf="@id/filter_tv_taste_detail_spicy"
-                    app:layout_constraintStart_toEndOf="@id/filter_tv_taste_detail_greasy"
-                    app:layout_constraintTop_toTopOf="@id/filter_tv_taste_detail_greasy" />
-
-                <TextView
-                    android:id="@+id/filter_tv_taste_detail_spicy"
-                    style="@style/font_body1_regular"
-                    android:layout_width="@dimen/taste_detail_select_width"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_filter_taste_detail_unselected"
-                    android:gravity="center"
-                    android:paddingTop="4dp"
-                    android:paddingBottom="5dp"
-                    android:text="@string/taste_detail_spicy"
-                    android:textColor="@color/gray"
-                    app:layout_constraintEnd_toEndOf="@id/filter_tv_taste_detail_cool"
-                    app:layout_constraintStart_toEndOf="@id/filter_tv_taste_detail_attractive"
-                    app:layout_constraintTop_toTopOf="@id/filter_tv_taste_detail_attractive" />
-
-                <TextView
-                    android:id="@+id/filter_tv_taste_detail_hot"
-                    style="@style/font_body1_regular"
-                    android:layout_width="@dimen/taste_detail_select_width"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:background="@drawable/bg_filter_taste_detail_unselected"
-                    android:gravity="center"
-                    android:paddingTop="4dp"
-                    android:paddingBottom="5dp"
-                    android:text="@string/taste_detail_hot"
-                    android:textColor="@color/gray"
-                    app:layout_constraintEnd_toStartOf="@id/filter_tv_taste_detail_neat"
-                    app:layout_constraintHorizontal_chainStyle="spread_inside"
-                    app:layout_constraintStart_toStartOf="@id/filter_tv_taste_detail_salty"
-                    app:layout_constraintTop_toBottomOf="@id/filter_tv_taste_detail_salty" />
-
-                <TextView
-                    android:id="@+id/filter_tv_taste_detail_neat"
-                    style="@style/font_body1_regular"
-                    android:layout_width="@dimen/taste_detail_select_width"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_filter_taste_detail_unselected"
-                    android:gravity="center"
-                    android:paddingTop="4dp"
-                    android:paddingBottom="5dp"
-                    android:text="@string/taste_detail_neat"
-                    android:textColor="@color/gray"
-                    app:layout_constraintEnd_toStartOf="@id/filter_tv_taste_detail_savory"
-                    app:layout_constraintStart_toEndOf="@id/filter_tv_taste_detail_hot"
-                    app:layout_constraintTop_toTopOf="@id/filter_tv_taste_detail_hot" />
-
-                <TextView
-                    android:id="@+id/filter_tv_taste_detail_savory"
-                    style="@style/font_body1_regular"
-                    android:layout_width="@dimen/taste_detail_select_width"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_filter_taste_detail_unselected"
-                    android:gravity="center"
-                    android:paddingTop="4dp"
-                    android:paddingBottom="5dp"
-                    android:text="@string/taste_detail_savory"
-                    android:textColor="@color/gray"
-                    app:layout_constraintEnd_toStartOf="@id/filter_tv_taste_detail_refresh"
-                    app:layout_constraintStart_toEndOf="@id/filter_tv_taste_detail_neat"
-                    app:layout_constraintTop_toTopOf="@id/filter_tv_taste_detail_neat" />
-
-                <TextView
-                    android:id="@+id/filter_tv_taste_detail_refresh"
-                    style="@style/font_body1_regular"
-                    android:layout_width="@dimen/taste_detail_select_width"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_filter_taste_detail_unselected"
-                    android:gravity="center"
-                    android:paddingTop="4dp"
-                    android:paddingBottom="5dp"
-                    android:text="@string/taste_detail_refresh"
-                    android:textColor="@color/gray"
-                    app:layout_constraintEnd_toEndOf="@id/filter_tv_taste_detail_spicy"
-                    app:layout_constraintStart_toEndOf="@id/filter_tv_taste_detail_savory"
-                    app:layout_constraintTop_toTopOf="@id/filter_tv_taste_detail_savory" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/filter_btn_select"
-                    style="@style/font_subtitle_medium"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginTop="36dp"
-                    android:background="@drawable/bg_btn_main"
-                    android:stateListAnimator="@null"
-                    android:text="@string/dialog_btn_select"
-                    android:textColor="@color/white"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/filter_tv_taste_detail_hot" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </ScrollView>
-
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

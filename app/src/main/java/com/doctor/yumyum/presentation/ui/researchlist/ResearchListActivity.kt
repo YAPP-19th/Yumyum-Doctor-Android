@@ -1,6 +1,7 @@
 package com.doctor.yumyum.presentation.ui.researchlist
 
 import ResearchListAdapter
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.ViewGroup
@@ -18,6 +19,9 @@ import com.doctor.yumyum.presentation.ui.search.SearchHashtagActivity
 import com.doctor.yumyum.presentation.ui.search.SearchTasteActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.launch
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+
 
 class ResearchListActivity :
     BaseActivity<ActivityResearchListBinding>(R.layout.activity_research_list) {
@@ -32,10 +36,18 @@ class ResearchListActivity :
         )[ResearchListViewModel::class.java]
     }
 
+    private var categoryName = ""
+    private var sort = "id"
+    private var order = "desc"
+    private var minPrice: Int? = null
+    private var maxPrice: Int? = null
+    private lateinit var filterLauncher: ActivityResultLauncher<Intent>
+
+    @SuppressLint("UseCompatLoadingForDrawables")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val categoryName = intent.extras?.get(getString(R.string.common_brand_en)).toString()
+        categoryName = intent.extras?.get(getString(R.string.common_brand_en)).toString()
         binding.activity = this
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
@@ -43,9 +55,36 @@ class ResearchListActivity :
         initSortDialog()
         initSearchDialog()
 
+        // 필터 화면에서 돌아왔을 때
+        filterLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                if (it.resultCode == RESULT_OK && it.data != null) {
+                    minPrice = it.data?.extras?.get("minPrice") as Int?
+                    maxPrice = it.data?.extras?.get("maxPrice") as Int?
+
+                    // 필터 아이콘 상태 변경
+                    if (minPrice == null && maxPrice == null) {
+                        // 적용하지 않은 상태
+                        binding.researchListTvFilter.setCompoundDrawablesWithIntrinsicBounds(
+                            getDrawable(R.drawable.ic_filter_gray), null, null, null
+                        )
+                    } else {
+                        // 적용한 상태
+                        binding.researchListTvFilter.setCompoundDrawablesWithIntrinsicBounds(
+                            getDrawable(R.drawable.ic_filter_green), null, null, null
+                        )
+                    }
+
+                    searchRecipeList()
+                }
+            }
+
         // 필터 화면으로 이동
         binding.researchListTvFilter.setOnClickListener {
-            startActivity(Intent(this, FilterActivity::class.java))
+            val intent = Intent(this, FilterActivity::class.java)
+            intent.putExtra("minPrice", minPrice)
+            intent.putExtra("maxPrice", maxPrice)
+            filterLauncher.launch(intent)
         }
         val researchListAdapter = ResearchListAdapter({ recipeId ->
             val intent = Intent(this, RecipeDetailActivity::class.java)
@@ -56,7 +95,39 @@ class ResearchListActivity :
         })
         binding.researchListClAppbar.appbarIbBack.setOnClickListener { finish() }
         binding.researchListRvRecipe.adapter = researchListAdapter
-        viewModel.sortType.observe(this) { sortDialog.dismiss() }
+
+        // 정렬 타입 변화 확인
+        viewModel.sortType.observe(this) { type ->
+            var src = getDrawable(R.drawable.ic_sort_green)
+
+            when (type) {
+                ResearchListViewModel.SORT_RECENT -> {
+                    sort = "id"
+                    order = "desc"
+                    src = getDrawable(R.drawable.ic_sort_gray)
+                }
+                ResearchListViewModel.SORT_LIKE -> {
+                    sort = "like"
+                    order = "desc"
+                }
+                ResearchListViewModel.SORT_EXPENSIVE -> {
+                    sort = "price"
+                    order = "desc"
+                }
+                ResearchListViewModel.SORT_CHEAP -> {
+                    sort = "price"
+                    order = "asc"
+                }
+            }
+            bottomSheetDialog.dismiss()
+            searchRecipeList()
+
+            // 정렬 아이콘 상태 변경
+            binding.researchListTvSort.setCompoundDrawablesWithIntrinsicBounds(
+                src, null, null, null
+            )
+        }
+        
         viewModel.searchType.observe(this) {
             if (it == ResearchListViewModel.SEARCH_HASHTAG) {
                 startActivity(Intent(this, SearchHashtagActivity::class.java))
@@ -65,21 +136,7 @@ class ResearchListActivity :
             }
             searchDialog.dismiss()
         }
-        lifecycleScope.launch {
-            viewModel.searchRecipeList(
-                categoryName,
-                "",
-                "",
-                0,
-                100000,
-                "like",
-                "asc",
-                "2021-12-26T12:12:12",
-                0,
-                10
-            )
-        }
-
+        
         viewModel.recipeList.observe(this) {
             researchListAdapter.setRecipeList(it)
         }
@@ -124,5 +181,22 @@ class ResearchListActivity :
     fun showSearchDialog() {
         searchDialog.show()
         viewModel.initSearchType()
+    }
+    
+    private fun searchRecipeList() {
+        lifecycleScope.launch {
+            viewModel.searchRecipeList(
+                categoryName,
+                "",
+                "",
+                minPrice,
+                maxPrice,
+                sort,
+                order,
+                "2022-12-26T12:12:12",
+                0,
+                10
+            )
+        }
     }
 }

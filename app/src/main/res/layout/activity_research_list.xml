@@ -100,7 +100,7 @@
             android:gravity="top"
             android:text="@string/common_filter"
             android:textColor="@color/gray"
-            app:drawableStartCompat="@drawable/ic_filter"
+            app:drawableStartCompat="@drawable/ic_filter_gray"
             app:layout_constraintBottom_toBottomOf="@id/research_list_tv_sort"
             app:layout_constraintEnd_toStartOf="@id/research_list_tv_sort"
             app:layout_constraintTop_toTopOf="@id/research_list_tv_sort" />
@@ -117,7 +117,7 @@
             android:onClick="@{()->activity.showSortDialog()}"
             android:text="@string/common_sort"
             android:textColor="@color/gray"
-            app:drawableStartCompat="@drawable/ic_sort"
+            app:drawableStartCompat="@drawable/ic_sort_gray"
             app:layout_constraintBottom_toBottomOf="@id/research_list_tv_brand"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/research_list_tv_brand" />
