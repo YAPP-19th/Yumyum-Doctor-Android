@@ -160,9 +160,12 @@
                 android:layout_width="0dp"
                 android:layout_height="102dp"
                 android:layout_marginTop="30dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/home_tv_my_recipe" />
+                app:layout_constraintTop_toBottomOf="@id/home_tv_my_recipe"
+                tools:listitem="@layout/item_home_brand" />
 
             <ImageView
                 android:id="@+id/home_iv_today_recipe"
