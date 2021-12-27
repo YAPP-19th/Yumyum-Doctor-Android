@@ -11,7 +11,7 @@ import com.doctor.yumyum.data.model.FoodFlavor
 import okhttp3.MultipartBody
 
 class WriteViewModel : BaseViewModel()  {
-    private var _mode : MutableLiveData<Boolean> = MutableLiveData()
+    private var _mode : MutableLiveData<Boolean> = MutableLiveData(false)
     val mode : LiveData<Boolean>
         get() = _mode
 
@@ -52,7 +52,6 @@ class WriteViewModel : BaseViewModel()  {
     }
 
     fun initCategory(){
-        _category.value = "샌드위치"
         if(_mode.value == true){
             _tempCategory.value = "스타벅스"
         }else{

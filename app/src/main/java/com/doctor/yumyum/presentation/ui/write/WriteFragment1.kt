@@ -42,6 +42,14 @@ class WriteFragment1 : BaseFragment<FragmentWriteFirstBinding>(R.layout.fragment
 
         writeViewModel.initCategory()
         writeViewModel.category.observe(viewLifecycleOwner) { brandSelectDialog.dismiss() }
+        writeViewModel.mode.observe(viewLifecycleOwner){
+            if(it){
+                binding.writeFirstTvSelectBrand.text = resources.getString(R.string.common_starbucks)
+            }else{
+                binding.writeFirstTvSelectBrand.text = resources.getString(R.string.common_sandwich)
+            }
+
+        }
     }
 
     private fun initListener() {
