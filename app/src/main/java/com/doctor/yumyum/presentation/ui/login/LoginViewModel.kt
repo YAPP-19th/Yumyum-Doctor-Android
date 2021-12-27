@@ -31,7 +31,6 @@ class LoginViewModel : BaseViewModel() {
             if (response.isSuccessful) {
                 for (h in response.headers().toList()) {
                     if (h.first == "Authorization") {
-                        Log.d("로그", h.second)
                         repository.setLoginToken(h.second)
                         repository.setLoginMode(oauthType)
                     }

@@ -13,7 +13,10 @@ import com.doctor.yumyum.presentation.ui.myrecipe.MyRecipeFragment
 import com.doctor.yumyum.presentation.ui.researchrecipe.ResearchRecipeFragment
 import com.doctor.yumyum.presentation.ui.write.WriteRecipeActivity
 
-class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
+
+
+
+class MainActivity : BaseActivity<ActivityMainBinding>(com.doctor.yumyum.R.layout.activity_main) {
 
     private lateinit var viewModel: MainViewModel
 
@@ -62,5 +65,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         binding.mainNvBottom.selectedItemId = R.id.menu_main_my_recipe
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_fl_frag, MyRecipeFragment()).commit()
+    }
+
+    fun replaceMyRecipeWithBrand(brand: String) {
+        binding.mainNvBottom.selectedItemId = R.id.menu_main_my_recipe
+
+        val myRecipeFragment = MyRecipeFragment()
+        myRecipeFragment.arguments = Bundle().apply { putString(getString(R.string.common_brand), brand) }
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_fl_frag, myRecipeFragment).commit()
     }
 }

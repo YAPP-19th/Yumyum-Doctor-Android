@@ -88,12 +88,13 @@
                 app:layout_constraintStart_toEndOf="@id/home_tv_favorite"
                 app:layout_constraintTop_toBottomOf="@id/home_tv_greeting" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/home_btn_my_recipe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="36dp"
                 android:layout_marginEnd="21dp"
+                android:background="@null"
                 android:src="@drawable/ic_right_arrow"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/home_cl_appbar" />
@@ -157,12 +158,15 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/home_rv_brand"
-                android:layout_width="0dp"
-                android:layout_height="102dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/home_tv_my_recipe" />
+                app:layout_constraintTop_toBottomOf="@id/home_tv_my_recipe"
+                tools:listitem="@layout/item_home_brand" />
 
             <ImageView
                 android:id="@+id/home_iv_today_recipe"
