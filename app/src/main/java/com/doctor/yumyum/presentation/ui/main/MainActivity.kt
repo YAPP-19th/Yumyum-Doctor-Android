@@ -60,10 +60,4 @@ class MainActivity : BaseActivity<ActivityMainBinding>(com.doctor.yumyum.R.layou
             }
         }
     }
-
-    fun replaceMyRecipe() {
-        binding.mainNvBottom.selectedItemId = R.id.menu_main_my_recipe
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.main_fl_frag, MyRecipeFragment()).commit()
-    }
 }

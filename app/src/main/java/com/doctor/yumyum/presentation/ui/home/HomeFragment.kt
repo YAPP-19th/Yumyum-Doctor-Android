@@ -54,7 +54,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             lifecycleOwner = viewLifecycleOwner
             homeBtnMyRecipe.setOnClickListener {
                 val activity = activity as MainActivity
-                activity.replaceMyRecipe()
+                activity.supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_fl_frag, MyRecipeFragment()).commit()
             }
         }
 
