@@ -34,7 +34,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.viewModel = viewModel
-        binding.lifecycleOwner = viewLifecycleOwnerg
+        binding.lifecycleOwner = viewLifecycleOwner
 
         viewModel.mode.observe(viewLifecycleOwner) {
             binding.homeIbMode.setImageResource(
