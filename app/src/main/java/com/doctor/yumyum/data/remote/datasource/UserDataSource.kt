@@ -12,7 +12,7 @@ import retrofit2.Response
 interface UserDataSource {
     suspend fun getNickname(): Response<NicknameResponse>
     suspend fun validateNickname(nickname: String): Response<ResponseBody>
-    suspend fun patchNickname(nickname: Nickname): Response<ResponseBody>
+    suspend fun patchNickname(nickname: String): Response<ResponseBody>
     suspend fun postFlavor(flavor: UserFlavor): Response<ResponseBody>
     suspend fun getUserInfo(): Response<UserInfoResponse>
 }
@@ -27,7 +27,7 @@ class UserDataSourceImpl : UserDataSource {
         RetrofitClient.getClient().create(UserService::class.java)
             .validateNickname(nickname)
 
-    override suspend fun patchNickname(nickname: Nickname): Response<ResponseBody> =
+    override suspend fun patchNickname(nickname: String): Response<ResponseBody> =
         RetrofitClient.getClient().create(UserService::class.java)
             .patchNickname(nickname)
 

@@ -10,7 +10,7 @@ import retrofit2.Response
 interface UserRepository {
     suspend fun getNickname(): Response<NicknameResponse>
     suspend fun validateNickname(nickname: String): Response<ResponseBody>
-    suspend fun patchNickname(nickname: Nickname): Response<ResponseBody>
+    suspend fun patchNickname(nickname: String): Response<ResponseBody>
     suspend fun postFlavor(flavor: UserFlavor): Response<ResponseBody>
     suspend fun getUserInfo(): Response<UserInfoResponse>
 }

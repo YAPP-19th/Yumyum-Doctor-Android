@@ -42,7 +42,7 @@ class NicknameViewModel : BaseViewModel() {
     suspend fun patchNickname(nickname: String) {
         try {
             val nicknameResponse: Response<ResponseBody> =
-                userRepository.patchNickname(Nickname(nickname))
+                userRepository.patchNickname(nickname)
         } catch (e:Exception) {
             _errorState.postValue(true)
         }

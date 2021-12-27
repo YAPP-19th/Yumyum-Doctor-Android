@@ -19,7 +19,7 @@ class UserRepositoryImpl() : UserRepository {
     override suspend fun validateNickname(nickname: String): Response<ResponseBody> =
         userDataSource.validateNickname(nickname)
 
-    override suspend fun patchNickname(nickname: Nickname): Response<ResponseBody> =
+    override suspend fun patchNickname(nickname: String): Response<ResponseBody> =
         userDataSource.patchNickname(nickname)
 
     override suspend fun postFlavor(flavor: UserFlavor): Response<ResponseBody> =

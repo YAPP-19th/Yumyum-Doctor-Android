@@ -20,7 +20,7 @@ interface UserService {
 
     @PATCH("/api/v1/users/me/nickname")
     suspend fun patchNickname(
-        @Body nickname: Nickname
+        @Body nickname: String
     ): Response<ResponseBody>
 
     @PUT("/api/v1/users/me/flavors")
