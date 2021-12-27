@@ -5,7 +5,7 @@ import android.widget.Button
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.common.base.BaseViewModel
-import com.doctor.yumyum.data.model.UserFlavorModel
+import com.doctor.yumyum.data.model.UserFlavor
 import com.doctor.yumyum.data.repository.UserRepositoryImpl
 import okhttp3.ResponseBody
 import retrofit2.Response
@@ -60,7 +60,7 @@ class TasteViewModel : BaseViewModel() {
 
             if (flavorList != null) {
                 val userFlavorResponse: Response<ResponseBody> = userRepository.postFlavor(
-                    UserFlavorModel(flavorList)
+                    UserFlavor(flavorList)
                 )
 //                if (userFlavorResponse.code() == 403) {
 //                    //TODO : 허용되지 않은 사용자
