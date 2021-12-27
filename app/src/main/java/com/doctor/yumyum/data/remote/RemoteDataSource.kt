@@ -1,13 +1,6 @@
 package com.doctor.yumyum.data.remote
 
 import com.doctor.yumyum.common.network.RetrofitClient
-import com.doctor.yumyum.data.model.NicknamePatchModel
-import com.doctor.yumyum.data.model.SignInModel
-import com.doctor.yumyum.data.model.SignUpModel
-import com.doctor.yumyum.data.model.UserFlavorModel
-import com.doctor.yumyum.data.remote.api.AuthService
-import com.doctor.yumyum.data.remote.api.UserService
-import com.doctor.yumyum.data.remote.response.GetNicknameResponse
 import com.doctor.yumyum.data.remote.api.RankRecipeService
 import com.doctor.yumyum.data.remote.api.RecipeService
 import com.doctor.yumyum.data.remote.response.RankRecipeResponse

@@ -169,6 +169,13 @@
     <string name="share">공유</string>
     <string name="share_title">공유하기</string>
 
+    <!-- 홈 -->
+    <string name="home_tv_favorite">나의 최애레시피</string>
+    <string name="home_tv_check">를 확인해보세요</string>
+    <string name="home_tv_my_recipe">나의 레시피</string>
+    <string name="home_tv_today_recipe">오늘의 추천 레시피</string>
+    <string name="home_tv_favorite_empty">아직 최애레시피가 없어요\n<font color="#000000"><b>레시피 탐구</b></font>에서 최애레시피\n등록해보세요!</string>
+
     <!-- 나의 레시피 -->
     <string name="my_recipe_tv_best_recipe">최애레시피</string>
     <string name="my_recipe_tv_change_order">순서 수정</string>
