@@ -1,7 +1,6 @@
 package com.doctor.yumyum.data.remote.datasource
 
 import com.doctor.yumyum.common.network.RetrofitClient
-import com.doctor.yumyum.data.model.Nickname
 import com.doctor.yumyum.data.model.UserFlavor
 import com.doctor.yumyum.data.remote.api.UserService
 import com.doctor.yumyum.data.remote.response.NicknameResponse

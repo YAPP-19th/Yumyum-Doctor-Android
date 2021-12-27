@@ -1,6 +1,5 @@
 package com.doctor.yumyum.data.repository
 
-import com.doctor.yumyum.data.model.Nickname
 import com.doctor.yumyum.data.model.UserFlavor
 import com.doctor.yumyum.data.remote.datasource.UserDataSourceImpl
 import com.doctor.yumyum.data.remote.response.NicknameResponse

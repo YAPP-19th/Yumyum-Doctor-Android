@@ -1,6 +1,5 @@
 package com.doctor.yumyum.data.remote.api
 
-import com.doctor.yumyum.data.model.Nickname
 import com.doctor.yumyum.data.model.UserFlavor
 import com.doctor.yumyum.data.remote.response.NicknameResponse
 import com.doctor.yumyum.data.remote.response.UserInfoResponse
