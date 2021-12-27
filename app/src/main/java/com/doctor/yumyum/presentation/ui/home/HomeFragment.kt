@@ -26,22 +26,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private val beverageBrandList: MutableList<Pair<Int, String>> by lazy {
         mutableListOf(
-            Pair(R.drawable.ic_brand_starbucks, getString(R.string.common_starbucks)),
-            Pair(R.drawable.ic_brand_amasvin, getString(R.string.common_amasvin)),
-            Pair(R.drawable.ic_brand_gongcha, getString(R.string.common_gongcha)),
-            Pair(R.drawable.ic_brand_ediya, getString(R.string.common_ediya)),
-            Pair(R.drawable.ic_brand_cocktail, getString(R.string.common_cocktail)),
-            Pair(R.drawable.ic_brand_etc, getString(R.string.common_etc))
+            Pair(R.drawable.ic_brand_starbucks_home, getString(R.string.common_starbucks)),
+            Pair(R.drawable.ic_brand_amasvin_home, getString(R.string.common_amasvin)),
+            Pair(R.drawable.ic_brand_gongcha_home, getString(R.string.common_gongcha)),
+            Pair(R.drawable.ic_brand_ediya_home, getString(R.string.common_ediya)),
+            Pair(R.drawable.ic_brand_cocktail_home, getString(R.string.common_cocktail)),
+            Pair(R.drawable.ic_brand_etc_home, getString(R.string.common_etc))
         )
     }
     private val foodBrandList: MutableList<Pair<Int, String>> by lazy {
         mutableListOf(
-            Pair(R.drawable.ic_brand_sandwich, getString(R.string.common_sandwich)),
-            Pair(R.drawable.ic_brand_maratang, getString(R.string.common_maratang)),
-            Pair(R.drawable.ic_brand_tteokbokki, getString(R.string.common_tteokbokki)),
-            Pair(R.drawable.ic_brand_salad, getString(R.string.common_salad)),
-            Pair(R.drawable.ic_brand_yogurt, getString(R.string.common_yogurt)),
-            Pair(R.drawable.ic_brand_ramen, getString(R.string.common_ramen))
+            Pair(R.drawable.ic_brand_sandwich_home, getString(R.string.common_sandwich)),
+            Pair(R.drawable.ic_brand_maratang_home, getString(R.string.common_maratang)),
+            Pair(R.drawable.ic_brand_tteokbokki_home, getString(R.string.common_tteokbokki)),
+            Pair(R.drawable.ic_brand_salad_home, getString(R.string.common_salad)),
+            Pair(R.drawable.ic_brand_yogurt_home, getString(R.string.common_yogurt)),
+            Pair(R.drawable.ic_brand_ramen_home, getString(R.string.common_ramen))
         )
     }
 
