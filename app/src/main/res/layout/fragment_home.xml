@@ -88,12 +88,13 @@
                 app:layout_constraintStart_toEndOf="@id/home_tv_favorite"
                 app:layout_constraintTop_toBottomOf="@id/home_tv_greeting" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/home_btn_my_recipe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="36dp"
                 android:layout_marginEnd="21dp"
+                android:background="@null"
                 android:src="@drawable/ic_right_arrow"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/home_cl_appbar" />

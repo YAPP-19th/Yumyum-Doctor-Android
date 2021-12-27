@@ -60,4 +60,20 @@ class MainActivity : BaseActivity<ActivityMainBinding>(com.doctor.yumyum.R.layou
             }
         }
     }
+
+    fun replaceMyRecipe() {
+        binding.mainNvBottom.selectedItemId = R.id.menu_main_my_recipe
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_fl_frag, MyRecipeFragment()).commit()
+    }
+
+    fun replaceMyRecipeWithBrand(brand: String) {
+        binding.mainNvBottom.selectedItemId = R.id.menu_main_my_recipe
+
+        val myRecipeFragment = MyRecipeFragment()
+        myRecipeFragment.arguments = Bundle().apply { putString(getString(R.string.common_brand), brand) }
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_fl_frag, myRecipeFragment).commit()
+    }
 }

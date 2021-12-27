@@ -3,7 +3,6 @@ package com.doctor.yumyum.presentation.ui.home
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
@@ -54,8 +53,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             lifecycleOwner = viewLifecycleOwner
             homeBtnMyRecipe.setOnClickListener {
                 val activity = activity as MainActivity
-                activity.supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_fl_frag, MyRecipeFragment()).commit()
+                activity.replaceMyRecipe()
             }
         }
 
@@ -66,7 +64,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         }
 
         brandRecyclerAdapter = HomeBrandAdapter { brand ->
-            replaceMyRecipeWithBrand(brand)
+            val activity = activity as MainActivity
+            activity.replaceMyRecipeWithBrand(brand)
         }
         binding.homeRvBrand.adapter = brandRecyclerAdapter
 
@@ -93,14 +92,5 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             brandRecyclerAdapter.setBrandList(foodBrandList)
         }
         brandRecyclerAdapter.notifyDataSetChanged()
-    }
-
-    private fun replaceMyRecipeWithBrand(brand: String) {
-        val myRecipeFragment = MyRecipeFragment()
-        myRecipeFragment.arguments = Bundle().apply { putString(getString(R.string.common_brand), brand) }
-
-        val activity = activity as MainActivity
-        activity.supportFragmentManager.beginTransaction()
-            .replace(R.id.main_fl_frag, myRecipeFragment).commit()
     }
 }

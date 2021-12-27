@@ -1,5 +1,6 @@
 package com.doctor.yumyum.presentation.ui.home
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.R
@@ -24,6 +25,7 @@ class HomeViewModel : BaseViewModel() {
         get() = _errorState
 
     fun changeMode() {
+        Log.d("로그", "sdf")
         _mode.value =
             if (mode.value == R.string.common_food) R.string.common_beverage else R.string.common_food
         mainRepository.setMode(mode.value ?: R.string.common_food)
