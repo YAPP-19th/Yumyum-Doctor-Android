@@ -2,15 +2,15 @@ package com.doctor.yumyum.presentation.ui.home
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
 import com.doctor.yumyum.databinding.FragmentHomeBinding
 import com.doctor.yumyum.presentation.adapter.HomeBrandAdapter
-import com.doctor.yumyum.presentation.adapter.ResearchBrandAdapter
 import com.doctor.yumyum.presentation.ui.main.MainActivity
+import com.doctor.yumyum.presentation.ui.myrecipe.MyRecipeFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -65,8 +65,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         }
 
         brandRecyclerAdapter = HomeBrandAdapter { brand ->
-            val activity = activity as MainActivity
-            activity.replaceMyRecipe() }
+            replaceMyRecipeWithBrand(brand)
+        }
         binding.homeRvBrand.adapter = brandRecyclerAdapter
 
 
@@ -74,8 +74,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             binding.homeIbMode.setImageResource(
                 if (it == R.string.common_food) R.drawable.ic_change_food else R.drawable.ic_change_beverage
             )
-            changeMode(it)
-
+            changeBrandMode(it)
         }
     }
 
@@ -84,13 +83,23 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             viewModel.getUserNickname()
         }
     }
+
     @SuppressLint("NotifyDataSetChanged")
-    fun changeMode(mode: Int) {
+    fun changeBrandMode(mode: Int) {
         if (mode == R.string.common_beverage) {
             brandRecyclerAdapter.setBrandList(beverageBrandList)
         } else {
             brandRecyclerAdapter.setBrandList(foodBrandList)
         }
         brandRecyclerAdapter.notifyDataSetChanged()
+    }
+
+    private fun replaceMyRecipeWithBrand(brand: String) {
+        val myRecipeFragment = MyRecipeFragment()
+        myRecipeFragment.arguments = Bundle().apply { putString(getString(R.string.common_brand), brand) }
+
+        val activity = activity as MainActivity
+        activity.supportFragmentManager.beginTransaction()
+            .replace(R.id.main_fl_frag, myRecipeFragment).commit()
     }
 }

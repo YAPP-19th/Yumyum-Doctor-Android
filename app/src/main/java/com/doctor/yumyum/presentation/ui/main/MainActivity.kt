@@ -13,7 +13,10 @@ import com.doctor.yumyum.presentation.ui.myrecipe.MyRecipeFragment
 import com.doctor.yumyum.presentation.ui.researchrecipe.ResearchRecipeFragment
 import com.doctor.yumyum.presentation.ui.write.WriteRecipeActivity
 
-class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
+
+
+
+class MainActivity : BaseActivity<ActivityMainBinding>(com.doctor.yumyum.R.layout.activity_main) {
 
     private lateinit var viewModel: MainViewModel
 
