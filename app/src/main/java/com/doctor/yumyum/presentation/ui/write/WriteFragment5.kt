@@ -2,7 +2,6 @@ package com.doctor.yumyum.presentation.ui.write
 
 import android.annotation.SuppressLint
 import android.app.Activity.RESULT_OK
-import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.database.Cursor
@@ -13,25 +12,15 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
-import com.doctor.yumyum.databinding.DialogSelectBrandBinding
-import com.doctor.yumyum.databinding.DialogWriteBinding
 import com.doctor.yumyum.databinding.FragmentWriteFifthBinding
-import com.doctor.yumyum.presentation.ui.taste.TastePassDialog
 import com.doctor.yumyum.presentation.ui.write.viewmodel.WriteViewModel
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 /**
  * 레시피 작성하기 5
@@ -56,7 +45,7 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
         openGallery()
 
         binding.writeBtnFinish.setOnClickListener {
-            WriteDialog().show(parentFragmentManager,"WriteDialog")
+            WriteDialog(writeViewModel).show(parentFragmentManager,"WriteDialog")
         }
     }
 
@@ -119,10 +108,6 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
         val cursor: Cursor = context.contentResolver.query(uri, null, null, null, null) ?: return ""
         cursor.moveToNext()
         return cursor.getString(cursor.getColumnIndex("_data"))
-    }
-
-    suspend fun postRecipe() {
-        writeViewModel.postRecipe()
     }
 
 }

@@ -156,6 +156,7 @@ class WriteViewModel : BaseViewModel() {
                 writeRepository.postRecipeText(writeRecipe = writeRecipe)
             val recipeId = (response.headers()["location"]?:"").split("/").last().toInt()
             if (response.isSuccessful) {
+                Log.d("WriteViewModel: ","레시피 작성 성공")
                 postImages(recipeId)
             }
         } catch (e: Exception) {
