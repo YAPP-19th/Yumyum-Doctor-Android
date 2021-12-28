@@ -2,6 +2,7 @@ package com.doctor.yumyum.presentation.ui.write
 
 import android.annotation.SuppressLint
 import android.app.Activity.RESULT_OK
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.database.Cursor
@@ -12,15 +13,22 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
+import com.doctor.yumyum.databinding.DialogSelectBrandBinding
+import com.doctor.yumyum.databinding.DialogWriteBinding
 import com.doctor.yumyum.databinding.FragmentWriteFifthBinding
+import com.doctor.yumyum.presentation.ui.taste.TastePassDialog
 import com.doctor.yumyum.presentation.ui.write.viewmodel.WriteViewModel
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -48,9 +56,7 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
         openGallery()
 
         binding.writeBtnFinish.setOnClickListener {
-            CoroutineScope(Dispatchers.IO).launch {
-                postRecipe()
-            }
+            WriteDialog().show(parentFragmentManager,"WriteDialog")
         }
     }
 
@@ -74,28 +80,30 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
     }
 
     private fun openGallery() {
-        reviewImageLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            if (it.resultCode == RESULT_OK) {
-                val intentResult = if (it.data == null) {
-                    //어떤 이미지도 선택하지 않은 경우 예외 처리 필요
-                    return@registerForActivityResult
-                } else {
-                    it.data
-                }
-
-                //이미지를 여러장 선택한 경우
-                val images = writeViewModel.reviewImageList.value?.toMutableList() ?: arrayListOf()
-                intentResult?.clipData?.apply {
-                    for (i in 0 until this.itemCount) {
-                        val uri = this.getItemAt(i).uri
-                        val path = uriToPath(requireContext(), uri)
-                        images.add(Pair(uri,path))
-                        if (images.size == 3) break
+        reviewImageLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                if (it.resultCode == RESULT_OK) {
+                    val intentResult = if (it.data == null) {
+                        //어떤 이미지도 선택하지 않은 경우 예외 처리 필요
+                        return@registerForActivityResult
+                    } else {
+                        it.data
                     }
+
+                    //이미지를 여러장 선택한 경우
+                    val images =
+                        writeViewModel.reviewImageList.value?.toMutableList() ?: arrayListOf()
+                    intentResult?.clipData?.apply {
+                        for (i in 0 until this.itemCount) {
+                            val uri = this.getItemAt(i).uri
+                            val path = uriToPath(requireContext(), uri)
+                            images.add(Pair(uri, path))
+                            if (images.size == 3) break
+                        }
+                    }
+                    writeViewModel.setReviewImageList(images)
                 }
-                writeViewModel.setReviewImageList(images)
             }
-        }
 
         binding.writeFifthIbImage1.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)
@@ -113,7 +121,8 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
         return cursor.getString(cursor.getColumnIndex("_data"))
     }
 
-    private suspend fun postRecipe() {
+    suspend fun postRecipe() {
         writeViewModel.postRecipe()
     }
+
 }
