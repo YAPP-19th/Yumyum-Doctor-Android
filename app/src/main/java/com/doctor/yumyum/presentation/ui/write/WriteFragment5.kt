@@ -21,6 +21,9 @@ import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
 import com.doctor.yumyum.databinding.FragmentWriteFifthBinding
 import com.doctor.yumyum.presentation.ui.write.viewmodel.WriteViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 /**
  * 레시피 작성하기 5
@@ -43,6 +46,31 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
         initBinding()
         changeReview()
         openGallery()
+
+        binding.writeBtnFinish.setOnClickListener {
+            CoroutineScope(Dispatchers.IO).launch {
+                postRecipe()
+            }
+        }
+    }
+
+    private fun initBinding() {
+        binding.viewModel = writeViewModel
+    }
+
+    private fun changeReview() {
+        binding.writeFifthEtReview.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                binding.writeFifthTvCount.text = "${s.toString().length}/110"
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+        })
     }
 
     private fun openGallery() {
@@ -61,7 +89,7 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
                     for (i in 0 until this.itemCount) {
                         val uri = this.getItemAt(i).uri
                         val path = uriToPath(requireContext(), uri)
-                        images.add(uri)
+                        images.add(uri to path)
                         if (images.size == 3) break
                     }
                 }
@@ -78,30 +106,14 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
         }
     }
 
-
-    private fun initBinding() {
-        binding.viewModel = writeViewModel
-    }
-
-    private fun changeReview() {
-        binding.writeFifthEtReview.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                binding.writeFifthTvCount.text = "${s.toString().length}/110 "
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-            }
-
-        })
-    }
-
     @SuppressLint("Range")
     fun uriToPath(context: Context, uri: Uri): String {
         val cursor: Cursor = context.contentResolver.query(uri, null, null, null, null) ?: return ""
         cursor.moveToNext()
         return cursor.getString(cursor.getColumnIndex("_data"))
+    }
+
+    private suspend fun postRecipe() {
+        writeViewModel.postRecipe()
     }
 }

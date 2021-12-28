@@ -134,7 +134,7 @@
             app:track="@drawable/recipe_private_sw_track" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/write_finish"
+            android:id="@+id/write_btn_finish"
             style="@style/font_subtitle_medium"
             android:layout_width="0dp"
             android:layout_height="47dp"
