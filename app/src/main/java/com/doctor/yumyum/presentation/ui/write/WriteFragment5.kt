@@ -90,7 +90,6 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
                         val uri = this.getItemAt(i).uri
                         val path = uriToPath(requireContext(), uri)
                         images.add(Pair(uri,path))
-                        Log.d("Fragment",images.toString())
                         if (images.size == 3) break
                     }
                 }
