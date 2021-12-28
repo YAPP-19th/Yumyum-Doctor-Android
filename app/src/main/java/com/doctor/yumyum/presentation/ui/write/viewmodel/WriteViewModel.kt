@@ -7,11 +7,10 @@ import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.common.base.BaseViewModel
-import com.doctor.yumyum.data.model.SignInModel
+import com.doctor.yumyum.data.model.FoodImage
 import com.doctor.yumyum.data.model.TagItem
 import com.doctor.yumyum.data.model.WriteRecipe
 import com.doctor.yumyum.data.repository.WriteRepositoryImpl
-import com.doctor.yumyum.domain.repository.WriteRepository
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -155,12 +154,32 @@ class WriteViewModel : BaseViewModel() {
             )
             val response: Response<ResponseBody> =
                 writeRepository.postRecipeText(writeRecipe = writeRecipe)
-
+            val recipeId = (response.headers()["location"]?:"").split("/").last().toInt()
             if (response.isSuccessful) {
-
+                postImages(recipeId)
             }
         } catch (e: Exception) {
 
+        }
+    }
+
+    private suspend fun postImages(recipeId: Int) {
+        try {
+            val images = arrayListOf<MultipartBody.Part>()
+            val imageList = _reviewImageList.value ?: emptyList()
+            imageList.forEach {
+                val file = File(it.second)
+                val body = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+                images.add(MultipartBody.Part.createFormData(name = "images", filename = file.name, body = body))
+            }
+            val response : Response<FoodImage> =
+                writeRepository.postRecipeImage(recipeId = recipeId,imgList = images)
+
+            if(response.isSuccessful){
+
+            }
+        } catch (e: Exception) {
+            Log.d("WriteViewModel imgPost failed : ",e.toString())
         }
     }
 
