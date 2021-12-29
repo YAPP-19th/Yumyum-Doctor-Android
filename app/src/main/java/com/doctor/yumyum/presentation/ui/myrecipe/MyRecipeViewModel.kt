@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseViewModel
-import com.doctor.yumyum.data.model.BestRecipe
+import com.doctor.yumyum.data.model.FavoriteRecipe
 import com.doctor.yumyum.data.repository.MainRepositoryImpl
 
 class MyRecipeViewModel : BaseViewModel() {
@@ -14,8 +14,8 @@ class MyRecipeViewModel : BaseViewModel() {
     val mode: LiveData<Int>
         get() = _mode
 
-    private val _bestRecipeList : MutableLiveData<ArrayList<BestRecipe>> = MutableLiveData()
-    val bestRecipeList : LiveData<ArrayList<BestRecipe>>
+    private val _bestRecipeList : MutableLiveData<ArrayList<FavoriteRecipe>> = MutableLiveData()
+    val bestRecipeList : LiveData<ArrayList<FavoriteRecipe>>
         get() = _bestRecipeList
 
     private val _myRecipeList : MutableLiveData<ArrayList<String>> = MutableLiveData()

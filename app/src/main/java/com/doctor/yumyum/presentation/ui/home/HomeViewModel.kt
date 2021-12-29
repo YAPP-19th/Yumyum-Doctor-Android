@@ -1,11 +1,10 @@
 package com.doctor.yumyum.presentation.ui.home
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseViewModel
-import com.doctor.yumyum.data.model.BestRecipe
+import com.doctor.yumyum.data.model.FavoriteRecipe
 import com.doctor.yumyum.data.remote.response.FavoriteRecipeResponse
 import com.doctor.yumyum.data.remote.response.UserInfoResponse
 import com.doctor.yumyum.data.repository.MainRepositoryImpl
@@ -23,8 +22,8 @@ class HomeViewModel : BaseViewModel() {
     val mode: LiveData<Int>
         get() = _mode
 
-    private val _favoriteList: MutableLiveData<ArrayList<BestRecipe>> = MutableLiveData()
-    val favoriteList: LiveData<ArrayList<BestRecipe>>
+    private val _favoriteList: MutableLiveData<ArrayList<FavoriteRecipe>> = MutableLiveData()
+    val favoriteList: LiveData<ArrayList<FavoriteRecipe>>
         get() = _favoriteList
 
     private val _nickname: MutableLiveData<String> = MutableLiveData("")

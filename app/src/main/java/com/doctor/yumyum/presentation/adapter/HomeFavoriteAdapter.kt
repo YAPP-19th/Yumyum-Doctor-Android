@@ -6,18 +6,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.doctor.yumyum.R
-import com.doctor.yumyum.data.model.BestRecipe
-import com.doctor.yumyum.data.model.RecipeModel
+import com.doctor.yumyum.data.model.FavoriteRecipe
 import com.doctor.yumyum.databinding.ItemHomeFavoriteBinding
 
 class HomeFavoriteAdapter(private val itemClickListener: (Int) -> Unit) :
     RecyclerView.Adapter<HomeFavoriteAdapter.ViewHolder>() {
 
-    private var recipeList: ArrayList<BestRecipe> = arrayListOf()
+    private var recipeList: ArrayList<FavoriteRecipe> = arrayListOf()
 
     inner class ViewHolder(private val binding: ItemHomeFavoriteBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(recipe: BestRecipe) {
+        fun bind(recipe: FavoriteRecipe) {
             binding.homeFavoriteTvBrand.text = recipe.categoryName
             binding.homeFavoriteTvName.text = recipe.foodTitle
             binding.homeFavoriteTvPrice.text = "${recipe.price}원"
@@ -51,7 +50,7 @@ class HomeFavoriteAdapter(private val itemClickListener: (Int) -> Unit) :
     override fun getItemCount(): Int = recipeList.size
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setRecipeList(recipeList: ArrayList<BestRecipe>) {
+    fun setRecipeList(recipeList: ArrayList<FavoriteRecipe>) {
         recipeList.clear()
         recipeList.addAll(recipeList)
         notifyDataSetChanged()
