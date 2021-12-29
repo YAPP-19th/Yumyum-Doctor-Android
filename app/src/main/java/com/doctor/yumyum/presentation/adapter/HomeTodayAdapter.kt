@@ -1,6 +1,7 @@
 package com.doctor.yumyum.presentation.adapter
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -22,6 +23,7 @@ class HomeTodayAdapter(private val itemClickListener: (Int) -> Unit) :
             binding.itemHomeTodayTvBrand.text = recipe.categoryName
             binding.itemHomeTodayTvPrice.text = "${recipe.price}원"
             binding.itemHomeTodayTvLike.text = recipe.numberOfLikes.toString()
+            binding.root.setOnClickListener { itemClickListener(recipe.id) }
 
             if (recipe.foodImages.size > 0) {
                 Glide

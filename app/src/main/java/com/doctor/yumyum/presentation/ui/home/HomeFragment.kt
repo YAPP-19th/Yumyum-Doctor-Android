@@ -1,15 +1,20 @@
 package com.doctor.yumyum.presentation.ui.home
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
+import com.doctor.yumyum.data.model.FoodImage
+import com.doctor.yumyum.data.model.RecipeModel
 import com.doctor.yumyum.databinding.FragmentHomeBinding
 import com.doctor.yumyum.presentation.adapter.HomeBrandAdapter
+import com.doctor.yumyum.presentation.adapter.HomeTodayAdapter
 import com.doctor.yumyum.presentation.ui.main.MainActivity
 import com.doctor.yumyum.presentation.ui.myrecipe.MyRecipeFragment
+import com.doctor.yumyum.presentation.ui.recipedetail.RecipeDetailActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -72,13 +77,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
         // 오늘의 추천레시피 초기화
         binding.homeVpTodayRecipe.offscreenPageLimit = 3
+        binding.homeVpTodayRecipe.adapter = HomeTodayAdapter { recipeId ->
+            val intent = Intent(context, RecipeDetailActivity::class.java)
+            intent.putExtra("recipeId", recipeId)
+            startActivity(intent)
+        }
 
-
+        // 음식 <=> 음료
         viewModel.mode.observe(viewLifecycleOwner) {
             binding.homeIbMode.setImageResource(
                 if (it == R.string.common_food) R.drawable.ic_change_food else R.drawable.ic_change_beverage
             )
             changeBrandMode(it)
+            CoroutineScope(Dispatchers.IO).launch {
+                viewModel.getRecommendation(getString(it))
+
+            }
         }
     }
 
@@ -88,13 +102,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun changeBrandMode(mode: Int) {
+    private fun changeBrandMode(mode: Int) {
         if (mode == R.string.common_beverage) {
             brandRecyclerAdapter.setBrandList(beverageBrandList)
         } else {
             brandRecyclerAdapter.setBrandList(foodBrandList)
         }
-        brandRecyclerAdapter.notifyDataSetChanged()
     }
 }

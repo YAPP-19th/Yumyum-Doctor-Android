@@ -1,6 +1,7 @@
 package com.doctor.yumyum.data.remote.api
 
 import com.doctor.yumyum.data.remote.response.RecipeDetailResponse
+import com.doctor.yumyum.data.remote.response.RecipeRecommendationResponse
 import com.doctor.yumyum.data.remote.response.SearchRecipeResponse
 import okhttp3.ResponseBody
 import retrofit2.Response
@@ -45,4 +46,11 @@ interface RecipeService {
         @Query("offset") offSet: Int,
         @Query("pageSize") pageSize: Int
     ): Response<SearchRecipeResponse>
+
+    @GET("/api/v1/foods/recommendation")
+    suspend fun getRecommendation(
+        @Query("categoryName") categoryName: String,
+        @Query("top") top: Int,
+        @Query("rankDatePeriod") rankDatePeriod: Int
+    ): Response<RecipeRecommendationResponse>
 }
