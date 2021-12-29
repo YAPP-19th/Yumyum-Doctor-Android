@@ -111,7 +111,9 @@ class WriteViewModel : BaseViewModel() {
     }
 
     fun setReviewImageList(newList: MutableList<Pair<Uri, String>>) {
-        _reviewImageList.value = newList
+        if(_reviewImageList.value?.size !=3){
+            _reviewImageList.value = newList
+        }
     }
 
     fun updateTasteList(view: View) {

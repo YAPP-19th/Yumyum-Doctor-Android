@@ -57,6 +57,7 @@
             android:layout_width="77dp"
             android:layout_height="72dp"
             android:layout_marginStart="6dp"
+            android:visibility="@{viewModel.reviewImageList.size() >= 2 ? View.VISIBLE : View.INVISIBLE}"
             android:background="@color/white"
             android:scaleType="fitXY"
             android:src="@drawable/ic_write_image"
@@ -67,6 +68,7 @@
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/write_fifth_ib_image3"
             bind_writeImg="@{viewModel.reviewImageList[2]}"
+            android:visibility="@{viewModel.reviewImageList.size() == 3 ? View.VISIBLE : View.INVISIBLE}"
             android:layout_width="77dp"
             android:layout_height="72dp"
             android:layout_marginStart="6dp"
