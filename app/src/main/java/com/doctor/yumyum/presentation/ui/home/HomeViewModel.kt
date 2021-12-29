@@ -18,14 +18,19 @@ class HomeViewModel : BaseViewModel() {
     private val mainRepository = MainRepositoryImpl()
     private val userRepository = UserRepositoryImpl()
     private val recipeRepository = RecipeRepositoryImpl()
+
     private val _mode: MutableLiveData<Int> = MutableLiveData(mainRepository.getMode())
     val mode: LiveData<Int>
         get() = _mode
+
     private val _favoriteList: MutableLiveData<ArrayList<BestRecipe>> = MutableLiveData()
-    val favoriteList: LiveData<ArrayList<BestRecipe>> get() = _favoriteList
+    val favoriteList: LiveData<ArrayList<BestRecipe>>
+        get() = _favoriteList
+
     private val _nickname: MutableLiveData<String> = MutableLiveData("")
     val nickname: LiveData<String>
         get() = _nickname
+
     private val _errorState: MutableLiveData<Boolean> = MutableLiveData(false)
     val errorState: LiveData<Boolean>
         get() = _errorState
@@ -50,11 +55,7 @@ class HomeViewModel : BaseViewModel() {
             val recipeFavoriteRecipeResponse: Response<FavoriteRecipeResponse> =
                 recipeRepository.getFavorite(categoryName)
 
-            Log.d("로그", recipeFavoriteRecipeResponse.code().toString())
-            Log.d("로그", recipeFavoriteRecipeResponse.message())
-
             if (recipeFavoriteRecipeResponse.isSuccessful) {
-                Log.d("로그", recipeFavoriteRecipeResponse.body()?.favoriteFoods.toString())
                 _favoriteList.postValue(recipeFavoriteRecipeResponse.body()?.favoriteFoods)
             } else {
                 _errorState.postValue(true)

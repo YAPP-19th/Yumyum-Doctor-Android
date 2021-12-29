@@ -81,7 +81,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
 
         viewModel.mode.observe(viewLifecycleOwner) {
-            Log.d("로그", "changeMode")
             binding.homeIbMode.setImageResource(
                 if (it == R.string.common_food) R.drawable.ic_change_food else R.drawable.ic_change_beverage
             )
