@@ -175,12 +175,8 @@ class WriteViewModel : BaseViewModel() {
                 val body = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
                 images.add(MultipartBody.Part.createFormData(name = "images", filename = file.name, body = body))
             }
-            val response : Response<FoodImage> =
-                writeRepository.postRecipeImage(recipeId = recipeId,imgList = images)
+            writeRepository.postRecipeImage(recipeId = recipeId,imgList = images)
 
-            if(response.isSuccessful){
-
-            }
         } catch (e: Exception) {
             Log.d("WriteViewModel imgPost failed : ",e.toString())
         }

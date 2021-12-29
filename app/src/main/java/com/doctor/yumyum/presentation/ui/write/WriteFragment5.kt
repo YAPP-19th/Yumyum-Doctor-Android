@@ -51,6 +51,7 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
 
     private fun initBinding() {
         binding.viewModel = writeViewModel
+        binding.fragment = this
     }
 
     private fun changeReview() {
@@ -91,16 +92,18 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
                         }
                     }
                     writeViewModel.setReviewImageList(images)
+                    Log.d("imgsize",writeViewModel.reviewImageList.value?.size.toString())
                 }
             }
 
-        binding.writeFifthIbImage1.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK)
-            intent.type = MediaStore.Images.Media.CONTENT_TYPE
-            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-            intent.data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-            reviewImageLauncher.launch(intent)
-        }
+    }
+
+    fun openGalleryListener(){
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = MediaStore.Images.Media.CONTENT_TYPE
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+        intent.data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        reviewImageLauncher.launch(intent)
     }
 
     @SuppressLint("Range")
