@@ -34,7 +34,7 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
         initDialog()
         startForSort()
 
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = myRecipeViewModel
         binding.myRecipeFragment = this
 
