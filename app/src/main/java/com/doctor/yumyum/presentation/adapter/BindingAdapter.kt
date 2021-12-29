@@ -34,7 +34,7 @@ fun bindRankList(rvTagList: RecyclerView, rankList: ArrayList<RecipeModel>?) {
 
 @BindingAdapter("bind_tagItem")
 fun bindTagItem(tvTagItem: TextView, tagItem: String) {
-    tvTagItem.text = "#$tagItem"
+    tvTagItem.text = tvTagItem.context.getString(R.string.common_tagItem,"$tagItem")
     tvTagItem.setTextColor(tvTagItem.context.getColor(R.color.dark_gray))
     tvTagItem.background = tvTagItem.context.getDrawable(R.drawable.bg_unselect_tag_item)
 }

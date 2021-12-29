@@ -52,6 +52,7 @@
     <string name="common_taste">맛</string>
     <string name="common_taste_detail">세부 맛</string>
     <string name="common_multi_selectable">(중복선택가능)</string>
+    <string name="common_tagItem">#%1$s</string>
 
     <!-- 맛 -->
     <string name="taste_sweet">단맛</string>
@@ -93,6 +94,9 @@
     <string name="write_fifth_photo_guide">(필수, 최대3장)</string>
     <string name="write_fifth_tv_review">리뷰</string>
     <string name="write_fifth_tv_private">레시피 비공개</string>
+    <string name="write_dialog_tv_finish">레시피를 업로드 하시겠습니까?</string>
+
+
 
     <!-- 재료(태그) 입력 -->
     <string name="write_tag_tv_title">재료 입력</string>
@@ -201,6 +205,6 @@
     <string name="taste_tv_recommendation">*이 설정을 바탕으로 새로운 레시피를 추천해드립니다</string>
     <string name="dialog_pass_taste">입맛 설정을 건너뛰시겠습니까?</string>
     <string name="dialog_msg_taste">*추후 마이페이지에서 다시 설정 가능합니다.</string>
-    <string name="write_dialog_tv_finish">레시피를 업로드 하시겠습니까?</string>
+
 
 </resources>
