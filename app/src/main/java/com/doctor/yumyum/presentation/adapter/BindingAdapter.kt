@@ -60,3 +60,10 @@ fun bindBrandBackGround(textView: TextView, tempCategory : String?){
         textView.background = null
     }
 }
+
+@BindingAdapter("bind_homeFavorite")
+fun bindHomeFavorite(rvRecipeList:RecyclerView, recipeList:ArrayList<RecipeModel>?) {
+    recipeList?.run {
+        ((rvRecipeList.adapter) as HomeFavoriteAdapter).setRecipeList(recipeList)
+    }
+}

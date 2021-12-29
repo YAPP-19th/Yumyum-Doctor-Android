@@ -1,6 +1,7 @@
 package com.doctor.yumyum.presentation.ui.home
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
@@ -8,8 +9,10 @@ import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
 import com.doctor.yumyum.databinding.FragmentHomeBinding
 import com.doctor.yumyum.presentation.adapter.HomeBrandAdapter
+import com.doctor.yumyum.presentation.adapter.HomeFavoriteAdapter
 import com.doctor.yumyum.presentation.ui.main.MainActivity
 import com.doctor.yumyum.presentation.ui.myrecipe.MyRecipeFragment
+import com.doctor.yumyum.presentation.ui.researchlist.ResearchListActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -61,6 +64,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         initNickname()
         viewModel.nickname.observe(viewLifecycleOwner) {
             binding.homeTvGreeting.text = getString(R.string.home_tv_greeting, it)
+        }
+
+        binding.homeRvFavoriteRecipe.adapter = HomeFavoriteAdapter {
+            val intent = Intent(context, ResearchListActivity::class.java)
+            intent.putExtra(getString(R.string.common_brand_en), it)
+            startActivity(intent)
         }
 
         brandRecyclerAdapter = HomeBrandAdapter { brand ->
