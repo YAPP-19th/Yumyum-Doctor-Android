@@ -1,9 +1,7 @@
 package com.doctor.yumyum.presentation.ui.home
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseViewModel
 import com.doctor.yumyum.data.model.RecipeModel
@@ -12,9 +10,6 @@ import com.doctor.yumyum.data.remote.response.UserInfoResponse
 import com.doctor.yumyum.data.repository.MainRepositoryImpl
 import com.doctor.yumyum.data.repository.RecipeRepositoryImpl
 import com.doctor.yumyum.data.repository.UserRepositoryImpl
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.lang.Exception
 
@@ -55,16 +50,12 @@ class HomeViewModel : BaseViewModel() {
             val recipeRecommendationResponse: Response<RecipeRecommendationResponse> =
                 recipeRepository.getRecommendation(
                     categoryName = categoryName,
-                    top = 5,
+                    top = 7,
                     rankDatePeriod = 7
                 )
             _recommendationList.postValue(recipeRecommendationResponse.body()?.recommendationFoods)
-            Log.d("로그 api", recipeRecommendationResponse.body()?.recommendationFoods.toString())
-            Log.d("로그", _recommendationList.value.toString())
-            Log.d("로그", recommendationList.value.toString())
         } catch (e: Exception) {
             _errorState.postValue(true)
-            Log.d("로그", e.message.toString())
         }
     }
 }

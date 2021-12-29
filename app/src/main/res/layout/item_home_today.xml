@@ -10,13 +10,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingHorizontal="16dp">
+        android:gravity="center">
 
         <androidx.cardview.widget.CardView
             android:layout_width="219dp"
             android:layout_height="267dp"
+            android:layout_marginTop="29dp"
+            android:layout_marginBottom="50dp"
             app:cardCornerRadius="10dp"
-            app:cardElevation="3dp">
+            app:cardElevation="16dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -27,6 +29,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="188dp"
                     android:contentDescription="@string/common_recipe_image"
+                    android:scaleType="centerCrop"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"

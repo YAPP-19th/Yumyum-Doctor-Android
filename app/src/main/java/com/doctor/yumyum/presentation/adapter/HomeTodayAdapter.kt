@@ -31,6 +31,7 @@ class HomeTodayAdapter(private val itemClickListener: (Int) -> Unit) :
                     .load(recipe.foodImages[0].imageUrl)
                     .placeholder(R.drawable.ic_loading_image)
                     .into(binding.itemHomeTodayIvRecipe)
+
             }
         }
     }

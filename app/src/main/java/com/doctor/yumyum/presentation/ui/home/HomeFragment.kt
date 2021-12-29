@@ -1,23 +1,27 @@
 package com.doctor.yumyum.presentation.ui.home
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewpager2.widget.ViewPager2
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
-import com.doctor.yumyum.data.model.FoodImage
-import com.doctor.yumyum.data.model.RecipeModel
 import com.doctor.yumyum.databinding.FragmentHomeBinding
 import com.doctor.yumyum.presentation.adapter.HomeBrandAdapter
 import com.doctor.yumyum.presentation.adapter.HomeTodayAdapter
 import com.doctor.yumyum.presentation.ui.main.MainActivity
-import com.doctor.yumyum.presentation.ui.myrecipe.MyRecipeFragment
 import com.doctor.yumyum.presentation.ui.recipedetail.RecipeDetailActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import androidx.annotation.NonNull
+
+import androidx.viewpager2.widget.MarginPageTransformer
+
+import androidx.viewpager2.widget.CompositePageTransformer
+import kotlin.math.abs
+
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
@@ -53,13 +57,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.apply {
-            viewModel = viewModel
-            lifecycleOwner = viewLifecycleOwner
-            homeBtnMyRecipe.setOnClickListener {
-                val activity = activity as MainActivity
-                activity.replaceMyRecipe()
-            }
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.homeBtnMyRecipe.setOnClickListener {
+            val activity = activity as MainActivity
+            activity.replaceMyRecipe()
         }
 
         // 닉네임 초기화
@@ -76,7 +78,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         binding.homeRvBrand.adapter = brandRecyclerAdapter
 
         // 오늘의 추천레시피 초기화
-        binding.homeVpTodayRecipe.offscreenPageLimit = 3
         binding.homeVpTodayRecipe.adapter = HomeTodayAdapter { recipeId ->
             val intent = Intent(context, RecipeDetailActivity::class.java)
             intent.putExtra("recipeId", recipeId)

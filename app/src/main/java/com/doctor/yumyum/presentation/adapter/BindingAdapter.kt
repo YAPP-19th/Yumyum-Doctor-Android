@@ -73,7 +73,6 @@ fun bindRecommendationList(
     vpRecommendation: ViewPager2,
     recommendationList: ArrayList<RecipeModel>?
 ) {
-    Log.d("로그 binding", recommendationList.toString())
     recommendationList?.run {
         ((vpRecommendation.adapter) as HomeTodayAdapter).setRecipeList(this)
     }
