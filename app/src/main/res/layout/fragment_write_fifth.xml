@@ -4,9 +4,15 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.doctor.yumyum.presentation.ui.write.viewmodel.WriteViewModel" />
+
+        <variable
+            name="fragment"
+            type="com.doctor.yumyum.presentation.ui.write.WriteFragment5" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,37 +43,45 @@
             app:layout_constraintTop_toTopOf="@id/write_fifth_tv_photo_guide" />
 
         <androidx.appcompat.widget.AppCompatImageButton
-            android:scaleType="fitXY"
             android:id="@+id/write_fifth_ib_image1"
+            bind_writeImg="@{viewModel.reviewImageList[0]}"
             android:layout_width="77dp"
             android:layout_height="72dp"
             android:layout_marginStart="17dp"
             android:layout_marginTop="8dp"
             android:background="@color/white"
+            android:onClick="@{() -> fragment.openGalleryListener()}"
+            android:scaleType="centerCrop"
             android:src="@drawable/ic_write_image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/write_fifth_tv_photo_guide" />
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/write_fifth_ib_image2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            bind_writeImg="@{viewModel.reviewImageList[1]}"
+            android:layout_width="77dp"
+            android:layout_height="72dp"
             android:layout_marginStart="6dp"
+            android:visibility="@{viewModel.reviewImageList.size() >= 1 ? View.VISIBLE : View.INVISIBLE}"
             android:background="@color/white"
-            android:src="@drawable/ic_write_image"
-            android:visibility="invisible"
+            android:scaleType="centerCrop"
+            android:onClick="@{() -> fragment.openGalleryListener()}"
+            android:src="@drawable/ic_plus_image"
             app:layout_constraintBottom_toBottomOf="@id/write_fifth_ib_image1"
             app:layout_constraintStart_toEndOf="@id/write_fifth_ib_image1"
             app:layout_constraintTop_toTopOf="@id/write_fifth_ib_image1" />
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/write_fifth_ib_image3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            bind_writeImg="@{viewModel.reviewImageList[2]}"
+            android:visibility="@{viewModel.reviewImageList.size() >= 2 ? View.VISIBLE : View.INVISIBLE}"
+            android:layout_width="77dp"
+            android:layout_height="72dp"
             android:layout_marginStart="6dp"
             android:background="@color/white"
-            android:src="@drawable/ic_write_image"
-            android:visibility="invisible"
+            android:scaleType="centerCrop"
+            android:onClick="@{() -> fragment.openGalleryListener()}"
+            android:src="@drawable/ic_plus_image"
             app:layout_constraintBottom_toBottomOf="@id/write_fifth_ib_image2"
             app:layout_constraintStart_toEndOf="@id/write_fifth_ib_image2"
             app:layout_constraintTop_toTopOf="@id/write_fifth_ib_image2" />
@@ -134,7 +148,7 @@
             app:track="@drawable/recipe_private_sw_track" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/write_finish"
+            android:id="@+id/write_btn_finish"
             style="@style/font_subtitle_medium"
             android:layout_width="0dp"
             android:layout_height="47dp"

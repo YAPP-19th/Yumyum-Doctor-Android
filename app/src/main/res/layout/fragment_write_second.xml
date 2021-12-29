@@ -28,6 +28,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="83dp"
+            android:text="@={writeViewModel.title}"
             android:background="@null"
             android:hint="@string/write_second_et_name"
             android:maxLines="1"

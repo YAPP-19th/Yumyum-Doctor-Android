@@ -73,6 +73,7 @@
 
 
         <EditText
+            android:text="@={`` + viewModel.price}"
             android:inputType="number"
             android:id="@+id/write_third_et_price"
             style="@style/font_h3_regular"

@@ -21,7 +21,8 @@ class HomeTodayAdapter(private val itemClickListener: (Int) -> Unit) :
         fun bind(recipe: RecipeModel) {
             binding.itemHomeTodayTvRecipe.text = recipe.foodName
             binding.itemHomeTodayTvBrand.text = recipe.categoryName
-            binding.itemHomeTodayTvPrice.text = "${recipe.price}원"
+            binding.itemHomeTodayTvPrice.text =
+                binding.root.context.getString(R.string.common_variable_price, recipe.price)
             binding.itemHomeTodayTvLike.text = recipe.numberOfLikes.toString()
             binding.root.setOnClickListener { itemClickListener(recipe.id) }
 

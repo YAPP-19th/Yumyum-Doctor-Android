@@ -1,7 +1,8 @@
 package com.doctor.yumyum.presentation.adapter
 
-import android.util.Log
+import android.net.Uri
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.doctor.yumyum.R
 import com.doctor.yumyum.data.model.RecipeModel
+import java.net.URI
 
 @BindingAdapter("bind_tagList")
 fun bindTagList(rvTagList: RecyclerView, tagList: ArrayList<String>?) {
@@ -34,7 +36,7 @@ fun bindRankList(rvTagList: RecyclerView, rankList: ArrayList<RecipeModel>?) {
 
 @BindingAdapter("bind_tagItem")
 fun bindTagItem(tvTagItem: TextView, tagItem: String) {
-    tvTagItem.text = "#$tagItem"
+    tvTagItem.text = tvTagItem.context.getString(R.string.common_tagItem,tagItem)
     tvTagItem.setTextColor(tvTagItem.context.getColor(R.color.dark_gray))
     tvTagItem.background = tvTagItem.context.getDrawable(R.drawable.bg_unselect_tag_item)
 }
@@ -76,4 +78,12 @@ fun bindRecommendationList(
     recommendationList?.run {
         ((vpRecommendation.adapter) as HomeTodayAdapter).setRecipeList(this)
     }
+}
+
+@BindingAdapter("bind_writeImg")
+fun bindWriteImg(imageButton: ImageButton, imgUri: Pair<Uri, String>?) {
+    imgUri?.apply {
+        imageButton.setImageURI(this.first)
+    }
+
 }
