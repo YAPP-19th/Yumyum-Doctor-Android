@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.doctor.yumyum.R
+import com.doctor.yumyum.data.model.BestRecipe
 import com.doctor.yumyum.data.model.RecipeModel
 
 @BindingAdapter("bind_tagList")
@@ -62,7 +63,7 @@ fun bindBrandBackGround(textView: TextView, tempCategory : String?){
 }
 
 @BindingAdapter("bind_homeFavorite")
-fun bindHomeFavorite(rvRecipeList:RecyclerView, recipeList:ArrayList<RecipeModel>?) {
+fun bindHomeFavorite(rvRecipeList:RecyclerView, recipeList:ArrayList<BestRecipe>?) {
     recipeList?.run {
         ((rvRecipeList.adapter) as HomeFavoriteAdapter).setRecipeList(recipeList)
     }

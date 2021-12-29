@@ -3,6 +3,7 @@ package com.doctor.yumyum.data.remote.datasource
 import com.doctor.yumyum.common.network.RetrofitClient
 import com.doctor.yumyum.data.remote.api.RankRecipeService
 import com.doctor.yumyum.data.remote.api.RecipeService
+import com.doctor.yumyum.data.remote.response.FavoriteRecipeResponse
 import com.doctor.yumyum.data.remote.response.RankRecipeResponse
 import com.doctor.yumyum.data.remote.response.RecipeDetailResponse
 import com.doctor.yumyum.data.remote.response.SearchRecipeResponse
@@ -33,6 +34,8 @@ interface RecipeDataSource {
         offset: Int,
         pageSize: Int
     ): Response<SearchRecipeResponse>
+
+    suspend fun getFavorite(categoryName: String): Response<FavoriteRecipeResponse>
 }
 
 class RecipeDataSourceImp : RecipeDataSource {
@@ -86,5 +89,8 @@ class RecipeDataSourceImp : RecipeDataSource {
                 offset,
                 pageSize
             )
+
+    override suspend fun getFavorite(categoryName: String): Response<FavoriteRecipeResponse> =
+        RetrofitClient.getClient().create(RecipeService::class.java).getFavoriteList(categoryName)
 }
 

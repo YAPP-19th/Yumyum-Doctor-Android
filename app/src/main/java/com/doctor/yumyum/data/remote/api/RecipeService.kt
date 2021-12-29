@@ -1,5 +1,6 @@
 package com.doctor.yumyum.data.remote.api
 
+import com.doctor.yumyum.data.remote.response.FavoriteRecipeResponse
 import com.doctor.yumyum.data.remote.response.RecipeDetailResponse
 import com.doctor.yumyum.data.remote.response.SearchRecipeResponse
 import okhttp3.ResponseBody
@@ -45,4 +46,9 @@ interface RecipeService {
         @Query("offset") offSet: Int,
         @Query("pageSize") pageSize: Int
     ): Response<SearchRecipeResponse>
+
+    @GET("/api/v1/foods/favorite")
+    suspend fun getFavoriteList(
+        @Query("categoryName") categoryName: String
+    ): Response<FavoriteRecipeResponse>
 }

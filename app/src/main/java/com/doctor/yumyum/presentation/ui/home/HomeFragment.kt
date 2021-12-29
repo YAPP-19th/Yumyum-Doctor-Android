@@ -3,6 +3,7 @@ package com.doctor.yumyum.presentation.ui.home
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
@@ -80,10 +81,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
 
         viewModel.mode.observe(viewLifecycleOwner) {
+            Log.d("로그", "changeMode")
             binding.homeIbMode.setImageResource(
                 if (it == R.string.common_food) R.drawable.ic_change_food else R.drawable.ic_change_beverage
             )
             changeBrandMode(it)
+            CoroutineScope(Dispatchers.IO).launch {
+                viewModel.getFavorite(getString(it))
+            }
         }
     }
 

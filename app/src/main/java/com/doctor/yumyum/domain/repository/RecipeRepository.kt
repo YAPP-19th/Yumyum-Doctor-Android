@@ -1,5 +1,6 @@
 package com.doctor.yumyum.domain.repository
 
+import com.doctor.yumyum.data.remote.response.FavoriteRecipeResponse
 import com.doctor.yumyum.data.remote.response.RecipeDetailResponse
 import com.doctor.yumyum.data.remote.response.SearchRecipeResponse
 import okhttp3.ResponseBody
@@ -23,4 +24,5 @@ interface RecipeRepository {
         offset: Int,
         pageSize: Int
     ): Response<SearchRecipeResponse>
+    suspend fun getFavorite(categoryName: String): Response<FavoriteRecipeResponse>
 }
