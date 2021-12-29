@@ -192,18 +192,18 @@
                 app:layout_constraintStart_toEndOf="@id/home_iv_today_recipe"
                 app:layout_constraintTop_toBottomOf="@id/home_rv_brand" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/home_rv_today_recipe"
-                android:layout_width="0dp"
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/home_vp_today_recipe"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="29dp"
                 android:layout_marginBottom="102dp"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/home_tv_today_recipe"
-                tools:listitem="@layout/item_home_today" />
+                app:layout_constraintTop_toBottomOf="@id/home_tv_today_recipe" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

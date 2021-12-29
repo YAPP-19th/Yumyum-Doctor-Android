@@ -63,11 +63,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             binding.homeTvGreeting.text = getString(R.string.home_tv_greeting, it)
         }
 
+        // 나의 레시피 초기화
         brandRecyclerAdapter = HomeBrandAdapter { brand ->
             val activity = activity as MainActivity
             activity.replaceMyRecipeWithBrand(brand)
         }
         binding.homeRvBrand.adapter = brandRecyclerAdapter
+
+        // 오늘의 추천레시피 초기화
+        binding.homeVpTodayRecipe.offscreenPageLimit = 3
 
 
         viewModel.mode.observe(viewLifecycleOwner) {

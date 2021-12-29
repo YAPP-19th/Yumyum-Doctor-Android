@@ -80,6 +80,7 @@
                     tools:text="@string/common_yogurt" />
 
                 <TextView
+                    android:id="@+id/item_home_today_tv_price"
                     style="@style/font_subtitle_medium"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
