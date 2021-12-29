@@ -1,6 +1,7 @@
 package com.doctor.yumyum.presentation.ui.write
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -40,8 +41,11 @@ class WriteFragment1 : BaseFragment<FragmentWriteFirstBinding>(R.layout.fragment
         initDialog()
         initListener()
 
-        writeViewModel.initCategory()
-        writeViewModel.category.observe(viewLifecycleOwner) { brandSelectDialog.dismiss() }
+        writeViewModel.category.observe(requireActivity()) { brandSelectDialog.dismiss() }
+        writeViewModel.mode.observe(requireActivity()){
+            writeViewModel.initCategory()
+            writeViewModel.setCategory()
+        }
     }
 
     private fun initListener() {

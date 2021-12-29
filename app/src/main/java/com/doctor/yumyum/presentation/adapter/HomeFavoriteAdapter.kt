@@ -25,7 +25,6 @@ class HomeFavoriteAdapter(private val itemClickListener: (Int) -> Unit) :
                 Glide
                     .with(binding.homeFavoriteIvRecipe)
                     .load(recipe.foodImages[0].imageUrl)
-                    .placeholder(R.drawable.ic_loading_image)
                     .into(binding.homeFavoriteIvRecipe)
             }
             binding.root.setOnClickListener {
@@ -50,9 +49,9 @@ class HomeFavoriteAdapter(private val itemClickListener: (Int) -> Unit) :
     override fun getItemCount(): Int = recipeList.size
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setRecipeList(recipeList: ArrayList<FavoriteRecipe>) {
+    fun setRecipeList(newRecipeList: ArrayList<FavoriteRecipe>) {
         recipeList.clear()
-        recipeList.addAll(recipeList)
+        recipeList.addAll(newRecipeList)
         notifyDataSetChanged()
     }
 }
