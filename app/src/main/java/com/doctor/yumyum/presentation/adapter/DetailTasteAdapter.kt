@@ -20,6 +20,15 @@ class DetailTasteAdapter(private val itemClickListener: (View) -> Unit) : Recycl
             binding.itemTvDetailTaste.apply {
                 this.text= taste.second
                 this.setCompoundDrawablesWithIntrinsicBounds(binding.root.context.getDrawable(taste.first),null,null,null)
+                if(selectedTasteList.contains(taste.second)){
+                    this.background = this.context.getDrawable(R.drawable.bg_filter_taste_selected)
+                    this.setTextColor(this.context.getColor(R.color.black))
+                }else{
+                    this.background = this.context.getDrawable(R.drawable.bg_filter_taste_unselected)
+                    this.setTextColor(this.context.getColor(R.color.gray))
+                }
+
+
                 this.setOnClickListener {
                     itemClickListener(this)
                     if(selectedTasteList.contains(taste.second)){

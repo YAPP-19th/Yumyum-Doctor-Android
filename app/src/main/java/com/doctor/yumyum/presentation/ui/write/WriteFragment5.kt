@@ -43,44 +43,15 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
         initBinding()
         changeReview()
         openGallery()
-    }
 
-    private fun openGallery() {
-        reviewImageLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            if (it.resultCode == RESULT_OK) {
-                val intentResult = if (it.data == null) {
-                    //어떤 이미지도 선택하지 않은 경우 예외 처리 필요
-                    return@registerForActivityResult
-                } else {
-                    it.data
-                }
-
-                //이미지를 여러장 선택한 경우
-                val images = writeViewModel.reviewImageList.value?.toMutableList() ?: arrayListOf()
-                intentResult?.clipData?.apply {
-                    for (i in 0 until this.itemCount) {
-                        val uri = this.getItemAt(i).uri
-                        val path = uriToPath(requireContext(), uri)
-                        images.add(uri)
-                        if (images.size == 3) break
-                    }
-                }
-                writeViewModel.setReviewImageList(images)
-            }
-        }
-
-        binding.writeFifthIbImage1.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK)
-            intent.type = MediaStore.Images.Media.CONTENT_TYPE
-            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-            intent.data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-            reviewImageLauncher.launch(intent)
+        binding.writeBtnFinish.setOnClickListener {
+            WriteDialog(writeViewModel).show(parentFragmentManager,"WriteDialog")
         }
     }
-
 
     private fun initBinding() {
         binding.viewModel = writeViewModel
+        binding.fragment = this
     }
 
     private fun changeReview() {
@@ -89,7 +60,7 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                binding.writeFifthTvCount.text = "${s.toString().length}/110 "
+                binding.writeFifthTvCount.text = "${s.toString().length}/110"
             }
 
             override fun afterTextChanged(s: Editable?) {
@@ -98,10 +69,48 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
         })
     }
 
+    private fun openGallery() {
+        reviewImageLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                if (it.resultCode == RESULT_OK) {
+                    val intentResult = if (it.data == null) {
+                        //어떤 이미지도 선택하지 않은 경우 예외 처리 필요
+                        return@registerForActivityResult
+                    } else {
+                        it.data
+                    }
+
+                    //이미지를 여러장 선택한 경우
+                    val images =
+                        writeViewModel.reviewImageList.value?.toMutableList() ?: arrayListOf()
+                    intentResult?.clipData?.apply {
+                        for (i in 0 until this.itemCount) {
+                            val uri = this.getItemAt(i).uri
+                            val path = uriToPath(requireContext(), uri)
+                            images.add(Pair(uri, path))
+                            if (images.size == 3) break
+                        }
+                    }
+                    writeViewModel.setReviewImageList(images)
+                    Log.d("imgsize",writeViewModel.reviewImageList.value?.size.toString())
+                }
+            }
+
+    }
+
+    fun openGalleryListener(){
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = MediaStore.Images.Media.CONTENT_TYPE
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+        intent.data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        reviewImageLauncher.launch(intent)
+    }
+
     @SuppressLint("Range")
     fun uriToPath(context: Context, uri: Uri): String {
         val cursor: Cursor = context.contentResolver.query(uri, null, null, null, null) ?: return ""
         cursor.moveToNext()
         return cursor.getString(cursor.getColumnIndex("_data"))
     }
+
 }
