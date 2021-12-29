@@ -52,13 +52,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.apply {
-            viewModel = viewModel
-            lifecycleOwner = viewLifecycleOwner
-            homeBtnMyRecipe.setOnClickListener {
-                val activity = activity as MainActivity
-                activity.replaceMyRecipe()
-            }
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.homeBtnMyRecipe.setOnClickListener {
+            val activity = activity as MainActivity
+            activity.replaceMyRecipe()
         }
 
         // 닉네임 초기화
