@@ -51,4 +51,7 @@ class RecipeRepositoryImpl : RecipeRepository {
             offset,
             pageSize
         )
+
+    override suspend fun getRecommendation(categoryName: String, top: Int, rankDatePeriod: Int) =
+        recipeDataSource.getRecommendation(categoryName, top, rankDatePeriod)
 }

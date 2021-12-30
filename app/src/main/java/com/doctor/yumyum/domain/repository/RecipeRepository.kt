@@ -1,6 +1,7 @@
 package com.doctor.yumyum.domain.repository
 
 import com.doctor.yumyum.data.remote.response.RecipeDetailResponse
+import com.doctor.yumyum.data.remote.response.RecipeRecommendationResponse
 import com.doctor.yumyum.data.remote.response.SearchRecipeResponse
 import okhttp3.ResponseBody
 import retrofit2.Response
@@ -23,4 +24,10 @@ interface RecipeRepository {
         offset: Int,
         pageSize: Int
     ): Response<SearchRecipeResponse>
+
+    suspend fun getRecommendation(
+        categoryName: String,
+        top: Int,
+        rankDatePeriod: Int
+    ): Response<RecipeRecommendationResponse>
 }

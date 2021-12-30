@@ -1,5 +1,6 @@
 package com.doctor.yumyum.presentation.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.AdapterView
@@ -36,7 +37,9 @@ class HomeBrandAdapter(private val itemClickListener: (String) -> Unit) :
 
     override fun getItemCount(): Int = brandList.size
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setBrandList(brandList: MutableList<Pair<Int, String>>) {
         this.brandList = brandList
+        notifyDataSetChanged()
     }
 }

@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.doctor.yumyum.R
 import com.doctor.yumyum.data.model.RecipeModel
 import java.net.URI
@@ -27,6 +28,7 @@ fun bindTasteTagList(rvTagList: RecyclerView, tagList: ArrayList<String>?) {
 
 @BindingAdapter("bind_rankList")
 fun bindRankList(rvTagList: RecyclerView, rankList: ArrayList<RecipeModel>?) {
+
     rankList?.run {
         ((rvTagList.adapter) as RankAdapter).setRankList(this)
     }
@@ -34,7 +36,7 @@ fun bindRankList(rvTagList: RecyclerView, rankList: ArrayList<RecipeModel>?) {
 
 @BindingAdapter("bind_tagItem")
 fun bindTagItem(tvTagItem: TextView, tagItem: String) {
-    tvTagItem.text = tvTagItem.context.getString(R.string.common_tagItem,"$tagItem")
+    tvTagItem.text = tvTagItem.context.getString(R.string.common_tagItem,tagItem)
     tvTagItem.setTextColor(tvTagItem.context.getColor(R.color.dark_gray))
     tvTagItem.background = tvTagItem.context.getDrawable(R.drawable.bg_unselect_tag_item)
 }
@@ -65,6 +67,16 @@ fun bindBrandBackGround(textView: TextView, tempCategory: String?) {
         textView.background = ContextCompat.getDrawable(textView.context, R.drawable.bg_tv_select)
     } else {
         textView.background = null
+    }
+}
+
+@BindingAdapter("bind_recommendationList")
+fun bindRecommendationList(
+    vpRecommendation: ViewPager2,
+    recommendationList: ArrayList<RecipeModel>?
+) {
+    recommendationList?.run {
+        ((vpRecommendation.adapter) as HomeTodayAdapter).setRecipeList(this)
     }
 }
 

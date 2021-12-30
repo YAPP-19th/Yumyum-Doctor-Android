@@ -53,6 +53,7 @@
     <string name="common_taste_detail">세부 맛</string>
     <string name="common_multi_selectable">(중복선택가능)</string>
     <string name="common_tagItem">#%1$s</string>
+    <string name="common_variable_price">%1$d원</string>
 
     <!-- 맛 -->
     <string name="taste_sweet">단맛</string>

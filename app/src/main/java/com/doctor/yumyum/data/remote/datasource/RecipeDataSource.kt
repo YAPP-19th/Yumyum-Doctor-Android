@@ -5,6 +5,7 @@ import com.doctor.yumyum.data.remote.api.RankRecipeService
 import com.doctor.yumyum.data.remote.api.RecipeService
 import com.doctor.yumyum.data.remote.response.RankRecipeResponse
 import com.doctor.yumyum.data.remote.response.RecipeDetailResponse
+import com.doctor.yumyum.data.remote.response.RecipeRecommendationResponse
 import com.doctor.yumyum.data.remote.response.SearchRecipeResponse
 import okhttp3.ResponseBody
 import retrofit2.Response
@@ -33,6 +34,12 @@ interface RecipeDataSource {
         offset: Int,
         pageSize: Int
     ): Response<SearchRecipeResponse>
+
+    suspend fun getRecommendation(
+        categoryName: String,
+        top: Int,
+        rankDatePeriod: Int
+    ): Response<RecipeRecommendationResponse>
 }
 
 class RecipeDataSourceImp : RecipeDataSource {
@@ -86,5 +93,13 @@ class RecipeDataSourceImp : RecipeDataSource {
                 offset,
                 pageSize
             )
+
+    override suspend fun getRecommendation(
+        categoryName: String,
+        top: Int,
+        rankDatePeriod: Int
+    ): Response<RecipeRecommendationResponse> =
+        RetrofitClient.getClient().create(RecipeService::class.java)
+            .getRecommendation(categoryName, top, rankDatePeriod)
 }
 
