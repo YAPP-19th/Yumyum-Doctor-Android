@@ -207,5 +207,18 @@
     <string name="dialog_pass_taste">입맛 설정을 건너뛰시겠습니까?</string>
     <string name="dialog_msg_taste">*추후 마이페이지에서 다시 설정 가능합니다.</string>
 
+    <!-- 마이페이지 -->
+    <string name="my_page_tv_title">마이페이지</string>
+    <string name="my_page_tv_my_point">내 포인트</string>
+    <string name="my_page_tv_point_unit">p</string>
+    <string name="my_page_tv_service_setting">서비스 설정</string>
+    <string name="my_page_tv_my_info">내 정보</string>
+    <string name="my_page_tv_flavor_setting">입맛 설정</string>
+    <string name="my_page_tv_service_info">서비스 정보</string>
+    <string name="my_page_tv_terms_of_use">이용약관</string>
+    <string name="my_page_tv_app_version">앱 버전</string>
+    <string name="my_page_tv_my_app_version">ver %1$s</string>
+    <string name="my_page_tv_logout">로그아웃</string>
+
 
 </resources>
