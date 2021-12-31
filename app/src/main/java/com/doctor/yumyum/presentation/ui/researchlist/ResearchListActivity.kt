@@ -15,8 +15,8 @@ import com.doctor.yumyum.databinding.DialogSelectSearchBinding
 import com.doctor.yumyum.databinding.DialogSelectSortBinding
 import com.doctor.yumyum.presentation.ui.filter.FilterActivity
 import com.doctor.yumyum.presentation.ui.recipedetail.RecipeDetailActivity
-import com.doctor.yumyum.presentation.ui.search.SearchHashtagActivity
-import com.doctor.yumyum.presentation.ui.search.SearchTasteActivity
+import com.doctor.yumyum.presentation.ui.searchhashtag.SearchHashtagActivity
+import com.doctor.yumyum.presentation.ui.searchtaste.SearchTasteActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.launch
 import androidx.activity.result.ActivityResultLauncher
