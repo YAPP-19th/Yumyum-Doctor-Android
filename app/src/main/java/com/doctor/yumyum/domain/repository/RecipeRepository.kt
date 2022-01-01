@@ -14,7 +14,7 @@ interface RecipeRepository {
     suspend fun deleteBookmark(recipeId: Int): Response<ResponseBody>
     suspend fun searchRecipeList(
         categoryName: String,
-        flavors: String,
+        flavors: ArrayList<String>,
         tags: String,
         minPrice: Int?,
         maxPrice: Int?,

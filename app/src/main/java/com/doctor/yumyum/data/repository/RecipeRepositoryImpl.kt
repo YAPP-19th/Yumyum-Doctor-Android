@@ -29,7 +29,7 @@ class RecipeRepositoryImpl : RecipeRepository {
 
     override suspend fun searchRecipeList(
         categoryName: String,
-        flavors: String,
+        flavors: ArrayList<String>,
         tags: String,
         minPrice: Int?,
         maxPrice: Int?,

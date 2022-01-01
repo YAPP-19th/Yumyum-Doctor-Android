@@ -42,6 +42,7 @@ class ResearchListActivity :
     private var order = "desc"
     private var minPrice: Int? = null
     private var maxPrice: Int? = null
+    private var flavors: ArrayList<String> = arrayListOf("")
     private lateinit var filterLauncher: ActivityResultLauncher<Intent>
     private lateinit var searchTasteLauncher: ActivityResultLauncher<Intent>
 
@@ -138,7 +139,10 @@ class ResearchListActivity :
                     val tasteList = it.data?.extras?.getStringArrayList("taste list")
 
                     // 검색창 리스트 설정
-                    tasteList?.let { list -> viewModel.setTasteList(list) }
+                    tasteList?.let { list ->
+                        viewModel.setTasteList(list)
+                        flavors = list
+                    }
 
                     searchRecipeList()
                 }
@@ -203,7 +207,7 @@ class ResearchListActivity :
         lifecycleScope.launch {
             viewModel.searchRecipeList(
                 categoryName,
-                "",
+                flavors,
                 "",
                 minPrice,
                 maxPrice,

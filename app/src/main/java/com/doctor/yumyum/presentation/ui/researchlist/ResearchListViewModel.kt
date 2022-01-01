@@ -55,7 +55,7 @@ class ResearchListViewModel : BaseViewModel() {
 
     suspend fun searchRecipeList(
         categoryName: String,
-        flavors: String,
+        flavors: ArrayList<String>,
         tags: String,
         minPrice: Int?,
         maxPrice: Int?,
