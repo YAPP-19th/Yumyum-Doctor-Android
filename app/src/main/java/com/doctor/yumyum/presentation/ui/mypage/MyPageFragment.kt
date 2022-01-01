@@ -59,15 +59,14 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
         }
 
         viewModel.grade.observe(viewLifecycleOwner) {
-            gradeBadge[it]?.let { it1 -> binding.myPageIvBadge.setImageResource(it1) }
-            nextGrade[it]?.let { it1 -> binding.myPageTvNextLevel.text = it1 }
+            gradeBadge[it]?.let { badge -> binding.myPageIvBadge.setImageResource(badge) }
+            nextGrade[it]?.let { point -> binding.myPageTvNextLevel.text = point }
         }
 
         viewModel.point.observe(viewLifecycleOwner) { point ->
             binding.myPageGraphOrange.layoutParams.apply {
-                val nextPoint: Int? = gradePoint[nextGrade[viewModel.grade.value]]
-                if (nextPoint != null) {
-                    width = binding.myPageGraphWhite.width * point / nextPoint
+                gradePoint[nextGrade[viewModel.grade.value]]?.let { nextPoint ->
+                    binding.myPageGraphOrange.layoutParams.width = binding.myPageGraphWhite.width * point / nextPoint
                 }
             }
             if (binding.myPageGraphOrange.width != 0) {
