@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseViewModel
 import com.doctor.yumyum.data.model.BestRecipe
+import com.doctor.yumyum.data.model.RecipeModel
 import com.doctor.yumyum.data.model.WriteRecipe
 import com.doctor.yumyum.data.remote.response.SearchRecipeResponse
 import com.doctor.yumyum.data.repository.MainRepositoryImpl
@@ -30,8 +31,8 @@ class MyRecipeViewModel : BaseViewModel() {
     val bestRecipeList: LiveData<ArrayList<BestRecipe>>
         get() = _bestRecipeList
 
-    private val _myRecipeList: MutableLiveData<List<SearchRecipeResponse>> = MutableLiveData()
-    val myRecipeList: LiveData<List<SearchRecipeResponse>>
+    private val _myRecipeList: MutableLiveData<ArrayList<RecipeModel>> = MutableLiveData()
+    val myRecipeList: LiveData<ArrayList<RecipeModel>>
         get() = _myRecipeList
 
     fun changeMode() {
@@ -40,32 +41,29 @@ class MyRecipeViewModel : BaseViewModel() {
         repository.setMode(mode.value ?: R.string.common_food)
     }
 
-    fun changeFoodType(foodType : MineFoodType) {
-        _foodType.value = foodType.name
+    fun changeFoodType(foodType : String) {
+        _foodType.value = foodType
     }
 
 
-    suspend fun getMyRecipe(categoryName: String) {
+    suspend fun getMyRecipe(categoryName: String, mineFoodType: String) {
         try {
-            val myRecipeResponse: Response<SearchRecipeResponse> =
+            val response =
                 myRecipeRepository.getMyRecipe(
                     categoryName = categoryName,
                     flavors = "",
                     tags = "",
                     offset = 0,
                     pageSize = 10,
-                    mineFoodType = foodType.value.toString(),
-                    minPrice = 0,
-                    maxPrice = 10000,
+                    mineFoodType = mineFoodType,
+                    minPrice = null,
+                    maxPrice = null,
                     firstSearchTime = "2022-12-20T12:12:12",
                     sort = "id",
                     order = "asc",
                     status = ""
                 )
-
-            if (myRecipeResponse.isSuccessful) {
-
-            }
+            _myRecipeList.postValue(response.body()?.foods)
         } catch (e: Exception) {
             Log.d("MyRecipeViewModel: ","MyRecipeGet 실패")
         }
@@ -73,5 +71,5 @@ class MyRecipeViewModel : BaseViewModel() {
 }
 
 enum class MineFoodType {
-    MYFOOD, BOOKMARK
+    MYFOOD,BOOKMARK
 }
