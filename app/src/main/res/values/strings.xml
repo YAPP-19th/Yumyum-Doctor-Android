@@ -198,6 +198,7 @@
     <string name="error_weekly_ranking">주간 랭킹 데이터를 불러올 수 없습니다.</string>
     <string name="error_filter_price_range">잘못된 범위입니다.</string>
     <string name="error_filter_price_empty">가격 범위를 입력해주세요.</string>
+    <string name="error_recipe_list">레시피 목록을 불러올 수 없습니다.</string>
 
     <!-- 입맛 설정 -->
     <string name="taste_tv_title">냠냠박사 과정을 이수하러\n오신 여러분들을 환영합니다!</string>
