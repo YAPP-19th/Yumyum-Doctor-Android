@@ -1,5 +1,6 @@
 package com.doctor.yumyum.presentation.ui.myrecipe
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.R
@@ -14,19 +15,30 @@ class MyRecipeViewModel : BaseViewModel() {
     val mode: LiveData<Int>
         get() = _mode
 
-    private val _bestRecipeList : MutableLiveData<ArrayList<BestRecipe>> = MutableLiveData()
-    val bestRecipeList : LiveData<ArrayList<BestRecipe>>
+    private val _bestRecipeList: MutableLiveData<ArrayList<BestRecipe>> = MutableLiveData()
+    val bestRecipeList: LiveData<ArrayList<BestRecipe>>
         get() = _bestRecipeList
 
-    private val _myRecipeList : MutableLiveData<ArrayList<String>> = MutableLiveData()
-    val myRecipeList : LiveData<ArrayList<String>>
+    private val _myRecipeList: MutableLiveData<ArrayList<String>> = MutableLiveData()
+    val myRecipeList: LiveData<ArrayList<String>>
         get() = _myRecipeList
+
+    private val _foodType: MutableLiveData<String> = MutableLiveData(MineFoodType.MYFOOD.name)
+    val foodType: LiveData<String>
+        get() = _foodType
 
     fun changeMode() {
         _mode.value =
             if (mode.value == R.string.common_food) R.string.common_beverage else R.string.common_food
-
-        // 현재 모드 저장
         repository.setMode(mode.value ?: R.string.common_food)
     }
+
+    fun changeFoodType(foodType : MineFoodType) {
+        _foodType.value = foodType.name
+    }
+
+}
+
+enum class MineFoodType {
+    MYFOOD, BOOKMARK
 }
