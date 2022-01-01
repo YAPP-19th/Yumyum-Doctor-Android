@@ -16,7 +16,7 @@
 
         <variable
             name="mineFoodType"
-            type="com.doctor.yumyum.presentation.ui.myrecipe.MyRecipeViewModel.MineFoodType" />
+            type="com.doctor.yumyum.presentation.ui.myrecipe.MineFoodType" />
 
     </data>
 

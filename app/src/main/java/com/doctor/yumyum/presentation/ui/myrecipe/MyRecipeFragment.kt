@@ -2,31 +2,31 @@ package com.doctor.yumyum.presentation.ui.myrecipe
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
 import com.doctor.yumyum.databinding.DialogMyRecipeSortBinding
-import com.doctor.yumyum.databinding.DialogSelectBrandBinding
-import com.doctor.yumyum.databinding.DialogSelectSortBinding
 import com.doctor.yumyum.databinding.FragmentMyRecipeBinding
-import com.doctor.yumyum.presentation.ui.write.WriteTagActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment_my_recipe) {
 
     private lateinit var sortLauncher: ActivityResultLauncher<Intent>
-    private val myRecipeViewModel : MyRecipeViewModel by viewModels()
+    private val myRecipeViewModel: MyRecipeViewModel by viewModels()
     private lateinit var sortSelectDialog: BottomSheetDialog
     private lateinit var sortSelectBinding: DialogMyRecipeSortBinding
     private lateinit var sortSelectView: View
+
+    private lateinit var categoryName: String
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -42,11 +42,15 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
             binding.myRecipeIbMode.setImageResource(
                 if (it == R.string.common_food) R.drawable.ic_change_food else R.drawable.ic_change_beverage
             )
+            categoryName = requireContext().resources.getString(it)
+            CoroutineScope(Dispatchers.IO).launch {
+                myRecipeViewModel.getMyRecipe(categoryName)
+            }
         }
     }
 
     private fun startForSort() {
-        sortLauncher= registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        sortLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             //TODO : 정렬 정보 가져오기
         }
         binding.myRecipeIbSort.setOnClickListener {
