@@ -79,6 +79,7 @@
                 android:layout_marginEnd="7dp"
                 android:layout_marginBottom="1dp"
                 android:contentDescription="@string/research_list_ib_hashtag_reset"
+                android:onClick="@{()->activity.resetSearchList()}"
                 android:src="@drawable/ic_close"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

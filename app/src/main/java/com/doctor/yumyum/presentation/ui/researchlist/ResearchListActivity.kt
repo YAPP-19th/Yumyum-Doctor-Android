@@ -219,4 +219,12 @@ class ResearchListActivity :
             )
         }
     }
+
+    fun resetSearchList() {
+        // 맛 리스트 초기화
+        viewModel.setTasteList(arrayListOf())
+        flavors = arrayListOf("")
+
+        searchRecipeList()
+    }
 }
