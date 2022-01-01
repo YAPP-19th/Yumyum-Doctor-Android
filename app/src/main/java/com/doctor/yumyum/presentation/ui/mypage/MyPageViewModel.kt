@@ -27,9 +27,14 @@ class MyPageViewModel : BaseViewModel() {
     suspend fun getUserInfo() {
         try {
             val userInfoResponse: Response<UserInfoResponse> = userRepository.getUserInfo()
-            _nickname.postValue(userInfoResponse.body()?.userInfo?.nickname)
-            _grade.postValue(userInfoResponse.body()?.userInfo?.grade?.let { gradeEnToKo(it) })
-            _point.postValue(userInfoResponse.body()?.userInfo?.userGradePoint)
+            if (userInfoResponse.isSuccessful) {
+                _nickname.postValue(userInfoResponse.body()?.userInfo?.nickname)
+                _grade.postValue(userInfoResponse.body()?.userInfo?.grade?.let { gradeEnToKo(it) })
+                _point.postValue(userInfoResponse.body()?.userInfo?.userGradePoint)
+            }
+            else {
+                _errorState.postValue(true)
+            }
         } catch (e: Exception) {
             _errorState.postValue(true)
         }

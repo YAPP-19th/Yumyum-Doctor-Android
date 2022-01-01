@@ -50,6 +50,7 @@
             android:layout_height="88dp"
             android:layout_marginTop="13dp"
             app:layout_constraintEnd_toEndOf="parent"
+            android:scaleType="fitXY"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/my_page_cl_appbar"
             tools:src="@drawable/ic_badge_student" />
