@@ -6,6 +6,8 @@ import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseViewModel
 import com.doctor.yumyum.data.model.FavoriteRecipe
 import com.doctor.yumyum.data.remote.response.FavoriteRecipeResponse
+import com.doctor.yumyum.data.model.RecipeModel
+import com.doctor.yumyum.data.remote.response.RecipeRecommendationResponse
 import com.doctor.yumyum.data.remote.response.UserInfoResponse
 import com.doctor.yumyum.data.repository.MainRepositoryImpl
 import com.doctor.yumyum.data.repository.RecipeRepositoryImpl
@@ -17,7 +19,6 @@ class HomeViewModel : BaseViewModel() {
     private val mainRepository = MainRepositoryImpl()
     private val userRepository = UserRepositoryImpl()
     private val recipeRepository = RecipeRepositoryImpl()
-
     private val _mode: MutableLiveData<Int> = MutableLiveData(mainRepository.getMode())
     val mode: LiveData<Int>
         get() = _mode
@@ -29,7 +30,9 @@ class HomeViewModel : BaseViewModel() {
     private val _nickname: MutableLiveData<String> = MutableLiveData("")
     val nickname: LiveData<String>
         get() = _nickname
-
+    private val _recommendationList: MutableLiveData<ArrayList<RecipeModel>> = MutableLiveData()
+    val recommendationList: LiveData<ArrayList<RecipeModel>>
+        get() = _recommendationList
     private val _errorState: MutableLiveData<Boolean> = MutableLiveData(false)
     val errorState: LiveData<Boolean>
         get() = _errorState
@@ -59,6 +62,20 @@ class HomeViewModel : BaseViewModel() {
             } else {
                 _errorState.postValue(true)
             }
+        } catch (e: Exception) {
+            _errorState.postValue(true)
+        }
+    }
+
+    suspend fun getRecommendation(categoryName: String) {
+        try {
+            val recipeRecommendationResponse: Response<RecipeRecommendationResponse> =
+                recipeRepository.getRecommendation(
+                    categoryName = categoryName,
+                    top = 7,
+                    rankDatePeriod = 7
+                )
+            _recommendationList.postValue(recipeRecommendationResponse.body()?.recommendationFoods)
         } catch (e: Exception) {
             _errorState.postValue(true)
         }

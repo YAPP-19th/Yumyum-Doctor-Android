@@ -46,22 +46,30 @@
             android:onClick="@{()->activity.showSearchDialog()}"
             app:layout_constraintTop_toBottomOf="@id/research_list_divider">
 
+            <ImageView
+                android:id="@+id/research_list_iv_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ic_search"
+                app:layout_constraintBottom_toBottomOf="@id/research_list_et_search"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/research_list_et_search" />
+
             <TextView
                 android:id="@+id/research_list_et_search"
                 style="@style/font_body1_medium"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="2dp"
                 android:background="@null"
-                android:drawablePadding="6dp"
                 android:gravity="top"
                 android:paddingVertical="8dp"
-                android:paddingStart="10dp"
-                android:paddingEnd="2dp"
                 android:text="@string/research_list_search"
                 android:textColor="@color/light_gray"
-                app:drawableStartCompat="@drawable/ic_search"
                 app:layout_constraintEnd_toStartOf="@id/research_list_ib_close"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@id/research_list_iv_search"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
@@ -71,10 +79,24 @@
                 android:layout_marginEnd="7dp"
                 android:layout_marginBottom="1dp"
                 android:contentDescription="@string/research_list_ib_hashtag_reset"
+                android:onClick="@{()->activity.resetSearchList()}"
                 android:src="@drawable/ic_close"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/research_list_rv_search_taste"
+                bind_tasteTagList="@{viewModel.tasteList}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="@id/research_list_et_search"
+                app:layout_constraintEnd_toEndOf="@id/research_list_et_search"
+                app:layout_constraintStart_toStartOf="@id/research_list_et_search"
+                app:layout_constraintTop_toTopOf="@id/research_list_et_search" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

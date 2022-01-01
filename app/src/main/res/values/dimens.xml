@@ -8,4 +8,6 @@
     <dimen name="weekly_ranking_image_height">103dp</dimen>
     <dimen name="write_fifth_review_height">121dp</dimen>
     <dimen name="write_taste_width">100dp</dimen>
+    <dimen name="home_favorite_item_width">219dp</dimen>
+    <dimen name="home_favorite_item_height">267dp</dimen>
 </resources>

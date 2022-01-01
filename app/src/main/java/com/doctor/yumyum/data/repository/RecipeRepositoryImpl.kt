@@ -30,7 +30,7 @@ class RecipeRepositoryImpl : RecipeRepository {
 
     override suspend fun searchRecipeList(
         categoryName: String,
-        flavors: String,
+        flavors: ArrayList<String>,
         tags: String,
         minPrice: Int?,
         maxPrice: Int?,
@@ -52,7 +52,8 @@ class RecipeRepositoryImpl : RecipeRepository {
             offset,
             pageSize
         )
-
     override suspend fun getFavorite(categoryName: String): Response<FavoriteRecipeResponse> =
         recipeDataSource.getFavorite(categoryName)
+    override suspend fun getRecommendation(categoryName: String, top: Int, rankDatePeriod: Int) =
+        recipeDataSource.getRecommendation(categoryName, top, rankDatePeriod)
 }

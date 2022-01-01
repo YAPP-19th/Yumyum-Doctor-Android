@@ -6,6 +6,7 @@ import com.doctor.yumyum.data.remote.api.RecipeService
 import com.doctor.yumyum.data.remote.response.FavoriteRecipeResponse
 import com.doctor.yumyum.data.remote.response.RankRecipeResponse
 import com.doctor.yumyum.data.remote.response.RecipeDetailResponse
+import com.doctor.yumyum.data.remote.response.RecipeRecommendationResponse
 import com.doctor.yumyum.data.remote.response.SearchRecipeResponse
 import okhttp3.ResponseBody
 import retrofit2.Response
@@ -24,7 +25,7 @@ interface RecipeDataSource {
     suspend fun deleteBookmark(recipeId: Int): Response<ResponseBody>
     suspend fun searchRecipeList(
         categoryName: String,
-        flavors: String,
+        flavors: ArrayList<String>,
         tags: String,
         minPrice: Int?,
         maxPrice: Int?,
@@ -34,8 +35,12 @@ interface RecipeDataSource {
         offset: Int,
         pageSize: Int
     ): Response<SearchRecipeResponse>
-
     suspend fun getFavorite(categoryName: String): Response<FavoriteRecipeResponse>
+    suspend fun getRecommendation(
+        categoryName: String,
+        top: Int,
+        rankDatePeriod: Int
+    ): Response<RecipeRecommendationResponse>
 }
 
 class RecipeDataSourceImp : RecipeDataSource {
@@ -66,7 +71,7 @@ class RecipeDataSourceImp : RecipeDataSource {
 
     override suspend fun searchRecipeList(
         categoryName: String,
-        flavors: String,
+        flavors: ArrayList<String>,
         tags: String,
         minPrice: Int?,
         maxPrice: Int?,
@@ -92,5 +97,12 @@ class RecipeDataSourceImp : RecipeDataSource {
 
     override suspend fun getFavorite(categoryName: String): Response<FavoriteRecipeResponse> =
         RetrofitClient.getClient().create(RecipeService::class.java).getFavoriteList(categoryName)
+    override suspend fun getRecommendation(
+        categoryName: String,
+        top: Int,
+        rankDatePeriod: Int
+    ): Response<RecipeRecommendationResponse> =
+        RetrofitClient.getClient().create(RecipeService::class.java)
+            .getRecommendation(categoryName, top, rankDatePeriod)
 }
 

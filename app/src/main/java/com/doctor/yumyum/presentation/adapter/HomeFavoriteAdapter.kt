@@ -20,6 +20,7 @@ class HomeFavoriteAdapter(private val itemClickListener: (Int) -> Unit) :
             binding.homeFavoriteTvBrand.text = recipe.categoryName
             binding.homeFavoriteTvName.text = recipe.foodTitle
             binding.homeFavoriteTvPrice.text = "${recipe.price}원"
+            binding.homeFavoriteTvLike.text = recipe.numberOfLikes.toString()
 
             if (recipe.foodImages.isNotEmpty()) {
                 Glide
