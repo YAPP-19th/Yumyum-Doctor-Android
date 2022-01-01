@@ -6,6 +6,7 @@ import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
+import com.doctor.yumyum.common.utils.gradePoint
 import com.doctor.yumyum.databinding.FragmentMyPageBinding
 import com.doctor.yumyum.presentation.ui.taste.TasteActivity
 import kotlinx.coroutines.CoroutineScope
@@ -42,7 +43,6 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        activity?.window?.statusBarColor = context?.let { ContextCompat.getColor(it, R.color.pale_gray) }
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
@@ -61,6 +61,18 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
         viewModel.grade.observe(viewLifecycleOwner) {
             gradeBadge[it]?.let { it1 -> binding.myPageIvBadge.setImageResource(it1) }
             nextGrade[it]?.let { it1 -> binding.myPageTvNextLevel.text = it1 }
+        }
+
+        viewModel.point.observe(viewLifecycleOwner) { point ->
+            binding.myPageGraphOrange.layoutParams.apply {
+                val nextPoint: Int? = gradePoint[nextGrade[viewModel.grade.value]]
+                if (nextPoint != null) {
+                    width = binding.myPageGraphWhite.width * point / nextPoint
+                }
+            }
+            if (binding.myPageGraphOrange.width != 0) {
+                binding.myPageGraphOrange.visibility = View.VISIBLE
+            }
         }
     }
 }
