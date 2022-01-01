@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseViewModel
+import com.doctor.yumyum.common.utils.MineFoodType
 import com.doctor.yumyum.data.model.BestRecipe
 import com.doctor.yumyum.data.model.RecipeModel
 import com.doctor.yumyum.data.model.WriteRecipe
@@ -70,6 +71,4 @@ class MyRecipeViewModel : BaseViewModel() {
     }
 }
 
-enum class MineFoodType {
-    MYFOOD,BOOKMARK
-}
+
