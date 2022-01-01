@@ -1,5 +1,6 @@
 package com.doctor.yumyum.presentation.ui.searchtaste
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
@@ -22,5 +23,11 @@ class SearchTasteActivity :
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         binding.searchTasteAppbar.appbarIbBack.setOnClickListener { finish() }
+        binding.searchTasteBtnSearch.setOnClickListener {
+            val intent = Intent()
+            intent.putStringArrayListExtra("taste list", viewModel.tasteList.value)
+            setResult(RESULT_OK, intent)
+            finish()
+        }
     }
 }

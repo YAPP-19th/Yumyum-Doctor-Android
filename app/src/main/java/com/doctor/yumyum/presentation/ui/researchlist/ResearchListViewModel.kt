@@ -23,6 +23,8 @@ class ResearchListViewModel : BaseViewModel() {
     val searchType: LiveData<Int> get() = _searchType
     private var _tmpSearchType: MutableLiveData<Int> = MutableLiveData()
     val tmpSearchType: LiveData<Int> get() = _tmpSearchType
+    private var _tasteList = MutableLiveData<ArrayList<String>>(ArrayList())
+    val tasteList: LiveData<ArrayList<String>> get() = _tasteList
 
     private val _recipeList = MutableLiveData<ArrayList<RecipeModel>>()
     val recipeList: LiveData<ArrayList<RecipeModel>> get() = _recipeList
@@ -100,6 +102,10 @@ class ResearchListViewModel : BaseViewModel() {
                 _errorState.postValue(ERROR_BOOKMARK)
             }
         }
+    }
+
+    fun setTasteList(tasteList: ArrayList<String>) {
+        _tasteList.value = tasteList
     }
 
     companion object {

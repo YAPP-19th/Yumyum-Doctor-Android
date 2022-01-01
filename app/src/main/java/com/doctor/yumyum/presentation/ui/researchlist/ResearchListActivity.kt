@@ -5,6 +5,8 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -13,14 +15,13 @@ import com.doctor.yumyum.common.base.BaseActivity
 import com.doctor.yumyum.databinding.ActivityResearchListBinding
 import com.doctor.yumyum.databinding.DialogSelectSearchBinding
 import com.doctor.yumyum.databinding.DialogSelectSortBinding
+import com.doctor.yumyum.presentation.adapter.TasteTagAdapter
 import com.doctor.yumyum.presentation.ui.filter.FilterActivity
 import com.doctor.yumyum.presentation.ui.recipedetail.RecipeDetailActivity
 import com.doctor.yumyum.presentation.ui.searchhashtag.SearchHashtagActivity
 import com.doctor.yumyum.presentation.ui.searchtaste.SearchTasteActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.launch
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 
 
 class ResearchListActivity :
@@ -42,6 +43,7 @@ class ResearchListActivity :
     private var minPrice: Int? = null
     private var maxPrice: Int? = null
     private lateinit var filterLauncher: ActivityResultLauncher<Intent>
+    private lateinit var searchTasteLauncher: ActivityResultLauncher<Intent>
 
     @SuppressLint("UseCompatLoadingForDrawables")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,6 +54,7 @@ class ResearchListActivity :
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         binding.researchListTvBrand.text = categoryName
+        binding.researchListRvSearchTaste.adapter = TasteTagAdapter()
         initSortDialog()
         initSearchDialog()
 
@@ -127,16 +130,29 @@ class ResearchListActivity :
                 src, null, null, null
             )
         }
-        
+
+        // 맛별로 검색할 때
+        searchTasteLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                if (it.resultCode == RESULT_OK && it.data != null) {
+                    val tasteList = it.data?.extras?.getStringArrayList("taste list")
+
+                    // 검색창 리스트 설정
+                    tasteList?.let { list -> viewModel.setTasteList(list) }
+
+                    searchRecipeList()
+                }
+            }
+
         viewModel.searchType.observe(this) {
             if (it == ResearchListViewModel.SEARCH_HASHTAG) {
                 startActivity(Intent(this, SearchHashtagActivity::class.java))
             } else if (it == ResearchListViewModel.SEARCH_TASTE) {
-                startActivity(Intent(this, SearchTasteActivity::class.java))
+                searchTasteLauncher.launch(Intent(this, SearchTasteActivity::class.java))
             }
             searchDialog.dismiss()
         }
-        
+
         viewModel.recipeList.observe(this) {
             researchListAdapter.setRecipeList(it)
         }
@@ -182,7 +198,7 @@ class ResearchListActivity :
         searchDialog.show()
         viewModel.initSearchType()
     }
-    
+
     private fun searchRecipeList() {
         lifecycleScope.launch {
             viewModel.searchRecipeList(
