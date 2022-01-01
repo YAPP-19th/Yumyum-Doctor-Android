@@ -4,7 +4,10 @@ import ResearchListAdapter
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -13,14 +16,14 @@ import com.doctor.yumyum.common.base.BaseActivity
 import com.doctor.yumyum.databinding.ActivityResearchListBinding
 import com.doctor.yumyum.databinding.DialogSelectSearchBinding
 import com.doctor.yumyum.databinding.DialogSelectSortBinding
+import com.doctor.yumyum.presentation.adapter.TasteTagAdapter
 import com.doctor.yumyum.presentation.ui.filter.FilterActivity
 import com.doctor.yumyum.presentation.ui.recipedetail.RecipeDetailActivity
-import com.doctor.yumyum.presentation.ui.search.SearchHashtagActivity
-import com.doctor.yumyum.presentation.ui.search.SearchTasteActivity
+import com.doctor.yumyum.presentation.ui.search.hashtag.SearchHashtagActivity
+import com.doctor.yumyum.presentation.ui.search.taste.SearchTasteActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.launch
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
+import java.util.*
 
 
 class ResearchListActivity :
@@ -41,7 +44,10 @@ class ResearchListActivity :
     private var order = "desc"
     private var minPrice: Int? = null
     private var maxPrice: Int? = null
+    private var flavors: ArrayList<String> = arrayListOf("")
     private lateinit var filterLauncher: ActivityResultLauncher<Intent>
+    private lateinit var searchTasteLauncher: ActivityResultLauncher<Intent>
+    private var touchStartTime: Long = Calendar.getInstance().timeInMillis
 
     @SuppressLint("UseCompatLoadingForDrawables")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,6 +58,22 @@ class ResearchListActivity :
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         binding.researchListTvBrand.text = categoryName
+        binding.researchListRvSearchTaste.adapter = TasteTagAdapter()
+
+        // recycler view touch listener
+        binding.researchListRvSearchTaste.setOnTouchListener { _, motionEvent ->
+            if (motionEvent.action == MotionEvent.ACTION_DOWN) {
+                // 누를 때 시간 저장
+                touchStartTime = Calendar.getInstance().timeInMillis
+                true
+            } else if (motionEvent.action == MotionEvent.ACTION_UP && Calendar.getInstance().timeInMillis - touchStartTime < MAX_CLICK_DURATION) {
+                // 뗄 때 시간과 비교해서 차이가 DURATION 보다 작으면 다이얼로그 띄우기
+                showSearchDialog()
+                true
+            } else {
+                false
+            }
+        }
         initSortDialog()
         initSearchDialog()
 
@@ -127,16 +149,32 @@ class ResearchListActivity :
                 src, null, null, null
             )
         }
-        
+
+        // 맛별로 검색할 때
+        searchTasteLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                if (it.resultCode == RESULT_OK && it.data != null) {
+                    val tasteList = it.data?.extras?.getStringArrayList("taste list")
+
+                    // 검색창 리스트 설정
+                    tasteList?.let { list ->
+                        viewModel.setTasteList(list)
+                        flavors = list
+                    }
+
+                    searchRecipeList()
+                }
+            }
+
         viewModel.searchType.observe(this) {
             if (it == ResearchListViewModel.SEARCH_HASHTAG) {
                 startActivity(Intent(this, SearchHashtagActivity::class.java))
             } else if (it == ResearchListViewModel.SEARCH_TASTE) {
-                startActivity(Intent(this, SearchTasteActivity::class.java))
+                searchTasteLauncher.launch(Intent(this, SearchTasteActivity::class.java))
             }
             searchDialog.dismiss()
         }
-        
+
         viewModel.recipeList.observe(this) {
             researchListAdapter.setRecipeList(it)
         }
@@ -182,12 +220,12 @@ class ResearchListActivity :
         searchDialog.show()
         viewModel.initSearchType()
     }
-    
+
     private fun searchRecipeList() {
         lifecycleScope.launch {
             viewModel.searchRecipeList(
                 categoryName,
-                "",
+                flavors,
                 "",
                 minPrice,
                 maxPrice,
@@ -198,5 +236,17 @@ class ResearchListActivity :
                 10
             )
         }
+    }
+
+    fun resetSearchList() {
+        // 맛 리스트 초기화
+        viewModel.setTasteList(arrayListOf())
+        flavors = arrayListOf("")
+
+        searchRecipeList()
+    }
+
+    companion object {
+        const val MAX_CLICK_DURATION = 100
     }
 }

@@ -36,7 +36,7 @@ interface RecipeService {
     @GET("/api/v1/foods")
     suspend fun searchRecipeList(
         @Query("categoryName") categoryName: String,
-        @Query("flavors") flavors: String,
+        @Query("flavors") flavors: ArrayList<String>,
         @Query("tags") tags: String,
         @Query("minPrice") minPrice: Int?,
         @Query("maxPrice") maxPrice: Int?,

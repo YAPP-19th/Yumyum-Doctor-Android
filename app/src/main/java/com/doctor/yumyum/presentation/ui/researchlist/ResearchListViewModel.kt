@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseViewModel
 import com.doctor.yumyum.data.model.RecipeModel
+import com.doctor.yumyum.data.remote.response.SearchRecipeResponse
 import com.doctor.yumyum.data.repository.RecipeRepositoryImpl
 import kotlinx.coroutines.launch
 import okhttp3.ResponseBody
@@ -23,8 +24,9 @@ class ResearchListViewModel : BaseViewModel() {
     val searchType: LiveData<Int> get() = _searchType
     private var _tmpSearchType: MutableLiveData<Int> = MutableLiveData()
     val tmpSearchType: LiveData<Int> get() = _tmpSearchType
-
-    private val _recipeList = MutableLiveData<ArrayList<RecipeModel>>()
+    private var _tasteList = MutableLiveData<ArrayList<String>>(ArrayList())
+    val tasteList: LiveData<ArrayList<String>> get() = _tasteList
+    private val _recipeList = MutableLiveData<ArrayList<RecipeModel>>(ArrayList())
     val recipeList: LiveData<ArrayList<RecipeModel>> get() = _recipeList
 
     fun initSortType() {
@@ -53,7 +55,7 @@ class ResearchListViewModel : BaseViewModel() {
 
     suspend fun searchRecipeList(
         categoryName: String,
-        flavors: String,
+        flavors: ArrayList<String>,
         tags: String,
         minPrice: Int?,
         maxPrice: Int?,
@@ -65,7 +67,7 @@ class ResearchListViewModel : BaseViewModel() {
     ) {
         try {
 
-            _recipeList.postValue(
+            val response: Response<SearchRecipeResponse> =
                 repository.searchRecipeList(
                     categoryName,
                     flavors,
@@ -77,10 +79,15 @@ class ResearchListViewModel : BaseViewModel() {
                     firstSearchTime,
                     offset,
                     pageSize
-                ).body()?.foods
-            )
+                )
+
+            if (response.isSuccessful) {
+                _recipeList.postValue(response.body()?.foods)
+            } else {
+                _errorState.postValue(ERROR_SEARCH)
+            }
         } catch (e: Exception) {
-            e
+            _errorState.postValue(ERROR_SEARCH)
         }
     }
 
@@ -102,12 +109,19 @@ class ResearchListViewModel : BaseViewModel() {
         }
     }
 
+    fun setTasteList(tasteList: ArrayList<String>) {
+        _tasteList.value = tasteList
+    }
+
     companion object {
         const val SORT_RECENT = 1
         const val SORT_LIKE = 2
         const val SORT_EXPENSIVE = 3
         const val SORT_CHEAP = 4
+
         const val ERROR_BOOKMARK = R.string.error_bookmark
+        const val ERROR_SEARCH = R.string.error_recipe_list
+
         const val SEARCH_HASHTAG = 11
         const val SEARCH_TASTE = 12
     }
