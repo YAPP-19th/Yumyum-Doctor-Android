@@ -17,10 +17,10 @@
         android:theme="@style/Theme.Yumyum"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".presentation.ui.searchhashtag.SearchHashtagActivity"
+            android:name="com.doctor.yumyum.presentation.ui.search.hashtag.SearchHashtagActivity"
             android:exported="true" />
         <activity
-            android:name=".presentation.ui.searchtaste.SearchTasteActivity"
+            android:name="com.doctor.yumyum.presentation.ui.search.taste.SearchTasteActivity"
             android:exported="true" />
         <activity
             android:name=".presentation.ui.recipedetail.RecipeDetailActivity"

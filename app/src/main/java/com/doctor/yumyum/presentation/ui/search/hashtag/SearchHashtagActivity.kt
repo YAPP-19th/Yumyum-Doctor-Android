@@ -1,4 +1,4 @@
-package com.doctor.yumyum.presentation.ui.searchhashtag
+package com.doctor.yumyum.presentation.ui.search.hashtag
 
 import android.os.Bundle
 import com.doctor.yumyum.R

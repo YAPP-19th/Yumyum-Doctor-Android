@@ -1,4 +1,4 @@
-package com.doctor.yumyum.presentation.ui.searchtaste
+package com.doctor.yumyum.presentation.ui.search.taste
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
