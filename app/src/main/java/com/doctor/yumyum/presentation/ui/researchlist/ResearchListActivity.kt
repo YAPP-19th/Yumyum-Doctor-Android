@@ -4,6 +4,7 @@ import ResearchListAdapter
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -22,6 +23,7 @@ import com.doctor.yumyum.presentation.ui.searchhashtag.SearchHashtagActivity
 import com.doctor.yumyum.presentation.ui.searchtaste.SearchTasteActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.launch
+import java.util.*
 
 
 class ResearchListActivity :
@@ -45,6 +47,7 @@ class ResearchListActivity :
     private var flavors: ArrayList<String> = arrayListOf("")
     private lateinit var filterLauncher: ActivityResultLauncher<Intent>
     private lateinit var searchTasteLauncher: ActivityResultLauncher<Intent>
+    private var touchStartTime: Long = Calendar.getInstance().timeInMillis
 
     @SuppressLint("UseCompatLoadingForDrawables")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,6 +59,21 @@ class ResearchListActivity :
         binding.lifecycleOwner = this
         binding.researchListTvBrand.text = categoryName
         binding.researchListRvSearchTaste.adapter = TasteTagAdapter()
+
+        // recycler view touch listener
+        binding.researchListRvSearchTaste.setOnTouchListener { _, motionEvent ->
+            if (motionEvent.action == MotionEvent.ACTION_DOWN) {
+                // 누를 때 시간 저장
+                touchStartTime = Calendar.getInstance().timeInMillis
+                true
+            } else if (motionEvent.action == MotionEvent.ACTION_UP && Calendar.getInstance().timeInMillis - touchStartTime < MAX_CLICK_DURATION) {
+                // 뗄 때 시간과 비교해서 차이가 DURATION 보다 작으면 다이얼로그 띄우기
+                showSearchDialog()
+                true
+            } else {
+                false
+            }
+        }
         initSortDialog()
         initSearchDialog()
 
@@ -226,5 +244,9 @@ class ResearchListActivity :
         flavors = arrayListOf("")
 
         searchRecipeList()
+    }
+
+    companion object {
+        const val MAX_CLICK_DURATION = 100
     }
 }
