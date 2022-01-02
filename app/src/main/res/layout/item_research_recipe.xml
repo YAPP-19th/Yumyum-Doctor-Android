@@ -23,9 +23,10 @@
                 android:id="@+id/item_research_recipe_iv_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/light_gray"
                 android:contentDescription="@string/common_recipe_image"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_recipe_sample" />
+                android:scaleType="center"
+                android:src="@drawable/ic_loading_image" />
 
         </androidx.cardview.widget.CardView>
 
