@@ -16,7 +16,7 @@ interface RecipeRepository {
     suspend fun searchRecipeList(
         categoryName: String,
         flavors: ArrayList<String>,
-        tags: String,
+        tags: ArrayList<String>,
         minPrice: Int?,
         maxPrice: Int?,
         sort: String,

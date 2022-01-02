@@ -26,7 +26,7 @@ interface RecipeDataSource {
     suspend fun searchRecipeList(
         categoryName: String,
         flavors: ArrayList<String>,
-        tags: String,
+        tags: ArrayList<String>,
         minPrice: Int?,
         maxPrice: Int?,
         sort: String,
@@ -72,7 +72,7 @@ class RecipeDataSourceImp : RecipeDataSource {
     override suspend fun searchRecipeList(
         categoryName: String,
         flavors: ArrayList<String>,
-        tags: String,
+        tags: ArrayList<String>,
         minPrice: Int?,
         maxPrice: Int?,
         sort: String,

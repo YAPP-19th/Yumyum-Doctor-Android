@@ -87,7 +87,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/research_list_rv_search_taste"
-                bind_tasteTagList="@{viewModel.tasteList}"
+                bind_tasteTagList="@{viewModel.searchList}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@color/white"

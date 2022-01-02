@@ -45,8 +45,10 @@ class ResearchListActivity :
     private var minPrice: Int? = null
     private var maxPrice: Int? = null
     private var flavors: ArrayList<String> = arrayListOf("")
+    private var tags: ArrayList<String> = arrayListOf("")
     private lateinit var filterLauncher: ActivityResultLauncher<Intent>
     private lateinit var searchTasteLauncher: ActivityResultLauncher<Intent>
+    private lateinit var searchHashtagLauncher: ActivityResultLauncher<Intent>
     private var touchStartTime: Long = Calendar.getInstance().timeInMillis
 
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -154,12 +156,29 @@ class ResearchListActivity :
         searchTasteLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 if (it.resultCode == RESULT_OK && it.data != null) {
-                    val tasteList = it.data?.extras?.getStringArrayList("taste list")
+                    val tasteList = it.data?.extras?.getStringArrayList(TASTE_EXTRA_KEY)
 
                     // 검색창 리스트 설정
                     tasteList?.let { list ->
-                        viewModel.setTasteList(list)
+                        viewModel.setSearchList(list)
                         flavors = list
+                        tags = arrayListOf("")
+                    }
+
+                    searchRecipeList()
+                }
+            }
+
+        searchHashtagLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                if (it.resultCode == RESULT_OK && it.data != null) {
+                    val hashtagList = it.data?.extras?.getStringArrayList(HASHTAG_EXTRA_KEY)
+
+                    // 검색창 리스트 설정
+                    hashtagList?.let { list ->
+                        viewModel.setSearchList(ArrayList(list.map { it -> "#$it" }))
+                        tags = list
+                        flavors = arrayListOf("")
                     }
 
                     searchRecipeList()
@@ -168,7 +187,7 @@ class ResearchListActivity :
 
         viewModel.searchType.observe(this) {
             if (it == ResearchListViewModel.SEARCH_HASHTAG) {
-                startActivity(Intent(this, SearchHashtagActivity::class.java))
+                searchHashtagLauncher.launch(Intent(this, SearchHashtagActivity::class.java))
             } else if (it == ResearchListViewModel.SEARCH_TASTE) {
                 searchTasteLauncher.launch(Intent(this, SearchTasteActivity::class.java))
             }
@@ -226,7 +245,7 @@ class ResearchListActivity :
             viewModel.searchRecipeList(
                 categoryName,
                 flavors,
-                "",
+                tags,
                 minPrice,
                 maxPrice,
                 sort,
@@ -239,14 +258,18 @@ class ResearchListActivity :
     }
 
     fun resetSearchList() {
+        viewModel.setSearchList(arrayListOf())
         // 맛 리스트 초기화
-        viewModel.setTasteList(arrayListOf())
         flavors = arrayListOf("")
+        // 해시태그 리스트 초기화
+        tags = arrayListOf("")
 
         searchRecipeList()
     }
 
     companion object {
         const val MAX_CLICK_DURATION = 100
+        const val TASTE_EXTRA_KEY = "taste list"
+        const val HASHTAG_EXTRA_KEY = "hashtag list"
     }
 }
