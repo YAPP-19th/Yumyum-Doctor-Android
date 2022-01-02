@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.doctor.yumyum.presentation.ui.write.viewmodel.WriteTagViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -31,25 +40,34 @@
             app:layout_constraintStart_toEndOf="@id/search_hashtag_ib_back"
             app:layout_constraintTop_toTopOf="@id/search_hashtag_ib_back">
 
+            <ImageView
+                android:id="@+id/search_hashtag_iv_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ic_search"
+                app:layout_constraintBottom_toBottomOf="@id/search_hashtag_et_search"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/search_hashtag_et_search" />
+
             <EditText
                 android:id="@+id/search_hashtag_et_search"
                 style="@style/font_h3_medium"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="2dp"
                 android:background="@null"
-                android:drawablePadding="6dp"
-                android:gravity="top"
                 android:hint="@string/research_list_search_with_hashtag"
                 android:importantForAutofill="no"
                 android:inputType="textImeMultiLine"
                 android:paddingVertical="7dp"
-                android:paddingStart="10dp"
-                android:paddingEnd="2dp"
+                android:text="@={viewModel.tagInput}"
                 android:textColor="@color/dark_gray"
                 android:textColorHint="@color/light_gray"
-                app:drawableStartCompat="@drawable/ic_search"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/search_hashtag_ib_close"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@id/search_hashtag_iv_search"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
@@ -65,6 +83,43 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/search_hashtag_rv_tag"
+            bind_tagList="@{viewModel.tagList}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal"
+            android:overScrollMode="never"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_hashtag_cl_search"
+            tools:listitem="@layout/item_input_ingredient" />
+
+        <TextView
+            android:id="@+id/search_hashtag_tv_remove"
+            style="@style/font_body1_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:onClick="@{() -> viewModel.updateDeleteStatus()}"
+            android:text="@{viewModel.deleteStatus == viewModel.DELETE_STATUS ? @string/write_tag_delete : @string/write_tag_select_delete}"
+            android:textColor="@{viewModel.deleteStatus == viewModel.DELETE_STATUS ? @color/black : @color/main_orange}"
+            android:visibility="@{viewModel.tagList.size() == 0 ? View.INVISIBLE : View.VISIBLE}"
+            app:layout_constraintStart_toStartOf="@id/search_hashtag_rv_tag"
+            app:layout_constraintTop_toBottomOf="@id/search_hashtag_rv_tag" />
+
+        <TextView
+            style="@style/font_body2_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/search_hashtag_guide"
+            android:textColor="@color/dark_gray"
+            app:layout_constraintStart_toStartOf="@id/search_hashtag_tv_remove"
+            app:layout_constraintTop_toBottomOf="@id/search_hashtag_tv_remove" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/search_hashtag_btn_search"

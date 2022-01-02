@@ -20,6 +20,7 @@ class TasteActivity : BaseActivity<ActivityTasteBinding>(R.layout.activity_taste
             ViewModelProvider.NewInstanceFactory()
         )[TasteViewModel::class.java]
     }
+    private var fromMyPage: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -92,6 +93,7 @@ class TasteActivity : BaseActivity<ActivityTasteBinding>(R.layout.activity_taste
                     .navigate(R.id.action_tasteClassFragment_to_tasteDetailFragment)
             }
         }
+        fromMyPage = intent.extras?.getBoolean(getString(R.string.taste_mode)) ?: false
     }
 
     private fun setStateClass() {
