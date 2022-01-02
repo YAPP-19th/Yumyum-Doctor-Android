@@ -30,6 +30,7 @@ class RankAdapter(private val itemClickListener: (Int) -> Unit) :
                 Glide
                     .with(binding.researchRankingIvRecipe)
                     .load(recipe.foodImages[0].imageUrl)
+                    .placeholder(R.drawable.ic_loading_image)
                     .into(binding.researchRankingIvRecipe)
             }
 

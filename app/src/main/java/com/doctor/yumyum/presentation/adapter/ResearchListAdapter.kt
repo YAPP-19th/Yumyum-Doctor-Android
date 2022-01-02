@@ -33,6 +33,7 @@ class ResearchListAdapter(
                 Glide
                     .with(binding.itemResearchRecipeIvImage)
                     .load(recipe.foodImages[0].imageUrl)
+                    .placeholder(R.drawable.ic_loading_image)
                     .into(binding.itemResearchRecipeIvImage)
             }
         }
