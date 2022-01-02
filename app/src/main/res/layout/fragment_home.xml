@@ -116,7 +116,7 @@
                 android:paddingBottom="28dp"
                 android:text="@string/home_tv_favorite_empty"
                 android:textColor="@color/dark_gray"
-                android:visibility="@{viewModel.favoriteList.size == 0 ? View.VISIBLE : View.GONE}"
+                android:visibility="@{viewModel.favoriteList.size == 0 ? View.VISIBLE : View.INVISIBLE}"
                 app:drawableTopCompat="@drawable/ic_heart"
                 app:layout_constraintBottom_toTopOf="@id/home_tv_my_recipe"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -141,10 +141,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="222dp"
+                android:layout_marginTop="42dp"
                 android:src="@drawable/ic_pencil"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/home_tv_check" />
+                app:layout_constraintTop_toBottomOf="@id/home_tv_favorite_empty" />
 
             <TextView
                 android:id="@+id/home_tv_my_recipe"
@@ -152,13 +152,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="7dp"
-                android:layout_marginTop="224dp"
+                android:layout_marginTop="43dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/home_tv_my_recipe"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/home_iv_my_recipe"
-                app:layout_constraintTop_toBottomOf="@id/home_tv_check" />
+                app:layout_constraintTop_toBottomOf="@id/home_tv_favorite_empty" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/home_rv_brand"
