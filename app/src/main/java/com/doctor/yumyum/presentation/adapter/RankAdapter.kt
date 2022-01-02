@@ -1,9 +1,9 @@
 package com.doctor.yumyum.presentation.adapter
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -33,6 +33,7 @@ class RankAdapter(private val itemClickListener: (Int) -> Unit) :
                     .into(binding.researchRankingIvRecipe)
             }
 
+            binding.researchRankingIvRank.visibility = VISIBLE
             when (adapterPosition) {
                 0 -> binding.researchRankingIvRank.setImageResource(R.drawable.ic_gold_medal)
                 1 -> binding.researchRankingIvRank.setImageResource(R.drawable.ic_silver_medal)
