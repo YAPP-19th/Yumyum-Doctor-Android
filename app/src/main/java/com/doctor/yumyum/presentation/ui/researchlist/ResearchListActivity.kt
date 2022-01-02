@@ -245,7 +245,7 @@ class ResearchListActivity :
             viewModel.searchRecipeList(
                 categoryName,
                 flavors,
-                "",
+                tags,
                 minPrice,
                 maxPrice,
                 sort,
