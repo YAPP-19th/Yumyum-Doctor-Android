@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseActivity
 import com.doctor.yumyum.databinding.ActivitySearchTasteBinding
+import com.doctor.yumyum.presentation.ui.researchlist.ResearchListActivity
 
 class SearchTasteActivity :
     BaseActivity<ActivitySearchTasteBinding>(R.layout.activity_search_taste) {
@@ -25,7 +26,10 @@ class SearchTasteActivity :
         binding.searchTasteAppbar.appbarIbBack.setOnClickListener { finish() }
         binding.searchTasteBtnSearch.setOnClickListener {
             val intent = Intent()
-            intent.putStringArrayListExtra("taste list", viewModel.tasteList.value)
+            intent.putStringArrayListExtra(
+                ResearchListActivity.TASTE_EXTRA_KEY,
+                viewModel.tasteList.value
+            )
             setResult(RESULT_OK, intent)
             finish()
         }

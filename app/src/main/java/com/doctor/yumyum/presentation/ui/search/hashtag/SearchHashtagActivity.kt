@@ -8,6 +8,7 @@ import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseActivity
 import com.doctor.yumyum.databinding.ActivitySearchHashtagBinding
 import com.doctor.yumyum.presentation.adapter.WriteTagAdapter
+import com.doctor.yumyum.presentation.ui.researchlist.ResearchListActivity
 import com.doctor.yumyum.presentation.ui.write.viewmodel.WriteTagViewModel
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
@@ -40,7 +41,7 @@ class SearchHashtagActivity :
         // 레시피 목록으로 해시태그 리스트 전달
         binding.searchHashtagBtnSearch.setOnClickListener {
             val intent = Intent()
-            intent.putStringArrayListExtra("hashtag list", viewModel.tagList.value)
+            intent.putStringArrayListExtra(ResearchListActivity.HASHTAG_EXTRA_KEY, viewModel.tagList.value)
             setResult(RESULT_OK, intent)
             finish()
         }

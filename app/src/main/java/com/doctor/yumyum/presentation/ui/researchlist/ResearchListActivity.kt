@@ -156,7 +156,7 @@ class ResearchListActivity :
         searchTasteLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 if (it.resultCode == RESULT_OK && it.data != null) {
-                    val tasteList = it.data?.extras?.getStringArrayList("taste list")
+                    val tasteList = it.data?.extras?.getStringArrayList(TASTE_EXTRA_KEY)
 
                     // 검색창 리스트 설정
                     tasteList?.let { list ->
@@ -172,7 +172,7 @@ class ResearchListActivity :
         searchHashtagLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 if (it.resultCode == RESULT_OK && it.data != null) {
-                    val hashtagList = it.data?.extras?.getStringArrayList("hashtag list")
+                    val hashtagList = it.data?.extras?.getStringArrayList(HASHTAG_EXTRA_KEY)
 
                     // 검색창 리스트 설정
                     hashtagList?.let { list ->
@@ -269,5 +269,7 @@ class ResearchListActivity :
 
     companion object {
         const val MAX_CLICK_DURATION = 100
+        const val TASTE_EXTRA_KEY = "taste list"
+        const val HASHTAG_EXTRA_KEY = "hashtag list"
     }
 }
