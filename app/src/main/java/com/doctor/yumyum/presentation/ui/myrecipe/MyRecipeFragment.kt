@@ -3,20 +3,17 @@ package com.doctor.yumyum.presentation.ui.myrecipe
 import ResearchListAdapter
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.whenResumed
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
 import com.doctor.yumyum.databinding.DialogMyRecipeSortBinding
 import com.doctor.yumyum.databinding.FragmentMyRecipeBinding
 import com.doctor.yumyum.presentation.ui.recipedetail.RecipeDetailActivity
-import com.doctor.yumyum.presentation.ui.researchlist.ResearchListViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -25,7 +22,7 @@ import kotlinx.coroutines.launch
 
 class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment_my_recipe) {
 
-    private lateinit var sortLauncher: ActivityResultLauncher<Intent>
+    private lateinit var filterLauncher: ActivityResultLauncher<Intent>
     private val myRecipeViewModel: MyRecipeViewModel by viewModels()
     private lateinit var sortSelectDialog: BottomSheetDialog
     private lateinit var sortSelectBinding: DialogMyRecipeSortBinding
@@ -39,7 +36,7 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
         initBinding()
         initDialog()
         initRecycler()
-        startForSort()
+        startForFilter()
 
 
         myRecipeViewModel.mode.observe(viewLifecycleOwner) { mode ->
@@ -91,13 +88,13 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
         }
     }
 
-    private fun startForSort() {
-        sortLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+    private fun startForFilter() {
+        filterLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             //TODO : 정렬 정보 가져오기
         }
-        binding.myRecipeIbSort.setOnClickListener {
+        binding.myRecipeIbFilter.setOnClickListener {
             val intent = Intent(context, MyPageFilterActivity::class.java)
-            sortLauncher.launch(intent)
+            filterLauncher.launch(intent)
         }
     }
 
