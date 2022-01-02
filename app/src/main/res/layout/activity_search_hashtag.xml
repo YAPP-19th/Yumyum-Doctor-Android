@@ -111,6 +111,16 @@
             app:layout_constraintStart_toStartOf="@id/search_hashtag_rv_tag"
             app:layout_constraintTop_toBottomOf="@id/search_hashtag_rv_tag" />
 
+        <TextView
+            style="@style/font_body2_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/search_hashtag_guide"
+            android:textColor="@color/dark_gray"
+            app:layout_constraintStart_toStartOf="@id/search_hashtag_tv_remove"
+            app:layout_constraintTop_toBottomOf="@id/search_hashtag_tv_remove" />
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/search_hashtag_btn_search"
             style="@style/font_subtitle_medium"

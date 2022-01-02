@@ -33,8 +33,12 @@ class SearchHashtagActivity :
         binding.searchHashtagEtSearch.setOnEditorActionListener { _, actionId, _ ->
             // 해시태그 추가
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                viewModel.validTagItem()
-                binding.searchHashtagEtSearch.text.clear()
+                if (viewModel.tagList.value?.size ?: 0 >= 10) {
+                    showToast(getString(R.string.search_hashtag_guide))
+                } else {
+                    viewModel.validTagItem()
+                    binding.searchHashtagEtSearch.text.clear()
+                }
             }
             false
         }
