@@ -1,5 +1,6 @@
 package com.doctor.yumyum.presentation.ui.search.hashtag
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import androidx.activity.viewModels
@@ -35,6 +36,13 @@ class SearchHashtagActivity :
                 binding.searchHashtagEtSearch.text.clear()
             }
             false
+        }
+        // 레시피 목록으로 해시태그 리스트 전달
+        binding.searchHashtagBtnSearch.setOnClickListener {
+            val intent = Intent()
+            intent.putStringArrayListExtra("hashtag list", viewModel.tagList.value)
+            setResult(RESULT_OK, intent)
+            finish()
         }
 
         viewModel.deleteStatus.observe(this) {
