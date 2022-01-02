@@ -155,6 +155,7 @@
     <string name="search_list_empty">해당하는 레시피가 없습니다.</string>
     <string name="filter_reset_icon">필터 초기화 아이콘</string>
     <string name="filter_guide">*최솟값 또는 최댓값만 입력하여도 됩니다.</string>
+    <string name="search_hashtag_guide">*해시태그는 최대 10개까지 작성가능합니다.</string>
 
     <!-- 레시피 상세 -->
     <string name="recipe_detail_iv_book">책 아이콘</string>
