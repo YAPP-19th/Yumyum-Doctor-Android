@@ -49,20 +49,20 @@
             android:layout_width="88dp"
             android:layout_height="88dp"
             android:layout_marginTop="13dp"
-            app:layout_constraintEnd_toEndOf="parent"
             android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/my_page_cl_appbar"
             tools:src="@drawable/ic_badge_student" />
 
         <TextView
-            android:text="@{viewModel.nickname + viewModel.grade}"
             android:id="@+id/my_page_tv_user"
             style="@style/font_h3_bold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:gravity="center"
+            android:text="@{viewModel.nickname + viewModel.grade}"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -86,17 +86,18 @@
             app:layout_constraintTop_toBottomOf="@id/my_page_tv_user" />
 
         <TextView
-            android:text="@{viewModel.point.toString()}"
             android:id="@+id/my_page_tv_point"
             style="@style/font_body2_medium"
-            android:layout_width="wrap_content"
+            android:layout_width="31dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:gravity="end"
+            android:text="@{viewModel.point.toString()}"
             android:textColor="@color/main_orange"
             app:layout_constraintEnd_toEndOf="@id/my_page_tv_point_unit"
             app:layout_constraintStart_toEndOf="@id/my_page_tv_my_point"
             app:layout_constraintTop_toBottomOf="@id/my_page_tv_user"
-            tools:text="@string/my_page_tv_title" />
+            tools:text="3" />
 
         <TextView
             android:id="@+id/my_page_tv_point_unit"
@@ -128,15 +129,14 @@
             android:id="@+id/my_page_graph_orange"
             android:layout_width="0dp"
             android:layout_height="9dp"
+            android:layout_marginStart="0dp"
             android:background="@drawable/bg_my_page_graph"
             android:backgroundTint="@color/main_orange"
             android:elevation="8dp"
-            android:layout_marginStart="0dp"
+            android:visibility="invisible"
             app:layout_constraintStart_toStartOf="@id/my_page_graph_white"
             app:layout_constraintTop_toBottomOf="@id/my_page_graph_white"
-            app:layout_constraintTop_toTopOf="@id/my_page_graph_white"
-            android:visibility="invisible"
-            />
+            app:layout_constraintTop_toTopOf="@id/my_page_graph_white" />
 
         <TextView
             android:id="@+id/my_page_tv_next_level"
