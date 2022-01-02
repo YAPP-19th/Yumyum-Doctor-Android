@@ -1,6 +1,7 @@
 package com.doctor.yumyum.data.repository
 
 import com.doctor.yumyum.data.remote.datasource.RecipeDataSourceImp
+import com.doctor.yumyum.data.remote.response.FavoriteRecipeResponse
 import com.doctor.yumyum.data.remote.response.RecipeDetailResponse
 import com.doctor.yumyum.data.remote.response.SearchRecipeResponse
 import com.doctor.yumyum.domain.repository.RecipeRepository
@@ -51,7 +52,8 @@ class RecipeRepositoryImpl : RecipeRepository {
             offset,
             pageSize
         )
-
+    override suspend fun getFavorite(categoryName: String): Response<FavoriteRecipeResponse> =
+        recipeDataSource.getFavorite(categoryName)
     override suspend fun getRecommendation(categoryName: String, top: Int, rankDatePeriod: Int) =
         recipeDataSource.getRecommendation(categoryName, top, rankDatePeriod)
 }

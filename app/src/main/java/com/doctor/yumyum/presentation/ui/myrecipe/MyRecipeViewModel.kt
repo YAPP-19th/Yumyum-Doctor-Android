@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseViewModel
+import com.doctor.yumyum.data.model.FavoriteRecipe
 import com.doctor.yumyum.common.utils.MineFoodType
 import com.doctor.yumyum.data.model.BestRecipe
 import com.doctor.yumyum.data.model.RecipeModel
@@ -24,6 +25,8 @@ class MyRecipeViewModel : BaseViewModel() {
     val mode: LiveData<Int>
         get() = _mode
 
+    private val _bestRecipeList : MutableLiveData<ArrayList<FavoriteRecipe>> = MutableLiveData()
+    val bestRecipeList : LiveData<ArrayList<FavoriteRecipe>>
     private val _foodType: MutableLiveData<String> = MutableLiveData(MineFoodType.MYFOOD.name)
     val foodType: LiveData<String>
         get() = _foodType

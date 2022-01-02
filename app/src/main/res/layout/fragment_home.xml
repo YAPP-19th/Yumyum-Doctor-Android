@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.doctor.yumyum.presentation.ui.home.HomeViewModel" />
@@ -108,12 +110,13 @@
                 android:layout_marginBottom="43dp"
                 android:background="@drawable/bg_message_empty"
                 android:drawablePadding="7dp"
+                android:gravity="center"
                 android:paddingHorizontal="27dp"
                 android:paddingTop="24dp"
                 android:paddingBottom="28dp"
                 android:text="@string/home_tv_favorite_empty"
                 android:textColor="@color/dark_gray"
-                android:visibility="invisible"
+                android:visibility="@{viewModel.favoriteList.size == 0 ? View.VISIBLE : View.INVISIBLE}"
                 app:drawableTopCompat="@drawable/ic_heart"
                 app:layout_constraintBottom_toTopOf="@id/home_tv_my_recipe"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -122,6 +125,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/home_rv_favorite_recipe"
+                bind_homeFavorite="@{viewModel.favoriteList}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -137,10 +141,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="42dp"
                 android:src="@drawable/ic_pencil"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/home_rv_favorite_recipe" />
+                app:layout_constraintTop_toBottomOf="@id/home_tv_favorite_empty" />
 
             <TextView
                 android:id="@+id/home_tv_my_recipe"
@@ -148,13 +152,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="7dp"
-                android:layout_marginTop="33dp"
+                android:layout_marginTop="43dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/home_tv_my_recipe"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/home_iv_my_recipe"
-                app:layout_constraintTop_toBottomOf="@id/home_rv_favorite_recipe" />
+                app:layout_constraintTop_toBottomOf="@id/home_tv_favorite_empty" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/home_rv_brand"

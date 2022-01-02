@@ -1,26 +1,21 @@
 package com.doctor.yumyum.presentation.ui.home
 
+
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
-import androidx.viewpager2.widget.ViewPager2
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
 import com.doctor.yumyum.databinding.FragmentHomeBinding
 import com.doctor.yumyum.presentation.adapter.HomeBrandAdapter
+import com.doctor.yumyum.presentation.adapter.HomeFavoriteAdapter
 import com.doctor.yumyum.presentation.adapter.HomeTodayAdapter
 import com.doctor.yumyum.presentation.ui.main.MainActivity
 import com.doctor.yumyum.presentation.ui.recipedetail.RecipeDetailActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import androidx.annotation.NonNull
-
-import androidx.viewpager2.widget.MarginPageTransformer
-
-import androidx.viewpager2.widget.CompositePageTransformer
-import kotlin.math.abs
 
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
@@ -70,6 +65,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             binding.homeTvGreeting.text = getString(R.string.home_tv_greeting, it)
         }
 
+        // 최애 레시피 초기화
+        binding.homeRvFavoriteRecipe.adapter = HomeFavoriteAdapter {
+            val intent = Intent(context, RecipeDetailActivity::class.java)
+            intent.putExtra("recipeId", it)
+            startActivity(intent)
+        }
+
         // 나의 레시피 초기화
         brandRecyclerAdapter = HomeBrandAdapter { brand ->
             val activity = activity as MainActivity
@@ -91,8 +93,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             )
             changeBrandMode(it)
             CoroutineScope(Dispatchers.IO).launch {
+                viewModel.getFavorite(getString(it))
                 viewModel.getRecommendation(getString(it))
-
             }
         }
     }

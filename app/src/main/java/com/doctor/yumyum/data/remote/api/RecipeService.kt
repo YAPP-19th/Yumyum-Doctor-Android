@@ -1,5 +1,6 @@
 package com.doctor.yumyum.data.remote.api
 
+import com.doctor.yumyum.data.remote.response.FavoriteRecipeResponse
 import com.doctor.yumyum.data.remote.response.RecipeDetailResponse
 import com.doctor.yumyum.data.remote.response.RecipeRecommendationResponse
 import com.doctor.yumyum.data.remote.response.SearchRecipeResponse
@@ -47,6 +48,10 @@ interface RecipeService {
         @Query("pageSize") pageSize: Int
     ): Response<SearchRecipeResponse>
 
+    @GET("/api/v1/foods/favorite")
+    suspend fun getFavoriteList(
+        @Query("categoryName") categoryName: String
+    ): Response<FavoriteRecipeResponse>
     @GET("/api/v1/foods/recommendation")
     suspend fun getRecommendation(
         @Query("categoryName") categoryName: String,

@@ -9,8 +9,8 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.doctor.yumyum.R
+import com.doctor.yumyum.data.model.FavoriteRecipe
 import com.doctor.yumyum.data.model.RecipeModel
-import java.net.URI
 
 @BindingAdapter("bind_tagList")
 fun bindTagList(rvTagList: RecyclerView, tagList: ArrayList<String>?) {
@@ -67,6 +67,13 @@ fun bindBrandBackGround(textView: TextView, tempCategory: String?) {
         textView.background = ContextCompat.getDrawable(textView.context, R.drawable.bg_tv_select)
     } else {
         textView.background = null
+    }
+}
+
+@BindingAdapter("bind_homeFavorite")
+fun bindHomeFavorite(rvRecipeList:RecyclerView, recipeList:ArrayList<FavoriteRecipe>?) {
+    recipeList?.run {
+        ((rvRecipeList.adapter) as HomeFavoriteAdapter).setRecipeList(recipeList)
     }
 }
 
