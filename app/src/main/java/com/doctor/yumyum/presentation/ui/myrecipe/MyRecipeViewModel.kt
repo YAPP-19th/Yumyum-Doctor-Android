@@ -64,7 +64,9 @@ class MyRecipeViewModel : BaseViewModel() {
                     order = "asc",
                     status = ""
                 )
-            _myRecipeList.postValue(response.body()?.foods)
+            response.body()?.foods?.let {
+                _myRecipeList.postValue(it)
+            }
         } catch (e: Exception) {
             Log.d("MyRecipeViewModel: ","MyRecipeGet 실패")
         }
