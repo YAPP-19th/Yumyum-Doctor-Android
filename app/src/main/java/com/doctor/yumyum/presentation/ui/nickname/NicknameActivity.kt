@@ -30,6 +30,7 @@ class NicknameActivity : BaseActivity<ActivityNicknameBinding>(R.layout.activity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("로그", "nicknameActivity")
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
@@ -53,9 +54,9 @@ class NicknameActivity : BaseActivity<ActivityNicknameBinding>(R.layout.activity
             }
 
             if (intent.getBooleanExtra(getString(R.string.nickname_mode), false)) {
-                startActivity(Intent(this, MainActivity::class.java))
+                startActivity(Intent(this@NicknameActivity, MainActivity::class.java))
             } else {
-                startActivity(Intent(this, TasteActivity::class.java))
+                startActivity(Intent(this@NicknameActivity, TasteActivity::class.java))
             }
         }
 
