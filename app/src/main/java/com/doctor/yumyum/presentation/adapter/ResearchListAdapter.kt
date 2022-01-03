@@ -31,6 +31,7 @@ class ResearchListAdapter(
             binding.itemResearchRecipeTvCost.text = "${recipe.price}원"
             binding.root.setOnClickListener { itemClickListener(recipe.id) }
             binding.itemResearchRecipeIbBookmark.setOnClickListener { bookmarkClickListener(recipe) }
+            binding.itemRecipeIbFavorite.setOnClickListener { favoriteClickListener(recipe)}
 
             if (recipe.isBookmark)
                 binding.itemResearchRecipeIbBookmark.setImageResource(R.drawable.ic_bookmark_clicked)

@@ -42,5 +42,7 @@ class MyRecipeRepositoryImpl : MyRecipeRepository {
     override suspend fun deleteFavorite(recipeId: Int): Response<ResponseBody> =
         myRecipeDataSource.deleteFavorite(recipeId)
 
+    override suspend fun postFavorite(recipeId: Int, categoryName: String): Response<ResponseBody> =
+        myRecipeDataSource.postFavorite(recipeId,categoryName)
 
 }

@@ -21,4 +21,5 @@ interface MyRecipeRepository {
     ): Response<SearchRecipeResponse>
 
     suspend fun deleteFavorite(recipeId : Int) : Response<ResponseBody>
+    suspend fun postFavorite(recipeId: Int,categoryName: String) : Response<ResponseBody>
 }

@@ -3,7 +3,6 @@ package com.doctor.yumyum.presentation.ui.myrecipe
 import ResearchListAdapter
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
@@ -12,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
+import com.doctor.yumyum.data.model.RecipeModel
 import com.doctor.yumyum.databinding.DialogMyRecipeSortBinding
 import com.doctor.yumyum.databinding.FragmentMyRecipeBinding
 import com.doctor.yumyum.presentation.adapter.MyRecipeFavoriteAdapter
@@ -76,7 +76,9 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
             val intent = Intent(requireContext(), RecipeDetailActivity::class.java)
             intent.putExtra("recipeId", recipeId)
             startActivity(intent)
-        }, {},{},foodType)
+        }, {},{
+            postFavorite(it)
+        },foodType)
         binding.myRecipeRvPost.adapter = myRecipeListAdapter
 
         myRecipeViewModel.myRecipeList.observe(viewLifecycleOwner) {
@@ -93,12 +95,12 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
             CoroutineScope(Dispatchers.IO).launch {
                 myRecipeViewModel.deleteFavorite(recipeId)
             }
+
         })
         binding.myRecipeRvFavoriteRecipe.adapter = myRecipeFavoriteAdapter
 
         myRecipeViewModel.favoriteRecipeList.observe(viewLifecycleOwner) {
             myRecipeFavoriteAdapter.setFavoriteList(it)
-            Log.d("FavoriteList",myRecipeViewModel.favoriteRecipeList.value.toString())
         }
     }
 
@@ -124,6 +126,15 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
             initMyRecipeRecycler(foodType)
             CoroutineScope(Dispatchers.IO).launch {
                 myRecipeViewModel.getMyRecipe(category, foodType)
+            }
+        }
+    }
+
+    private fun postFavorite(it: RecipeModel) {
+        myRecipeViewModel.mode.observe(viewLifecycleOwner) { mode ->
+            val categoryName = requireContext().resources.getString(mode)
+            CoroutineScope(Dispatchers.IO).launch {
+                myRecipeViewModel.postFavorite(it.id, categoryName)
             }
         }
     }

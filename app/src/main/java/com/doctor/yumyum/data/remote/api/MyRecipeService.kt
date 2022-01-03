@@ -1,12 +1,10 @@
 package com.doctor.yumyum.data.remote.api
 
 import com.doctor.yumyum.data.remote.response.SearchRecipeResponse
+import com.google.android.gms.common.internal.safeparcel.SafeParcelable
 import okhttp3.ResponseBody
 import retrofit2.Response
-import retrofit2.http.DELETE
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface MyRecipeService {
 
@@ -29,5 +27,11 @@ interface MyRecipeService {
     @DELETE("/api/v1/foods/{recipeId}/favorite")
     suspend fun deleteFavorite(
         @Path("recipeId") recipeId: Int,
+    ) : Response<ResponseBody>
+
+    @POST("/api/v1/foods/{recipeId}/favorite")
+    suspend fun postFavorite(
+        @Path("recipeId") recipeId: Int,
+        @Body categoryName: String
     ) : Response<ResponseBody>
 }

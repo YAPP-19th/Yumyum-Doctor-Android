@@ -25,6 +25,7 @@ interface MyRecipeDataSource {
     ): Response<SearchRecipeResponse>
 
     suspend fun deleteFavorite(recipeId : Int) : Response<ResponseBody>
+    suspend fun postFavorite(recipeId: Int,categoryName: String) : Response<ResponseBody>
 }
 
 
@@ -62,5 +63,9 @@ class MyRecipeDataSourceImpl : MyRecipeDataSource {
     override suspend fun deleteFavorite(recipeId: Int): Response<ResponseBody> =
         RetrofitClient.getClient().create(MyRecipeService::class.java)
             .deleteFavorite(recipeId)
+
+    override suspend fun postFavorite(recipeId: Int, categoryName: String): Response<ResponseBody> =
+        RetrofitClient.getClient().create(MyRecipeService::class.java)
+            .postFavorite(recipeId,categoryName)
 
 }

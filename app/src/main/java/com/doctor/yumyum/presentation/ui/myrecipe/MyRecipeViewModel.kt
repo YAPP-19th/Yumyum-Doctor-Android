@@ -87,6 +87,13 @@ class MyRecipeViewModel : BaseViewModel() {
             Log.d("MyRecipeViewModel: ","FavoriteDelete failed - ${response.code()}")
         }
     }
+
+    suspend fun postFavorite(recipeId: Int, categoryName: String){
+        val response = myRecipeRepository.postFavorite(recipeId,categoryName)
+        if(!response.isSuccessful){
+            Log.d("MyRecipeViewModel: ","FavoritePost failed - ${response.code()}")
+        }
+    }
 }
 
 
