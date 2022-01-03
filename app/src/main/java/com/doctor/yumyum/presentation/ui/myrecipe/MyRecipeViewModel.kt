@@ -7,7 +7,6 @@ import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseViewModel
 import com.doctor.yumyum.data.model.FavoriteRecipe
 import com.doctor.yumyum.common.utils.MineFoodType
-import com.doctor.yumyum.data.model.BestRecipe
 import com.doctor.yumyum.data.model.RecipeModel
 import com.doctor.yumyum.data.model.WriteRecipe
 import com.doctor.yumyum.data.remote.response.SearchRecipeResponse
@@ -27,13 +26,11 @@ class MyRecipeViewModel : BaseViewModel() {
 
     private val _bestRecipeList : MutableLiveData<ArrayList<FavoriteRecipe>> = MutableLiveData()
     val bestRecipeList : LiveData<ArrayList<FavoriteRecipe>>
+        get() = _bestRecipeList
+
     private val _foodType: MutableLiveData<String> = MutableLiveData(MineFoodType.MYFOOD.name)
     val foodType: LiveData<String>
         get() = _foodType
-
-    private val _bestRecipeList: MutableLiveData<ArrayList<BestRecipe>> = MutableLiveData()
-    val bestRecipeList: LiveData<ArrayList<BestRecipe>>
-        get() = _bestRecipeList
 
     private val _myRecipeList: MutableLiveData<ArrayList<RecipeModel>> = MutableLiveData()
     val myRecipeList: LiveData<ArrayList<RecipeModel>>
