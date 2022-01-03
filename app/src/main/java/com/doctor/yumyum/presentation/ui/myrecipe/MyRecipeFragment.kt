@@ -44,6 +44,8 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
                 if (mode == R.string.common_food) R.drawable.ic_change_food else R.drawable.ic_change_beverage
             )
             val categoryName = requireContext().resources.getString(mode)
+            getFavoriteList(categoryName)
+            getMyPostList(categoryName)
         }
     }
 
@@ -105,6 +107,20 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
         binding.myRecipeIbFilter.setOnClickListener {
             val intent = Intent(context, MyPageFilterActivity::class.java)
             filterLauncher.launch(intent)
+        }
+    }
+
+    private fun getFavoriteList(category: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            myRecipeViewModel.getFavoriteRecipe(category)
+        }
+    }
+
+    private fun getMyPostList(category: String) {
+        myRecipeViewModel.foodType.observe(viewLifecycleOwner) { foodType ->
+            CoroutineScope(Dispatchers.IO).launch {
+                myRecipeViewModel.getMyRecipe(category, foodType)
+            }
         }
     }
 
