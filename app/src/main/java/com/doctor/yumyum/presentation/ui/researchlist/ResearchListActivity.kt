@@ -117,7 +117,7 @@ class ResearchListActivity :
             startActivity(intent)
         }, { recipe ->
             viewModel.setBookmarkState(recipe)
-        }, {},RecipeType.BASIC.name)
+        }, {},{},RecipeType.BASIC.name)
         binding.researchListClAppbar.appbarIbBack.setOnClickListener { finish() }
         binding.researchListRvRecipe.adapter = researchListAdapter
 

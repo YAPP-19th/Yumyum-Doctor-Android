@@ -20,6 +20,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import okhttp3.internal.notify
 
 
 class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment_my_recipe) {
@@ -36,7 +37,6 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
         initDialog()
         initFavoriteRecipeRecycler()
         startForFilter()
-
 
         myRecipeViewModel.mode.observe(viewLifecycleOwner) { mode ->
             binding.myRecipeIbMode.setImageResource(
@@ -76,7 +76,9 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
             val intent = Intent(requireContext(), RecipeDetailActivity::class.java)
             intent.putExtra("recipeId", recipeId)
             startActivity(intent)
-        }, {},{
+        },{}, {
+            deleteBookMark(it.id)
+        },{
             postFavorite(it)
         },foodType)
         binding.myRecipeRvPost.adapter = myRecipeListAdapter
@@ -95,7 +97,6 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
             CoroutineScope(Dispatchers.IO).launch {
                 myRecipeViewModel.deleteFavorite(recipeId)
             }
-
         })
         binding.myRecipeRvFavoriteRecipe.adapter = myRecipeFavoriteAdapter
 
@@ -135,7 +136,14 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
             val categoryName = requireContext().resources.getString(mode)
             CoroutineScope(Dispatchers.IO).launch {
                 myRecipeViewModel.postFavorite(it.id, categoryName)
+                myRecipeViewModel.getFavoriteRecipe(categoryName)
             }
+        }
+    }
+
+    private fun deleteBookMark(recipeId : Int){
+        CoroutineScope(Dispatchers.IO).launch {
+            myRecipeViewModel.deleteBookMark(recipeId)
         }
     }
 

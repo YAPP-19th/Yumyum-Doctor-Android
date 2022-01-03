@@ -94,6 +94,13 @@ class MyRecipeViewModel : BaseViewModel() {
             Log.d("MyRecipeViewModel: ","FavoritePost failed - ${response.code()}")
         }
     }
+
+    suspend fun deleteBookMark(recipeId: Int){
+        val response = recipeRepository.deleteBookmark(recipeId)
+        if(!response.isSuccessful){
+            Log.d("MyRecipeViewModel: ","BookMarkDelete failed - ${response.code()}")
+        }
+    }
 }
 
 

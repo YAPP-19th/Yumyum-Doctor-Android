@@ -23,7 +23,7 @@ class MyRecipeFavoriteAdapter(
 
     inner class ViewHolder(private val binding: ItemMyrecipeFavoriteBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(recipe: FavoriteRecipe) {
+        fun bind(recipe: FavoriteRecipe, position: Int) {
             binding.itemMyFavoriteTvBrand.text = recipe.categoryName
             binding.itemMyFavoriteTvPrice.text =
                 binding.root.resources.getString(R.string.common_variable_price, recipe.price)
@@ -44,9 +44,11 @@ class MyRecipeFavoriteAdapter(
             }
 
             binding.root.setOnClickListener { itemClickListener(recipe.id)}
-            binding.itemMyFavoriteIbHeart.setOnClickListener { deleteFavorite(recipe.id) }
+            binding.itemMyFavoriteIbHeart.setOnClickListener {
+                deleteFavorite(recipe.id)
+                favoriteList.removeAt(position)
+                notifyItemRemoved(position)}
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -56,7 +58,7 @@ class MyRecipeFavoriteAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(favoriteList[position])
+        holder.bind(favoriteList[position],position)
     }
 
     override fun getItemCount(): Int = favoriteList.size
