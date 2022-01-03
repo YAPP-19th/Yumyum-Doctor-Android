@@ -3,7 +3,9 @@ package com.doctor.yumyum.data.remote.datasource
 import com.doctor.yumyum.common.network.RetrofitClient
 import com.doctor.yumyum.data.remote.api.MyRecipeService
 import com.doctor.yumyum.data.remote.response.SearchRecipeResponse
+import okhttp3.ResponseBody
 import retrofit2.Response
+import retrofit2.create
 
 
 interface MyRecipeDataSource {
@@ -21,6 +23,8 @@ interface MyRecipeDataSource {
         mineFoodType : String,
         status : String?
     ): Response<SearchRecipeResponse>
+
+    suspend fun deleteFavorite(recipeId : Int) : Response<ResponseBody>
 }
 
 
@@ -54,4 +58,9 @@ class MyRecipeDataSourceImpl : MyRecipeDataSource {
                 mineFoodType = mineFoodType,
                 status = status,
             )
+
+    override suspend fun deleteFavorite(recipeId: Int): Response<ResponseBody> =
+        RetrofitClient.getClient().create(MyRecipeService::class.java)
+            .deleteFavorite(recipeId)
+
 }

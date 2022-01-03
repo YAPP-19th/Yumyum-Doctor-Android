@@ -1,6 +1,7 @@
 package com.doctor.yumyum.domain.repository
 
 import com.doctor.yumyum.data.remote.response.SearchRecipeResponse
+import okhttp3.ResponseBody
 import retrofit2.Response
 
 interface MyRecipeRepository {
@@ -18,4 +19,6 @@ interface MyRecipeRepository {
         mineFoodType : String,
         status : String?
     ): Response<SearchRecipeResponse>
+
+    suspend fun deleteFavorite(recipeId : Int) : Response<ResponseBody>
 }

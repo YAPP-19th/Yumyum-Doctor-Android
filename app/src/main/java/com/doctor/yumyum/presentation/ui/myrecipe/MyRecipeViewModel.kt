@@ -80,6 +80,13 @@ class MyRecipeViewModel : BaseViewModel() {
             Log.d("MyRecipeViewModel: ","FavoriteGet failed - ${e.message}")
         }
     }
+
+    suspend fun deleteFavorite(recipeId : Int){
+        val response = myRecipeRepository.deleteFavorite(recipeId)
+        if(!response.isSuccessful){
+            Log.d("MyRecipeViewModel: ","FavoriteDelete failed - ${response.code()}")
+        }
+    }
 }
 
 
