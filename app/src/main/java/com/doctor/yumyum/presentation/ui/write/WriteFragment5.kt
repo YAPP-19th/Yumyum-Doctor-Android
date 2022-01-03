@@ -38,7 +38,9 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
     private lateinit var reviewImageLauncher: ActivityResultLauncher<Intent>
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
-            if(isGranted){openGalleryListener()}
+            if (isGranted) {
+                openGalleryListener()
+            }
         }
     private val writeViewModel: WriteViewModel by activityViewModels {
         object : ViewModelProvider.Factory {
@@ -69,8 +71,12 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
             }
+
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                binding.writeFifthTvCount.text = binding.writeFifthTvCount.context.getString(R.string.write_tv_text_count,s.toString().length)
+                binding.writeFifthTvCount.text = binding.writeFifthTvCount.context.getString(
+                    R.string.write_tv_text_count,
+                    s.toString().length
+                )
             }
 
             override fun afterTextChanged(s: Editable?) {
@@ -84,7 +90,6 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 if (it.resultCode == RESULT_OK) {
                     val intentResult = if (it.data == null) {
-                        //어떤 이미지도 선택하지 않은 경우 예외 처리 필요
                         return@registerForActivityResult
                     } else {
                         it.data
@@ -102,7 +107,6 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
                         }
                     }
                     writeViewModel.setReviewImageList(images)
-                    Log.d("imgsize", writeViewModel.reviewImageList.value?.size.toString())
                 }
             }
 
@@ -138,19 +142,19 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
     }
 
     private fun showDialogToGetPermission() {
-        //TODO 디자인이 나오면 삭제 예정, 삭제예정이여서 하드코딩했습니다.
         val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Permission request")
-            .setMessage("냠냠박사는 이미지 접근 허용이 필요합니다. \n일부 권한을 부여하려면 설정으로 이동해야 합니다.")
+        builder.setTitle(resources.getString(R.string.img_permission_dialog_title))
+            .setMessage(resources.getString(R.string.img_permission_dialog_message))
 
-        builder.setPositiveButton("OK") { dialogInterface, i ->
+        builder.setPositiveButton(resources.getString(R.string.img_permission_dialog_ok)) { dialogInterface, i ->
             val intent = Intent(
                 Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                Uri.fromParts("package", "com.doctor.yumyum", null))
+                Uri.fromParts("package", "com.doctor.yumyum", null)
+            )
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
-        builder.setNegativeButton("Later") { dialogInterface, i ->
+        builder.setNegativeButton(resources.getString(R.string.img_permission_dialog_dismiss)) { dialogInterface, i ->
             // ignore
         }
         val dialog = builder.create()
