@@ -119,6 +119,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
+            android:text="@string/write_tv_text_count_init"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="@id/write_fifth_et_review"
             app:layout_constraintEnd_toEndOf="@id/write_fifth_et_review" />
