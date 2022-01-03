@@ -34,7 +34,6 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
 
         initBinding()
         initDialog()
-        initMyRecipeRecycler()
         initFavoriteRecipeRecycler()
         startForFilter()
 
@@ -72,12 +71,12 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
         sortSelectDialog.setContentView(sortSelectBinding.root)
     }
 
-    private fun initMyRecipeRecycler() {
+    private fun initMyRecipeRecycler(foodType : String) {
         val myRecipeListAdapter = ResearchListAdapter({ recipeId ->
             val intent = Intent(requireContext(), RecipeDetailActivity::class.java)
             intent.putExtra("recipeId", recipeId)
             startActivity(intent)
-        }, {})
+        }, {},{},foodType)
         binding.myRecipeRvPost.adapter = myRecipeListAdapter
 
         myRecipeViewModel.myRecipeList.observe(viewLifecycleOwner) {
@@ -122,6 +121,7 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
 
     private fun getMyPostList(category: String) {
         myRecipeViewModel.foodType.observe(viewLifecycleOwner) { foodType ->
+            initMyRecipeRecycler(foodType)
             CoroutineScope(Dispatchers.IO).launch {
                 myRecipeViewModel.getMyRecipe(category, foodType)
             }

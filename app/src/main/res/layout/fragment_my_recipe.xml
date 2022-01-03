@@ -16,7 +16,7 @@
 
         <variable
             name="mineFoodType"
-            type="com.doctor.yumyum.common.utils.MineFoodType" />
+            type="com.doctor.yumyum.common.utils.RecipeType" />
 
     </data>
 

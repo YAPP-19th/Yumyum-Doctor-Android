@@ -32,12 +32,11 @@
             android:id="@+id/item_my_favorite_ib_heart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="4dp"
+            android:layout_marginTop="7.6dp"
+            android:layout_marginEnd="6dp"
             android:background="#00000000"
             app:layout_constraintEnd_toEndOf="@id/item_my_favorite_cv_image"
             app:layout_constraintTop_toTopOf="@id/item_my_favorite_cv_image" />
-
 
         <TextView
             android:id="@+id/item_my_favorite_tv_brand"

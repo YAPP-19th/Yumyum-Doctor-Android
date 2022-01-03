@@ -7,6 +7,7 @@ import android.widget.BaseAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.doctor.yumyum.R
+import com.doctor.yumyum.common.utils.RecipeType
 import com.doctor.yumyum.data.model.FavoriteRecipe
 import com.doctor.yumyum.data.remote.response.FavoriteRecipeResponse
 import com.doctor.yumyum.databinding.DialogWriteBinding
