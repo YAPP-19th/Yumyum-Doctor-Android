@@ -10,15 +10,27 @@
         android:layout_marginEnd="15dp">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/item_best_recipe_iv_image"
+            android:id="@+id/item_best_recipe_cv_image"
             android:layout_width="115dp"
             android:layout_height="100dp"
-            android:scaleType="fitXY"
+            app:cardElevation="0dp"
+            app:layout_constraintDimensionRatio="1:0.8"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:cardCornerRadius="10dp"
-            tools:src="@mipmap/ic_launcher_round" />
+            app:cardCornerRadius="10dp">
+
+            <ImageView
+                android:id="@+id/item_best_recipe_iv_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="center"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
         <TextView
             android:id="@+id/item_best_recipe_tv_brand"
@@ -27,8 +39,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             android:textColor="@color/gray"
-            app:layout_constraintStart_toStartOf="@id/item_best_recipe_iv_image"
-            app:layout_constraintTop_toBottomOf="@id/item_best_recipe_iv_image"
+            app:layout_constraintStart_toStartOf="@id/item_best_recipe_cv_image"
+            app:layout_constraintTop_toBottomOf="@id/item_best_recipe_cv_image"
             tools:text="라면" />
 
         <TextView
