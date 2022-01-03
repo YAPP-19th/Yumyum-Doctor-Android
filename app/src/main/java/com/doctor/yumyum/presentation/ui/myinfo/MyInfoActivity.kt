@@ -13,6 +13,9 @@ class MyInfoActivity : BaseActivity<ActivityMyInfoBinding>(R.layout.activity_my_
 
         binding.lifecycleOwner = this
         binding.apply {
+            myInfoAppbar.appbarIbBack.setOnClickListener {
+                onBackPressed()
+            }
             myInfoTvNicknameSetting.setOnClickListener {
                 val tasteIntent = Intent(this@MyInfoActivity, NicknameActivity::class.java)
                 tasteIntent.putExtra(getString(R.string.nickname_mode), true)
