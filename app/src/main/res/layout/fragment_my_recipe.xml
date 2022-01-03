@@ -108,6 +108,27 @@
                     app:layout_constraintEnd_toStartOf="@id/my_recipe_tv_change_order"
                     app:layout_constraintTop_toTopOf="@id/my_recipe_tv_change_order" />
 
+
+                <TextView
+                    android:id="@+id/my_recipe_tv_favorite_empty"
+                    style="@style/font_body1_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="23dp"
+                    android:background="@drawable/bg_message_empty"
+                    android:drawablePadding="7dp"
+                    android:gravity="center"
+                    android:paddingHorizontal="24dp"
+                    android:paddingTop="19dp"
+                    android:paddingBottom="26dp"
+                    android:visibility="@{viewModel.favoriteRecipeList.size() == 0 ? View.VISIBLE : View.INVISIBLE}"
+                    android:text="@string/best_recipe_empty"
+                    android:textColor="@color/dark_gray"
+                    app:drawableTopCompat="@drawable/ic_heart"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/my_recipe_tv_best_guide" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/my_recipe_rv_favorite_recipe"
                     android:layout_width="match_parent"
@@ -116,33 +137,11 @@
                     android:clipToPadding="false"
                     android:orientation="horizontal"
                     android:paddingHorizontal="16dp"
-                    android:visibility="@{viewModel.favoriteRecipeList.size() == 0 ? View.GONE : View.VISIBLE}"
+                    android:visibility="@{viewModel.favoriteRecipeList.size() == 0 ? View.INVISIBLE : View.VISIBLE}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintStart_toStartOf="@id/my_recipe_tv_best_guide"
                     app:layout_constraintTop_toBottomOf="@id/my_recipe_tv_best_guide"
                     tools:listitem="@layout/item_myrecipe_favorite" />
-
-                <TextView
-                    android:id="@+id/my_recipe_tv_favorite_empty"
-                    style="@style/font_body1_medium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="23dp"
-                    android:layout_marginBottom="28dp"
-                    android:background="@drawable/bg_message_empty"
-                    android:drawablePadding="7dp"
-                    android:gravity="center"
-                    android:paddingHorizontal="24dp"
-                    android:paddingTop="19dp"
-                    android:paddingBottom="26dp"
-                    android:visibility="@{viewModel.favoriteRecipeList.size() == 0 ? View.VISIBLE : View.GONE}"
-                    android:text="@string/best_recipe_empty"
-                    android:textColor="@color/dark_gray"
-                    app:drawableTopCompat="@drawable/ic_heart"
-                    app:layout_constraintBottom_toTopOf="@id/my_recipe_divider2"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/my_recipe_tv_best_guide" />
 
                 <View
                     android:id="@+id/my_recipe_divider2"

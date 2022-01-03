@@ -12,30 +12,31 @@
             android:id="@+id/item_my_favorite_cv_image"
             android:layout_width="115dp"
             android:layout_height="100dp"
+            app:cardCornerRadius="10dp"
             app:cardElevation="0dp"
             app:layout_constraintDimensionRatio="1:0.8"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:cardCornerRadius="10dp">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/item_my_favorite_iv_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="center"/>
+                android:scaleType="center"
+                android:src="@drawable/ic_recipe_sample" />
 
         </androidx.cardview.widget.CardView>
 
         <ImageButton
+            android:id="@+id/item_my_favorite_ib_heart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_heart_empty"
-            android:layout_marginEnd="4dp"
             android:layout_marginTop="4dp"
-            android:id="@+id/item_my_favorite_ib_heart"
-            app:layout_constraintTop_toTopOf="@id/item_my_favorite_cv_image"
-            app:layout_constraintEnd_toEndOf="@id/item_my_favorite_cv_image"/>
+            android:layout_marginEnd="4dp"
+            android:background="#00000000"
+            app:layout_constraintEnd_toEndOf="@id/item_my_favorite_cv_image"
+            app:layout_constraintTop_toTopOf="@id/item_my_favorite_cv_image" />
 
 
         <TextView
