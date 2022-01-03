@@ -3,6 +3,7 @@ package com.doctor.yumyum.presentation.ui.myrecipe
 import ResearchListAdapter
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
@@ -13,6 +14,7 @@ import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
 import com.doctor.yumyum.databinding.DialogMyRecipeSortBinding
 import com.doctor.yumyum.databinding.FragmentMyRecipeBinding
+import com.doctor.yumyum.presentation.adapter.MyRecipeFavoriteAdapter
 import com.doctor.yumyum.presentation.ui.recipedetail.RecipeDetailActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.CoroutineScope
@@ -21,21 +23,19 @@ import kotlinx.coroutines.launch
 
 
 class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment_my_recipe) {
-
     private lateinit var filterLauncher: ActivityResultLauncher<Intent>
     private val myRecipeViewModel: MyRecipeViewModel by viewModels()
     private lateinit var sortSelectDialog: BottomSheetDialog
     private lateinit var sortSelectBinding: DialogMyRecipeSortBinding
     private lateinit var sortSelectView: View
 
-    private var categoryName = ""
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initBinding()
         initDialog()
-        initRecycler()
+        initMyRecipeRecycler()
+        initFavoriteRecipeRecycler()
         startForFilter()
 
 
@@ -43,12 +43,7 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
             binding.myRecipeIbMode.setImageResource(
                 if (mode == R.string.common_food) R.drawable.ic_change_food else R.drawable.ic_change_beverage
             )
-            categoryName = requireContext().resources.getString(mode)
-            myRecipeViewModel.foodType.observe(viewLifecycleOwner){ foodType ->
-                CoroutineScope(Dispatchers.IO).launch {
-                    myRecipeViewModel.getMyRecipe(categoryName,foodType)
-                }
-            }
+            val categoryName = requireContext().resources.getString(mode)
         }
     }
 
@@ -75,23 +70,38 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
         sortSelectDialog.setContentView(sortSelectBinding.root)
     }
 
-    private fun initRecycler() {
+    private fun initMyRecipeRecycler() {
         val myRecipeListAdapter = ResearchListAdapter({ recipeId ->
-            val intent = Intent(requireContext(),RecipeDetailActivity::class.java)
+            val intent = Intent(requireContext(), RecipeDetailActivity::class.java)
             intent.putExtra("recipeId", recipeId)
             startActivity(intent)
-        },{})
+        }, {})
         binding.myRecipeRvPost.adapter = myRecipeListAdapter
 
-        myRecipeViewModel.myRecipeList.observe(viewLifecycleOwner){
+        myRecipeViewModel.myRecipeList.observe(viewLifecycleOwner) {
             myRecipeListAdapter.setRecipeList(it)
         }
     }
 
-    private fun startForFilter() {
-        filterLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            //TODO : 정렬 정보 가져오기
+    private fun initFavoriteRecipeRecycler() {
+        val myRecipeFavoriteAdapter = MyRecipeFavoriteAdapter { recipeId ->
+            val intent = Intent(requireContext(), RecipeDetailActivity::class.java)
+            intent.putExtra("recipeId", recipeId)
+            startActivity(intent)
         }
+        binding.myRecipeRvFavoriteRecipe.adapter = myRecipeFavoriteAdapter
+
+        myRecipeViewModel.favoriteRecipeList.observe(viewLifecycleOwner) {
+            myRecipeFavoriteAdapter.setFavoriteList(it)
+            Log.d("FavoriteList",myRecipeViewModel.favoriteRecipeList.value.toString())
+        }
+    }
+
+    private fun startForFilter() {
+        filterLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                //TODO : 정렬 정보 가져오기
+            }
         binding.myRecipeIbFilter.setOnClickListener {
             val intent = Intent(context, MyPageFilterActivity::class.java)
             filterLauncher.launch(intent)
