@@ -42,6 +42,8 @@ class MyRecipeFavoriteAdapter(
                     .into(binding.itemMyFavoriteIvImage)
             }
 
+            binding.root.setOnClickListener { itemClickListener(recipe.id)}
+            binding.itemMyFavoriteIbHeart.setOnClickListener { deleteFavorite(recipe.id) }
         }
 
     }

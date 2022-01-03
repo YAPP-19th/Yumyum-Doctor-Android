@@ -86,11 +86,15 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
     }
 
     private fun initFavoriteRecipeRecycler() {
-        val myRecipeFavoriteAdapter = MyRecipeFavoriteAdapter { recipeId ->
+        val myRecipeFavoriteAdapter = MyRecipeFavoriteAdapter ({ recipeId ->
             val intent = Intent(requireContext(), RecipeDetailActivity::class.java)
             intent.putExtra("recipeId", recipeId)
             startActivity(intent)
-        }
+        }, { recipeId ->
+            CoroutineScope(Dispatchers.IO).launch {
+                myRecipeViewModel.deleteFavorite(recipeId)
+            }
+        })
         binding.myRecipeRvFavoriteRecipe.adapter = myRecipeFavoriteAdapter
 
         myRecipeViewModel.favoriteRecipeList.observe(viewLifecycleOwner) {
