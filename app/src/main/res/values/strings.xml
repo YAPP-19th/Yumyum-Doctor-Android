@@ -103,7 +103,7 @@
     <string name="write_fifth_tv_review">리뷰</string>
     <string name="write_fifth_tv_private">레시피 비공개</string>
     <string name="write_dialog_tv_finish">레시피를 업로드 하시겠습니까?</string>
-    <string name="write_tv_text_count2">0/100</string>
+    <string name="write_tv_text_count_init">0/100</string>
     <string name="write_tv_text_count">%1$d/100</string>
 
 
