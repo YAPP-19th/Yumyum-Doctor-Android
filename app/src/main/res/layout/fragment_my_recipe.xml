@@ -109,21 +109,21 @@
                     app:layout_constraintTop_toTopOf="@id/my_recipe_tv_change_order" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/my_recipe_rv_best_recipe"
+                    android:id="@+id/my_recipe_rv_favorite_recipe"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="9dp"
                     android:clipToPadding="false"
                     android:orientation="horizontal"
                     android:paddingHorizontal="16dp"
-                    android:visibility="@{viewModel.bestRecipeList.size() == 0 ? View.GONE : View.VISIBLE}"
+                    android:visibility="@{viewModel.favoriteRecipeList.size() == 0 ? View.GONE : View.VISIBLE}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintStart_toStartOf="@id/my_recipe_tv_best_guide"
                     app:layout_constraintTop_toBottomOf="@id/my_recipe_tv_best_guide"
                     tools:listitem="@layout/item_myrecipe_favorite" />
 
                 <TextView
-                    android:id="@+id/my_recipe_tv_best_empty"
+                    android:id="@+id/my_recipe_tv_favorite_empty"
                     style="@style/font_body1_medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -135,7 +135,7 @@
                     android:paddingHorizontal="24dp"
                     android:paddingTop="19dp"
                     android:paddingBottom="26dp"
-                    android:visibility="@{viewModel.bestRecipeList.size() == 0 ? View.VISIBLE : View.GONE}"
+                    android:visibility="@{viewModel.favoriteRecipeList.size() == 0 ? View.VISIBLE : View.GONE}"
                     android:text="@string/best_recipe_empty"
                     android:textColor="@color/dark_gray"
                     app:drawableTopCompat="@drawable/ic_heart"
@@ -150,7 +150,7 @@
                     android:layout_height="14dp"
                     android:layout_marginTop="28dp"
                     android:background="@color/layout_empty"
-                    app:layout_constraintTop_toBottomOf="@id/my_recipe_tv_best_empty"/>
+                    app:layout_constraintTop_toBottomOf="@id/my_recipe_tv_favorite_empty"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/my_recipe_tv_my_post"

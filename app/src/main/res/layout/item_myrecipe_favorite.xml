@@ -3,14 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="15dp">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/item_best_recipe_cv_image"
+            android:id="@+id/item_my_favorite_cv_image"
             android:layout_width="115dp"
             android:layout_height="100dp"
             app:cardElevation="0dp"
@@ -21,7 +20,7 @@
             app:cardCornerRadius="10dp">
 
             <ImageView
-                android:id="@+id/item_best_recipe_iv_image"
+                android:id="@+id/item_my_favorite_iv_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="center"/>
@@ -31,36 +30,43 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:src="@drawable/ic_heart_empty"
+            android:layout_marginEnd="4dp"
+            android:layout_marginTop="4dp"
+            android:id="@+id/item_my_favorite_ib_heart"
+            app:layout_constraintTop_toTopOf="@id/item_my_favorite_cv_image"
+            app:layout_constraintEnd_toEndOf="@id/item_my_favorite_cv_image"/>
+
 
         <TextView
-            android:id="@+id/item_best_recipe_tv_brand"
+            android:id="@+id/item_my_favorite_tv_brand"
             style="@style/font_body2_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             android:textColor="@color/gray"
-            app:layout_constraintStart_toStartOf="@id/item_best_recipe_cv_image"
-            app:layout_constraintTop_toBottomOf="@id/item_best_recipe_cv_image"
+            app:layout_constraintStart_toStartOf="@id/item_my_favorite_cv_image"
+            app:layout_constraintTop_toBottomOf="@id/item_my_favorite_cv_image"
             tools:text="라면" />
 
         <TextView
-            android:id="@+id/item_best_recipe_tv_title"
+            android:id="@+id/item_my_favorite_tv_title"
             style="@style/font_body1_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="@id/item_best_recipe_tv_brand"
-            app:layout_constraintTop_toBottomOf="@id/item_best_recipe_tv_brand"
+            app:layout_constraintStart_toStartOf="@id/item_my_favorite_tv_brand"
+            app:layout_constraintTop_toBottomOf="@id/item_my_favorite_tv_brand"
             tools:text="땅콩버터라면" />
 
         <TextView
-            android:id="@+id/item_best_recipe_tv_price"
+            android:id="@+id/item_my_favorite_tv_price"
             style="@style/font_body1_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="@id/item_best_recipe_tv_title"
-            app:layout_constraintTop_toBottomOf="@id/item_best_recipe_tv_title"
+            app:layout_constraintStart_toStartOf="@id/item_my_favorite_tv_title"
+            app:layout_constraintTop_toBottomOf="@id/item_my_favorite_tv_title"
             tools:text="5300원" />
 
 
