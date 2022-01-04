@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-    <data>
-        <import type="android.view.View"/>
-        <variable
-            name="myRecipeViewModel"
-            type="com.doctor.yumyum.presentation.ui.myrecipe.MyRecipeViewModel" />
-
-        <variable
-            name="recipeType"
-            type="com.doctor.yumyum.common.utils.RecipeType" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -84,12 +73,12 @@
             app:layout_constraintTop_toBottomOf="@id/item_research_recipe_cv_recipe" />
 
         <ImageButton
-            android:id="@+id/item_recipe_ib_favorite"
+            android:id="@+id/item_research_recipe_ib_favorite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="7.6dp"
             android:layout_marginEnd="6dp"
-            android:background="#00000000"
+            android:background="@null"
             app:layout_constraintEnd_toEndOf="@id/item_research_recipe_cv_recipe"
             app:layout_constraintTop_toTopOf="@id/item_research_recipe_cv_recipe" />
 

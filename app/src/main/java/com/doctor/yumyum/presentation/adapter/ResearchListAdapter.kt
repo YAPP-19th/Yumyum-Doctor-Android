@@ -26,10 +26,11 @@ class ResearchListAdapter(
             when(recipeType){
                 RecipeType.MYFOOD.name -> binding.itemResearchRecipeIbBookmark.visibility = View.GONE
                 RecipeType.BASIC.name -> {
-                    binding.itemRecipeIbFavorite.visibility = View.GONE
+                    binding.itemResearchRecipeIbFavorite.visibility = View.GONE
                     binding.itemResearchRecipeIbBookmark.setOnClickListener { bookmarkClickListener(recipe) }
                 }
                 RecipeType.BOOKMARK.name -> binding.itemResearchRecipeIbBookmark.setOnClickListener {
+                    binding.itemResearchRecipeIbBookmark.visibility = View.VISIBLE
                     bookmarkDeleteListener(recipe)
                     recipeList.removeAt(position)
                     notifyItemRemoved(position)
@@ -39,7 +40,7 @@ class ResearchListAdapter(
             binding.itemResearchRecipeTvTitle.text = recipe.foodName
             binding.itemResearchRecipeTvCost.text = "${recipe.price}원"
             binding.root.setOnClickListener { itemClickListener(recipe.id) }
-            binding.itemRecipeIbFavorite.setOnClickListener { favoriteClickListener(recipe)}
+            binding.itemResearchRecipeIbFavorite.setOnClickListener { favoriteClickListener(recipe)}
 
             if (recipe.isBookmark)
                 binding.itemResearchRecipeIbBookmark.setImageResource(R.drawable.ic_bookmark_clicked)
@@ -47,9 +48,9 @@ class ResearchListAdapter(
                 binding.itemResearchRecipeIbBookmark.setImageResource(R.drawable.ic_bookmark_unclicked)
 
             if(recipe.isFavorite)
-                binding.itemRecipeIbFavorite.setImageResource(R.drawable.ic_heart_selected)
+                binding.itemResearchRecipeIbFavorite.setImageResource(R.drawable.ic_heart_selected)
             else
-                binding.itemRecipeIbFavorite.setImageResource(R.drawable.ic_heart_unselected)
+                binding.itemResearchRecipeIbFavorite.setImageResource(R.drawable.ic_heart_unselected)
 
             if (recipe.foodImages.size > 0) {
                 Glide
