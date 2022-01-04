@@ -30,10 +30,6 @@ class NicknameActivity : BaseActivity<ActivityNicknameBinding>(R.layout.activity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("로그", "nicknameActivity")
-
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = this
 
         init()
 
@@ -44,6 +40,10 @@ class NicknameActivity : BaseActivity<ActivityNicknameBinding>(R.layout.activity
     }
 
     private fun init() {
+        binding.apply {
+            viewModel = viewModel
+            lifecycleOwner = this@NicknameActivity
+        }
         binding.nicknameToolbar.appbarIbBack.setOnClickListener {
             onBackPressed()
         }
@@ -73,11 +73,9 @@ class NicknameActivity : BaseActivity<ActivityNicknameBinding>(R.layout.activity
                 }
                 if (p0.isNullOrEmpty()) {
                     setMessageNull()
-                }
-                else if (p0.length >= 20) {
+                } else if (p0.length >= 20) {
                     setMessageOverflow()
-                }
-                else {
+                } else {
                     setMessageSuccess()
                 }
             }
