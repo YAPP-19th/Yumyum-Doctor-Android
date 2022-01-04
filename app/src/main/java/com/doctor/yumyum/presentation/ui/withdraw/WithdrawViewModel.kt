@@ -1,15 +1,38 @@
 package com.doctor.yumyum.presentation.ui.withdraw
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.common.base.BaseViewModel
+import com.doctor.yumyum.data.repository.UserRepositoryImpl
+import com.kakao.sdk.user.UserApiClient
+import java.lang.Exception
 
 class WithdrawViewModel : BaseViewModel() {
+    private val userRepository = UserRepositoryImpl()
     private val _withdrawType: MutableLiveData<Int> = MutableLiveData(REASON_RARELY)
     val withdrawType: LiveData<Int> get() = _withdrawType
+    private val _errorState: MutableLiveData<Boolean> = MutableLiveData()
+    val errorState: LiveData<Boolean> get() = _errorState
 
     fun setWithdrawType(type: Int) {
         _withdrawType.value = type
+    }
+
+    suspend fun withdraw() {
+        UserApiClient.instance.unlink { error ->
+            if (error != null) {
+                _errorState.value = true
+            }
+        }
+        try {
+            val response = userRepository.deleteUser()
+            if (!response.isSuccessful) {
+                _errorState.postValue(true)
+            }
+        } catch (e: Exception) {
+            _errorState.postValue(true)
+        }
     }
 
     companion object {

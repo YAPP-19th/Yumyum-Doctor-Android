@@ -26,4 +26,7 @@ class UserRepositoryImpl() : UserRepository {
 
     override suspend fun getUserInfo(): Response<UserInfoResponse> =
         userDataSource.getUserInfo()
+
+    override suspend fun deleteUser(): Response<ResponseBody> =
+        userDataSource.deleteUser()
 }

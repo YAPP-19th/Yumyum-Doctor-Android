@@ -23,7 +23,7 @@ class WithdrawActivity : BaseActivity<ActivityWithdrawBinding>(R.layout.activity
             onBackPressed()
         }
         binding.withdrawTvWithdraw.setOnClickListener {
-            WithdrawDialog().apply {
+            WithdrawDialog(viewModel).apply {
                 show(supportFragmentManager, "TastePassDialog")
             }
         }

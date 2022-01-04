@@ -12,4 +12,5 @@ interface UserRepository {
     suspend fun patchNickname(nickname: String): Response<ResponseBody>
     suspend fun postFlavor(flavor: UserFlavor): Response<ResponseBody>
     suspend fun getUserInfo(): Response<UserInfoResponse>
+    suspend fun deleteUser(): Response<ResponseBody>
 }

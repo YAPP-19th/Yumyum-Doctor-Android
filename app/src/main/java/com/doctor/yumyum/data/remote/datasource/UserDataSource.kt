@@ -14,6 +14,7 @@ interface UserDataSource {
     suspend fun patchNickname(nickname: String): Response<ResponseBody>
     suspend fun postFlavor(flavor: UserFlavor): Response<ResponseBody>
     suspend fun getUserInfo(): Response<UserInfoResponse>
+    suspend fun deleteUser(): Response<ResponseBody>
 }
 
 class UserDataSourceImpl : UserDataSource {
@@ -35,5 +36,8 @@ class UserDataSourceImpl : UserDataSource {
 
     override suspend fun getUserInfo(): Response<UserInfoResponse> =
         RetrofitClient.getClient().create(UserService::class.java).getUserInfo()
+
+    override suspend fun deleteUser(): Response<ResponseBody> =
+        RetrofitClient.getClient().create(UserService::class.java).deleteUser()
 
 }

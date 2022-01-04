@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseActivity
+import com.doctor.yumyum.common.utils.RecipeType
 import com.doctor.yumyum.databinding.ActivityResearchListBinding
 import com.doctor.yumyum.databinding.DialogSelectSearchBinding
 import com.doctor.yumyum.databinding.DialogSelectSortBinding
@@ -116,7 +117,7 @@ class ResearchListActivity :
             startActivity(intent)
         }, { recipe ->
             viewModel.setBookmarkState(recipe)
-        })
+        }, {},{},RecipeType.BASIC.name)
         binding.researchListClAppbar.appbarIbBack.setOnClickListener { finish() }
         binding.researchListRvRecipe.adapter = researchListAdapter
 

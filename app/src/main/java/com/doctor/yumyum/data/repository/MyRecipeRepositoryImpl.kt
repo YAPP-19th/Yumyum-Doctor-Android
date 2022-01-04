@@ -3,12 +3,12 @@ package com.doctor.yumyum.data.repository
 import com.doctor.yumyum.data.remote.datasource.MyRecipeDataSourceImpl
 import com.doctor.yumyum.data.remote.response.SearchRecipeResponse
 import com.doctor.yumyum.domain.repository.MyRecipeRepository
+import okhttp3.ResponseBody
 import retrofit2.Response
 
 class MyRecipeRepositoryImpl : MyRecipeRepository {
     private val myRecipeDataSource : MyRecipeDataSourceImpl
         get() = MyRecipeDataSourceImpl()
-
 
     override suspend fun getMyRecipe(
         categoryName: String,
@@ -38,5 +38,11 @@ class MyRecipeRepositoryImpl : MyRecipeRepository {
             status = status,
             offset = offset
         )
+
+    override suspend fun deleteFavorite(recipeId: Int): Response<ResponseBody> =
+        myRecipeDataSource.deleteFavorite(recipeId)
+
+    override suspend fun postFavorite(recipeId: Int, categoryName: String): Response<ResponseBody> =
+        myRecipeDataSource.postFavorite(recipeId,categoryName)
 
 }

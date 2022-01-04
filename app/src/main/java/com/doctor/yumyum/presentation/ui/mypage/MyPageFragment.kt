@@ -2,6 +2,7 @@ package com.doctor.yumyum.presentation.ui.mypage
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
@@ -51,17 +52,6 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
             viewModel.getUserInfo()
         }
 
-        binding.apply {
-            myPageTvTasteSetting.setOnClickListener {
-                val tasteIntent = Intent(context, TasteActivity::class.java)
-                tasteIntent.putExtra(getString(R.string.taste_mode), true)
-                startActivity(tasteIntent)
-            }
-            myPageTvMyInfo.setOnClickListener {
-                startActivity(Intent(context, MyInfoActivity::class.java))
-            }
-        }
-
         viewModel.grade.observe(viewLifecycleOwner) {
             gradeBadge[it]?.let { badge -> binding.myPageIvBadge.setImageResource(badge) }
             nextGrade[it]?.let { point -> binding.myPageTvNextLevel.text = point }
@@ -70,8 +60,36 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
         viewModel.point.observe(viewLifecycleOwner) { point ->
             binding.myPageGraphOrange.apply {
                 gradePoint[nextGrade[viewModel.grade.value]]?.let { nextPoint ->
-                    if (nextPoint != 0 ) {
-                        this.layoutParams.width = binding.myPageGraphWhite.width * point / nextPoint
+                    if (nextPoint != 0) {
+                        this.layoutParams.width =
+                            binding.myPageGraphWhite.width * point / nextPoint
+                    }
+                }
+            }
+        }
+
+        binding.apply {
+            myPageIbInfo.setOnClickListener {
+                activity?.let { activity ->
+                    LevelInfoDialog().show(
+                        activity.supportFragmentManager,
+                        "LogoutDialog"
+                    )
+                }
+            }
+            myPageTvTasteSetting.setOnClickListener {
+                val tasteIntent = Intent(context, TasteActivity::class.java)
+                tasteIntent.putExtra(getString(R.string.taste_mode), true)
+                startActivity(tasteIntent)
+            }
+            myPageTvMyInfo.setOnClickListener {
+                startActivity(Intent(context, MyInfoActivity::class.java))
+                myPageTvLogout.setOnClickListener {
+                    activity?.let { activity ->
+                        LogoutDialog(viewModel).show(
+                            activity.supportFragmentManager,
+                            "LogoutDialog"
+                        )
                     }
                 }
             }
