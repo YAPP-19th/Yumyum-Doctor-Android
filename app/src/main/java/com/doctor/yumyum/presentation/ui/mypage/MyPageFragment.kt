@@ -2,13 +2,13 @@ package com.doctor.yumyum.presentation.ui.mypage
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
 import com.doctor.yumyum.common.utils.gradePoint
 import com.doctor.yumyum.databinding.FragmentMyPageBinding
-import com.doctor.yumyum.presentation.ui.splash.SplashActivity
 import com.doctor.yumyum.presentation.ui.taste.TasteActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -58,8 +58,13 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
                 startActivity(tasteIntent)
             }
             myPageTvLogout.setOnClickListener {
-                viewModel?.logout()
-                startActivity(Intent(context, SplashActivity::class.java))
+                activity?.let { activity ->
+                    LogoutDialog(viewModel).show(
+                        activity.supportFragmentManager,
+                        "LogoutDialog"
+                    )
+                }
+
             }
         }
 
@@ -71,7 +76,8 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
         viewModel.point.observe(viewLifecycleOwner) { point ->
             binding.myPageGraphOrange.layoutParams.apply {
                 gradePoint[nextGrade[viewModel.grade.value]]?.let { nextPoint ->
-                    binding.myPageGraphOrange.layoutParams.width = binding.myPageGraphWhite.width * point / nextPoint
+                    binding.myPageGraphOrange.layoutParams.width =
+                        binding.myPageGraphWhite.width * point / nextPoint
                 }
             }
             if (binding.myPageGraphOrange.width != 0) {

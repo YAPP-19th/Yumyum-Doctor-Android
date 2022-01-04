@@ -233,6 +233,7 @@
     <string name="my_page_tv_app_version">앱 버전</string>
     <string name="my_page_tv_my_app_version">ver %1$s</string>
     <string name="my_page_tv_logout">로그아웃</string>
+    <string name="dialog_logout_title">로그아웃 하시겠습니까?</string>
 
 
 </resources>
