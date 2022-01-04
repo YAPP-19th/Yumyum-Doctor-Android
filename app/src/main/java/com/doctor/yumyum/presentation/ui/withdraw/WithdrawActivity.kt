@@ -19,5 +19,13 @@ class WithdrawActivity : BaseActivity<ActivityWithdrawBinding>(R.layout.activity
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+        binding.withdrawAppbar.appbarIbBack.setOnClickListener {
+            onBackPressed()
+        }
+        binding.withdrawTvWithdraw.setOnClickListener {
+            WithdrawDialog().apply {
+                show(supportFragmentManager, "TastePassDialog")
+            }
+        }
     }
 }

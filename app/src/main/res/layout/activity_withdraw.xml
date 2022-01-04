@@ -136,7 +136,7 @@
             android:background="@drawable/bg_btn_main"
             android:gravity="center"
             android:paddingVertical="16dp"
-            android:text="@string/my_info_tv_withdraw"
+            android:text="@string/withdraw_tv_withdraw"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
