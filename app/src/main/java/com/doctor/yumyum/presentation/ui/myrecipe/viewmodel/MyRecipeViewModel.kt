@@ -1,4 +1,4 @@
-package com.doctor.yumyum.presentation.ui.myrecipe
+package com.doctor.yumyum.presentation.ui.myrecipe.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData

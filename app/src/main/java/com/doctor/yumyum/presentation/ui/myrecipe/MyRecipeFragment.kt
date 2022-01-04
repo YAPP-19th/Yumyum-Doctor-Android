@@ -15,12 +15,12 @@ import com.doctor.yumyum.data.model.RecipeModel
 import com.doctor.yumyum.databinding.DialogMyRecipeSortBinding
 import com.doctor.yumyum.databinding.FragmentMyRecipeBinding
 import com.doctor.yumyum.presentation.adapter.MyRecipeFavoriteAdapter
+import com.doctor.yumyum.presentation.ui.myrecipe.viewmodel.MyRecipeViewModel
 import com.doctor.yumyum.presentation.ui.recipedetail.RecipeDetailActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.internal.notify
 
 
 class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment_my_recipe) {

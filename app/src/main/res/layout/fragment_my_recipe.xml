@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.doctor.yumyum.presentation.ui.myrecipe.MyRecipeViewModel" />
+            type="com.doctor.yumyum.presentation.ui.myrecipe.viewmodel.MyRecipeViewModel" />
 
         <variable
             name="myRecipeFragment"
