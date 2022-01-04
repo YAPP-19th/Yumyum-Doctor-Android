@@ -61,8 +61,10 @@ class MyRecipeViewModel : BaseViewModel() {
                     order = "asc",
                     status = ""
                 )
-            response.body()?.foods?.let {
-                _myRecipeList.postValue(it)
+            if(response.isSuccessful){
+                response.body()?.foods?.let {
+                    _myRecipeList.postValue(it)
+                }
             }
         } catch (e: Exception) {
             Log.d("MyRecipeViewModel: ","MyRecipeGet 실패")
@@ -73,8 +75,10 @@ class MyRecipeViewModel : BaseViewModel() {
         try {
             val response =
                 recipeRepository.getFavorite(categoryName)
-            response.body()?.favoriteFoods?.let {
-                _favoriteRecipeList.postValue(it)
+            if(response.isSuccessful){
+                response.body()?.favoriteFoods?.let {
+                    _favoriteRecipeList.postValue(it)
+                }
             }
         }catch (e: Exception){
             Log.d("MyRecipeViewModel: ","FavoriteGet failed - ${e.message}")
