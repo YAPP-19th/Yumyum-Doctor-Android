@@ -6,29 +6,27 @@ import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseViewModel
 import com.doctor.yumyum.data.model.FavoriteRecipe
-import com.doctor.yumyum.common.utils.MineFoodType
+import com.doctor.yumyum.common.utils.RecipeType
 import com.doctor.yumyum.data.model.RecipeModel
-import com.doctor.yumyum.data.model.WriteRecipe
-import com.doctor.yumyum.data.remote.response.SearchRecipeResponse
 import com.doctor.yumyum.data.repository.MainRepositoryImpl
 import com.doctor.yumyum.data.repository.MyRecipeRepositoryImpl
-import okhttp3.ResponseBody
-import retrofit2.Response
-import kotlin.coroutines.coroutineContext
+import com.doctor.yumyum.data.repository.RecipeRepositoryImpl
+
 
 class MyRecipeViewModel : BaseViewModel() {
     private val repository = MainRepositoryImpl()
     private val myRecipeRepository = MyRecipeRepositoryImpl()
+    private val recipeRepository = RecipeRepositoryImpl()
 
     private val _mode: MutableLiveData<Int> = MutableLiveData(repository.getMode())
     val mode: LiveData<Int>
         get() = _mode
 
-    private val _bestRecipeList : MutableLiveData<ArrayList<FavoriteRecipe>> = MutableLiveData()
-    val bestRecipeList : LiveData<ArrayList<FavoriteRecipe>>
-        get() = _bestRecipeList
+    private val _favoriteRecipeList : MutableLiveData<ArrayList<FavoriteRecipe>> = MutableLiveData()
+    val favoriteRecipeList : LiveData<ArrayList<FavoriteRecipe>>
+        get() = _favoriteRecipeList
 
-    private val _foodType: MutableLiveData<String> = MutableLiveData(MineFoodType.MYFOOD.name)
+    private val _foodType: MutableLiveData<String> = MutableLiveData(RecipeType.MYFOOD.name)
     val foodType: LiveData<String>
         get() = _foodType
 
@@ -45,7 +43,6 @@ class MyRecipeViewModel : BaseViewModel() {
     fun changeFoodType(foodType : String) {
         _foodType.value = foodType
     }
-
 
     suspend fun getMyRecipe(categoryName: String, mineFoodType: String) {
         try {
@@ -64,11 +61,48 @@ class MyRecipeViewModel : BaseViewModel() {
                     order = "asc",
                     status = ""
                 )
-            response.body()?.foods?.let {
-                _myRecipeList.postValue(it)
+            if(response.isSuccessful){
+                response.body()?.foods?.let {
+                    _myRecipeList.postValue(it)
+                }
             }
         } catch (e: Exception) {
             Log.d("MyRecipeViewModel: ","MyRecipeGet 실패")
+        }
+    }
+
+    suspend fun getFavoriteRecipe(categoryName: String){
+        try {
+            val response =
+                recipeRepository.getFavorite(categoryName)
+            if(response.isSuccessful){
+                response.body()?.favoriteFoods?.let {
+                    _favoriteRecipeList.postValue(it)
+                }
+            }
+        }catch (e: Exception){
+            Log.d("MyRecipeViewModel: ","FavoriteGet failed - ${e.message}")
+        }
+    }
+
+    suspend fun deleteFavorite(recipeId : Int){
+        val response = myRecipeRepository.deleteFavorite(recipeId)
+        if(!response.isSuccessful){
+            Log.d("MyRecipeViewModel: ","FavoriteDelete failed - ${response.code()}")
+        }
+    }
+
+    suspend fun postFavorite(recipeId: Int, categoryName: String){
+        val response = myRecipeRepository.postFavorite(recipeId,categoryName)
+        if(!response.isSuccessful){
+            Log.d("MyRecipeViewModel: ","FavoritePost failed - ${response.code()}")
+        }
+    }
+
+    suspend fun deleteBookMark(recipeId: Int){
+        val response = recipeRepository.deleteBookmark(recipeId)
+        if(!response.isSuccessful){
+            Log.d("MyRecipeViewModel: ","BookMarkDelete failed - ${response.code()}")
         }
     }
 }
