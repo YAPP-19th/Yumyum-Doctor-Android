@@ -1,5 +1,8 @@
 package com.doctor.yumyum.data.repository
 
+import androidx.lifecycle.LiveData
+import androidx.paging.PagingData
+import com.doctor.yumyum.data.model.RecipeModel
 import com.doctor.yumyum.data.remote.datasource.RecipeDataSourceImp
 import com.doctor.yumyum.data.remote.response.FavoriteRecipeResponse
 import com.doctor.yumyum.data.remote.response.RecipeDetailResponse
@@ -52,8 +55,34 @@ class RecipeRepositoryImpl : RecipeRepository {
             offset,
             pageSize
         )
+
     override suspend fun getFavorite(categoryName: String): Response<FavoriteRecipeResponse> =
         recipeDataSource.getFavorite(categoryName)
+
     override suspend fun getRecommendation(categoryName: String, top: Int, rankDatePeriod: Int) =
         recipeDataSource.getRecommendation(categoryName, top, rankDatePeriod)
+
+    override suspend fun searchPagingList(
+        categoryName: String,
+        flavors: ArrayList<String>,
+        tags: ArrayList<String>,
+        minPrice: Int?,
+        maxPrice: Int?,
+        sort: String,
+        order: String,
+        firstSearchTime: String,
+        offset: Int,
+        pageSize: Int
+    ): LiveData<PagingData<RecipeModel>> = recipeDataSource.searchPagingList(
+        categoryName,
+        flavors,
+        tags,
+        minPrice,
+        maxPrice,
+        sort,
+        order,
+        firstSearchTime,
+        offset,
+        pageSize
+    )
 }

@@ -1,5 +1,8 @@
 package com.doctor.yumyum.domain.repository
 
+import androidx.lifecycle.LiveData
+import androidx.paging.PagingData
+import com.doctor.yumyum.data.model.RecipeModel
 import com.doctor.yumyum.data.remote.response.FavoriteRecipeResponse
 import com.doctor.yumyum.data.remote.response.RecipeDetailResponse
 import com.doctor.yumyum.data.remote.response.RecipeRecommendationResponse
@@ -31,4 +34,16 @@ interface RecipeRepository {
         top: Int,
         rankDatePeriod: Int
     ): Response<RecipeRecommendationResponse>
+    suspend fun searchPagingList(
+        categoryName: String,
+        flavors: ArrayList<String>,
+        tags: ArrayList<String>,
+        minPrice: Int?,
+        maxPrice: Int?,
+        sort: String,
+        order: String,
+        firstSearchTime: String,
+        offset: Int,
+        pageSize: Int
+    ): LiveData<PagingData<RecipeModel>>
 }

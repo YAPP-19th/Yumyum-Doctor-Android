@@ -1,6 +1,6 @@
 package com.doctor.yumyum.presentation.ui.researchlist
 
-import ResearchListAdapter
+import ResearchPagingAdapter
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
@@ -111,13 +111,13 @@ class ResearchListActivity :
             intent.putExtra("maxPrice", maxPrice)
             filterLauncher.launch(intent)
         }
-        val researchListAdapter = ResearchListAdapter({ recipeId ->
+        val researchListAdapter = ResearchPagingAdapter({ recipeId ->
             val intent = Intent(this, RecipeDetailActivity::class.java)
             intent.putExtra("recipeId", recipeId)
             startActivity(intent)
         }, { recipe ->
             viewModel.setBookmarkState(recipe)
-        }, {},{},RecipeType.BASIC.name)
+        }, {}, {}, RecipeType.BASIC.name)
         binding.researchListClAppbar.appbarIbBack.setOnClickListener { finish() }
         binding.researchListRvRecipe.adapter = researchListAdapter
 
@@ -195,8 +195,8 @@ class ResearchListActivity :
             searchDialog.dismiss()
         }
 
-        viewModel.recipeList.observe(this) {
-            researchListAdapter.setRecipeList(it)
+        viewModel.searchPagingList.observe(this) {
+            lifecycleScope.launch { it?.let { researchListAdapter.submitData(it) } }
         }
         viewModel.errorState.observe(this) { resId ->
             showToast(getString(resId))
@@ -243,7 +243,7 @@ class ResearchListActivity :
 
     private fun searchRecipeList() {
         lifecycleScope.launch {
-            viewModel.searchRecipeList(
+            viewModel.searchPagingList(
                 categoryName,
                 flavors,
                 tags,

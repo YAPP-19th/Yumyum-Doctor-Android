@@ -3,6 +3,7 @@ package com.doctor.yumyum.presentation.ui.researchlist
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseViewModel
 import com.doctor.yumyum.data.model.RecipeModel
@@ -28,6 +29,8 @@ class ResearchListViewModel : BaseViewModel() {
     val searchList: LiveData<ArrayList<String>> get() = _searchList
     private val _recipeList = MutableLiveData<ArrayList<RecipeModel>>(ArrayList())
     val recipeList: LiveData<ArrayList<RecipeModel>> get() = _recipeList
+    private var _searchPagingList = MutableLiveData<PagingData<RecipeModel>>()
+    val searchPagingList: LiveData<PagingData<RecipeModel>> get() = _searchPagingList
 
     fun initSortType() {
         _tmpSortType.value = sortType.value
@@ -86,6 +89,37 @@ class ResearchListViewModel : BaseViewModel() {
             } else {
                 _errorState.postValue(ERROR_SEARCH)
             }
+        } catch (e: Exception) {
+            _errorState.postValue(ERROR_SEARCH)
+        }
+    }
+
+    suspend fun searchPagingList(
+        categoryName: String,
+        flavors: ArrayList<String>,
+        tags: ArrayList<String>,
+        minPrice: Int?,
+        maxPrice: Int?,
+        sort: String,
+        order: String,
+        firstSearchTime: String,
+        offset: Int,
+        pageSize: Int
+    ) {
+        try {
+            _searchPagingList.value =
+                repository.searchPagingList(
+                    categoryName,
+                    flavors,
+                    tags,
+                    minPrice,
+                    maxPrice,
+                    sort,
+                    order,
+                    firstSearchTime,
+                    offset,
+                    pageSize
+                ).value
         } catch (e: Exception) {
             _errorState.postValue(ERROR_SEARCH)
         }

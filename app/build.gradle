@@ -93,4 +93,7 @@ dependencies {
 
     //FlexboxLayout
     implementation 'com.google.android.flexbox:flexbox:3.0.0'
+
+    // paging
+    implementation 'androidx.paging:paging-runtime-ktx:3.1.0'
 }
