@@ -1,8 +1,10 @@
 package com.doctor.yumyum.presentation.ui.myrecipe
 
 import ResearchListAdapter
+import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
@@ -17,6 +19,7 @@ import com.doctor.yumyum.databinding.FragmentMyRecipeBinding
 import com.doctor.yumyum.presentation.adapter.MyRecipeFavoriteAdapter
 import com.doctor.yumyum.presentation.ui.myrecipe.viewmodel.MyRecipeViewModel
 import com.doctor.yumyum.presentation.ui.recipedetail.RecipeDetailActivity
+import com.doctor.yumyum.presentation.ui.write.WriteFragment2
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -29,6 +32,15 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
     private lateinit var sortSelectDialog: BottomSheetDialog
     private lateinit var sortSelectBinding: DialogMyRecipeSortBinding
     private lateinit var sortSelectView: View
+
+    companion object {
+        const val MODE = "mode"
+        const val MIN = "minPrice"
+        const val MAX = "maxPrice"
+        const val STATUS = "status"
+        const val CATEGORY = "category"
+        const val TASTE = "tasteList"
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -71,16 +83,16 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
         sortSelectDialog.setContentView(sortSelectBinding.root)
     }
 
-    private fun initMyRecipeRecycler(foodType : String) {
+    private fun initMyRecipeRecycler(foodType: String) {
         val myRecipeListAdapter = ResearchListAdapter({ recipeId ->
             val intent = Intent(requireContext(), RecipeDetailActivity::class.java)
             intent.putExtra("recipeId", recipeId)
             startActivity(intent)
-        },{}, {
+        }, {}, {
             deleteBookMark(it.id)
-        },{
+        }, {
             postFavorite(it)
-        },foodType)
+        }, foodType)
         binding.myRecipeRvPost.adapter = myRecipeListAdapter
 
         myRecipeViewModel.myRecipeList.observe(viewLifecycleOwner) {
@@ -89,7 +101,7 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
     }
 
     private fun initFavoriteRecipeRecycler() {
-        val myRecipeFavoriteAdapter = MyRecipeFavoriteAdapter ({ recipeId ->
+        val myRecipeFavoriteAdapter = MyRecipeFavoriteAdapter({ recipeId ->
             val intent = Intent(requireContext(), RecipeDetailActivity::class.java)
             intent.putExtra("recipeId", recipeId)
             startActivity(intent)
@@ -108,7 +120,15 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
     private fun startForFilter() {
         filterLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-                //TODO : 정렬 정보 가져오기
+                if (it.resultCode == RESULT_OK) {
+                    val mode = it.data?.getIntExtra(MODE,0)?: 0
+                    val minPrice = it.data?.getStringExtra(MIN)
+                    val maxPrice = it.data?.getStringExtra(MAX)
+                    val category = it.data?.getStringExtra(CATEGORY)
+                    val status = it.data?.getStringExtra(STATUS)
+                    val tasteList = it.data?.getStringArrayListExtra(TASTE) as ArrayList<String>
+                    getMyPostWithFilter(mode,category,status,tasteList,minPrice,maxPrice)
+                }
             }
         binding.myRecipeIbFilter.setOnClickListener {
             val intent = Intent(context, MyRecipeFilterActivity::class.java)
@@ -126,8 +146,21 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
         myRecipeViewModel.foodType.observe(viewLifecycleOwner) { foodType ->
             initMyRecipeRecycler(foodType)
             CoroutineScope(Dispatchers.IO).launch {
-                myRecipeViewModel.getMyRecipe(category, foodType)
+                myRecipeViewModel.getMyRecipe(category, foodType,null,null,null,null)
             }
+        }
+    }
+
+    private fun getMyPostWithFilter(
+        mode: Int,
+        category: String?,
+        status: String?,
+        tasteList: ArrayList<String>,
+        min: String?,
+        max: String?
+    ) {
+        if(category.isNullOrBlank()){
+
         }
     }
 
@@ -141,7 +174,7 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
         }
     }
 
-    private fun deleteBookMark(recipeId : Int){
+    private fun deleteBookMark(recipeId: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             myRecipeViewModel.deleteBookMark(recipeId)
         }

@@ -7,10 +7,6 @@
         <import type="com.doctor.yumyum.R"/>
 
         <variable
-            name="fragment"
-            type="com.doctor.yumyum.presentation.ui.myrecipe.MyRecipeFilterActivity" />
-
-        <variable
             name="viewModel"
             type="com.doctor.yumyum.presentation.ui.myrecipe.viewmodel.MyRecipeFilterViewModel" />
 
