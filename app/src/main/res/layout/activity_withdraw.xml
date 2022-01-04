@@ -5,6 +5,10 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.doctor.yumyum.presentation.ui.withdraw.WithdrawViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,12 +39,14 @@
         <TextView
             android:id="@+id/withdraw_reason_rarely"
             style="@style/font_body1_regular"
+            bind_withdraw="@{viewModel.withdrawType == viewModel.REASON_RARELY}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="21dp"
             android:drawablePadding="6dp"
             android:gravity="center_vertical"
+            android:onClick="@{()->viewModel.setWithdrawType(viewModel.REASON_RARELY)}"
             android:text="@string/withdraw_reason_rarely"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
@@ -51,12 +57,14 @@
         <TextView
             android:id="@+id/withdraw_reason_uncomfortable"
             style="@style/font_body1_regular"
+            bind_withdraw="@{viewModel.withdrawType == viewModel.REASON_UNCOMFORTABLE}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="8dp"
             android:drawablePadding="6dp"
             android:gravity="center_vertical"
+            android:onClick="@{()->viewModel.setWithdrawType(viewModel.REASON_UNCOMFORTABLE)}"
             android:text="@string/withdraw_reason_uncomfortable"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
@@ -67,12 +75,14 @@
         <TextView
             android:id="@+id/withdraw_reason_unpleasant"
             style="@style/font_body1_regular"
+            bind_withdraw="@{viewModel.withdrawType == viewModel.REASON_UNPLEASANT}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="8dp"
             android:drawablePadding="6dp"
             android:gravity="center_vertical"
+            android:onClick="@{()->viewModel.setWithdrawType(viewModel.REASON_UNPLEASANT)}"
             android:text="@string/withdraw_reason_unpleasant"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
@@ -83,12 +93,14 @@
         <TextView
             android:id="@+id/withdraw_reason_wrong"
             style="@style/font_body1_regular"
+            bind_withdraw="@{viewModel.withdrawType == viewModel.REASON_WRONG}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="8dp"
             android:drawablePadding="6dp"
             android:gravity="center_vertical"
+            android:onClick="@{()->viewModel.setWithdrawType(viewModel.REASON_WRONG)}"
             android:text="@string/withdraw_reason_wrong"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
@@ -99,12 +111,14 @@
         <TextView
             android:id="@+id/withdraw_reason_etc"
             style="@style/font_body1_regular"
+            bind_withdraw="@{viewModel.withdrawType == viewModel.REASON_ETC}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="8dp"
             android:drawablePadding="6dp"
             android:gravity="center_vertical"
+            android:onClick="@{()->viewModel.setWithdrawType(viewModel.REASON_ETC)}"
             android:text="@string/withdraw_reason_etc"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
