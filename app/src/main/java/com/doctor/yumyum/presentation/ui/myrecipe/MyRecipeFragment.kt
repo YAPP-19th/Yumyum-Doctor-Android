@@ -111,7 +111,7 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
                 //TODO : 정렬 정보 가져오기
             }
         binding.myRecipeIbFilter.setOnClickListener {
-            val intent = Intent(context, MyPageFilterActivity::class.java)
+            val intent = Intent(context, MyRecipeFilterActivity::class.java)
             filterLauncher.launch(intent)
         }
     }
