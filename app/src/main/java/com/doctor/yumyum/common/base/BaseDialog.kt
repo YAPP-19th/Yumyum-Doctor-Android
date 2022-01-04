@@ -45,7 +45,5 @@ abstract class BaseDialog<T : ViewDataBinding>(@LayoutRes private val layoutResI
         params.width = (display.widthPixels * 0.8).toInt()
 
         dialog?.window!!.attributes = params
-
-
     }
 }

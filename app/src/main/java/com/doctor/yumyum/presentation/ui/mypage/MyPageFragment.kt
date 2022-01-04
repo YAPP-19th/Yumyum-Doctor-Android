@@ -52,6 +52,14 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
         }
 
         binding.apply {
+            myPageIbInfo.setOnClickListener {
+                activity?.let { activity ->
+                    LevelInfoDialog().show(
+                        activity.supportFragmentManager,
+                        "LogoutDialog"
+                    )
+                }
+            }
             myPageTvTasteSetting.setOnClickListener {
                 val tasteIntent = Intent(context, TasteActivity::class.java)
                 tasteIntent.putExtra(getString(R.string.taste_mode), true)
