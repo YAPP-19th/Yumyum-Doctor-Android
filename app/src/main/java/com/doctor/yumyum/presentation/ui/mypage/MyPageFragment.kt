@@ -2,6 +2,7 @@ package com.doctor.yumyum.presentation.ui.mypage
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
@@ -51,10 +52,27 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
         }
 
         binding.apply {
+            myPageIbInfo.setOnClickListener {
+                activity?.let { activity ->
+                    LevelInfoDialog().show(
+                        activity.supportFragmentManager,
+                        "LogoutDialog"
+                    )
+                }
+            }
             myPageTvTasteSetting.setOnClickListener {
                 val tasteIntent = Intent(context, TasteActivity::class.java)
                 tasteIntent.putExtra(getString(R.string.taste_mode), true)
                 startActivity(tasteIntent)
+            }
+            myPageTvLogout.setOnClickListener {
+                activity?.let { activity ->
+                    LogoutDialog(viewModel).show(
+                        activity.supportFragmentManager,
+                        "LogoutDialog"
+                    )
+                }
+
             }
         }
 
@@ -66,7 +84,8 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
         viewModel.point.observe(viewLifecycleOwner) { point ->
             binding.myPageGraphOrange.layoutParams.apply {
                 gradePoint[nextGrade[viewModel.grade.value]]?.let { nextPoint ->
-                    binding.myPageGraphOrange.layoutParams.width = binding.myPageGraphWhite.width * point / nextPoint
+                    binding.myPageGraphOrange.layoutParams.width =
+                        binding.myPageGraphWhite.width * point / nextPoint
                 }
             }
             if (binding.myPageGraphOrange.width != 0) {

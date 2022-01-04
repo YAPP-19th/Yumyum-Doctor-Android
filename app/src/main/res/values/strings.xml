@@ -233,6 +233,18 @@
     <string name="my_page_tv_app_version">앱 버전</string>
     <string name="my_page_tv_my_app_version">ver %1$s</string>
     <string name="my_page_tv_logout">로그아웃</string>
+    <string name="dialog_logout_title">로그아웃 하시겠습니까?</string>
+    
+    <!-- 레벨 안내 -->
+    <string name="level_info_title">레벨 안내</string>
+    <string name="level_info_student">회원가입 완료 시</string>
+    <string name="level_info_bachelor"><b>300</b>포인트 달성 시</string>
+    <string name="level_info_master"><b>700</b>포인트 달성 시</string>
+    <string name="level_info_expert"><b>1200</b>포인트 달성 시</string>
+    <string name="level_info_professor"><b>1800</b>포인트 달성 시</string>
+    <string name="level_info_point_how">포인트 획득 기준</string>
+    <string name="level_info_point_write">· 레시피 작성 <b>50</b>point</string>
+    <string name="level_info_point_open">· 레시피 \'최초\'공개 설정 <b>10</b>point (최초 1회)</string>
 
 
 </resources>
