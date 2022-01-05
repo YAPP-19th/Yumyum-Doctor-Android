@@ -2,6 +2,7 @@ package com.doctor.yumyum.presentation.ui.write
 
 
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
+import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.annotation.SuppressLint
 import android.app.Activity.RESULT_OK
 import android.app.AlertDialog
@@ -116,7 +117,7 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
         when {
             ContextCompat.checkSelfPermission(
                 requireContext(),
-                READ_EXTERNAL_STORAGE
+                WRITE_EXTERNAL_STORAGE
             ) == PERMISSION_GRANTED -> {
                 val intent = Intent(Intent.ACTION_PICK)
                 intent.type = MediaStore.Images.Media.CONTENT_TYPE
@@ -124,12 +125,12 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
                 intent.data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
                 reviewImageLauncher.launch(intent)
             }
-            shouldShowRequestPermissionRationale(READ_EXTERNAL_STORAGE)
+            shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE)
             -> {
                 showDialogToGetPermission()
             }
             else -> {
-                requestPermissionLauncher.launch(READ_EXTERNAL_STORAGE)
+                requestPermissionLauncher.launch(WRITE_EXTERNAL_STORAGE)
             }
         }
     }
