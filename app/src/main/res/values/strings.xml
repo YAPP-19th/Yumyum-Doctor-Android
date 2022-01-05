@@ -236,7 +236,8 @@
     <string name="my_page_tv_my_app_version">ver %1$s</string>
     <string name="my_page_tv_logout">로그아웃</string>
     <string name="dialog_logout_title">로그아웃 하시겠습니까?</string>
-    
+    <string name="dialog_grade_up_title">축하합니다!</string>
+    <string name="dialog_grade_up_content">조건을 모두 달성하여\n<b>%1$s 학위</b>를 취득하셨습니다.</string>
     <!-- 레벨 안내 -->
     <string name="level_info_title">레벨 안내</string>
     <string name="level_info_student">회원가입 완료 시</string>
@@ -264,6 +265,7 @@
     <string name="withdraw_tv_withdraw">탈퇴</string>
     <string name="withdraw_dialog_title">계정을 정말 삭제하시겠습니까?</string>
     <string name="withdraw_dialog_subtitle">*현재까지의 데이터가 영구 삭제됩니다.</string>
+
 
 
 </resources>

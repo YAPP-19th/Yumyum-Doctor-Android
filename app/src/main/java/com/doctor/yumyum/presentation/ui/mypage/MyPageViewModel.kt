@@ -1,5 +1,6 @@
 package com.doctor.yumyum.presentation.ui.mypage
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.common.base.BaseViewModel
@@ -14,6 +15,7 @@ import com.kakao.sdk.user.UserApiClient
 class MyPageViewModel : BaseViewModel() {
     private val userRepository = UserRepositoryImpl()
     private val loginRepository = LoginRepositoryImpl()
+    private val localGrade = userRepository.getLocalGrade()
     private val _nickname: MutableLiveData<String> = MutableLiveData("")
     val nickname: LiveData<String>
         get() = _nickname
@@ -26,6 +28,9 @@ class MyPageViewModel : BaseViewModel() {
     private val _errorState: MutableLiveData<Boolean> = MutableLiveData(false)
     val errorState: LiveData<Boolean>
         get() = _errorState
+    private val _gradeUp: MutableLiveData<String> = MutableLiveData("")
+    val gradeUp: LiveData<String>
+        get() = _gradeUp
 
     suspend fun getUserInfo() {
         try {
@@ -34,6 +39,11 @@ class MyPageViewModel : BaseViewModel() {
                 _nickname.postValue(userInfoResponse.body()?.userInfo?.nickname)
                 _grade.postValue(userInfoResponse.body()?.userInfo?.grade?.let { gradeEnToKo(it) })
                 _point.postValue(userInfoResponse.body()?.userInfo?.userGradePoint)
+                userInfoResponse.body()?.userInfo?.grade?.let { gradeEnToKo(it) }?.let {
+                    isGradeUp(
+                        it
+                    )
+                }
             } else {
                 _errorState.postValue(true)
             }
@@ -42,11 +52,21 @@ class MyPageViewModel : BaseViewModel() {
         }
     }
 
+    private fun isGradeUp(newGrade: String) {
+        Log.d("로그 local grade",localGrade.toString())
+        Log.d("로그 new grade", newGrade.toString())
+        if (localGrade != null) {
+            if (localGrade != newGrade) {
+                _gradeUp.postValue(newGrade)
+                userRepository.setLocalGrade(newGrade)
+            }
+        }
+    }
+
     fun logout() {
         UserApiClient.instance.logout {
             loginRepository.setLoginToken("")
             loginRepository.setLoginMode("")
         }
-
     }
 }

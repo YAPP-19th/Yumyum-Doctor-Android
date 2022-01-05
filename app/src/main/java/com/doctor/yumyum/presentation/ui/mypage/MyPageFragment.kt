@@ -52,6 +52,17 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
             viewModel.getUserInfo()
         }
 
+        viewModel.gradeUp.observe(viewLifecycleOwner) { grade ->
+            if (grade.isNotBlank()) {
+                activity?.let {
+                    GradeUpDialog(grade).show(
+                        it.supportFragmentManager,
+                        "GradeUpDialog"
+                    )
+                }
+            }
+        }
+
         viewModel.grade.observe(viewLifecycleOwner) {
             gradeBadge[it]?.let { badge -> binding.myPageIvBadge.setImageResource(badge) }
             nextGrade[it]?.let { point -> binding.myPageTvNextLevel.text = point }

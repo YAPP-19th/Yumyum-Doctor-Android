@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_dialog_level_info">
+        android:background="@drawable/bg_dialog_my_page">
 
         <TextView
             android:id="@+id/dialog_level_info_tv_title"
