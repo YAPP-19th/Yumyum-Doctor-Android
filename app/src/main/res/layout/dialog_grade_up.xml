@@ -29,6 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="23dp"
             android:text="@string/dialog_grade_up_title"
+            style="@style/font_level_title"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

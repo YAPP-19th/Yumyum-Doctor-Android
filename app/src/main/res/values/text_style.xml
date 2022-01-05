@@ -97,5 +97,17 @@
         <item name="android:includeFontPadding">false</item>
     </style>
 
+    <!-- level -->
+    <style name="font_level_title">
+        <item name="android:fontFamily">@font/level</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+    <style name="font_level_content">
+        <item name="android:fontFamily">@font/level</item>
+        <item name="android:textSize">13dp</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
 
 </resources>
