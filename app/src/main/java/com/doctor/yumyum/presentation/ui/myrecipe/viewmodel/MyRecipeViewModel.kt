@@ -46,12 +46,10 @@ class MyRecipeViewModel : BaseViewModel() {
 
     fun setTmpSortType(type: SortType) {
         _tmpSortType.value = type
-        Log.d("TempSortType", tmpSortType.value.toString())
     }
 
     fun setSortType() {
         _sortType.value = tmpSortType.value
-        Log.d("SortType", sortType.value.toString())
     }
 
     fun changeMode() {
@@ -70,7 +68,9 @@ class MyRecipeViewModel : BaseViewModel() {
         flavor: String?,
         minPrice: String?,
         maxPrice: String?,
-        status: String?
+        status: String?,
+        sort : String,
+        order: String
     ) {
         try {
             val response =
@@ -84,8 +84,8 @@ class MyRecipeViewModel : BaseViewModel() {
                     minPrice = minPrice?.toInt(),
                     maxPrice = maxPrice?.toInt(),
                     firstSearchTime = "2022-12-20T12:12:12",
-                    sort = "id",
-                    order = "asc",
+                    sort = sort,
+                    order = order,
                     status = status
                 )
             Log.d("MyRecipeViewModel: ", "${response.body()}")

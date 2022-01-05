@@ -13,12 +13,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
+import com.doctor.yumyum.common.utils.SortType
 import com.doctor.yumyum.data.model.RecipeModel
 import com.doctor.yumyum.databinding.DialogMyRecipeSortBinding
 import com.doctor.yumyum.databinding.FragmentMyRecipeBinding
 import com.doctor.yumyum.presentation.adapter.MyRecipeFavoriteAdapter
 import com.doctor.yumyum.presentation.ui.myrecipe.viewmodel.MyRecipeViewModel
 import com.doctor.yumyum.presentation.ui.recipedetail.RecipeDetailActivity
+import com.doctor.yumyum.presentation.ui.researchlist.ResearchListViewModel
 import com.doctor.yumyum.presentation.ui.write.WriteFragment2
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.CoroutineScope
@@ -33,7 +35,6 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
     private lateinit var sortSelectBinding: DialogMyRecipeSortBinding
     private lateinit var sortSelectView: View
 
-    private var mode: Int = 0
     private var category: String? = null
     private var sort = "id"
     private var order = "desc"
@@ -43,10 +44,8 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
     private var flavors: java.util.ArrayList<String> = arrayListOf("")
 
     private var isFilterSet: Boolean = false
-    private var isSortSet: Boolean = false
 
     companion object {
-        const val MODE = "mode"
         const val MIN = "minPrice"
         const val MAX = "maxPrice"
         const val STATUS = "status"
@@ -65,13 +64,35 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
         initFavoriteRecipeRecycler()
         startForFilter()
 
+        //음식,음료 observe
         myRecipeViewModel.mode.observe(viewLifecycleOwner) { mode ->
             binding.myRecipeIbMode.setImageResource(
                 if (mode == R.string.common_food) R.drawable.ic_change_food else R.drawable.ic_change_beverage
             )
             getFavoriteList(requireContext().resources.getString(mode))
-            getMyPostWithFilter(mode, null, null, null, null, null)
+            getMyPostWithFilter()
         }
+
+        //정렬 적용하기 Observe
+        myRecipeViewModel.sortType.observe(viewLifecycleOwner) { type ->
+            when (type) {
+                SortType.RECENT -> {
+                    sort = "id"
+                    order = "desc"
+                }
+                SortType.EXPENSIVE -> {
+                    sort = "price"
+                    order = "desc"
+                }
+                SortType.CHEAP -> {
+                    sort = "price"
+                    order = "asc"
+                }
+            }
+            sortSelectDialog.dismiss()
+            getMyPostWithFilter()
+        }
+
     }
 
     private fun initBinding() {
@@ -91,6 +112,7 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
 
         sortSelectBinding.apply {
             lifecycleOwner = this@MyRecipeFragment
+            viewModel = myRecipeViewModel
         }
 
         sortSelectDialog = BottomSheetDialog(requireContext())
@@ -143,18 +165,21 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
                 when (it.resultCode) {
                     FILTER_APPLY -> {
                         isFilterSet = true
-                        mode = it.data?.getIntExtra(MODE, 0) ?: 0
                         minPrice = it.data?.getStringExtra(MIN)
                         maxPrice = it.data?.getStringExtra(MAX)
                         category = it.data?.getStringExtra(CATEGORY)
                         status = it.data?.getStringExtra(STATUS)
                         flavors = it.data?.getStringArrayListExtra(TASTE) as ArrayList<String>
-                        getMyPostWithFilter(mode, category, status, flavors, minPrice, maxPrice)
+                        getMyPostWithFilter()
                     }
                     FILTER_RESET -> {
                         isFilterSet = false
-                        mode = it.data?.getIntExtra(MODE, 0) ?: 0
-                        getMyPostWithFilter(mode, null, null, null, null, null)
+                        minPrice = null
+                        maxPrice = null
+                        category = null
+                        status = null
+                        flavors = arrayListOf()
+                        getMyPostWithFilter()
                     }
                 }
 
@@ -176,23 +201,16 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
         }
     }
 
-    private fun getMyPostWithFilter(
-        mode: Int,
-        category: String?,
-        status: String?,
-        tasteList: ArrayList<String>?,
-        min: String?,
-        max: String?
-    ) {
+    private fun getMyPostWithFilter() {
         val categoryName = if (category.isNullOrBlank()) {
-            requireContext().resources.getString(mode)
+            myRecipeViewModel.mode.value?.let { requireContext().resources.getString(it) }
         } else {
             category
         }
         myRecipeViewModel.foodType.observe(viewLifecycleOwner) { foodType ->
             initMyRecipeRecycler(foodType)
             CoroutineScope(Dispatchers.IO).launch {
-                myRecipeViewModel.getMyRecipe(categoryName, foodType, null, min, max, status)
+                myRecipeViewModel.getMyRecipe(categoryName.toString(), foodType,null,minPrice, maxPrice, status,sort,order)
             }
         }
     }
@@ -215,6 +233,7 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
 
     fun showBottomSheet() {
         sortSelectDialog.show()
+        myRecipeViewModel.initSortType()
     }
 
     fun changeFoodType(foodType: String) {

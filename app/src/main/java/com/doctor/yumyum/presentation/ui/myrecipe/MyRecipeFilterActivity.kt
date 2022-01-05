@@ -40,7 +40,6 @@ class MyRecipeFilterActivity :
     }
 
     fun finishFilter() {
-        val mode = filterViewModel.mode.value
         val minPrice = filterViewModel.minPrice.value
         val maxPrice = filterViewModel.maxPrice.value
         val status = filterViewModel.status.value
@@ -51,7 +50,6 @@ class MyRecipeFilterActivity :
             showToast(getString(R.string.error_filter_price_range))
         } else {
             val intent = Intent(this, MyRecipeFragment::class.java)
-            intent.putExtra(MyRecipeFragment.MODE, mode)
             intent.putExtra(MyRecipeFragment.MIN, minPrice)
             intent.putExtra(MyRecipeFragment.MAX, maxPrice)
             intent.putExtra(MyRecipeFragment.CATEGORY, category)
@@ -63,9 +61,7 @@ class MyRecipeFilterActivity :
     }
 
     fun resetFilter() {
-        val mode = filterViewModel.mode.value
         val intent = Intent(this, MyRecipeFragment::class.java)
-        intent.putExtra(MyRecipeFragment.MODE, mode)
         setResult(MyRecipeFragment.FILTER_RESET, intent)
         finish()
     }
