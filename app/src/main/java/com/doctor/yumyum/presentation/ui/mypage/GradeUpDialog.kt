@@ -14,9 +14,9 @@ class GradeUpDialog(private val grade: String) :
     private val gradeBadge: Map<String, Int> by lazy {
         mapOf(
             getString(R.string.grade_bachelor) to R.drawable.ic_grade_up_bachelor,
-            getString(R.string.grade_master) to R.drawable.ic_badge_master,
-            getString(R.string.grade_expert) to R.drawable.ic_badge_expert,
-            getString(R.string.grade_professor) to R.drawable.ic_badge_professor
+            getString(R.string.grade_master) to R.drawable.ic_grade_up_master,
+            getString(R.string.grade_expert) to R.drawable.ic_grade_up_expert,
+            getString(R.string.grade_professor) to R.drawable.ic_grade_up_professor
         )
     }
 

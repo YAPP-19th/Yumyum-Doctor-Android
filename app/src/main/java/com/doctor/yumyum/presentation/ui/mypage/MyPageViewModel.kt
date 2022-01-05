@@ -53,8 +53,6 @@ class MyPageViewModel : BaseViewModel() {
     }
 
     private fun isGradeUp(newGrade: String) {
-        Log.d("로그 local grade",localGrade.toString())
-        Log.d("로그 new grade", newGrade.toString())
         if (localGrade != null) {
             if (localGrade != newGrade) {
                 _gradeUp.postValue(newGrade)
@@ -65,6 +63,7 @@ class MyPageViewModel : BaseViewModel() {
 
     fun logout() {
         UserApiClient.instance.logout {
+            userRepository.setLocalGrade("")
             loginRepository.setLoginToken("")
             loginRepository.setLoginMode("")
         }
