@@ -28,7 +28,14 @@ class MyRecipeFilterViewModel : BaseViewModel() {
 
     fun setStatus(type : String){
         _status.value = type
-        Log.d("filterLauncher: ViewModel",status.value.toString())
+    }
+
+    fun setMinPrice(min: String){
+        minPrice.value = min
+    }
+
+    fun setMaxPrice(max: String){
+        maxPrice.value = max
     }
 
     fun setCategory(view: View) {

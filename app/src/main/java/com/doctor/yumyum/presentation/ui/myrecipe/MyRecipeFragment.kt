@@ -33,14 +33,17 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
     private lateinit var sortSelectBinding: DialogMyRecipeSortBinding
     private lateinit var sortSelectView: View
 
-    private var mode : Int =0
-    private var category : String? = null
+    private var mode: Int = 0
+    private var category: String? = null
     private var sort = "id"
     private var order = "desc"
     private var minPrice: String? = null
     private var maxPrice: String? = null
-    private var status : String? = null
+    private var status: String? = null
     private var flavors: java.util.ArrayList<String> = arrayListOf("")
+
+    private var isFilterSet: Boolean = false
+    private var isSortSet: Boolean = false
 
     companion object {
         const val MODE = "mode"
@@ -67,7 +70,7 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
                 if (mode == R.string.common_food) R.drawable.ic_change_food else R.drawable.ic_change_beverage
             )
             getFavoriteList(requireContext().resources.getString(mode))
-            getMyPostWithFilter(mode,null,null,null,null,null)
+            getMyPostWithFilter(mode, null, null, null, null, null)
         }
     }
 
@@ -95,6 +98,11 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
     }
 
     private fun initMyRecipeRecycler(foodType: String) {
+        if (isFilterSet) {
+            binding.myRecipeIbFilter.setImageResource(R.drawable.ic_filter_green)
+        } else {
+            binding.myRecipeIbFilter.setImageResource(R.drawable.ic_filter_gray)
+        }
         val myRecipeListAdapter = ResearchListAdapter({ recipeId ->
             val intent = Intent(requireContext(), RecipeDetailActivity::class.java)
             intent.putExtra("recipeId", recipeId)
@@ -134,7 +142,7 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
                 //필터 적용 화면에서 돌아왔을때
                 when (it.resultCode) {
                     FILTER_APPLY -> {
-                        binding.myRecipeIbFilter.setImageResource(R.drawable.ic_filter_green)
+                        isFilterSet = true
                         mode = it.data?.getIntExtra(MODE, 0) ?: 0
                         minPrice = it.data?.getStringExtra(MIN)
                         maxPrice = it.data?.getStringExtra(MAX)
@@ -144,12 +152,11 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
                         getMyPostWithFilter(mode, category, status, flavors, minPrice, maxPrice)
                     }
                     FILTER_RESET -> {
-                        binding.myRecipeIbFilter.setImageResource(R.drawable.ic_filter_gray)
+                        isFilterSet = false
                         mode = it.data?.getIntExtra(MODE, 0) ?: 0
-                        getMyPostWithFilter(mode,null,null,null,null,null)
+                        getMyPostWithFilter(mode, null, null, null, null, null)
                     }
                 }
-                Log.d("filterLauncher","$minPrice , $maxPrice , $status , $category , $flavors")
 
             }
         binding.myRecipeIbFilter.setOnClickListener {
@@ -208,5 +215,10 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
 
     fun showBottomSheet() {
         sortSelectDialog.show()
+    }
+
+    fun changeFoodType(foodType: String) {
+        isFilterSet = false
+        myRecipeViewModel.changeFoodType(foodType)
     }
 }
