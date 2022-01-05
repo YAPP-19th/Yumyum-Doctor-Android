@@ -56,7 +56,7 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
                 activity?.let { activity ->
                     LevelInfoDialog().show(
                         activity.supportFragmentManager,
-                        "LogoutDialog"
+                        "LevelInfoDialog"
                     )
                 }
             }
