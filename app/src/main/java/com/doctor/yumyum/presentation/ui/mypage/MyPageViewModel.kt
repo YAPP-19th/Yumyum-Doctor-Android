@@ -8,9 +8,12 @@ import com.doctor.yumyum.data.repository.UserRepositoryImpl
 import retrofit2.Response
 import java.lang.Exception
 import com.doctor.yumyum.common.utils.gradeEnToKo
+import com.doctor.yumyum.data.repository.LoginRepositoryImpl
+import com.kakao.sdk.user.UserApiClient
 
 class MyPageViewModel : BaseViewModel() {
     private val userRepository = UserRepositoryImpl()
+    private val loginRepository = LoginRepositoryImpl()
     private val _nickname: MutableLiveData<String> = MutableLiveData("")
     val nickname: LiveData<String>
         get() = _nickname
@@ -31,12 +34,19 @@ class MyPageViewModel : BaseViewModel() {
                 _nickname.postValue(userInfoResponse.body()?.userInfo?.nickname)
                 _grade.postValue(userInfoResponse.body()?.userInfo?.grade?.let { gradeEnToKo(it) })
                 _point.postValue(userInfoResponse.body()?.userInfo?.userGradePoint)
-            }
-            else {
+            } else {
                 _errorState.postValue(true)
             }
         } catch (e: Exception) {
             _errorState.postValue(true)
         }
+    }
+
+    fun logout() {
+        UserApiClient.instance.logout {
+            loginRepository.setLoginToken("")
+            loginRepository.setLoginMode("")
+        }
+
     }
 }
