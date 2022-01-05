@@ -33,6 +33,15 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
     private lateinit var sortSelectBinding: DialogMyRecipeSortBinding
     private lateinit var sortSelectView: View
 
+    private var mode : Int =0
+    private var category : String? = null
+    private var sort = "id"
+    private var order = "desc"
+    private var minPrice: String? = null
+    private var maxPrice: String? = null
+    private var status : String? = null
+    private var flavors: java.util.ArrayList<String> = arrayListOf("")
+
     companion object {
         const val MODE = "mode"
         const val MIN = "minPrice"
@@ -40,6 +49,9 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
         const val STATUS = "status"
         const val CATEGORY = "category"
         const val TASTE = "tasteList"
+
+        const val FILTER_APPLY = 1004
+        const val FILTER_RESET = 1005
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,9 +66,8 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
             binding.myRecipeIbMode.setImageResource(
                 if (mode == R.string.common_food) R.drawable.ic_change_food else R.drawable.ic_change_beverage
             )
-            val categoryName = requireContext().resources.getString(mode)
-            getFavoriteList(categoryName)
-            getMyPostList(categoryName)
+            getFavoriteList(requireContext().resources.getString(mode))
+            getMyPostWithFilter(mode,null,null,null,null,null)
         }
     }
 
@@ -120,18 +131,34 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
     private fun startForFilter() {
         filterLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-                if (it.resultCode == RESULT_OK) {
-                    val mode = it.data?.getIntExtra(MODE,0)?: 0
-                    val minPrice = it.data?.getStringExtra(MIN)
-                    val maxPrice = it.data?.getStringExtra(MAX)
-                    val category = it.data?.getStringExtra(CATEGORY)
-                    val status = it.data?.getStringExtra(STATUS)
-                    val tasteList = it.data?.getStringArrayListExtra(TASTE) as ArrayList<String>
-                    getMyPostWithFilter(mode,category,status,tasteList,minPrice,maxPrice)
+                //필터 적용 화면에서 돌아왔을때
+                when (it.resultCode) {
+                    FILTER_APPLY -> {
+                        binding.myRecipeIbFilter.setImageResource(R.drawable.ic_filter_green)
+                        mode = it.data?.getIntExtra(MODE, 0) ?: 0
+                        minPrice = it.data?.getStringExtra(MIN)
+                        maxPrice = it.data?.getStringExtra(MAX)
+                        category = it.data?.getStringExtra(CATEGORY)
+                        status = it.data?.getStringExtra(STATUS)
+                        flavors = it.data?.getStringArrayListExtra(TASTE) as ArrayList<String>
+                        getMyPostWithFilter(mode, category, status, flavors, minPrice, maxPrice)
+                    }
+                    FILTER_RESET -> {
+                        binding.myRecipeIbFilter.setImageResource(R.drawable.ic_filter_gray)
+                        mode = it.data?.getIntExtra(MODE, 0) ?: 0
+                        getMyPostWithFilter(mode,null,null,null,null,null)
+                    }
                 }
+                Log.d("filterLauncher","$minPrice , $maxPrice , $status , $category , $flavors")
+
             }
         binding.myRecipeIbFilter.setOnClickListener {
             val intent = Intent(context, MyRecipeFilterActivity::class.java)
+            intent.putExtra(MIN, minPrice)
+            intent.putExtra(MAX, maxPrice)
+            intent.putExtra(CATEGORY, category)
+            intent.putExtra(STATUS, status)
+            intent.putStringArrayListExtra(TASTE, flavors)
             filterLauncher.launch(intent)
         }
     }
@@ -142,25 +169,24 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
         }
     }
 
-    private fun getMyPostList(category: String) {
-        myRecipeViewModel.foodType.observe(viewLifecycleOwner) { foodType ->
-            initMyRecipeRecycler(foodType)
-            CoroutineScope(Dispatchers.IO).launch {
-                myRecipeViewModel.getMyRecipe(category, foodType,null,null,null,null)
-            }
-        }
-    }
-
     private fun getMyPostWithFilter(
         mode: Int,
         category: String?,
         status: String?,
-        tasteList: ArrayList<String>,
+        tasteList: ArrayList<String>?,
         min: String?,
         max: String?
     ) {
-        if(category.isNullOrBlank()){
-
+        val categoryName = if (category.isNullOrBlank()) {
+            requireContext().resources.getString(mode)
+        } else {
+            category
+        }
+        myRecipeViewModel.foodType.observe(viewLifecycleOwner) { foodType ->
+            initMyRecipeRecycler(foodType)
+            CoroutineScope(Dispatchers.IO).launch {
+                myRecipeViewModel.getMyRecipe(categoryName, foodType, null, min, max, status)
+            }
         }
     }
 

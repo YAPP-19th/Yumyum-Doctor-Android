@@ -7,6 +7,10 @@
         <import type="com.doctor.yumyum.R"/>
 
         <variable
+            name="activity"
+            type="com.doctor.yumyum.presentation.ui.myrecipe.MyRecipeFilterActivity" />
+
+        <variable
             name="viewModel"
             type="com.doctor.yumyum.presentation.ui.myrecipe.viewmodel.MyRecipeFilterViewModel" />
 
@@ -35,7 +39,7 @@
         </include>
 
         <ImageButton
-            android:onClick="@{() -> viewModel.refresh()}"
+            android:onClick="@{() -> activity.resetFilter()}"
             android:id="@+id/myRecipe_filter_ib_refresh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -87,13 +91,13 @@
                     android:layout_width="@dimen/taste_select_width"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="17dp"
-                    android:background="@{viewModel.status == status.SHARED ? @drawable/bg_filter_taste_selected:@drawable/bg_filter_taste_unselected}"
+                    android:background="@{viewModel.status == status.SHARED.name ? @drawable/bg_filter_taste_selected:@drawable/bg_filter_taste_unselected}"
                     android:gravity="center"
-                    android:onClick="@{() ->viewModel.setStatus(status.SHARED)}"
+                    android:onClick="@{() ->viewModel.setStatus(status.SHARED.name)}"
                     android:paddingTop="10dp"
                     android:paddingBottom="11dp"
                     android:text="@string/common_public"
-                    android:textColor="@{viewModel.status == status.SHARED ? @color/black : @color/gray}"
+                    android:textColor="@{viewModel.status == status.SHARED.name ? @color/black : @color/gray}"
                     app:layout_constraintEnd_toStartOf="@id/my_filter_tv_private"
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="parent"
@@ -105,13 +109,13 @@
                     android:layout_width="@dimen/taste_select_width"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:background="@{viewModel.status == status.MINE ? @drawable/bg_filter_taste_selected:@drawable/bg_filter_taste_unselected}"
+                    android:background="@{viewModel.status == status.MINE.name ? @drawable/bg_filter_taste_selected:@drawable/bg_filter_taste_unselected}"
                     android:gravity="center"
-                    android:onClick="@{() ->viewModel.setStatus(status.MINE)}"
+                    android:onClick="@{() ->viewModel.setStatus(status.MINE.name)}"
                     android:paddingTop="10dp"
                     android:paddingBottom="11dp"
                     android:text="@string/common_private"
-                    android:textColor="@{viewModel.status == status.MINE ? @color/black  : @color/gray}"
+                    android:textColor="@{viewModel.status == status.MINE.name ? @color/black  : @color/gray}"
                     app:layout_constraintBottom_toBottomOf="@id/my_filter_tv_public"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_chainStyle="packed"
@@ -658,6 +662,7 @@
         </ScrollView>
 
         <androidx.appcompat.widget.AppCompatButton
+            android:onClick="@{() -> activity.finishFilter()}"
             android:id="@+id/my_filter_btn_select"
             style="@style/font_subtitle_medium"
             android:layout_width="match_parent"

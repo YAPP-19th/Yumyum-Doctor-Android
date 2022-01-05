@@ -14,8 +14,8 @@ class MyRecipeFilterViewModel : BaseViewModel() {
 
     val mode : MutableLiveData<Int> = MutableLiveData(mainRepository.getMode())
 
-    private val _status :MutableLiveData<StatusType> = MutableLiveData()
-    val status : LiveData<StatusType> get() = _status
+    private val _status :MutableLiveData<String> = MutableLiveData()
+    val status : LiveData<String> get() = _status
 
     val minPrice : MutableLiveData<String> = MutableLiveData()
     val maxPrice : MutableLiveData<String> = MutableLiveData()
@@ -26,15 +26,19 @@ class MyRecipeFilterViewModel : BaseViewModel() {
     private val _tasteList : MutableLiveData<ArrayList<String>> = MutableLiveData(arrayListOf())
     val tasteList : LiveData<ArrayList<String>> get() =_tasteList
 
-    fun setStatus( type : StatusType){
+    fun setStatus(type : String){
         _status.value = type
-        minPrice.value.isNullOrEmpty()
+        Log.d("filterLauncher: ViewModel",status.value.toString())
     }
 
     fun setCategory(view: View) {
         view as TextView
         val tempText = view.text.toString()
         _category.value = tempText
+    }
+
+    fun setCategory(category : String){
+        _category.value = category
     }
 
     fun setTasteList(taste: String) {
@@ -46,12 +50,8 @@ class MyRecipeFilterViewModel : BaseViewModel() {
         _tasteList.value = _tasteList.value
     }
 
-    fun refresh(){
-        _status.value = null
-        minPrice.value = ""
-        maxPrice.value = ""
-        _category.value=""
-        _tasteList.value?.clear()
-        _tasteList.value = _tasteList.value
+    fun setTasteList(list : ArrayList<String>) {
+        _tasteList.value = list
     }
+
 }
