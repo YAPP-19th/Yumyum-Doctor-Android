@@ -32,10 +32,12 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
 
         window.statusBarColor = getColor(R.color.main_orange)
 
-        viewModel.state.observe(this) {
-            when (it) {
-                1 -> startActivity(Intent(this, LoginActivity::class.java))
-                2 -> startActivity(Intent(this, MainActivity::class.java))
+        viewModel.isLogin.observe(this) { isLogin ->
+            if (isLogin) {
+                startActivity(Intent(this, MainActivity::class.java))
+            }
+            else {
+                startActivity(Intent(this, LoginActivity::class.java))
             }
             finish()
         }
@@ -48,8 +50,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
         } else {
             CoroutineScope(Dispatchers.IO).launch {
                 viewModel.signIn()
-                startActivity(Intent(this@SplashActivity, MainActivity::class.java))
-                finish()
             }
         }
     }
