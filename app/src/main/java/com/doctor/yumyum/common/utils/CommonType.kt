@@ -12,3 +12,7 @@ enum class StatusType {
 enum class TagType {
     MAIN,ADD,EXTRACT
 }
+
+enum class SortType {
+    RECENT,CHEAP,EXPENSIVE
+}

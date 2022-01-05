@@ -5,9 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseViewModel
+import com.doctor.yumyum.common.utils.SortType
 import com.doctor.yumyum.data.model.FavoriteRecipe
 import com.doctor.yumyum.common.utils.RecipeType
-import com.doctor.yumyum.data.model.FoodFlavor
 import com.doctor.yumyum.data.model.RecipeModel
 import com.doctor.yumyum.data.repository.MainRepositoryImpl
 import com.doctor.yumyum.data.repository.MyRecipeRepositoryImpl
@@ -23,6 +23,11 @@ class MyRecipeViewModel : BaseViewModel() {
     val mode: LiveData<Int>
         get() = _mode
 
+    private var _sortType: MutableLiveData<SortType> = MutableLiveData(SortType.RECENT)
+    val sortType: LiveData<SortType> get() = _sortType
+    private var _tmpSortType: MutableLiveData<SortType> = MutableLiveData()
+    val tmpSortType: LiveData<SortType> get() = _tmpSortType
+
     private val _favoriteRecipeList: MutableLiveData<ArrayList<FavoriteRecipe>> = MutableLiveData()
     val favoriteRecipeList: LiveData<ArrayList<FavoriteRecipe>>
         get() = _favoriteRecipeList
@@ -34,6 +39,20 @@ class MyRecipeViewModel : BaseViewModel() {
     private val _myRecipeList: MutableLiveData<ArrayList<RecipeModel>> = MutableLiveData()
     val myRecipeList: LiveData<ArrayList<RecipeModel>>
         get() = _myRecipeList
+
+    fun initSortType() {
+        _tmpSortType.value = sortType.value
+    }
+
+    fun setTmpSortType(type: SortType) {
+        _tmpSortType.value = type
+        Log.d("TempSortType", tmpSortType.value.toString())
+    }
+
+    fun setSortType() {
+        _sortType.value = tmpSortType.value
+        Log.d("SortType", sortType.value.toString())
+    }
 
     fun changeMode() {
         _mode.value =
