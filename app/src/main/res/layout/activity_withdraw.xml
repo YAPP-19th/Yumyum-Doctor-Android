@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.doctor.yumyum.presentation.ui.withdraw.WithdrawViewModel" />
+            type="com.doctor.yumyum.presentation.ui.mypage.withdraw.WithdrawViewModel" />
 
     </data>
 

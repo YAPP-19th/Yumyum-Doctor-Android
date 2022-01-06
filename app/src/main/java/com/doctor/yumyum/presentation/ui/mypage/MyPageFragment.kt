@@ -8,6 +8,7 @@ import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
 import com.doctor.yumyum.common.utils.gradePoint
 import com.doctor.yumyum.databinding.FragmentMyPageBinding
+import com.doctor.yumyum.presentation.ui.mypage.terms.TermsActivity
 import com.doctor.yumyum.presentation.ui.mypage.myinfo.MyInfoActivity
 import com.doctor.yumyum.presentation.ui.taste.TasteActivity
 import kotlinx.coroutines.CoroutineScope
@@ -52,7 +53,7 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
         }
 
         viewModel.gradeUp.observe(viewLifecycleOwner) { grade ->
-            if (grade.isNotBlank()) {
+            if ((grade.isNotBlank()) && (grade != requireContext().getString(R.string.grade_student))) {
                 activity?.let {
                     GradeUpDialog(grade).show(
                         it.supportFragmentManager,
@@ -94,14 +95,18 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
             }
             myPageTvMyInfo.setOnClickListener {
                 startActivity(Intent(context, MyInfoActivity::class.java))
-                myPageTvLogout.setOnClickListener {
-                    activity?.let { activity ->
-                        LogoutDialog(viewModel).show(
-                            activity.supportFragmentManager,
-                            "LogoutDialog"
-                        )
-                    }
+
+            }
+            myPageTvLogout.setOnClickListener {
+                activity?.let { activity ->
+                    LogoutDialog(viewModel).show(
+                        activity.supportFragmentManager,
+                        "LogoutDialog"
+                    )
                 }
+            }
+            myPageTvTermsOfUse.setOnClickListener {
+                startActivity(Intent(requireContext(), TermsActivity::class.java))
             }
         }
     }
