@@ -34,4 +34,9 @@ object SharedPreference {
     private const val MODE = "MODE"
     fun getMode(): Int? = pref?.getInt(MODE, R.string.common_food)
     fun setMode(mode: Int) = pref?.edit()?.putInt(MODE, mode)?.apply()
+
+    //레벨
+    private const val GRADE = "GRADE"
+    fun getGrade(): String? = pref?.getString(GRADE, "")
+    fun setGrade(grade: String) = pref?.edit()?.putString(GRADE, grade)?.apply()
 }

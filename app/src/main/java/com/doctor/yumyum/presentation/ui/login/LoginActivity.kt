@@ -2,11 +2,11 @@ package com.doctor.yumyum.presentation.ui.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseActivity
 import com.doctor.yumyum.databinding.ActivityLoginBinding
+import com.doctor.yumyum.presentation.ui.main.MainActivity
 import com.doctor.yumyum.presentation.ui.nickname.NicknameActivity
 import com.kakao.sdk.auth.LoginClient
 import com.kakao.sdk.auth.model.OAuthToken
@@ -40,6 +40,20 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
             }
         }
 
+        viewModel.isLogin.observe(this) { isLogin ->
+            if (isLogin) {
+                startActivity(
+                    Intent(
+                        this,
+                        MainActivity::class.java
+                    ).apply {
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    })
+            } else {
+                startActivity(Intent(this, NicknameActivity::class.java))
+            }
+        }
+
         // 회원가입 에러 처리
         viewModel.errorState.observe(this) { error ->
             if (error == true) {
@@ -55,8 +69,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         try {
             val accessToken = kakaoLogin()
             val nickname = kakaoUserInfo()
-            viewModel.signUp(accessToken, nickname,"KAKAO")
-            startActivity(Intent(this, NicknameActivity::class.java))
+            viewModel.signUp(accessToken, nickname, "KAKAO")
 
         } catch (e: Exception) {
             ErrorDialog().apply {

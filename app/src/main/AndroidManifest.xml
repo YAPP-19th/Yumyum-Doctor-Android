@@ -18,6 +18,12 @@
             android:name=".presentation.ui.mypage.terms.TermsActivity"
             android:exported="true" />
         <activity
+            android:name="com.doctor.yumyum.presentation.ui.mypage.withdraw.WithdrawActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.doctor.yumyum.presentation.ui.mypage.myinfo.MyInfoActivity"
+            android:exported="true" />
+        <activity
             android:name=".presentation.ui.search.hashtag.SearchHashtagActivity"
             android:exported="true" />
         <activity

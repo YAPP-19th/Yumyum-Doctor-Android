@@ -3,6 +3,7 @@ package com.doctor.yumyum.presentation.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
@@ -61,8 +62,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
         // 닉네임 초기화
         initNickname()
-        viewModel.nickname.observe(viewLifecycleOwner) {
-            binding.homeTvGreeting.text = getString(R.string.home_tv_greeting, it)
+
+        viewModel.userInfo.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.homeTvGreeting.text = getString(
+                    R.string.home_tv_greeting,
+                    viewModel.nickname.value,
+                    viewModel.grade.value
+                )
+            }
         }
 
         // 최애 레시피 초기화
@@ -93,15 +101,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             )
             changeBrandMode(it)
             CoroutineScope(Dispatchers.IO).launch {
-                viewModel.getFavorite(getString(it))
-                viewModel.getRecommendation(getString(it))
+                viewModel.getFavorite(requireContext().getString(it))
+                viewModel.getRecommendation(requireContext().getString(it))
             }
         }
     }
 
     private fun initNickname() {
         CoroutineScope(Dispatchers.IO).launch {
-            viewModel.getUserNickname()
+            viewModel.getUserInfo()
         }
     }
 

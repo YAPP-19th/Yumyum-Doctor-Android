@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.doctor.yumyum.presentation.ui.mypage.withdraw.WithdrawViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.ui.mypage.withdraw.WithdrawActivity">
+
+        <include
+            android:id="@+id/withdraw_appbar"
+            layout="@layout/layout_appbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:main="@{@string/withdraw_title}" />
+
+        <TextView
+            android:id="@+id/withdraw_tv_reason"
+            style="@style/font_h2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/withdraw_tv_reason"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/withdraw_appbar" />
+
+        <TextView
+            android:id="@+id/withdraw_reason_rarely"
+            style="@style/font_body1_regular"
+            bind_withdraw="@{viewModel.withdrawType == viewModel.REASON_RARELY}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="21dp"
+            android:drawablePadding="6dp"
+            android:gravity="center_vertical"
+            android:onClick="@{()->viewModel.setWithdrawType(viewModel.REASON_RARELY)}"
+            android:text="@string/withdraw_reason_rarely"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/withdraw_tv_reason"
+            tools:drawableStart="@drawable/ic_report_selected" />
+
+        <TextView
+            android:id="@+id/withdraw_reason_uncomfortable"
+            style="@style/font_body1_regular"
+            bind_withdraw="@{viewModel.withdrawType == viewModel.REASON_UNCOMFORTABLE}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:drawablePadding="6dp"
+            android:gravity="center_vertical"
+            android:onClick="@{()->viewModel.setWithdrawType(viewModel.REASON_UNCOMFORTABLE)}"
+            android:text="@string/withdraw_reason_uncomfortable"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/withdraw_reason_rarely"
+            tools:drawableStart="@drawable/ic_report_selected" />
+
+        <TextView
+            android:id="@+id/withdraw_reason_unpleasant"
+            style="@style/font_body1_regular"
+            bind_withdraw="@{viewModel.withdrawType == viewModel.REASON_UNPLEASANT}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:drawablePadding="6dp"
+            android:gravity="center_vertical"
+            android:onClick="@{()->viewModel.setWithdrawType(viewModel.REASON_UNPLEASANT)}"
+            android:text="@string/withdraw_reason_unpleasant"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/withdraw_reason_uncomfortable"
+            tools:drawableStart="@drawable/ic_report_selected" />
+
+        <TextView
+            android:id="@+id/withdraw_reason_wrong"
+            style="@style/font_body1_regular"
+            bind_withdraw="@{viewModel.withdrawType == viewModel.REASON_WRONG}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:drawablePadding="6dp"
+            android:gravity="center_vertical"
+            android:onClick="@{()->viewModel.setWithdrawType(viewModel.REASON_WRONG)}"
+            android:text="@string/withdraw_reason_wrong"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/withdraw_reason_unpleasant"
+            tools:drawableStart="@drawable/ic_report_selected" />
+
+        <TextView
+            android:id="@+id/withdraw_reason_etc"
+            style="@style/font_body1_regular"
+            bind_withdraw="@{viewModel.withdrawType == viewModel.REASON_ETC}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:drawablePadding="6dp"
+            android:gravity="center_vertical"
+            android:onClick="@{()->viewModel.setWithdrawType(viewModel.REASON_ETC)}"
+            android:text="@string/withdraw_reason_etc"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/withdraw_reason_wrong"
+            tools:drawableStart="@drawable/ic_report_selected" />
+
+        <TextView
+            android:id="@+id/withdraw_tv_withdraw"
+            style="@style/font_subtitle_medium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_btn_main"
+            android:gravity="center"
+            android:paddingVertical="16dp"
+            android:text="@string/withdraw_tv_withdraw"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

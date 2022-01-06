@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.ui.mypage.myinfo.MyInfoActivity">
+
+        <include
+            android:id="@+id/my_info_appbar"
+            layout="@layout/layout_appbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:main="@{@string/my_info_tv_title}" />
+
+        <ImageView
+            android:id="@+id/my_info_iv_nickname_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_my_page_caretdown"
+            app:layout_constraintBottom_toBottomOf="@id/my_info_tv_nickname_setting"
+            app:layout_constraintEnd_toEndOf="@id/my_info_tv_nickname_setting"
+            app:layout_constraintTop_toTopOf="@id/my_info_tv_nickname_setting" />
+
+        <TextView
+            android:id="@+id/my_info_tv_nickname_setting"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:textColor="@color/black"
+            style="@style/font_body1_regular"
+            android:layout_marginTop="25dp"
+            android:text="@string/my_info_tv_nickname_setting"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/my_info_appbar" />
+
+        <ImageView
+            android:id="@+id/my_info_iv_withdraw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_my_page_caretdown"
+            app:layout_constraintBottom_toBottomOf="@id/my_info_tv_withdraw"
+            app:layout_constraintEnd_toEndOf="@id/my_info_tv_withdraw"
+            app:layout_constraintTop_toTopOf="@id/my_info_tv_withdraw" />
+
+        <TextView
+            android:id="@+id/my_info_tv_withdraw"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:textColor="@color/black"
+            style="@style/font_body1_regular"
+            android:layout_marginTop="17dp"
+            android:text="@string/my_info_tv_withdraw"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/my_info_tv_nickname_setting"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

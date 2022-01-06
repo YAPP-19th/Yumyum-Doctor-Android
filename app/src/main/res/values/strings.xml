@@ -109,6 +109,7 @@
     <string name="img_permission_dialog_message">사진을 첨부하기 위해서는 이미지 접근 권한이 필요합니다.기능 사용을 원하실 경우 휴대폰설정 > 애플리케이션 관리자에서 해당 앱의 권한을 허용해주세요.</string>
     <string name="img_permission_dialog_ok">설정</string>
     <string name="img_permission_dialog_dismiss">닫기</string>
+
     <!-- 재료(태그) 입력 -->
     <string name="write_tag_tv_title">재료 입력</string>
     <string name="write_tag_type">tagType</string>
@@ -164,6 +165,7 @@
     <string name="recipe_detail_iv_book">책 아이콘</string>
 
     <!-- 닉네임 Activity -->
+    <string name="nickname_mode">닉네임 설정 모드</string>
     <string name="nickname_tv_title">입학할 학생의 이름을 입력해주세요</string>
     <string name="nickname_tv_warning">*실명 사용은 지양해주시길 바랍니다.</string>
     <string name="nickname_et_hint">닉네임을 입력해주세요</string>
@@ -186,7 +188,7 @@
     <string name="share_title">공유하기</string>
 
     <!-- 홈 -->
-    <string name="home_tv_greeting">안녕하세요, %1$s 학생!</string>
+    <string name="home_tv_greeting">안녕하세요, %1$s %2$s!</string>
     <string name="home_tv_favorite">나의 최애레시피</string>
     <string name="home_tv_check">를 확인해보세요</string>
     <string name="home_tv_my_recipe">나의 레시피</string>
@@ -234,6 +236,8 @@
     <string name="my_page_tv_my_app_version">ver %1$s</string>
     <string name="my_page_tv_logout">로그아웃</string>
     <string name="dialog_logout_title">로그아웃 하시겠습니까?</string>
+    <string name="dialog_grade_up_title">축하합니다!</string>
+    <string name="dialog_grade_up_content">조건을 모두 달성하여\n<b>%1$s 학위</b>를 취득하셨습니다.</string>
 
     <!-- 레벨 안내 -->
     <string name="level_info_title">레벨 안내</string>
@@ -276,5 +280,22 @@
     <string name="terms_13_content">① 회사가 제작한 서비스 내의 콘텐츠에 대한 저작권과 기타 지적재산권은 회사에 귀속합니다.\n\n② 회원은 회사가 제공하는 서비스를 이용하여 얻은 정보 중에서 회사 또는 제공업체에 지적재산권이 귀속된 정보를 회사 또는 제공업체의 사전 동의 없이 복제⋅전송 등의 방법(편집, 공표, 공연, 배포, 방송, 2차적 저작물 작성 등을 포함합니다. 이하 같습니다)에 의하여 영리목적으로 이용하거나 타인에게 이용하게 하여서는 안 됩니다.\n\n③ 회원의 게시물이 정보통신망법 및 저작권법 등 관련법에 위반되는 내용을 포함하는 경우, 권리자는 관련법이 정한 절차에 따라 해당 게시물을 게시중단 하거나 삭제 할 수 있으며, 이로 인해 발생하는 민·형사상의 책임은 전적으로 해당 회원 본인이 부담하여야 하며, 운영자는 관련법에 따라 조치를 취하여야 합니다.\n\n④ 운영자는 전항에 따른 권리자의 요청이 없는 경우라도 권리침해가 인정될 만한 사유가 있거나 기타 “APP” 정책 및 관련법에 위반되는 경우에는 관련법에 따라 해당 게시물에 대해 임시조치 등을 취할 수 있습니다.\n\n⑤ 이 조는 운영자가 서비스를 운영하는 동안 유효하며, 회원 탈퇴 후에도 지속적으로 적용됩니다.</string>
     <string name="terms_14_title">제14조 (재판권 및 준거법)</string>
     <string name="terms_14_content">이 약관은 대한민국 법률에 따라 규율되고 해석됩니다. 운영자와 회원 간에 발생한 분쟁으로 소송이 제기되는 경우에는 법령에 정한 절차에 따른 법원을 관할 법원으로 합니다.</string>
+    <!-- 내 정보 -->
+    <string name="my_info_tv_title">내정보</string>
+    <string name="my_info_tv_nickname_setting">닉네임 수정</string>
+    <string name="my_info_tv_withdraw">회원탈퇴</string>
+    
+    <!-- 회원 탈퇴 -->
+    <string name="withdraw_title">회원탈퇴</string>
+    <string name="withdraw_tv_reason">탈퇴 사유를 선택해주세요</string>
+    <string name="withdraw_reason_rarely">자주 사용하지 않습니다.</string>
+    <string name="withdraw_reason_uncomfortable">앱이 불편합니다.</string>
+    <string name="withdraw_reason_unpleasant">불쾌한 경험을 했습니다.</string>
+    <string name="withdraw_reason_wrong">잘못된 정보들이 많습니다.</string>
+    <string name="withdraw_reason_etc">기타</string>
+    <string name="withdraw_tv_withdraw">탈퇴</string>
+    <string name="withdraw_dialog_title">계정을 정말 삭제하시겠습니까?</string>
+    <string name="withdraw_dialog_subtitle">*현재까지의 데이터가 영구 삭제됩니다.</string>
+
 
 </resources>
