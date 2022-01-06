@@ -12,6 +12,14 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <include
+            android:id="@+id/terms_cl_appbar"
+            layout="@layout/layout_appbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:main="@{@string/terms_title}" />
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -22,14 +30,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 tools:context=".presentation.ui.mypage.terms.TermsActivity">
-
-                <include
-                    android:id="@+id/terms_cl_appbar"
-                    layout="@layout/layout_appbar"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:main="@{@string/terms_title}" />
 
                 <TextView
                     android:id="@+id/terms_1_title"
