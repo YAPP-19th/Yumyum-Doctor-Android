@@ -11,9 +11,9 @@ class TermsActivity : BaseActivity<ActivityTermsBinding>(R.layout.activity_terms
 
         binding.lifecycleOwner = this
         binding.apply {
-//            termsClAppbar.appbarIbBack.setOnClickListener {
-//                onBackPressed()
-//            }
+            termsClAppbar.appbarIbBack.setOnClickListener {
+                onBackPressed()
+            }
             termsBtnOk.setOnClickListener {
                 onBackPressed()
             }
