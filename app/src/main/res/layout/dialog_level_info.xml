@@ -14,7 +14,7 @@
         <ImageView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_margin ="5dp"
+            android:layout_margin="5dp"
             android:background="@drawable/bg_dialog_my_page"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -23,12 +23,12 @@
 
         <TextView
             android:id="@+id/dialog_level_info_tv_title"
+            style="@style/font_level_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
-            android:text="@string/level_info_title"
-            style="@style/font_level_title"
             android:fontFamily="@font/level"
+            android:text="@string/level_info_title"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -48,11 +48,11 @@
 
         <TextView
             android:id="@+id/dialog_level_info_tv_student"
+            style="@style/font_level_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="@string/grade_student"
-            style="@style/font_level_content"
             android:textColor="@color/white"
             app:layout_constraintStart_toEndOf="@id/dialog_level_info_iv_student"
             app:layout_constraintTop_toBottomOf="@id/dialog_level_info_tv_title" />
@@ -80,11 +80,11 @@
 
         <TextView
             android:id="@+id/dialog_level_info_tv_bachelor"
+            style="@style/font_level_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="@string/grade_bachelor"
-            style="@style/font_level_content"
             android:textColor="@color/white"
             app:layout_constraintStart_toEndOf="@id/dialog_level_info_iv_bachelor"
             app:layout_constraintTop_toBottomOf="@id/dialog_level_info_tv_student_info" />
@@ -112,10 +112,10 @@
 
         <TextView
             android:id="@+id/dialog_level_info_tv_master"
+            style="@style/font_level_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            style="@style/font_level_content"
             android:text="@string/grade_master"
             android:textColor="@color/white"
             app:layout_constraintStart_toEndOf="@id/dialog_level_info_iv_master"
@@ -144,11 +144,11 @@
 
         <TextView
             android:id="@+id/dialog_level_info_tv_expert"
+            style="@style/font_level_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="@string/grade_expert"
-            style="@style/font_level_content"
             android:textColor="@color/white"
             app:layout_constraintStart_toEndOf="@id/dialog_level_info_iv_expert"
             app:layout_constraintTop_toBottomOf="@id/dialog_level_info_tv_master_info" />
@@ -176,10 +176,10 @@
 
         <TextView
             android:id="@+id/dialog_level_info_tv_professor"
+            style="@style/font_level_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            style="@style/font_level_content"
             android:text="@string/grade_professor"
             android:textColor="@color/white"
             app:layout_constraintStart_toEndOf="@id/dialog_level_info_iv_professor"

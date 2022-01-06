@@ -21,7 +21,13 @@ class LogoutDialog(private val myPageViewModel: MyPageViewModel?) :
         binding.dialogLogoutNo.setOnClickListener { dismiss() }
         binding.dialogLogoutYes.setOnClickListener {
             myPageViewModel?.logout()
-            startActivity(Intent(this.context, SplashActivity::class.java))
+            startActivity(
+                Intent(
+                    this.context,
+                    SplashActivity::class.java
+                ).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                })
         }
         return binding.root
     }

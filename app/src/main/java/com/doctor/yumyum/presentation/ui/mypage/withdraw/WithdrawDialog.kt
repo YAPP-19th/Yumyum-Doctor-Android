@@ -24,7 +24,13 @@ class WithdrawDialog(private val withdrawViewModel: WithdrawViewModel) :
         binding.dialogWithdrawNo.setOnClickListener { dismiss() }
         binding.dialogWithdrawYes.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch { withdrawViewModel.withdraw() }
-            startActivity(Intent(this.context, SplashActivity::class.java))
+            startActivity(
+                Intent(
+                    this.context,
+                    SplashActivity::class.java
+                ).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                })
         }
         return binding.root
     }

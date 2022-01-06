@@ -93,8 +93,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             )
             changeBrandMode(it)
             CoroutineScope(Dispatchers.IO).launch {
-                context?.let { context -> viewModel.getFavorite(context.getString(it)) }
-                context?.let { context -> viewModel.getRecommendation(context.getString(it)) }
+                viewModel.getFavorite(requireContext().getString(it))
+                viewModel.getRecommendation(requireContext().getString(it))
             }
         }
     }

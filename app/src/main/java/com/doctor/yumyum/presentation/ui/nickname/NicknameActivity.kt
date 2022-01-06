@@ -55,6 +55,7 @@ class NicknameActivity : BaseActivity<ActivityNicknameBinding>(R.layout.activity
 
             if (intent.getBooleanExtra(getString(R.string.nickname_mode), false)) {
                 startActivity(Intent(this@NicknameActivity, MainActivity::class.java))
+                finish()
             } else {
                 startActivity(Intent(this@NicknameActivity, TasteActivity::class.java))
             }
