@@ -1,6 +1,5 @@
 package com.doctor.yumyum.presentation.ui.login
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.common.base.BaseViewModel
@@ -17,6 +16,9 @@ class LoginViewModel : BaseViewModel() {
     private val _errorState: MutableLiveData<Boolean> = MutableLiveData(false)
     val errorState: LiveData<Boolean>
         get() = _errorState
+    private val _isLogin: MutableLiveData<Boolean> = MutableLiveData()
+    val isLogin: LiveData<Boolean>
+        get() = _isLogin
 
 
     suspend fun signUp(accessToken: String, nickname: String, oauthType: String) {
@@ -33,6 +35,7 @@ class LoginViewModel : BaseViewModel() {
                     if (h.first == "Authorization") {
                         repository.setLoginToken(h.second)
                         repository.setLoginMode(oauthType)
+                        _isLogin.postValue(false)
                     }
                 }
             } else if (response.code() == 409) {
@@ -57,6 +60,7 @@ class LoginViewModel : BaseViewModel() {
                     if (h.first == "Authorization") {
                         repository.setLoginToken(h.second)
                         repository.setLoginMode(oauthType)
+                        _isLogin.postValue(true)
                     }
                 }
             } else {

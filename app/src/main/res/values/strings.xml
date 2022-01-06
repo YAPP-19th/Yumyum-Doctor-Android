@@ -186,7 +186,7 @@
     <string name="share_title">공유하기</string>
 
     <!-- 홈 -->
-    <string name="home_tv_greeting">안녕하세요, %1$s 학생!</string>
+    <string name="home_tv_greeting">안녕하세요, %1$s %2$s!</string>
     <string name="home_tv_favorite">나의 최애레시피</string>
     <string name="home_tv_check">를 확인해보세요</string>
     <string name="home_tv_my_recipe">나의 레시피</string>

@@ -14,20 +14,20 @@ import java.lang.Exception
 class SplashViewModel : BaseViewModel() {
     private val repository: LoginRepositoryImpl = LoginRepositoryImpl()
     val loginToken: String? = repository.getLoginToken()
-    private val _errorState: MutableLiveData<Boolean> = MutableLiveData(false)
-    val errorState: LiveData<Boolean>
-        get() = _errorState
+    private val _isLogin: MutableLiveData<Boolean> = MutableLiveData()
+    val isLogin: LiveData<Boolean>
+        get() = _isLogin
 
     suspend fun signIn(): Boolean {
         val accessToken = TokenManager.instance.getToken()?.accessToken
         val oauthType = repository.getLoginMode()
 
         if (accessToken.isNullOrEmpty()) {
-            _errorState.postValue(true)
+            _isLogin.postValue(false)
             return false
         }
         if (oauthType.isNullOrEmpty()) {
-            _errorState.postValue(true)
+            _isLogin.postValue(false)
             return false
         }
 
@@ -41,14 +41,15 @@ class SplashViewModel : BaseViewModel() {
                 for (h in response.headers().toList()) {
                     if (h.first == "Authorization") {
                         repository.setLoginToken(h.second)
+                        _isLogin.postValue(true)
                     }
                 }
                 return true
             }
-            _errorState.postValue(true)
+            _isLogin.postValue(false)
             return false
         } catch (e: Exception) {
-            _errorState.postValue(true)
+            _isLogin.postValue(false)
             return false
         }
     }
