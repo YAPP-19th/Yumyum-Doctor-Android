@@ -326,6 +326,7 @@
             android:layout_marginBottom="20dp"
             android:background="@drawable/bg_btn_main"
             android:paddingVertical="16dp"
+            android:stateListAnimator="@null"
             android:text="@string/common_ok"
             android:textColor="@color/white" />
     </LinearLayout>
