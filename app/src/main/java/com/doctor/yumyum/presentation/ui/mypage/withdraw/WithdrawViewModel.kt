@@ -1,6 +1,5 @@
-package com.doctor.yumyum.presentation.ui.withdraw
+package com.doctor.yumyum.presentation.ui.mypage.withdraw
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.common.base.BaseViewModel
@@ -8,7 +7,6 @@ import com.doctor.yumyum.data.repository.LoginRepositoryImpl
 import com.doctor.yumyum.data.repository.UserRepositoryImpl
 import com.kakao.sdk.user.UserApiClient
 import java.lang.Exception
-import kotlin.math.log
 
 class WithdrawViewModel : BaseViewModel() {
     private val userRepository = UserRepositoryImpl()

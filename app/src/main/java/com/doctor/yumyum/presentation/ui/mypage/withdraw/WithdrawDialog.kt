@@ -1,4 +1,4 @@
-package com.doctor.yumyum.presentation.ui.withdraw
+package com.doctor.yumyum.presentation.ui.mypage.withdraw
 
 import android.content.Intent
 import android.os.Bundle

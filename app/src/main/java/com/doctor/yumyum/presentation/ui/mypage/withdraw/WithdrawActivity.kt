@@ -1,4 +1,4 @@
-package com.doctor.yumyum.presentation.ui.withdraw
+package com.doctor.yumyum.presentation.ui.mypage.withdraw
 
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider

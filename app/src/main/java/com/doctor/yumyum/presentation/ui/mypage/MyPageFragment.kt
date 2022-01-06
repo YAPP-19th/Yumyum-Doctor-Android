@@ -2,14 +2,13 @@ package com.doctor.yumyum.presentation.ui.mypage
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
 import com.doctor.yumyum.common.utils.gradePoint
 import com.doctor.yumyum.databinding.FragmentMyPageBinding
-import com.doctor.yumyum.presentation.ui.myinfo.MyInfoActivity
+import com.doctor.yumyum.presentation.ui.mypage.myinfo.MyInfoActivity
 import com.doctor.yumyum.presentation.ui.taste.TasteActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
