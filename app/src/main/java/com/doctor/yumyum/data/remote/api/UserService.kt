@@ -29,4 +29,7 @@ interface UserService {
 
     @GET("/api/v1/users/me")
     suspend fun getUserInfo(): Response<UserInfoResponse>
+
+    @DELETE("/api/v1/users/me")
+    suspend fun deleteUser(): Response<ResponseBody>
 }

@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseActivity
 import com.doctor.yumyum.databinding.ActivityNicknameBinding
+import com.doctor.yumyum.presentation.ui.main.MainActivity
 import com.doctor.yumyum.presentation.ui.taste.TasteActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -31,6 +32,7 @@ class NicknameActivity : BaseActivity<ActivityNicknameBinding>(R.layout.activity
         super.onCreate(savedInstanceState)
 
         init()
+
         viewModel.nickname.observe(this) { nickname ->
             binding.nicknameEtNickname.setText(nickname)
         }
@@ -42,7 +44,6 @@ class NicknameActivity : BaseActivity<ActivityNicknameBinding>(R.layout.activity
             viewModel = viewModel
             lifecycleOwner = this@NicknameActivity
         }
-
         binding.nicknameToolbar.appbarIbBack.setOnClickListener {
             onBackPressed()
         }
@@ -51,7 +52,13 @@ class NicknameActivity : BaseActivity<ActivityNicknameBinding>(R.layout.activity
             CoroutineScope(Dispatchers.IO).launch {
                 viewModel.patchNickname(binding.nicknameEtNickname.text.toString())
             }
-            startActivity(Intent(this, TasteActivity::class.java))
+
+            if (intent.getBooleanExtra(getString(R.string.nickname_mode), false)) {
+                startActivity(Intent(this@NicknameActivity, MainActivity::class.java))
+                finish()
+            } else {
+                startActivity(Intent(this@NicknameActivity, TasteActivity::class.java))
+            }
         }
 
         binding.nicknameEtNickname.addTextChangedListener(object : TextWatcher {
@@ -67,11 +74,9 @@ class NicknameActivity : BaseActivity<ActivityNicknameBinding>(R.layout.activity
                 }
                 if (p0.isNullOrEmpty()) {
                     setMessageNull()
-                }
-                else if (p0.length >= 20) {
+                } else if (p0.length >= 20) {
                     setMessageOverflow()
-                }
-                else {
+                } else {
                     setMessageSuccess()
                 }
             }
@@ -116,7 +121,8 @@ class NicknameActivity : BaseActivity<ActivityNicknameBinding>(R.layout.activity
         setButtonUnavailable()
     }
 
-    fun setButtonUnavailable() {
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private fun setButtonUnavailable() {
         binding.nicknameBtnComplete.apply {
             setBackgroundResource(R.drawable.bg_btn_sub)
             background = getDrawable(R.drawable.bg_btn_sub)
@@ -124,7 +130,7 @@ class NicknameActivity : BaseActivity<ActivityNicknameBinding>(R.layout.activity
         }
     }
 
-    fun setButtonAvailable() {
+    private fun setButtonAvailable() {
         binding.nicknameBtnComplete.apply {
             setBackgroundResource(R.drawable.bg_btn_main)
             isClickable = true

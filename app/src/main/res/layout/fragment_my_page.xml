@@ -46,13 +46,13 @@
 
         <ImageView
             android:id="@+id/my_page_iv_badge"
-            android:layout_width="88dp"
-            android:layout_height="88dp"
-            android:layout_marginTop="13dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="33dp"
             android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/my_page_cl_appbar"
+            app:layout_constraintTop_toTopOf="@id/my_page_cl_appbar"
             tools:src="@drawable/ic_badge_student" />
 
         <TextView
@@ -60,13 +60,13 @@
             style="@style/font_h3_bold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="128dp"
             android:gravity="center"
             android:text="@{viewModel.nickname + viewModel.grade}"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/my_page_iv_badge"
+            app:layout_constraintTop_toTopOf="@id/my_page_iv_badge"
             tools:text="@string/my_page_tv_title" />
 
         <TextView

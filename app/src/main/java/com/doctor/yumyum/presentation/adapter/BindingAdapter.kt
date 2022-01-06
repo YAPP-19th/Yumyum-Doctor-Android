@@ -50,6 +50,15 @@ fun bindStartCompat(textView: TextView, condition: Boolean) {
     textView.setCompoundDrawablesWithIntrinsicBounds(src, null, null, null)
 }
 
+@BindingAdapter("bind_withdraw")
+fun bindWithdraw(textView: TextView, condition: Boolean) {
+    val src = if (condition) ContextCompat.getDrawable(
+        textView.context,
+        R.drawable.ic_withdraw_selected
+    ) else ContextCompat.getDrawable(textView.context, R.drawable.ic_withdraw_unselected)
+    textView.setCompoundDrawablesWithIntrinsicBounds(src, null, null, null)
+}
+
 @BindingAdapter("bind_tasteDetail")
 fun bindTasteDetail(button: Button, tasteList: List<String>) {
     if (tasteList.contains(button.text)) {

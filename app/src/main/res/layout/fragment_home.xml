@@ -62,7 +62,7 @@
                 android:layout_marginTop="14dp"
                 android:layout_marginEnd="16dp"
                 android:textColor="@color/black"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/home_btn_my_recipe"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/home_cl_appbar"
                 tools:text="@string/home_tv_favorite" />

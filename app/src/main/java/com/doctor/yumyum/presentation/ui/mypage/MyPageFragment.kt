@@ -2,13 +2,13 @@ package com.doctor.yumyum.presentation.ui.mypage
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
 import com.doctor.yumyum.common.utils.gradePoint
 import com.doctor.yumyum.databinding.FragmentMyPageBinding
+import com.doctor.yumyum.presentation.ui.mypage.myinfo.MyInfoActivity
 import com.doctor.yumyum.presentation.ui.taste.TasteActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -51,6 +51,33 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
             viewModel.getUserInfo()
         }
 
+        viewModel.gradeUp.observe(viewLifecycleOwner) { grade ->
+            if (grade.isNotBlank()) {
+                activity?.let {
+                    GradeUpDialog(grade).show(
+                        it.supportFragmentManager,
+                        "GradeUpDialog"
+                    )
+                }
+            }
+        }
+
+        viewModel.grade.observe(viewLifecycleOwner) {
+            gradeBadge[it]?.let { badge -> binding.myPageIvBadge.setImageResource(badge) }
+            nextGrade[it]?.let { point -> binding.myPageTvNextLevel.text = point }
+        }
+
+        viewModel.point.observe(viewLifecycleOwner) { point ->
+            binding.myPageGraphOrange.apply {
+                gradePoint[nextGrade[viewModel.grade.value]]?.let { nextPoint ->
+                    if (nextPoint != 0) {
+                        this.layoutParams.width =
+                            binding.myPageGraphWhite.width * point / nextPoint
+                    }
+                }
+            }
+        }
+
         binding.apply {
             myPageIbInfo.setOnClickListener {
                 activity?.let { activity ->
@@ -65,31 +92,16 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
                 tasteIntent.putExtra(getString(R.string.taste_mode), true)
                 startActivity(tasteIntent)
             }
-            myPageTvLogout.setOnClickListener {
-                activity?.let { activity ->
-                    LogoutDialog(viewModel).show(
-                        activity.supportFragmentManager,
-                        "LogoutDialog"
-                    )
+            myPageTvMyInfo.setOnClickListener {
+                startActivity(Intent(context, MyInfoActivity::class.java))
+                myPageTvLogout.setOnClickListener {
+                    activity?.let { activity ->
+                        LogoutDialog(viewModel).show(
+                            activity.supportFragmentManager,
+                            "LogoutDialog"
+                        )
+                    }
                 }
-
-            }
-        }
-
-        viewModel.grade.observe(viewLifecycleOwner) {
-            gradeBadge[it]?.let { badge -> binding.myPageIvBadge.setImageResource(badge) }
-            nextGrade[it]?.let { point -> binding.myPageTvNextLevel.text = point }
-        }
-
-        viewModel.point.observe(viewLifecycleOwner) { point ->
-            binding.myPageGraphOrange.layoutParams.apply {
-                gradePoint[nextGrade[viewModel.grade.value]]?.let { nextPoint ->
-                    binding.myPageGraphOrange.layoutParams.width =
-                        binding.myPageGraphWhite.width * point / nextPoint
-                }
-            }
-            if (binding.myPageGraphOrange.width != 0) {
-                binding.myPageGraphOrange.visibility = View.VISIBLE
             }
         }
     }

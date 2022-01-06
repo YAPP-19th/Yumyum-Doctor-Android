@@ -10,6 +10,9 @@ interface LocalDataSource {
 
     fun getMode(): Int?
     fun setMode(mode: Int)
+
+    fun getLocalGrade(): String?
+    fun setLocalGrade(grade: String)
 }
 
 class LocalDataSourceImpl : LocalDataSource {
@@ -29,5 +32,11 @@ class LocalDataSourceImpl : LocalDataSource {
 
     override fun setMode(mode: Int) {
         SharedPreference.setMode(mode)
+    }
+
+    override fun getLocalGrade(): String? = SharedPreference.getGrade()
+
+    override fun setLocalGrade(grade: String) {
+        SharedPreference.setGrade(grade)
     }
 }
