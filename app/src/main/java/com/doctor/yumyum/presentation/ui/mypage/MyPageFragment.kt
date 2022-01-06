@@ -9,6 +9,7 @@ import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
 import com.doctor.yumyum.common.utils.gradePoint
 import com.doctor.yumyum.databinding.FragmentMyPageBinding
+import com.doctor.yumyum.presentation.ui.mypage.terms.TermsActivity
 import com.doctor.yumyum.presentation.ui.taste.TasteActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -64,6 +65,9 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
                 val tasteIntent = Intent(context, TasteActivity::class.java)
                 tasteIntent.putExtra(getString(R.string.taste_mode), true)
                 startActivity(tasteIntent)
+            }
+            myPageTvTermsOfUse.setOnClickListener{
+                startActivity(Intent(requireContext(), TermsActivity::class.java))
             }
             myPageTvLogout.setOnClickListener {
                 activity?.let { activity ->
