@@ -140,6 +140,11 @@ class WriteViewModel : BaseViewModel() {
         }
     }
 
+    fun deleteReviewImage(index : Int){
+        _reviewImageList.value?.removeAt(index)
+        _reviewImageList.value = _reviewImageList.value
+    }
+
     fun updateTasteList(view: View) {
         view as TextView
         val newTaste = view.text.toString()
