@@ -7,6 +7,8 @@ import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.common.base.BaseViewModel
+import com.doctor.yumyum.common.utils.StatusType
+import com.doctor.yumyum.common.utils.TagType
 import com.doctor.yumyum.data.model.FoodImage
 import com.doctor.yumyum.data.model.TagItem
 import com.doctor.yumyum.data.model.WriteRecipe
@@ -67,13 +69,6 @@ class WriteViewModel : BaseViewModel() {
         const val SPICY = "매운맛"
         const val BITTER = "쓴맛"
         const val SOUR = "신맛"
-
-        const val MAIN = "MAIN"
-        const val ADD = "ADD"
-        const val EXTRACT = "EXTRACT"
-
-        const val SHARED = "SHARED"
-        const val MINE = "MINE"
     }
 
     fun setMode(isTurnOn: Boolean) {
@@ -128,17 +123,17 @@ class WriteViewModel : BaseViewModel() {
     }
 
     private fun refactorData() {
-        tagList.add(TagItem(null, mainIngredient.value.toString(), MAIN))
+        tagList.add(TagItem(null, mainIngredient.value.toString(), TagType.MAIN.name))
         addTagList.value?.forEach {
-            tagList.add(TagItem(null, it, ADD))
+            tagList.add(TagItem(null, it, TagType.ADD.name))
         }
         minusTagList.value?.forEach {
-            tagList.add(TagItem(null, it, EXTRACT))
+            tagList.add(TagItem(null, it, TagType.EXTRACT.name))
         }
         foodStatus = if (privateMode.value == true) {
-            MINE
+            StatusType.MINE.name
         } else {
-            SHARED
+            StatusType.SHARED.name
         }
     }
 

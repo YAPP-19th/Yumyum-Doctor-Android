@@ -1,5 +1,6 @@
 package com.doctor.yumyum.presentation.adapter
 
+import android.annotation.SuppressLint
 import android.net.Uri
 import android.widget.Button
 import android.widget.ImageButton
@@ -102,4 +103,15 @@ fun bindWriteImg(imageButton: ImageButton, imgUri: Pair<Uri, String>?) {
         imageButton.setImageURI(this.first)
     }
 
+}
+
+@BindingAdapter("bind_filterBackground")
+fun bindFilterBackGround(textView: TextView, category: String?) {
+    if (textView.text == category) {
+        textView.background = ContextCompat.getDrawable(textView.context, R.drawable.bg_filter_taste_selected)
+        textView.setTextColor(textView.context.getColor(R.color.black))
+    } else {
+        textView.background = ContextCompat.getDrawable(textView.context, R.drawable.bg_filter_taste_unselected)
+        textView.setTextColor(textView.context.getColor(R.color.gray))
+    }
 }

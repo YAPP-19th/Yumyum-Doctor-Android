@@ -82,7 +82,7 @@
 
         <activity android:name=".presentation.ui.write.WriteRecipeActivity" />
         <activity android:name=".presentation.ui.write.WriteTagActivity" />
-        <activity android:name=".presentation.ui.myrecipe.MyPageFilterActivity" />
+        <activity android:name=".presentation.ui.myrecipe.MyRecipeFilterActivity" />
     </application>
 
 </manifest>
