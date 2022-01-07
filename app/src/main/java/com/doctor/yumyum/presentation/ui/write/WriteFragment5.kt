@@ -60,6 +60,15 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
         binding.writeBtnFinish.setOnClickListener {
             WriteDialog(writeViewModel).show(parentFragmentManager, "WriteDialog")
         }
+        writeViewModel.fifthOnFinish.observe(viewLifecycleOwner){
+            if(it){
+                binding.writeBtnFinish.isEnabled = true
+                binding.writeBtnFinish.background = resources.getDrawable(R.drawable.bg_btn_main)
+            }else{
+                binding.writeBtnFinish.isEnabled = false
+                binding.writeBtnFinish.background = resources.getDrawable(R.drawable.bg_btn_sub)
+            }
+        }
     }
 
     private fun initBinding() {

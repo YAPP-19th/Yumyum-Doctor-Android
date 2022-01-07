@@ -149,13 +149,14 @@
             app:track="@drawable/recipe_private_sw_track" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:enabled="false"
             android:id="@+id/write_btn_finish"
             style="@style/font_subtitle_medium"
             android:layout_width="0dp"
             android:layout_height="47dp"
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/bg_btn_main"
+            android:background="@drawable/bg_btn_sub"
             android:stateListAnimator="@null"
             android:text="@string/common_complete"
             android:textColor="@color/white"

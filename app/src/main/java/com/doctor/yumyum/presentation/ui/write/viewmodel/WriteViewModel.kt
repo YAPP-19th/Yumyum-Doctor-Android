@@ -66,19 +66,29 @@ class WriteViewModel : BaseViewModel() {
         get() = _tasteList
 
     val secondOnNext: MediatorLiveData<Boolean> = MediatorLiveData()
+    val fifthOnFinish : MediatorLiveData<Boolean> = MediatorLiveData()
 
     init {
         secondOnNext.addSource(title) {
-            secondOnNext.value = _secondOnNext()
+            secondOnNext.value = secondOnNext()
         }
         secondOnNext.addSource(mainIngredient) {
-            secondOnNext.value = _secondOnNext()
+            secondOnNext.value = secondOnNext()
         }
         secondOnNext.addSource(addTagList) {
-            secondOnNext.value = _secondOnNext()
+            secondOnNext.value = secondOnNext()
         }
         secondOnNext.addSource(minusTagList) {
-            secondOnNext.value = _secondOnNext()
+            secondOnNext.value = secondOnNext()
+        }
+    }
+
+    init {
+        fifthOnFinish.addSource(reviewImageList){
+            fifthOnFinish.value = fifthFinish()
+        }
+        fifthOnFinish.addSource(reviewText){
+            fifthOnFinish.value = fifthFinish()
         }
     }
 
@@ -141,12 +151,19 @@ class WriteViewModel : BaseViewModel() {
         _tasteList.value = _tasteList.value
     }
 
-    private fun _secondOnNext(): Boolean {
+    private fun secondOnNext(): Boolean {
         if (title.value.isNullOrBlank() || mainIngredient.value.isNullOrBlank()) {
             return false
         } else if (addTagList.value?.isNullOrEmpty() == false){
             return true
         } else if (minusTagList.value?.isNullOrEmpty() == false){
+            return true
+        }
+        return false
+    }
+
+    private fun fifthFinish() : Boolean {
+        if(!reviewImageList.value.isNullOrEmpty() && !reviewText.value.isNullOrBlank()){
             return true
         }
         return false
