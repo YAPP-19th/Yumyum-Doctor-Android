@@ -13,7 +13,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseActivity
+import com.doctor.yumyum.common.utils.ORDER_FLAG
 import com.doctor.yumyum.common.utils.RecipeType
+import com.doctor.yumyum.common.utils.SORT_FLAG
 import com.doctor.yumyum.databinding.ActivityResearchListBinding
 import com.doctor.yumyum.databinding.DialogSelectSearchBinding
 import com.doctor.yumyum.databinding.DialogSelectSortBinding
@@ -127,21 +129,21 @@ class ResearchListActivity :
 
             when (type) {
                 ResearchListViewModel.SORT_RECENT -> {
-                    sort = "id"
-                    order = "desc"
+                    sort = SORT_FLAG.ID
+                    order = ORDER_FLAG.DESC
                     src = getDrawable(R.drawable.ic_sort_gray)
                 }
                 ResearchListViewModel.SORT_LIKE -> {
-                    sort = "like"
-                    order = "desc"
+                    sort = SORT_FLAG.LIKE
+                    order = ORDER_FLAG.DESC
                 }
                 ResearchListViewModel.SORT_EXPENSIVE -> {
-                    sort = "price"
-                    order = "desc"
+                    sort = SORT_FLAG.PRICE
+                    order = ORDER_FLAG.DESC
                 }
                 ResearchListViewModel.SORT_CHEAP -> {
-                    sort = "price"
-                    order = "asc"
+                    sort = SORT_FLAG.PRICE
+                    order = ORDER_FLAG.ASC
                 }
             }
             sortDialog.dismiss()

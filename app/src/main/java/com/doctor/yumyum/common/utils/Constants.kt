@@ -20,3 +20,14 @@ object TASTE {
     const val TASTE_DETAIL_SAVORY = "고소한"
     const val TASTE_DETAIL_REFRESH = "개운한"
 }
+
+object SORT_FLAG {
+    const val ID = "id"
+    const val LIKE = "like"
+    const val PRICE = "price"
+}
+
+object ORDER_FLAG {
+    const val DESC = "desc"
+    const val ASC ="asc"
+}
