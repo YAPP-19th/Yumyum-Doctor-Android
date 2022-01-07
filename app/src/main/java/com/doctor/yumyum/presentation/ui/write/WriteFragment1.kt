@@ -41,7 +41,8 @@ class WriteFragment1 : BaseFragment<FragmentWriteFirstBinding>(R.layout.fragment
         initBinding()
         initDialog()
         initListener()
-        
+
+        writeViewModel.category.observe(requireActivity()) { brandSelectDialog.dismiss() }
         writeViewModel.mode.observe(requireActivity()){
             writeViewModel.initCategory()
             writeViewModel.setCategory()
