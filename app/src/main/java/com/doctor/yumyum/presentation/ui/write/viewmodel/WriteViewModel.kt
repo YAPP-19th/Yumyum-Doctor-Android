@@ -49,7 +49,7 @@ class WriteViewModel : BaseViewModel() {
     val minusTagList: LiveData<ArrayList<String>>
         get() = _minusTagList
 
-    var price: MutableLiveData<Int> = MutableLiveData()
+    var price: MutableLiveData<String> = MutableLiveData("")
     var reviewText: MutableLiveData<String> = MutableLiveData()
 
     private var _privateMode: MutableLiveData<Boolean> = MutableLiveData()
@@ -174,7 +174,7 @@ class WriteViewModel : BaseViewModel() {
                 categoryName = category.value.toString(),
                 title = title.value.toString(),
                 tags = tagList,
-                price = price.value ?: 0,
+                price = price.value!!.toInt(),
                 flavors = (tasteList.value?.toList() ?: emptyList()),
                 reviewMsg = reviewText.value.toString(),
                 foodStatus = foodStatus

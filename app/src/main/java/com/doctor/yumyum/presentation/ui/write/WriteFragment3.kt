@@ -34,6 +34,15 @@ class WriteFragment3 : BaseFragment<FragmentWriteThirdBinding>(R.layout.fragment
         binding.writeThirdBtnNext.setOnClickListener {
             findNavController().navigate(R.id.action_third_write_fragment_to_fourth_write_fragment)
         }
+        writeViewModel.price.observe(viewLifecycleOwner){
+            if (!it.isNullOrBlank()){
+                binding.writeThirdBtnNext.isEnabled = true
+                binding.writeThirdBtnNext.background = resources.getDrawable(R.drawable.bg_btn_main)
+            }else{
+                binding.writeThirdBtnNext.isEnabled = false
+                binding.writeThirdBtnNext.background = resources.getDrawable(R.drawable.bg_btn_sub)
+            }
+        }
     }
 
     private fun initBinding() {
