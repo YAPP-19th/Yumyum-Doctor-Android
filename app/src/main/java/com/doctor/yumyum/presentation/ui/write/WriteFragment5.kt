@@ -69,6 +69,14 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
                 binding.writeBtnFinish.background = resources.getDrawable(R.drawable.bg_btn_sub)
             }
         }
+
+        writeViewModel.privateMode.observe(viewLifecycleOwner){
+            if(it){
+                binding.writeFifthSwRecipePrivate.setTrackResource(R.drawable.recipe_private_sw_seleted_track)
+            }else{
+                binding.writeFifthSwRecipePrivate.setTrackResource(R.drawable.recipe_private_sw_track)
+            }
+        }
     }
 
     private fun initBinding() {
