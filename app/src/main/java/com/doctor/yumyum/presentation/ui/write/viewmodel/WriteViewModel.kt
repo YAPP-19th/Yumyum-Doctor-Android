@@ -3,6 +3,7 @@ package com.doctor.yumyum.presentation.ui.write.viewmodel
 import android.net.Uri
 import android.util.Log
 import android.view.View
+import android.widget.EditText
 import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
@@ -98,6 +99,8 @@ class WriteViewModel : BaseViewModel() {
         const val SPICY = "매운맛"
         const val BITTER = "쓴맛"
         const val SOUR = "신맛"
+
+        const val ETC = "기타"
     }
 
     fun setMode(isTurnOn: Boolean) {
@@ -116,6 +119,10 @@ class WriteViewModel : BaseViewModel() {
         view as TextView
         val tempText = view.text.toString()
         _tempCategory.value = tempText
+    }
+
+    fun setEtcCategory(category : String){
+        _category.value = category
     }
 
     fun setCategory() {
