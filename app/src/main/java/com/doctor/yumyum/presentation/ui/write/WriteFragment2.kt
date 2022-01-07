@@ -110,7 +110,7 @@ class WriteFragment2 : BaseFragment<FragmentWriteSecondBinding>(R.layout.fragmen
                 )
                 intent.putStringArrayListExtra(
                     resources.getString(R.string.write_intent_inputList),
-                    addList
+                    minusList
                 )
                 changeIngredients.launch(intent)
             }
