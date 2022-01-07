@@ -25,11 +25,11 @@ class MyRecipeFilterActivity :
 
     private fun setFilter() {
         //TODO : 이미 적용된 값 Setting , 공개비공개여부, 브랜드 값이 background&Text 컬러가 변하지 않음 ㅠ..ㅠ..ㅠ..
-        intent.extras?.getString(MyRecipeFragment.STATUS)?.let { filterViewModel.setStatus(it) }
-        intent.extras?.getString(MyRecipeFragment.MIN)?.let { filterViewModel.setMinPrice(it) }
-        intent.extras?.getString(MyRecipeFragment.MAX)?.let { filterViewModel.setMaxPrice(it) }
-        intent.extras?.getString(MyRecipeFragment.CATEGORY)?.let { filterViewModel.setCategory(it) }
-        intent.extras?.getStringArrayList(MyRecipeFragment.TASTE)?.let { filterViewModel.setTasteList(it) }
+        intent.extras?.getString(MyRecipeFragment.STATUS_KEY)?.let { filterViewModel.setStatus(it) }
+        intent.extras?.getString(MyRecipeFragment.MIN_KEY)?.let { filterViewModel.setMinPrice(it) }
+        intent.extras?.getString(MyRecipeFragment.MAX_KEY)?.let { filterViewModel.setMaxPrice(it) }
+        intent.extras?.getString(MyRecipeFragment.CATEGORY_KEY)?.let { filterViewModel.setCategory(it) }
+        intent.extras?.getStringArrayList(MyRecipeFragment.TASTE_KEY)?.let { filterViewModel.setTasteList(it) }
     }
 
     private fun initBinding() {
@@ -50,11 +50,11 @@ class MyRecipeFilterActivity :
             showToast(getString(R.string.error_filter_price_range))
         } else {
             val intent = Intent(this, MyRecipeFragment::class.java)
-            intent.putExtra(MyRecipeFragment.MIN, minPrice)
-            intent.putExtra(MyRecipeFragment.MAX, maxPrice)
-            intent.putExtra(MyRecipeFragment.CATEGORY, category)
-            intent.putExtra(MyRecipeFragment.STATUS, status)
-            intent.putStringArrayListExtra(MyRecipeFragment.TASTE, tasteList)
+            intent.putExtra(MyRecipeFragment.MIN_KEY, minPrice)
+            intent.putExtra(MyRecipeFragment.MAX_KEY, maxPrice)
+            intent.putExtra(MyRecipeFragment.CATEGORY_KEY, category)
+            intent.putExtra(MyRecipeFragment.STATUS_KEY, status)
+            intent.putStringArrayListExtra(MyRecipeFragment.TASTE_KEY, tasteList)
             setResult(MyRecipeFragment.FILTER_APPLY, intent)
             finish()
         }
