@@ -2,6 +2,7 @@ package com.doctor.yumyum.presentation.ui.write
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -21,12 +22,13 @@ import com.doctor.yumyum.presentation.ui.write.viewmodel.WriteViewModel
  *  - 추가하는 재료 & 빼는 재료 보여주기
  */
 
-class WriteFragment2 : BaseFragment<FragmentWriteSecondBinding>(R.layout.fragment_write_second), View.OnClickListener{
-    private lateinit var changeIngredients : ActivityResultLauncher<Intent>
-    private var addList : ArrayList<String> = arrayListOf()
-    private var minusList : ArrayList<String> = arrayListOf()
-    private val writeViewModel : WriteViewModel by activityViewModels {
-        object : ViewModelProvider.Factory{
+class WriteFragment2 : BaseFragment<FragmentWriteSecondBinding>(R.layout.fragment_write_second),
+    View.OnClickListener {
+    private lateinit var changeIngredients: ActivityResultLauncher<Intent>
+    private var addList: ArrayList<String> = arrayListOf()
+    private var minusList: ArrayList<String> = arrayListOf()
+    private val writeViewModel: WriteViewModel by activityViewModels {
+        object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T =
                 WriteViewModel() as T
         }
@@ -43,13 +45,26 @@ class WriteFragment2 : BaseFragment<FragmentWriteSecondBinding>(R.layout.fragmen
         initBinding()
         initListener()
         changeIngredients()
+
+        writeViewModel.secondOnNext.observe(viewLifecycleOwner){
+            Log.d("isNext?",it.toString())
+            if(it){
+                binding.writeSecondBtnNext.isEnabled = true
+                binding.writeSecondBtnNext.background =
+                    resources.getDrawable(R.drawable.bg_btn_main)
+            }else{
+                binding.writeSecondBtnNext.background =
+                    resources.getDrawable(R.drawable.bg_btn_sub)
+                binding.writeSecondBtnNext.isEnabled = false
+            }
+        }
     }
 
     private fun initBinding() {
         binding.secondFragment = this
         binding.writeViewModel = writeViewModel
-        binding.writeSecondRvPlus.adapter = WriteTagAdapter{}
-        binding.writeSecondRvMinus.adapter = WriteTagAdapter{}
+        binding.writeSecondRvPlus.adapter = WriteTagAdapter {}
+        binding.writeSecondRvMinus.adapter = WriteTagAdapter {}
     }
 
     private fun initListener() {
@@ -61,28 +76,45 @@ class WriteFragment2 : BaseFragment<FragmentWriteSecondBinding>(R.layout.fragmen
     }
 
     override fun onClick(v: View?) {
-        val intent = Intent(context,WriteTagActivity::class.java)
-        when(v){
+        val intent = Intent(context, WriteTagActivity::class.java)
+        when (v) {
             binding.writeSecondBtnAdd -> {
-                intent.putExtra(resources.getString(R.string.write_tag_type), REQUEST_CODE_ADD_INGREDIENTS)
+                intent.putExtra(
+                    resources.getString(R.string.write_tag_type),
+                    REQUEST_CODE_ADD_INGREDIENTS
+                )
                 changeIngredients.launch(intent)
             }
             binding.writeSecondBtnMinus -> {
-                intent.putExtra(resources.getString(R.string.write_tag_type), REQUEST_CODE_MINUS_INGREDIENTS)
+                intent.putExtra(
+                    resources.getString(R.string.write_tag_type),
+                    REQUEST_CODE_MINUS_INGREDIENTS
+                )
                 changeIngredients.launch(intent)
             }
             binding.writeSecondIbAddEdit -> {
-                intent.putExtra(resources.getString(R.string.write_tag_type), REQUEST_CODE_ADD_INGREDIENTS)
-                intent.putStringArrayListExtra(resources.getString(R.string.write_intent_inputList), addList)
+                intent.putExtra(
+                    resources.getString(R.string.write_tag_type),
+                    REQUEST_CODE_ADD_INGREDIENTS
+                )
+                intent.putStringArrayListExtra(
+                    resources.getString(R.string.write_intent_inputList),
+                    addList
+                )
                 changeIngredients.launch(intent)
             }
             binding.writeSecondIbMinusEdit -> {
-                intent.putExtra(resources.getString(R.string.write_tag_type), REQUEST_CODE_MINUS_INGREDIENTS)
-                intent.putStringArrayListExtra(resources.getString(R.string.write_intent_inputList), addList)
+                intent.putExtra(
+                    resources.getString(R.string.write_tag_type),
+                    REQUEST_CODE_MINUS_INGREDIENTS
+                )
+                intent.putStringArrayListExtra(
+                    resources.getString(R.string.write_intent_inputList),
+                    addList
+                )
                 changeIngredients.launch(intent)
             }
-
-            binding.writeSecondBtnNext->
+            binding.writeSecondBtnNext ->
                 findNavController().navigate(R.id.action_second_write_fragment_to_third_write_fragment)
 
         }
@@ -90,16 +122,19 @@ class WriteFragment2 : BaseFragment<FragmentWriteSecondBinding>(R.layout.fragmen
 
     //TagActivity가 종료되었을 때
     private fun changeIngredients() {
-        changeIngredients = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ it ->
-            if (it.resultCode == REQUEST_CODE_ADD_INGREDIENTS) {
-                addList = it.data?.getStringArrayListExtra(resources.getString(R.string.write_intent_inputList)) as ArrayList<String>
-                writeViewModel.setAddTagItem(addList)
-            }
+        changeIngredients =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { it ->
+                if (it.resultCode == REQUEST_CODE_ADD_INGREDIENTS) {
+                    addList =
+                        it.data?.getStringArrayListExtra(resources.getString(R.string.write_intent_inputList)) as ArrayList<String>
+                    writeViewModel.setAddTagItem(addList)
+                }
 
-            if(it.resultCode == REQUEST_CODE_MINUS_INGREDIENTS){
-                minusList = it.data?.getStringArrayListExtra(resources.getString(R.string.write_intent_inputList)) as ArrayList<String>
-                writeViewModel.setMinusTagItem(minusList)
+                if (it.resultCode == REQUEST_CODE_MINUS_INGREDIENTS) {
+                    minusList =
+                        it.data?.getStringArrayListExtra(resources.getString(R.string.write_intent_inputList)) as ArrayList<String>
+                    writeViewModel.setMinusTagItem(minusList)
+                }
             }
-        }
     }
 }

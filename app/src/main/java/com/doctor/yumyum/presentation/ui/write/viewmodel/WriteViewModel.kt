@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.common.base.BaseViewModel
 import com.doctor.yumyum.common.utils.StatusType
@@ -48,20 +49,38 @@ class WriteViewModel : BaseViewModel() {
     val minusTagList: LiveData<ArrayList<String>>
         get() = _minusTagList
 
-    var price: MutableLiveData<Int> = MutableLiveData(0)
+    var price: MutableLiveData<Int> = MutableLiveData()
     var reviewText: MutableLiveData<String> = MutableLiveData()
 
     private var _privateMode: MutableLiveData<Boolean> = MutableLiveData()
     val privateMode: LiveData<Boolean>
         get() = _privateMode
 
-    private var _reviewImageList: MutableLiveData<MutableList<Pair<Uri, String>>> = MutableLiveData()
+    private var _reviewImageList: MutableLiveData<MutableList<Pair<Uri, String>>> =
+        MutableLiveData()
     val reviewImageList: LiveData<MutableList<Pair<Uri, String>>>
         get() = _reviewImageList
 
     private var _tasteList: MutableLiveData<ArrayList<String>> = MutableLiveData(arrayListOf())
     val tasteList: LiveData<ArrayList<String>>
         get() = _tasteList
+
+    val secondOnNext: MediatorLiveData<Boolean> = MediatorLiveData()
+
+    init {
+        secondOnNext.addSource(title) {
+            secondOnNext.value = _secondOnNext()
+        }
+        secondOnNext.addSource(mainIngredient) {
+            secondOnNext.value = _secondOnNext()
+        }
+        secondOnNext.addSource(addTagList) {
+            secondOnNext.value = _secondOnNext()
+        }
+        secondOnNext.addSource(minusTagList) {
+            secondOnNext.value = _secondOnNext()
+        }
+    }
 
     companion object {
         const val SWEET = "단맛"
@@ -106,7 +125,7 @@ class WriteViewModel : BaseViewModel() {
     }
 
     fun setReviewImageList(newList: MutableList<Pair<Uri, String>>) {
-        if(_reviewImageList.value?.size !=3){
+        if (_reviewImageList.value?.size != 3) {
             _reviewImageList.value = newList
         }
     }
@@ -120,6 +139,17 @@ class WriteViewModel : BaseViewModel() {
             _tasteList.value?.add(newTaste)
         }
         _tasteList.value = _tasteList.value
+    }
+
+    private fun _secondOnNext(): Boolean {
+        if (title.value.isNullOrBlank() || mainIngredient.value.isNullOrBlank()) {
+            return false
+        } else if (addTagList.value?.isNullOrEmpty() == false){
+            return true
+        } else if (minusTagList.value?.isNullOrEmpty() == false){
+            return true
+        }
+        return false
     }
 
     private fun refactorData() {
@@ -145,15 +175,15 @@ class WriteViewModel : BaseViewModel() {
                 title = title.value.toString(),
                 tags = tagList,
                 price = price.value ?: 0,
-                flavors = (tasteList.value?.toList()?:emptyList()),
+                flavors = (tasteList.value?.toList() ?: emptyList()),
                 reviewMsg = reviewText.value.toString(),
                 foodStatus = foodStatus
             )
             val response: Response<ResponseBody> =
                 writeRepository.postRecipeText(writeRecipe = writeRecipe)
-            val recipeId = (response.headers()["location"]?:"").split("/").last().toInt()
+            val recipeId = (response.headers()["location"] ?: "").split("/").last().toInt()
             if (response.isSuccessful) {
-                Log.d("WriteViewModel: ","레시피 작성 성공")
+                Log.d("WriteViewModel: ", "레시피 작성 성공")
                 postImages(recipeId)
             }
         } catch (e: Exception) {
@@ -168,12 +198,18 @@ class WriteViewModel : BaseViewModel() {
             imageList.forEach {
                 val file = File(it.second)
                 val body = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
-                images.add(MultipartBody.Part.createFormData(name = "images", filename = file.name, body = body))
+                images.add(
+                    MultipartBody.Part.createFormData(
+                        name = "images",
+                        filename = file.name,
+                        body = body
+                    )
+                )
             }
-            writeRepository.postRecipeImage(recipeId = recipeId,imgList = images)
+            writeRepository.postRecipeImage(recipeId = recipeId, imgList = images)
 
         } catch (e: Exception) {
-            Log.d("WriteViewModel imgPost failed : ",e.toString())
+            Log.d("WriteViewModel imgPost failed : ", e.toString())
         }
     }
 
