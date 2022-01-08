@@ -52,7 +52,7 @@
         <TextView
             android:id="@+id/report_tv_reason_duplicate"
             style="@style/font_body1_regular"
-            bind_startCompat="@{viewModel.reportType == viewModel.REASON_DUPLICATE}"
+            bind_reportCompat="@{viewModel.reportType == viewModel.REASON_DUPLICATE}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
@@ -70,7 +70,7 @@
         <TextView
             android:id="@+id/report_tv_reason_advertising"
             style="@style/font_body1_regular"
-            bind_startCompat="@{viewModel.reportType == viewModel.REASON_ADVERTISING}"
+            bind_reportCompat="@{viewModel.reportType == viewModel.REASON_ADVERTISING}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
@@ -88,7 +88,7 @@
         <TextView
             android:id="@+id/report_tv_reason_irrelevant"
             style="@style/font_body1_regular"
-            bind_startCompat="@{viewModel.reportType == viewModel.REASON_IRRELEVANT}"
+            bind_reportCompat="@{viewModel.reportType == viewModel.REASON_IRRELEVANT}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
@@ -106,7 +106,7 @@
         <TextView
             android:id="@+id/report_tv_reason_wrong"
             style="@style/font_body1_regular"
-            bind_startCompat="@{viewModel.reportType == viewModel.REASON_WRONG}"
+            bind_reportCompat="@{viewModel.reportType == viewModel.REASON_WRONG}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
@@ -124,7 +124,7 @@
         <TextView
             android:id="@+id/report_tv_reason_harmful"
             style="@style/font_body1_regular"
-            bind_startCompat="@{viewModel.reportType == viewModel.REASON_HARMFUL}"
+            bind_reportCompat="@{viewModel.reportType == viewModel.REASON_HARMFUL}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
@@ -142,7 +142,7 @@
         <TextView
             android:id="@+id/report_tv_reason_porno"
             style="@style/font_body1_regular"
-            bind_startCompat="@{viewModel.reportType == viewModel.REASON_PORNO}"
+            bind_reportCompat="@{viewModel.reportType == viewModel.REASON_PORNO}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
@@ -160,7 +160,7 @@
         <TextView
             android:id="@+id/report_tv_reason_etc"
             style="@style/font_body1_regular"
-            bind_startCompat="@{viewModel.reportType == viewModel.REASON_ETC}"
+            bind_reportCompat="@{viewModel.reportType == viewModel.REASON_ETC}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
