@@ -177,11 +177,14 @@
     <string name="report">신고</string>
     <string name="report_title">신고하기</string>
     <string name="report_select_reason">신고사유를 선택해주세요</string>
-    <string name="report_reason_duplicate">중복된 레시피를 게시하였습니다.</string>
-    <string name="report_reason_advertising">광고성 레시피를 게시하였습니다.</string>
-    <string name="report_reason_irrelevant">레시피와 관련없는 내용을 게시하였습니다.</string>
-    <string name="report_reason_harmful">가학적이나 유해한 내용을 게시하였습니다.</string>
-    <string name="report_reason_wrong">잘못된 사실을 게시하였습니다.</string>
+    <string name="report_guide">신고된 게시글은 운영 원칙에 따라 조치가 취해집니다.</string>
+    <string name="report_reason_duplicate">중복된 레시피입니다.</string>
+    <string name="report_reason_advertising">광고 내용을 포함하고 있습니다.</string>
+    <string name="report_reason_irrelevant">레시피와 관련없는 내용을 포함하고 있습니다.</string>
+    <string name="report_reason_harmful">가학적이나 유해한 내용을 포함하고 있습니다.</string>
+    <string name="report_reason_wrong">잘못된 사실을 포함하고 있습니다.</string>
+    <string name="report_reason_porno">음란물을 포함하고 있습니다.</string>
+    <string name="report_success">레시피 신고를 완료했습니다.</string>
 
     <!-- 공유하기 -->
     <string name="share">공유</string>
@@ -212,6 +215,7 @@
     <string name="error_filter_price_range">잘못된 범위입니다.</string>
     <string name="error_filter_price_empty">가격 범위를 입력해주세요.</string>
     <string name="error_recipe_list">레시피 목록을 불러올 수 없습니다.</string>
+    <string name="error_report_fail">레시피 신고하기를 할 수 없습니다.</string>
 
     <!-- 입맛 설정 -->
     <string name="taste_mode">입맛 설정 모드</string>

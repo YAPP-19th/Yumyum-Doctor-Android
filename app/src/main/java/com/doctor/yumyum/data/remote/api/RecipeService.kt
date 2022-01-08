@@ -52,10 +52,17 @@ interface RecipeService {
     suspend fun getFavoriteList(
         @Query("categoryName") categoryName: String
     ): Response<FavoriteRecipeResponse>
+
     @GET("/api/v1/foods/recommendation")
     suspend fun getRecommendation(
         @Query("categoryName") categoryName: String,
         @Query("top") top: Int,
         @Query("rankDatePeriod") rankDatePeriod: Int
     ): Response<RecipeRecommendationResponse>
+
+    @POST("/api/v1/foods/{recipeId}/report")
+    suspend fun reportRecipe(
+        @Path("recipeId") recipeId: Int,
+        @Body reason: HashMap<String, Any>
+    ): Response<ResponseBody>
 }

@@ -156,6 +156,7 @@
             android:gravity="center"
             android:paddingVertical="16dp"
             android:text="@string/report"
+            android:onClick="@{()->viewModel.reportRecipe()}"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
