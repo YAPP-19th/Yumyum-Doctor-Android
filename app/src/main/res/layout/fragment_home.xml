@@ -12,226 +12,231 @@
             type="com.doctor.yumyum.presentation.ui.home.HomeViewModel" />
     </data>
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/home_cl_appbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="51dp"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/home_cl_appbar"
-                android:layout_width="match_parent"
-                android:layout_height="51dp"
-                android:orientation="horizontal"
-                android:paddingHorizontal="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="15dp"
-                    android:src="@drawable/ic_logo_home"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <ImageButton
-                    android:id="@+id/home_ib_mode"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:contentDescription="@string/common_button_change_mode"
-                    android:minHeight="48dp"
-                    android:onClick="@{()->viewModel.changeMode()}"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    tools:src="@drawable/ic_change_food" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <TextView
-                android:id="@+id/home_tv_greeting"
-                style="@style/font_h2"
-                android:layout_width="0dp"
+            <ImageView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="14dp"
-                android:layout_marginEnd="16dp"
-                android:textColor="@color/black"
-                app:layout_constraintEnd_toStartOf="@id/home_btn_my_recipe"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/home_cl_appbar"
-                tools:text="@string/home_tv_favorite" />
-
-            <TextView
-                android:id="@+id/home_tv_favorite"
-                style="@style/font_body1_medium"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="3dp"
-                android:text="@string/home_tv_favorite"
-                android:textColor="@color/black"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/home_tv_greeting" />
-
-            <TextView
-                android:id="@+id/home_tv_check"
-                style="@style/font_body1_light"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:text="@string/home_tv_check"
-                android:textColor="@color/black"
-                app:layout_constraintStart_toEndOf="@id/home_tv_favorite"
-                app:layout_constraintTop_toBottomOf="@id/home_tv_greeting" />
+                android:layout_marginBottom="15dp"
+                android:src="@drawable/ic_logo_home"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <ImageButton
-                android:id="@+id/home_btn_my_recipe"
+                android:id="@+id/home_ib_mode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
-                android:layout_marginEnd="21dp"
                 android:background="@null"
-                android:src="@drawable/ic_right_arrow"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/home_cl_appbar" />
-
-            <TextView
-                android:id="@+id/home_tv_favorite_empty"
-                style="@style/font_body1_medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="38dp"
-                android:layout_marginBottom="43dp"
-                android:background="@drawable/bg_message_empty"
-                android:drawablePadding="7dp"
-                android:gravity="center"
-                android:paddingHorizontal="27dp"
-                android:paddingTop="24dp"
-                android:paddingBottom="28dp"
-                android:text="@string/home_tv_favorite_empty"
-                android:textColor="@color/dark_gray"
-                android:visibility="@{viewModel.favoriteList.size == 0 ? View.VISIBLE : View.INVISIBLE}"
-                app:drawableTopCompat="@drawable/ic_heart"
-                app:layout_constraintBottom_toTopOf="@id/home_tv_my_recipe"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/home_tv_check" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/home_rv_favorite_recipe"
-                bind_homeFavorite="@{viewModel.favoriteList}"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/home_tv_favorite"
-                tools:listitem="@layout/item_home_favorite" />
-
-            <ImageView
-                android:id="@+id/home_iv_my_recipe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="42dp"
-                android:src="@drawable/ic_pencil"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/home_tv_favorite_empty" />
-
-            <TextView
-                android:id="@+id/home_tv_my_recipe"
-                style="@style/font_h3_bold"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="7dp"
-                android:layout_marginTop="43dp"
-                android:layout_marginEnd="16dp"
-                android:text="@string/home_tv_my_recipe"
-                android:textColor="@color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/home_iv_my_recipe"
-                app:layout_constraintTop_toBottomOf="@id/home_tv_favorite_empty" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/home_rv_brand"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/home_tv_my_recipe"
-                tools:listitem="@layout/item_home_brand" />
-
-            <ImageView
-                android:id="@+id/home_iv_today_recipe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="30dp"
-                android:src="@drawable/ic_round_like"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/home_rv_brand" />
-
-            <TextView
-                android:id="@+id/home_tv_today_recipe"
-                style="@style/font_h3_bold"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="16dp"
-                android:text="@string/home_tv_today_recipe"
-                android:textColor="@color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/home_iv_today_recipe"
-                app:layout_constraintTop_toBottomOf="@id/home_rv_brand" />
-
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/home_vp_today_recipe"
-                bind_recommendationList="@{viewModel.recommendationList}"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="29dp"
-                android:clipChildren="false"
-                android:clipToPadding="false"
+                android:contentDescription="@string/common_button_change_mode"
+                android:minHeight="48dp"
+                android:onClick="@{()->viewModel.changeMode()}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/home_tv_today_recipe" />
-
-            <TextView
-                android:id="@+id/home_tv_today_empty"
-                style="@style/font_body1_medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="46dp"
-                android:layout_marginBottom="117dp"
-                android:background="@drawable/bg_message_empty"
-                android:drawablePadding="14dp"
-                android:paddingHorizontal="16dp"
-                android:paddingTop="30dp"
-                android:paddingBottom="36dp"
-                android:text="@string/home_tv_today_empty"
-                android:textColor="@color/black"
-                android:visibility="@{viewModel.recommendationList.size == 0 ? View.VISIBLE : View.INVISIBLE}"
-                app:drawableTopCompat="@drawable/ic_logo_error"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/home_tv_today_recipe" />
-
+                tools:src="@drawable/ic_change_food" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </ScrollView>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:id="@+id/home_tv_greeting"
+                    style="@style/font_h2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginEnd="16dp"
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toStartOf="@id/home_btn_my_recipe"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@string/home_tv_favorite" />
+
+                <TextView
+                    android:id="@+id/home_tv_favorite"
+                    style="@style/font_body1_medium"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="3dp"
+                    android:text="@string/home_tv_favorite"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/home_tv_greeting" />
+
+                <TextView
+                    android:id="@+id/home_tv_check"
+                    style="@style/font_body1_light"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:text="@string/home_tv_check"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toEndOf="@id/home_tv_favorite"
+                    app:layout_constraintTop_toBottomOf="@id/home_tv_greeting" />
+
+                <ImageButton
+                    android:id="@+id/home_btn_my_recipe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="36dp"
+                    android:layout_marginEnd="21dp"
+                    android:background="@null"
+                    android:src="@drawable/ic_right_arrow"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/home_tv_favorite_empty"
+                    style="@style/font_body1_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="38dp"
+                    android:layout_marginBottom="43dp"
+                    android:background="@drawable/bg_message_empty"
+                    android:drawablePadding="7dp"
+                    android:gravity="center"
+                    android:paddingHorizontal="27dp"
+                    android:paddingTop="24dp"
+                    android:paddingBottom="28dp"
+                    android:text="@string/home_tv_favorite_empty"
+                    android:textColor="@color/dark_gray"
+                    android:visibility="@{viewModel.favoriteList.size == 0 ? View.VISIBLE : View.INVISIBLE}"
+                    app:drawableTopCompat="@drawable/ic_heart"
+                    app:layout_constraintBottom_toTopOf="@id/home_tv_my_recipe"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/home_tv_check" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/home_rv_favorite_recipe"
+                    bind_homeFavorite="@{viewModel.favoriteList}"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/home_tv_favorite"
+                    tools:listitem="@layout/item_home_favorite" />
+
+                <ImageView
+                    android:id="@+id/home_iv_my_recipe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="42dp"
+                    android:src="@drawable/ic_pencil"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/home_tv_favorite_empty" />
+
+                <TextView
+                    android:id="@+id/home_tv_my_recipe"
+                    style="@style/font_h3_bold"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="7dp"
+                    android:layout_marginTop="43dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/home_tv_my_recipe"
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/home_iv_my_recipe"
+                    app:layout_constraintTop_toBottomOf="@id/home_tv_favorite_empty" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/home_rv_brand"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/home_tv_my_recipe"
+                    tools:listitem="@layout/item_home_brand" />
+
+                <ImageView
+                    android:id="@+id/home_iv_today_recipe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="30dp"
+                    android:src="@drawable/ic_round_like"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/home_rv_brand" />
+
+                <TextView
+                    android:id="@+id/home_tv_today_recipe"
+                    style="@style/font_h3_bold"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/home_tv_today_recipe"
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/home_iv_today_recipe"
+                    app:layout_constraintTop_toBottomOf="@id/home_rv_brand" />
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/home_vp_today_recipe"
+                    bind_recommendationList="@{viewModel.recommendationList}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="29dp"
+                    android:clipChildren="false"
+                    android:clipToPadding="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/home_tv_today_recipe" />
+
+                <TextView
+                    android:id="@+id/home_tv_today_empty"
+                    style="@style/font_body1_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="46dp"
+                    android:layout_marginBottom="117dp"
+                    android:background="@drawable/bg_message_empty"
+                    android:drawablePadding="14dp"
+                    android:paddingHorizontal="16dp"
+                    android:paddingTop="30dp"
+                    android:paddingBottom="36dp"
+                    android:text="@string/home_tv_today_empty"
+                    android:textColor="@color/black"
+                    android:visibility="@{viewModel.recommendationList.size == 0 ? View.VISIBLE : View.INVISIBLE}"
+                    app:drawableTopCompat="@drawable/ic_logo_error"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/home_tv_today_recipe" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </LinearLayout>
 </layout>
