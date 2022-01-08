@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Yumyum</string>
+    <string name="app_name">냠냠박사</string>
     <string name="shared_pref_key">Yumyum_DB</string>
     <string name="kakao_app_key">44e11b10e2c1d2c273b00e4d466badd2</string>
 
