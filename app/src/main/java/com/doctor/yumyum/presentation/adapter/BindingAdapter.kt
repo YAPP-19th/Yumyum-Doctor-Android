@@ -1,6 +1,5 @@
 package com.doctor.yumyum.presentation.adapter
 
-import android.annotation.SuppressLint
 import android.net.Uri
 import android.widget.Button
 import android.widget.ImageButton
@@ -42,8 +41,8 @@ fun bindTagItem(tvTagItem: TextView, tagItem: String) {
     tvTagItem.background = tvTagItem.context.getDrawable(R.drawable.bg_unselect_tag_item)
 }
 
-@BindingAdapter("bind_startCompat")
-fun bindStartCompat(textView: TextView, condition: Boolean) {
+@BindingAdapter("bind_reportCompat")
+fun bindReportCompat(textView: TextView, condition: Boolean) {
     val src = if (condition) ContextCompat.getDrawable(
         textView.context,
         R.drawable.ic_report_selected

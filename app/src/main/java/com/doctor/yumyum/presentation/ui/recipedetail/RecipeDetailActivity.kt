@@ -37,7 +37,7 @@ class RecipeDetailActivity :
         binding.recipeDetailRvMinus.adapter = WriteTagAdapter {}
         binding.recipeDetailRvTaste.adapter = TasteTagAdapter()
         binding.recipeDetailIbMenu.setOnClickListener {
-            RecipeMenuDialog().show(supportFragmentManager, "RecipeMenuDialog")
+            RecipeMenuDialog(recipeId).show(supportFragmentManager, "RecipeMenuDialog")
         }
         binding.recipeDetailIbBack.setOnClickListener { finish() }
 

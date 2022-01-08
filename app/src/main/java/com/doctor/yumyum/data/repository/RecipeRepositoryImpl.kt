@@ -52,8 +52,13 @@ class RecipeRepositoryImpl : RecipeRepository {
             offset,
             pageSize
         )
+
     override suspend fun getFavorite(categoryName: String): Response<FavoriteRecipeResponse> =
         recipeDataSource.getFavorite(categoryName)
+
     override suspend fun getRecommendation(categoryName: String, top: Int, rankDatePeriod: Int) =
         recipeDataSource.getRecommendation(categoryName, top, rankDatePeriod)
+
+    override suspend fun reportRecipe(recipeId: Int, reason: HashMap<String, Any>): Response<ResponseBody> =
+        recipeDataSource.reportRecipe(recipeId, reason)
 }

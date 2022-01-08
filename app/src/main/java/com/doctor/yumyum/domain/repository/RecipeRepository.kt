@@ -31,4 +31,5 @@ interface RecipeRepository {
         top: Int,
         rankDatePeriod: Int
     ): Response<RecipeRecommendationResponse>
+    suspend fun reportRecipe(recipeId: Int, reason: HashMap<String, Any>): Response<ResponseBody>
 }
