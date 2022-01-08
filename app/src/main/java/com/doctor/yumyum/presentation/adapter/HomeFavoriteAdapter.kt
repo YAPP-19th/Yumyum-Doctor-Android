@@ -19,13 +19,15 @@ class HomeFavoriteAdapter(private val itemClickListener: (Int) -> Unit) :
         fun bind(recipe: FavoriteRecipe) {
             binding.homeFavoriteTvBrand.text = recipe.categoryName
             binding.homeFavoriteTvName.text = recipe.foodTitle
-            binding.homeFavoriteTvPrice.text = "${recipe.price}원"
+            binding.homeFavoriteTvPrice.text =
+                binding.root.context.getString(R.string.common_variable_price, recipe.price)
             binding.homeFavoriteTvLike.text = recipe.numberOfLikes.toString()
 
             if (recipe.foodImages.isNotEmpty()) {
                 Glide
                     .with(binding.homeFavoriteIvRecipe)
                     .load(recipe.foodImages[0].imageUrl)
+                    .placeholder(R.drawable.ic_loading_image)
                     .into(binding.homeFavoriteIvRecipe)
             }
             binding.root.setOnClickListener {
