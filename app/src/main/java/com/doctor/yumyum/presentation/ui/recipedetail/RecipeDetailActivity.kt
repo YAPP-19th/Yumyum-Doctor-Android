@@ -51,7 +51,7 @@ class RecipeDetailActivity :
             showToast(getString(resId))
         }
 
-        // 오늘의 추천레시피 초기화
+        // 레시피 이미지 뷰페이저 설정
         binding.recipeDetailVpImage.adapter = RecipeDetailAdapter()
     }
 
