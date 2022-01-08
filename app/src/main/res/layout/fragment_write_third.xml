@@ -27,7 +27,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:text="@{viewModel.mainIngredient}"
             android:id="@+id/write_third_tv_main"
             style="@style/font_body1_medium"
             android:layout_width="wrap_content"

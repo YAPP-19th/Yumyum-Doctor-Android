@@ -43,6 +43,10 @@ class WriteFragment3 : BaseFragment<FragmentWriteThirdBinding>(R.layout.fragment
                 binding.writeThirdBtnNext.background = resources.getDrawable(R.drawable.bg_btn_sub)
             }
         }
+
+        writeViewModel.mainIngredient.observe(viewLifecycleOwner){
+            binding.writeThirdTvMain.text =resources.getString(R.string.common_tagItem,it)
+        }
     }
 
     private fun initBinding() {
