@@ -259,7 +259,7 @@ class ResearchListActivity :
                 order,
                 "2022-12-26T12:12:12",
                 0,
-                10
+                100
             )
         }
     }
