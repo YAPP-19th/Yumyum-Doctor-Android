@@ -29,11 +29,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="188dp"
                     android:contentDescription="@string/common_recipe_image"
-                    android:scaleType="centerCrop"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:src="@color/sub_green" />
+                    android:scaleType="center"
+                    android:background="@color/light_gray"
+                    android:src="@drawable/ic_loading_image"/>
 
                 <ImageView
                     android:id="@+id/item_home_today_iv_like"

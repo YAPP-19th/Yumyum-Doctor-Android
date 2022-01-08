@@ -197,6 +197,7 @@
     <string name="home_tv_my_recipe">나의 레시피</string>
     <string name="home_tv_today_recipe">오늘의 추천 레시피</string>
     <string name="home_tv_favorite_empty">아직 최애레시피가 없어요\n<font color="#000000"><b>레시피 탐구</b></font>에서 최애레시피\n등록해보세요!</string>
+    <string name="home_tv_today_empty">아직 등록된 레시피가 없습니다.</string>
 
     <!-- 나의 레시피 -->
     <string name="my_recipe_tv_best_recipe">최애레시피</string>

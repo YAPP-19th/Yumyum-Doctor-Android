@@ -30,8 +30,9 @@
                     android:id="@+id/home_favorite_iv_recipe"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    tools:src="@color/gray" />
+                    android:scaleType="center"
+                    android:background="@color/light_gray"
+                    android:src="@drawable/ic_loading_image" />
 
                 <ImageView
                     android:id="@+id/home_favorite_iv_like"
