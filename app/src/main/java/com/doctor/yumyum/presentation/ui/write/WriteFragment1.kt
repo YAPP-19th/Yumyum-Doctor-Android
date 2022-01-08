@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
@@ -51,6 +52,10 @@ class WriteFragment1 : BaseFragment<FragmentWriteFirstBinding>(R.layout.fragment
     private fun initListener() {
         binding.writeFirstBtnNext.setOnClickListener {
             findNavController().navigate(R.id.action_first_write_fragment_to_second_write_fragment)
+            val etcCategory = binding.writeFirstEtEtcCategory.text
+            etcCategory?.let {
+                writeViewModel.setEtcCategory(it.toString())
+            }
         }
     }
 

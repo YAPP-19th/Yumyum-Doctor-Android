@@ -73,7 +73,7 @@
 
 
         <EditText
-            android:text="@={`` + viewModel.price}"
+            android:text="@={viewModel.price}"
             android:inputType="number"
             android:id="@+id/write_third_et_price"
             style="@style/font_h3_regular"
@@ -118,7 +118,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/bg_btn_main"
+            android:background="@drawable/bg_btn_sub"
+            android:enabled="false"
             android:stateListAnimator="@null"
             android:text="@string/common_next"
             android:textColor="@color/white"

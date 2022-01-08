@@ -35,7 +35,7 @@ class WriteTagActivity : BaseActivity<ActivityWriteTagBinding>(R.layout.activity
 
         binding.writeTagIbBack.setOnClickListener { finish() }
         binding.writeTagEtInput.setOnEditorActionListener { v, actionId, event ->
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
+            if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT) {
                 tagViewModel.validTagItem()
                 binding.writeTagEtInput.text.clear()
             }

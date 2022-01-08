@@ -166,6 +166,7 @@
 
 
         <androidx.appcompat.widget.AppCompatButton
+            android:enabled="false"
             android:id="@+id/write_second_btn_next"
             style="@style/font_subtitle_medium"
             android:layout_width="0dp"
@@ -173,7 +174,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/bg_btn_main"
+            android:background="@drawable/bg_btn_sub"
             android:stateListAnimator="@null"
             android:text="@string/common_next"
             android:textColor="@color/white"
