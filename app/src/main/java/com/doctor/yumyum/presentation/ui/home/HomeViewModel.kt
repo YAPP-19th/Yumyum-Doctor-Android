@@ -1,6 +1,5 @@
 package com.doctor.yumyum.presentation.ui.home
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,15 +7,14 @@ import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseViewModel
 import com.doctor.yumyum.common.utils.gradeEnToKo
 import com.doctor.yumyum.data.model.FavoriteRecipe
-import com.doctor.yumyum.data.remote.response.FavoriteRecipeResponse
 import com.doctor.yumyum.data.model.RecipeModel
+import com.doctor.yumyum.data.remote.response.FavoriteRecipeResponse
 import com.doctor.yumyum.data.remote.response.RecipeRecommendationResponse
 import com.doctor.yumyum.data.remote.response.UserInfoResponse
 import com.doctor.yumyum.data.repository.MainRepositoryImpl
 import com.doctor.yumyum.data.repository.RecipeRepositoryImpl
 import com.doctor.yumyum.data.repository.UserRepositoryImpl
 import retrofit2.Response
-import java.lang.Exception
 
 class HomeViewModel : BaseViewModel() {
     private val mainRepository = MainRepositoryImpl()

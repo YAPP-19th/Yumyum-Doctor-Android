@@ -209,6 +209,28 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/home_tv_today_recipe" />
 
+            <TextView
+                android:id="@+id/home_tv_today_empty"
+                style="@style/font_body1_medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="46dp"
+                android:layout_marginBottom="117dp"
+                android:background="@drawable/bg_message_empty"
+                android:drawablePadding="14dp"
+                android:paddingHorizontal="16dp"
+                android:paddingTop="30dp"
+                android:paddingBottom="36dp"
+                android:text="@string/home_tv_today_empty"
+                android:textColor="@color/black"
+                android:visibility="@{viewModel.recommendationList.size == 0 ? View.VISIBLE : View.INVISIBLE}"
+                app:drawableTopCompat="@drawable/ic_logo_error"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/home_tv_today_recipe" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
