@@ -17,14 +17,13 @@
         android:layout_height="match_parent"
         tools:context=".presentation.ui.recipedetail.RecipeDetailActivity">
 
-        <ImageView
-            android:id="@+id/recipe_detail_iv_recipe"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/recipe_detail_vp_image"
+            bind_detailImageList="@{viewModel.imageList}"
             android:layout_width="0dp"
             android:layout_height="300dp"
-            android:background="@color/light_gray"
-            android:contentDescription="@string/common_recipe_image"
-            android:scaleType="center"
-            android:src="@drawable/ic_loading_image"
+            android:clipChildren="false"
+            android:clipToPadding="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -33,7 +32,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/bg_recipe_shadow"
-            app:layout_constraintBottom_toBottomOf="@id/recipe_detail_iv_recipe"
+            app:layout_constraintBottom_toBottomOf="@id/recipe_detail_vp_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

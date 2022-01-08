@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseViewModel
+import com.doctor.yumyum.data.model.FoodImage
 import com.doctor.yumyum.data.remote.response.RecipeDetailResponse
 import com.doctor.yumyum.data.repository.RecipeRepositoryImpl
 import kotlinx.coroutines.launch
@@ -41,6 +42,8 @@ class RecipeDetailViewModel : BaseViewModel() {
     val content: LiveData<String> get() = _content
     private val _recipeId = MutableLiveData<Int>()
     val recipeId: MutableLiveData<Int> get() = _recipeId
+    private val _imageList = MutableLiveData<ArrayList<FoodImage>>(arrayListOf())
+    val imageList: LiveData<ArrayList<FoodImage>> get() = _imageList
 
     suspend fun getRecipeDetail(recipeId: Int) {
         _recipeId.postValue(recipeId)
@@ -58,6 +61,7 @@ class RecipeDetailViewModel : BaseViewModel() {
                 _authorName.postValue("${recipeInfo?.writerName} 학생의 레시피")
                 _content.postValue(recipeInfo?.reviewDetail)
                 _recipePrice.postValue(recipeInfo?.price)
+                _imageList.postValue(ArrayList(recipeInfo?.foodImages ?: listOf()))
 
                 val addList: ArrayList<String> = arrayListOf()
                 val minusList: ArrayList<String> = arrayListOf()
