@@ -38,13 +38,25 @@
             app:layout_constraintTop_toBottomOf="@id/report_toolbar" />
 
         <TextView
+            android:id="@+id/report_tv_guide"
+            style="@style/font_body2_medium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/report_guide"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/report_tv_title"
+            app:layout_constraintTop_toBottomOf="@id/report_tv_title" />
+
+        <TextView
             android:id="@+id/report_tv_reason_duplicate"
             style="@style/font_body1_regular"
             bind_startCompat="@{viewModel.reportType == viewModel.REASON_DUPLICATE}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="21dp"
+            android:layout_marginTop="24dp"
             android:drawablePadding="6dp"
             android:gravity="center_vertical"
             android:onClick="@{() -> viewModel.setReportType(viewModel.REASON_DUPLICATE)}"
@@ -52,7 +64,7 @@
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/report_tv_title"
+            app:layout_constraintTop_toBottomOf="@id/report_tv_guide"
             tools:drawableStart="@drawable/ic_report_selected" />
 
         <TextView
@@ -92,6 +104,24 @@
             tools:drawableStart="@drawable/ic_report_unselected" />
 
         <TextView
+            android:id="@+id/report_tv_reason_wrong"
+            style="@style/font_body1_regular"
+            bind_startCompat="@{viewModel.reportType == viewModel.REASON_WRONG}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:drawablePadding="6dp"
+            android:gravity="center_vertical"
+            android:onClick="@{() -> viewModel.setReportType(viewModel.REASON_WRONG)}"
+            android:text="@string/report_reason_wrong"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/report_tv_reason_irrelevant"
+            tools:drawableStart="@drawable/ic_report_unselected" />
+
+        <TextView
             android:id="@+id/report_tv_reason_harmful"
             style="@style/font_body1_regular"
             bind_startCompat="@{viewModel.reportType == viewModel.REASON_HARMFUL}"
@@ -106,21 +136,21 @@
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/report_tv_reason_irrelevant"
+            app:layout_constraintTop_toBottomOf="@id/report_tv_reason_wrong"
             tools:drawableStart="@drawable/ic_report_unselected" />
 
         <TextView
-            android:id="@+id/report_tv_reason_wrong"
+            android:id="@+id/report_tv_reason_porno"
             style="@style/font_body1_regular"
-            bind_startCompat="@{viewModel.reportType == viewModel.REASON_WRONG}"
+            bind_startCompat="@{viewModel.reportType == viewModel.REASON_PORNO}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="8dp"
             android:drawablePadding="6dp"
             android:gravity="center_vertical"
-            android:onClick="@{() -> viewModel.setReportType(viewModel.REASON_WRONG)}"
-            android:text="@string/report_reason_wrong"
+            android:onClick="@{() -> viewModel.setReportType(viewModel.REASON_PORNO)}"
+            android:text="@string/report_reason_porno"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -142,7 +172,7 @@
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/report_tv_reason_wrong"
+            app:layout_constraintTop_toBottomOf="@id/report_tv_reason_porno"
             tools:drawableStart="@drawable/ic_report_unselected" />
 
         <TextView
@@ -154,9 +184,9 @@
             android:layout_marginBottom="20dp"
             android:background="@drawable/bg_btn_main"
             android:gravity="center"
+            android:onClick="@{()->viewModel.reportRecipe()}"
             android:paddingVertical="16dp"
             android:text="@string/report"
-            android:onClick="@{()->viewModel.reportRecipe()}"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

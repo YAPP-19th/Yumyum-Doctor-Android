@@ -57,6 +57,7 @@ class ReportViewModel : BaseViewModel() {
         const val REASON_IRRELEVANT = R.string.report_reason_irrelevant
         const val REASON_HARMFUL = R.string.report_reason_harmful
         const val REASON_WRONG = R.string.report_reason_wrong
+        const val REASON_PORNO = R.string.report_reason_porno
         const val REASON_ETC = R.string.common_etc
         const val ERROR_REPORT_FAIL = R.string.error_report_fail
     }
