@@ -117,8 +117,8 @@ class ResearchListActivity :
             val intent = Intent(this, RecipeDetailActivity::class.java)
             intent.putExtra("recipeId", recipeId)
             startActivity(intent)
-        }, { recipe ->
-            viewModel.setBookmarkState(recipe)
+        }, { recipe, position ->
+            viewModel.setBookmarkState(recipe, position)
         }, {},{},RecipeType.BASIC.name)
         binding.researchListClAppbar.appbarIbBack.setOnClickListener { finish() }
         binding.researchListRvRecipe.adapter = researchListAdapter
@@ -203,6 +203,10 @@ class ResearchListActivity :
         viewModel.errorState.observe(this) { resId ->
             showToast(getString(resId))
         }
+        // 레시피 상태 변화 시
+        viewModel.recipePosition.observe(this) { position ->
+            researchListAdapter.notifyItemChanged(position)
+        }
     }
 
     private fun initSortDialog() {
@@ -255,7 +259,7 @@ class ResearchListActivity :
                 order,
                 "2022-12-26T12:12:12",
                 0,
-                10
+                100
             )
         }
     }
