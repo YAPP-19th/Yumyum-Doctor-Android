@@ -127,7 +127,7 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
             val intent = Intent(requireContext(), RecipeDetailActivity::class.java)
             intent.putExtra("recipeId", recipeId)
             startActivity(intent)
-        }, {}, {
+        }, { _, _ -> }, {
             deleteBookMark(it.id)
         }, {
             postFavorite(it)

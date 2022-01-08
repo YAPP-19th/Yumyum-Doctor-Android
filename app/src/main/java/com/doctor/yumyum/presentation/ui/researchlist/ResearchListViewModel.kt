@@ -28,6 +28,8 @@ class ResearchListViewModel : BaseViewModel() {
     val searchList: LiveData<ArrayList<String>> get() = _searchList
     private val _recipeList = MutableLiveData<ArrayList<RecipeModel>>(ArrayList())
     val recipeList: LiveData<ArrayList<RecipeModel>> get() = _recipeList
+    private val _recipePosition = MutableLiveData<Int>()
+    val recipePosition: LiveData<Int> get() = _recipePosition
 
     fun initSortType() {
         _tmpSortType.value = sortType.value
@@ -91,7 +93,7 @@ class ResearchListViewModel : BaseViewModel() {
         }
     }
 
-    fun setBookmarkState(recipe: RecipeModel) {
+    fun setBookmarkState(recipe: RecipeModel, position: Int) {
         viewModelScope.launch {
             try {
                 val response: Response<ResponseBody> =
@@ -100,6 +102,7 @@ class ResearchListViewModel : BaseViewModel() {
 
                 if (response.isSuccessful) {
                     recipe.isBookmark = !recipe.isBookmark
+                    _recipePosition.value = position
                 } else {
                     _errorState.postValue(ERROR_BOOKMARK)
                 }
