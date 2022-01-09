@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="128dp"
             android:gravity="center"
-            android:text="@{viewModel.nickname + viewModel.grade}"
+            android:text="@{viewModel.nickname + ' ' + viewModel.grade}"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
