@@ -72,9 +72,10 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
         viewModel.point.observe(viewLifecycleOwner) { point ->
             binding.myPageGraphOrange.apply {
                 gradePoint[nextGrade[viewModel.grade.value]]?.let { nextPoint ->
-                    if (nextPoint != 0) {
+                    if (point != 0) {
                         this.layoutParams.width =
                             binding.myPageGraphWhite.width * point / nextPoint
+                        this.visibility = View.VISIBLE
                     }
                 }
             }
