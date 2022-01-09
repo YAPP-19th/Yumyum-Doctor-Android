@@ -61,4 +61,8 @@ class RecipeRepositoryImpl : RecipeRepository {
 
     override suspend fun reportRecipe(recipeId: Int, reason: HashMap<String, Any>): Response<ResponseBody> =
         recipeDataSource.reportRecipe(recipeId, reason)
+
+    override suspend fun deleteRecipe(recipeId: Int): Response<ResponseBody> =
+       recipeDataSource.deleteRecipe(recipeId)
+
 }
