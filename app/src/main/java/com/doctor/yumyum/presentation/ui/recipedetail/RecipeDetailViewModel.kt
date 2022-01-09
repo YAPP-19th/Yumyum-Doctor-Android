@@ -44,6 +44,8 @@ class RecipeDetailViewModel : BaseViewModel() {
     val recipeId: MutableLiveData<Int> get() = _recipeId
     private val _imageList = MutableLiveData<ArrayList<FoodImage>>(arrayListOf())
     val imageList: LiveData<ArrayList<FoodImage>> get() = _imageList
+    private val _isMyFood : MutableLiveData<Boolean> = MutableLiveData()
+    val isMyFood : LiveData<Boolean> get() = _isMyFood
 
     suspend fun getRecipeDetail(recipeId: Int) {
         _recipeId.postValue(recipeId)
@@ -62,6 +64,7 @@ class RecipeDetailViewModel : BaseViewModel() {
                 _content.postValue(recipeInfo?.reviewDetail)
                 _recipePrice.postValue(recipeInfo?.price)
                 _imageList.postValue(ArrayList(recipeInfo?.foodImages ?: listOf()))
+                _isMyFood.postValue(recipeInfo?.myFood)
 
                 val addList: ArrayList<String> = arrayListOf()
                 val minusList: ArrayList<String> = arrayListOf()
