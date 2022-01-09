@@ -45,7 +45,8 @@ class RecipeDetailViewModel : BaseViewModel() {
     private val _imageList = MutableLiveData<ArrayList<FoodImage>>(arrayListOf())
     val imageList: LiveData<ArrayList<FoodImage>> get() = _imageList
     private val _isMyFood : MutableLiveData<Boolean> = MutableLiveData()
-    val isMyFood : LiveData<Boolean> get() = _isMyFood
+    val isMyFood : LiveData<Boolean>
+        get() = _isMyFood
 
     suspend fun getRecipeDetail(recipeId: Int) {
         _recipeId.postValue(recipeId)
