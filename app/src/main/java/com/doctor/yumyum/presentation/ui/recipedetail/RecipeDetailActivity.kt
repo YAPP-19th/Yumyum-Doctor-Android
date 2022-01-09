@@ -7,6 +7,7 @@ import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseActivity
 import com.doctor.yumyum.common.utils.dpToIntPx
 import com.doctor.yumyum.databinding.ActivityRecipeDetailBinding
+import com.doctor.yumyum.presentation.adapter.RecipeDetailAdapter
 import com.doctor.yumyum.presentation.adapter.TasteTagAdapter
 import com.doctor.yumyum.presentation.adapter.WriteTagAdapter
 import kotlinx.coroutines.CoroutineScope
@@ -49,6 +50,9 @@ class RecipeDetailActivity :
         viewModel.errorState.observe(this) { resId ->
             showToast(getString(resId))
         }
+
+        // 레시피 이미지 뷰페이저 설정
+        binding.recipeDetailVpImage.adapter = RecipeDetailAdapter()
     }
 
     private fun setLayoutHeight() {
@@ -56,7 +60,7 @@ class RecipeDetailActivity :
         val displayMetrics = DisplayMetrics()
         this.windowManager?.defaultDisplay?.getMetrics(displayMetrics)
         val imageHeight = (displayMetrics.widthPixels * 0.8).toInt()
-        binding.recipeDetailIvRecipe.layoutParams.height = imageHeight
+        binding.recipeDetailVpImage.layoutParams.height = imageHeight
 
         // 이미지 뷰 height 에 따른 상세 화면 content top padding 설정
         val paddingTop = imageHeight - dpToIntPx(62f)

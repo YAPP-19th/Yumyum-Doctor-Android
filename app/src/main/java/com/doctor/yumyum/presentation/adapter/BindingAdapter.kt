@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.doctor.yumyum.R
 import com.doctor.yumyum.data.model.FavoriteRecipe
+import com.doctor.yumyum.data.model.FoodImage
 import com.doctor.yumyum.data.model.RecipeModel
 
 @BindingAdapter("bind_tagList")
@@ -113,4 +114,12 @@ fun bindFilterBackGround(textView: TextView, category: String?) {
         textView.background = ContextCompat.getDrawable(textView.context, R.drawable.bg_filter_taste_unselected)
         textView.setTextColor(textView.context.getColor(R.color.gray))
     }
+}
+
+@BindingAdapter("bind_detailImageList")
+fun bindDetailImageList(
+    vpDetailImage: ViewPager2,
+    imageList: ArrayList<FoodImage>
+) {
+    ((vpDetailImage.adapter) as RecipeDetailAdapter).setImageList(imageList)
 }
