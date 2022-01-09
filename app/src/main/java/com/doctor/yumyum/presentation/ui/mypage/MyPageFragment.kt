@@ -4,12 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
+import com.doctor.yumyum.BuildConfig
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
 import com.doctor.yumyum.common.utils.gradePoint
 import com.doctor.yumyum.databinding.FragmentMyPageBinding
-import com.doctor.yumyum.presentation.ui.mypage.terms.TermsActivity
 import com.doctor.yumyum.presentation.ui.mypage.myinfo.MyInfoActivity
+import com.doctor.yumyum.presentation.ui.mypage.terms.TermsActivity
 import com.doctor.yumyum.presentation.ui.taste.TasteActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -71,15 +72,19 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
         viewModel.point.observe(viewLifecycleOwner) { point ->
             binding.myPageGraphOrange.apply {
                 gradePoint[nextGrade[viewModel.grade.value]]?.let { nextPoint ->
-                    if (nextPoint != 0) {
+                    if (point != 0) {
                         this.layoutParams.width =
                             binding.myPageGraphWhite.width * point / nextPoint
+                        this.visibility = View.VISIBLE
                     }
                 }
             }
         }
 
         binding.apply {
+            myPageTvMyAppVersion.text =
+                getString(R.string.my_page_tv_my_app_version, BuildConfig.VERSION_NAME)
+
             myPageIbInfo.setOnClickListener {
                 activity?.let { activity ->
                     LevelInfoDialog().show(
