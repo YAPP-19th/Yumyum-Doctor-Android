@@ -58,6 +58,8 @@ class ResearchListAdapter(
                     .load(recipe.foodImages[0].imageUrl)
                     .placeholder(R.drawable.ic_loading_image)
                     .into(binding.itemResearchRecipeIvImage)
+            } else {
+                binding.itemResearchRecipeIvImage.setImageResource(R.drawable.ic_loading_image)
             }
         }
     }

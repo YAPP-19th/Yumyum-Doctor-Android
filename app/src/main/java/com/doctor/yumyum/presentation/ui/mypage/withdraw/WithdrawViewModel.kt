@@ -6,7 +6,6 @@ import com.doctor.yumyum.common.base.BaseViewModel
 import com.doctor.yumyum.data.repository.LoginRepositoryImpl
 import com.doctor.yumyum.data.repository.UserRepositoryImpl
 import com.kakao.sdk.user.UserApiClient
-import java.lang.Exception
 
 class WithdrawViewModel : BaseViewModel() {
     private val userRepository = UserRepositoryImpl()
@@ -21,6 +20,7 @@ class WithdrawViewModel : BaseViewModel() {
     }
 
     suspend fun withdraw() {
+
         UserApiClient.instance.unlink { error ->
             if (error != null) {
                 _errorState.value = true
@@ -29,12 +29,10 @@ class WithdrawViewModel : BaseViewModel() {
         try {
             val response = userRepository.deleteUser()
             if (!response.isSuccessful) {
-                _errorState.postValue(true)
             }
         } catch (e: Exception) {
             _errorState.postValue(true)
-        }
-        finally {
+        } finally {
             loginRepository.setLoginToken("")
             loginRepository.setLoginMode("")
             userRepository.setLocalGrade("")

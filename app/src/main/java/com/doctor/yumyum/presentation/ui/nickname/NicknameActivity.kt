@@ -5,10 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
-import androidx.core.content.ContextCompat
-import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseActivity
@@ -17,7 +14,6 @@ import com.doctor.yumyum.presentation.ui.main.MainActivity
 import com.doctor.yumyum.presentation.ui.taste.TasteActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class NicknameActivity : BaseActivity<ActivityNicknameBinding>(R.layout.activity_nickname) {
@@ -45,7 +41,11 @@ class NicknameActivity : BaseActivity<ActivityNicknameBinding>(R.layout.activity
             lifecycleOwner = this@NicknameActivity
         }
         binding.nicknameToolbar.appbarIbBack.setOnClickListener {
-            onBackPressed()
+            if (intent.getBooleanExtra(getString(R.string.nickname_mode), false)) {
+                onBackPressed()
+            } else {
+                NicknameBackDialog().show(supportFragmentManager, "NicknameBackDialog")
+            }
         }
 
         binding.nicknameBtnComplete.setOnClickListener {
@@ -74,7 +74,7 @@ class NicknameActivity : BaseActivity<ActivityNicknameBinding>(R.layout.activity
                 }
                 if (p0.isNullOrEmpty()) {
                     setMessageNull()
-                } else if (p0.length >= 20) {
+                } else if (p0.length > 20) {
                     setMessageOverflow()
                 } else {
                     setMessageSuccess()
@@ -83,9 +83,22 @@ class NicknameActivity : BaseActivity<ActivityNicknameBinding>(R.layout.activity
         })
     }
 
+    override fun onBackPressed() {
+        if (intent.getBooleanExtra(getString(R.string.nickname_mode), false)) {
+            super.onBackPressed()
+        } else {
+            NicknameBackDialog().show(supportFragmentManager, "NicknameBackDialog")
+        }
+    }
+
     private fun initNickname() {
         CoroutineScope(Dispatchers.IO).launch {
-            viewModel.getNickname()
+
+            if (intent.getBooleanExtra(getString(R.string.nickname_mode), false)) {
+                viewModel.getUserInfo()
+            } else {
+                viewModel.getNickname()
+            }
         }
     }
 

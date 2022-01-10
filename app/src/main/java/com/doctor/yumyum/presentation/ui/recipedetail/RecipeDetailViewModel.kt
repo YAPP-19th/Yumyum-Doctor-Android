@@ -44,8 +44,8 @@ class RecipeDetailViewModel : BaseViewModel() {
     val recipeId: MutableLiveData<Int> get() = _recipeId
     private val _imageList = MutableLiveData<ArrayList<FoodImage>>(arrayListOf())
     val imageList: LiveData<ArrayList<FoodImage>> get() = _imageList
-    private val _isMyFood : MutableLiveData<Boolean> = MutableLiveData()
-    val isMyFood : LiveData<Boolean>
+    private val _isMyFood: MutableLiveData<Boolean> = MutableLiveData()
+    val isMyFood: LiveData<Boolean>
         get() = _isMyFood
 
     suspend fun getRecipeDetail(recipeId: Int) {
@@ -64,7 +64,13 @@ class RecipeDetailViewModel : BaseViewModel() {
                 _authorName.postValue("${recipeInfo?.writerName} 학생의 레시피")
                 _content.postValue(recipeInfo?.reviewDetail)
                 _recipePrice.postValue(recipeInfo?.price)
-                _imageList.postValue(ArrayList(recipeInfo?.foodImages ?: listOf()))
+
+                val imageList: List<FoodImage> = if (recipeInfo?.foodImages?.isEmpty() == false)
+                    recipeInfo.foodImages
+                else
+                    listOf(FoodImage("id", "sample", "sample"))
+                _imageList.postValue(ArrayList(imageList))
+
                 _isMyFood.postValue(recipeInfo?.myFood)
 
                 val addList: ArrayList<String> = arrayListOf()
@@ -91,6 +97,8 @@ class RecipeDetailViewModel : BaseViewModel() {
                     }
                 }
                 _tasteTagList.postValue(tasteList)
+            } else {
+                _errorState.postValue(ERROR_RECIPE_DETAIL)
             }
         } catch (e: Exception) {
             _errorState.postValue(ERROR_RECIPE_DETAIL)

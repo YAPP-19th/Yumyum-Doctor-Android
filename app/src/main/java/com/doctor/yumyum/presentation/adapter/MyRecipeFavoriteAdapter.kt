@@ -4,16 +4,11 @@ import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.doctor.yumyum.R
-import com.doctor.yumyum.common.utils.RecipeType
 import com.doctor.yumyum.data.model.FavoriteRecipe
-import com.doctor.yumyum.data.remote.response.FavoriteRecipeResponse
-import com.doctor.yumyum.databinding.DialogWriteBinding
 import com.doctor.yumyum.databinding.ItemMyrecipeFavoriteBinding
-import com.doctor.yumyum.databinding.ItemSearchTasteBinding
 
 class MyRecipeFavoriteAdapter(
     private val itemClickListener: (Int) -> Unit,
@@ -42,6 +37,8 @@ class MyRecipeFavoriteAdapter(
                     .load(recipe.foodImages[0].imageUrl)
                     .placeholder(R.drawable.ic_loading_image)
                     .into(binding.itemMyFavoriteIvImage)
+            } else {
+                binding.itemMyFavoriteIvImage.setImageResource(R.drawable.ic_loading_image)
             }
 
             binding.root.setOnClickListener { itemClickListener(recipe.id)}
