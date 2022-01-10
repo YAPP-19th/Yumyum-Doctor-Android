@@ -6,6 +6,7 @@ import com.doctor.yumyum.data.remote.api.RecipeService
 import com.doctor.yumyum.data.remote.response.*
 import okhttp3.ResponseBody
 import retrofit2.Response
+import retrofit2.create
 
 interface RecipeDataSource {
     suspend fun getRecipeRank(
@@ -40,6 +41,7 @@ interface RecipeDataSource {
     ): Response<RecipeRecommendationResponse>
 
     suspend fun reportRecipe(recipeId: Int, reason: HashMap<String, Any>): Response<ResponseBody>
+    suspend fun deleteRecipe(recipeId: Int) : Response<ResponseBody>
 }
 
 class RecipeDataSourceImp : RecipeDataSource {
@@ -110,5 +112,8 @@ class RecipeDataSourceImp : RecipeDataSource {
         reason: HashMap<String, Any>
     ): Response<ResponseBody> =
         RetrofitClient.getClient().create(RecipeService::class.java).reportRecipe(recipeId, reason)
+
+    override suspend fun deleteRecipe(recipeId: Int): Response<ResponseBody> =
+        RetrofitClient.getClient().create(RecipeService::class.java).deleteRecipe(recipeId)
 }
 

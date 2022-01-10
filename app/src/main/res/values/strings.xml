@@ -163,6 +163,7 @@
 
     <!-- 레시피 상세 -->
     <string name="recipe_detail_iv_book">책 아이콘</string>
+    <string name="delete_dialog_tv_title">레시피를 삭제하시겠습니까?</string>
 
     <!-- 닉네임 Activity -->
     <string name="nickname_mode">닉네임 설정 모드</string>
@@ -217,6 +218,7 @@
     <string name="error_filter_price_empty">가격 범위를 입력해주세요.</string>
     <string name="error_recipe_list">레시피 목록을 불러올 수 없습니다.</string>
     <string name="error_report_fail">레시피 신고하기를 할 수 없습니다.</string>
+    <string name="error_delete_recipe">레시피를 삭제할 수 없습니다.</string>
 
     <!-- 입맛 설정 -->
     <string name="taste_mode">입맛 설정 모드</string>

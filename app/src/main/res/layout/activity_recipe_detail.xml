@@ -100,6 +100,7 @@
                     android:layout_marginEnd="8dp"
                     android:background="@null"
                     android:contentDescription="@string/common_like_image"
+                    android:visibility="@{viewModel.isMyFood() == false ? View.VISIBLE : View.GONE}"
                     android:onClick="@{()->viewModel.setLikeState(viewModel.recipeId)}"
                     android:src="@{viewModel.isLike ? @drawable/ic_like_clicked : @drawable/ic_like_unclicked}"
                     app:layout_constraintEnd_toStartOf="@id/recipe_detail_ib_bookmark"
@@ -114,11 +115,38 @@
                     android:layout_marginEnd="16dp"
                     android:background="@null"
                     android:contentDescription="@string/common_iv_bookmark"
+                    android:visibility="@{viewModel.isMyFood() == false ? View.VISIBLE : View.GONE}"
                     android:onClick="@{()->viewModel.setBookmarkState(viewModel.recipeId)}"
                     android:src="@{viewModel.isBookmark ? @drawable/ic_bookmark_clicked : @drawable/ic_bookmark_unclicked}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:src="@drawable/ic_bookmark_unclicked" />
+
+                <ImageButton
+                    android:id="@+id/recipe_detail_ib_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:background="@null"
+                    android:src="@drawable/ic_delete"
+                    android:visibility="@{viewModel.isMyFood() == true ? View.VISIBLE : View.GONE}"
+                    app:layout_constraintEnd_toStartOf="@id/recipe_detail_ib_modify"
+                    app:layout_constraintTop_toTopOf="@id/recipe_detail_ib_modify"
+                     />
+
+                <ImageButton
+                    android:id="@+id/recipe_detail_ib_modify"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@null"
+                    android:visibility="@{viewModel.isMyFood() == true ? View.VISIBLE : View.GONE}"
+                    android:onClick="@{()->viewModel.setBookmarkState(viewModel.recipeId)}"
+                    android:src="@drawable/ic_modify"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
 
                 <TextView
                     android:id="@+id/recipe_detail_tv_title"

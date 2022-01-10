@@ -65,4 +65,10 @@ interface RecipeService {
         @Path("recipeId") recipeId: Int,
         @Body reason: HashMap<String, Any>
     ): Response<ResponseBody>
+
+
+    @DELETE("/api/v1/foods/{recipeId}")
+    suspend fun deleteRecipe(
+        @Path("recipeId") recipeId: Int,
+    ): Response<ResponseBody>
 }

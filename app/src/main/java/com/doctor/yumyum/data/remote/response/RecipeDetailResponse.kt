@@ -17,5 +17,6 @@ data class RecipeDetailResponse(
     @SerializedName("foodFlavors") val foodFlavors: List<FoodFlavor>,
     @SerializedName("foodImages") val foodImages: List<FoodImage>,
     @SerializedName("meBookmark") val isBookmark: Boolean,
-    @SerializedName("meLike") val isLike: Boolean
+    @SerializedName("meLike") val isLike: Boolean,
+    @SerializedName("myFood") val myFood : Boolean
 )

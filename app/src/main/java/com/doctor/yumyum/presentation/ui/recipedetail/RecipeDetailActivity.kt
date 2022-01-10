@@ -1,5 +1,6 @@
 package com.doctor.yumyum.presentation.ui.recipedetail
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.DisplayMetrics
 import androidx.lifecycle.ViewModelProvider
@@ -10,6 +11,7 @@ import com.doctor.yumyum.databinding.ActivityRecipeDetailBinding
 import com.doctor.yumyum.presentation.adapter.RecipeDetailAdapter
 import com.doctor.yumyum.presentation.adapter.TasteTagAdapter
 import com.doctor.yumyum.presentation.adapter.WriteTagAdapter
+import com.doctor.yumyum.presentation.ui.myrecipe.MyRecipeFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -41,6 +43,14 @@ class RecipeDetailActivity :
             RecipeMenuDialog(recipeId).show(supportFragmentManager, "RecipeMenuDialog")
         }
         binding.recipeDetailIbBack.setOnClickListener { finish() }
+        binding.recipeDetailIbDelete.setOnClickListener {
+            RecipeDeleteDialog{
+                viewModel.deleteRecipe(recipeId)
+                val intent = Intent(this, MyRecipeFragment::class.java)
+                setResult(MyRecipeFragment.DELETE_RECIPE,intent)
+                finish()
+            }.show(supportFragmentManager,"DeleteRecipe")
+        }
 
         // 레시피 상세 조회
         CoroutineScope(Dispatchers.IO).launch {
