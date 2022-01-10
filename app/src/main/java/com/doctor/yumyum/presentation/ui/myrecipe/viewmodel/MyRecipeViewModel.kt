@@ -108,12 +108,10 @@ class MyRecipeViewModel : BaseViewModel() {
     }
 
     fun getFavoriteRecipe(categoryName: String) {
-        Log.d("getMyFavoritePost", "cateGoryName : $categoryName")
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response =
                     recipeRepository.getFavorite(categoryName)
-                Log.d("최애레시피 가져오기!", response.body().toString())
                 if (response.isSuccessful) {
                     response.body()?.favoriteFoods?.let {
                         _favoriteRecipeList.postValue(it)
@@ -127,7 +125,6 @@ class MyRecipeViewModel : BaseViewModel() {
 
     suspend fun deleteFavorite(recipeId: Int) {
         val response = myRecipeRepository.deleteFavorite(recipeId)
-        Log.d("최애레시피 삭제", "")
         if (!response.isSuccessful) {
             Log.d("MyRecipeViewModel: ", "FavoriteDelete failed - ${response.code()}")
         }
@@ -136,7 +133,6 @@ class MyRecipeViewModel : BaseViewModel() {
     suspend fun postFavorite(recipeId: Int, categoryName: String) {
         val response = myRecipeRepository.postFavorite(recipeId, categoryName)
         getFavoriteRecipe(categoryName)
-        Log.d("최애레시피 등록", "cateGoryName : $categoryName")
         if (!response.isSuccessful) {
             Log.d("MyRecipeViewModel: ", "FavoritePost failed - ${response.code()}")
         }
