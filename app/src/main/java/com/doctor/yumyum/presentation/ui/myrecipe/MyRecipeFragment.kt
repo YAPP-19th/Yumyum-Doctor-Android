@@ -179,16 +179,18 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
         binding.myRecipeRvFavoriteRecipe.adapter = myRecipeFavoriteAdapter
 
         // 내가 쓴 글 초기화
-        myRecipeListAdapter = ResearchListAdapter({ recipeId ->
-            val intent = Intent(requireContext(), RecipeDetailActivity::class.java)
-            intent.putExtra("recipeId", recipeId)
-            detailLauncher.launch(intent)
-        }, { _, _ -> }, {
-            myRecipeViewModel.deleteBookMark(it.id)
-        }, {
-            postFavorite(it)
-        }, foodType)
-        binding.myRecipeRvPost.adapter = myRecipeListAdapter
+        myRecipeViewModel.foodType.observe(viewLifecycleOwner){
+            myRecipeListAdapter = ResearchListAdapter({ recipeId ->
+                val intent = Intent(requireContext(), RecipeDetailActivity::class.java)
+                intent.putExtra("recipeId", recipeId)
+                detailLauncher.launch(intent)
+            }, { _, _ -> }, { recipeId ->
+                deleteBookMark(recipeId)
+            }, {
+                postFavorite(it)
+            }, it)
+            binding.myRecipeRvPost.adapter = myRecipeListAdapter
+        }
     }
 
     private fun startForFilter() {
@@ -269,6 +271,13 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
         lifecycleScope.launch {
             myRecipeViewModel.deleteFavorite(recipeId)
             getMyFavorite()
+            getMyPostWithFilter()
+        }
+    }
+
+    private fun deleteBookMark(recipeId: Int){
+        lifecycleScope.launch {
+            myRecipeViewModel.deleteBookMark(recipeId)
             getMyPostWithFilter()
         }
     }
