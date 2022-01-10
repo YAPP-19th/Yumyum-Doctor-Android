@@ -1,5 +1,6 @@
 package com.doctor.yumyum.presentation.ui.recipedetail
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.DisplayMetrics
 import androidx.lifecycle.ViewModelProvider
@@ -45,6 +46,9 @@ class RecipeDetailActivity :
         binding.recipeDetailIbDelete.setOnClickListener {
             RecipeDeleteDialog{
                 viewModel.deleteRecipe(recipeId)
+                val intent = Intent(this, MyRecipeFragment::class.java)
+                setResult(MyRecipeFragment.DELETE_RECIPE,intent)
+                finish()
             }.show(supportFragmentManager,"DeleteRecipe")
         }
 

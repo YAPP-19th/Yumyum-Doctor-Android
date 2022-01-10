@@ -28,6 +28,7 @@ import kotlinx.coroutines.launch
 
 class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment_my_recipe) {
     private lateinit var filterLauncher: ActivityResultLauncher<Intent>
+    private lateinit var detailLauncher: ActivityResultLauncher<Intent>
     private val myRecipeViewModel: MyRecipeViewModel by viewModels()
     private lateinit var sortSelectDialog: BottomSheetDialog
     private lateinit var sortSelectBinding: DialogMyRecipeSortBinding
@@ -52,6 +53,7 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
 
         const val FILTER_APPLY = 1004
         const val FILTER_RESET = 1005
+        const val DELETE_RECIPE = 1006
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -91,6 +93,13 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
             getMyPostWithFilter()
         }
 
+        //Detail Launcher
+        detailLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                if (it.resultCode == DELETE_RECIPE) {
+                    getMyPostWithFilter()
+                }
+            }
     }
 
     private fun initBinding() {
@@ -126,7 +135,7 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
         val myRecipeListAdapter = ResearchListAdapter({ recipeId ->
             val intent = Intent(requireContext(), RecipeDetailActivity::class.java)
             intent.putExtra("recipeId", recipeId)
-            startActivity(intent)
+            detailLauncher.launch(intent)
         }, { _, _ -> }, {
             deleteBookMark(it.id)
         }, {
@@ -206,10 +215,18 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
             category
         }
         myRecipeViewModel.foodType.observe(viewLifecycleOwner) { foodType ->
-            initMyRecipeRecycler(foodType)
             CoroutineScope(Dispatchers.IO).launch {
-                myRecipeViewModel.getMyRecipe(categoryName.toString(), foodType,null,minPrice, maxPrice, status,sort,order)
+                myRecipeViewModel.getMyRecipe(
+                    categoryName.toString(),
+                    foodType,
+                    null,
+                    minPrice,
+                    maxPrice,
+                    status,
+                    sort,
+                    order)
             }
+            initMyRecipeRecycler(foodType)
         }
     }
 
