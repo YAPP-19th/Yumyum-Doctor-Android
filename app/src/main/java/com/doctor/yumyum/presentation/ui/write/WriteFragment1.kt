@@ -52,10 +52,6 @@ class WriteFragment1 : BaseFragment<FragmentWriteFirstBinding>(R.layout.fragment
     private fun initListener() {
         binding.writeFirstBtnNext.setOnClickListener {
             findNavController().navigate(R.id.action_first_write_fragment_to_second_write_fragment)
-            val etcCategory = binding.writeFirstEtEtcCategory.text
-            if (!etcCategory.isNullOrBlank()) {
-                writeViewModel.setEtcCategory(etcCategory.toString())
-            }
         }
     }
 
