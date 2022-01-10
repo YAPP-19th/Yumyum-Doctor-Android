@@ -83,6 +83,15 @@ class NicknameActivity : BaseActivity<ActivityNicknameBinding>(R.layout.activity
         })
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        if (intent.getBooleanExtra(getString(R.string.nickname_mode), false)) {
+            onBackPressed()
+        } else {
+            NicknameBackDialog().show(supportFragmentManager, "NicknameBackDialog")
+        }
+    }
+
     private fun initNickname() {
         CoroutineScope(Dispatchers.IO).launch {
             viewModel.getNickname()
