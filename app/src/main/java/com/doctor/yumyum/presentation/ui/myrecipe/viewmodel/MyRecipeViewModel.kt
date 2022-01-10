@@ -26,6 +26,9 @@ class MyRecipeViewModel : BaseViewModel() {
     val mode: LiveData<Int>
         get() = _mode
 
+    private val _errorState: MutableLiveData<Int> = MutableLiveData()
+    val errorState: LiveData<Int> get() = _errorState
+
     private var _sortType: MutableLiveData<SortType> = MutableLiveData(SortType.RECENT)
     val sortType: LiveData<SortType> get() = _sortType
     private var _tmpSortType: MutableLiveData<SortType> = MutableLiveData()
@@ -68,7 +71,7 @@ class MyRecipeViewModel : BaseViewModel() {
     fun getMyRecipe(
         categoryName: String,
         mineFoodType: String,
-        flavor: String?,
+        flavor: ArrayList<String>,
         minPrice: String?,
         maxPrice: String?,
         status: String?,
@@ -80,7 +83,7 @@ class MyRecipeViewModel : BaseViewModel() {
                 val response =
                     myRecipeRepository.getMyRecipe(
                         categoryName = categoryName,
-                        flavors = "",
+                        flavors = flavor,
                         tags = "",
                         offset = 0,
                         pageSize = 10,
@@ -92,7 +95,6 @@ class MyRecipeViewModel : BaseViewModel() {
                         order = order,
                         status = status
                     )
-                Log.d("MyRecipeViewModel: ", "${response.body()}")
                 if (response.isSuccessful) {
                     response.body()?.foods?.let {
                         _myRecipeList.postValue(it)
@@ -105,17 +107,19 @@ class MyRecipeViewModel : BaseViewModel() {
     }
 
     fun getFavoriteRecipe(categoryName: String) {
+        Log.d("getMyFavoritePost","cateGoryName : $categoryName")
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response =
                     recipeRepository.getFavorite(categoryName)
+                Log.d("최애레시피 가져오기!",response.body().toString())
                 if (response.isSuccessful) {
                     response.body()?.favoriteFoods?.let {
                         _favoriteRecipeList.postValue(it)
                     }
                 }
             } catch (e: Exception) {
-                Log.d("MyRecipeViewModel: ", "FavoriteGet failed - ${e.message}")
+                _errorState.postValue(R.string.error_post_favorite_fail)
             }
         }
     }
@@ -123,6 +127,7 @@ class MyRecipeViewModel : BaseViewModel() {
     fun deleteFavorite(recipeId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             val response = myRecipeRepository.deleteFavorite(recipeId)
+            Log.d("최애레시피 삭제","")
             if (!response.isSuccessful) {
                 Log.d("MyRecipeViewModel: ", "FavoriteDelete failed - ${response.code()}")
             }
@@ -132,6 +137,7 @@ class MyRecipeViewModel : BaseViewModel() {
     fun postFavorite(recipeId: Int, categoryName: String) {
         viewModelScope.launch(Dispatchers.IO) {
             val response = myRecipeRepository.postFavorite(recipeId, categoryName)
+            Log.d("최애레시피 등록","cateGoryName : $categoryName")
             if (!response.isSuccessful) {
                 Log.d("MyRecipeViewModel: ", "FavoritePost failed - ${response.code()}")
             }

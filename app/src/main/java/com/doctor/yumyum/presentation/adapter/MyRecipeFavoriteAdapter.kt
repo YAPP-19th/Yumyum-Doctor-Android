@@ -46,9 +46,7 @@ class MyRecipeFavoriteAdapter(
 
             binding.root.setOnClickListener { itemClickListener(recipe.id)}
             binding.itemMyFavoriteIbHeart.setOnClickListener {
-                deleteFavorite(recipe.id)
-                favoriteList.remove(recipe)
-                notifyItemRemoved(position)}
+                deleteFavorite(recipe.id) }
         }
     }
 

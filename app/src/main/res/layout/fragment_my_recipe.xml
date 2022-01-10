@@ -85,29 +85,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/my_recipe_tv_change_order"
-                    style="@style/font_body2_regular"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="17dp"
-                    android:layout_marginEnd="16dp"
-                    android:text="@string/my_recipe_tv_change_order"
-                    android:textColor="@color/dark_gray"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatImageButton
-                    android:id="@+id/my_recipe_ib_change_order"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="4dp"
-                    android:background="@color/white"
-                    android:src="@drawable/ic_change_order"
-                    app:layout_constraintBottom_toBottomOf="@id/my_recipe_tv_change_order"
-                    app:layout_constraintEnd_toStartOf="@id/my_recipe_tv_change_order"
-                    app:layout_constraintTop_toTopOf="@id/my_recipe_tv_change_order" />
-
 
                 <TextView
                     android:id="@+id/my_recipe_tv_favorite_empty"
