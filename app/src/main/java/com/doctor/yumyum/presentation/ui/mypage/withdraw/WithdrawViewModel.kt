@@ -20,9 +20,6 @@ class WithdrawViewModel : BaseViewModel() {
     }
 
     suspend fun withdraw() {
-        loginRepository.setLoginToken("")
-        loginRepository.setLoginMode("")
-        userRepository.setLocalGrade("")
 
         UserApiClient.instance.unlink { error ->
             if (error != null) {
@@ -32,10 +29,13 @@ class WithdrawViewModel : BaseViewModel() {
         try {
             val response = userRepository.deleteUser()
             if (!response.isSuccessful) {
-                _errorState.postValue(true)
             }
         } catch (e: Exception) {
             _errorState.postValue(true)
+        } finally {
+            loginRepository.setLoginToken("")
+            loginRepository.setLoginMode("")
+            userRepository.setLocalGrade("")
         }
     }
 

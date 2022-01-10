@@ -5,8 +5,8 @@ import android.graphics.Color
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
-import com.doctor.yumyum.databinding.ActivityMainBinding
 import com.doctor.yumyum.common.base.BaseActivity
+import com.doctor.yumyum.databinding.ActivityMainBinding
 import com.doctor.yumyum.presentation.ui.home.HomeFragment
 import com.doctor.yumyum.presentation.ui.mypage.MyPageFragment
 import com.doctor.yumyum.presentation.ui.myrecipe.MyRecipeFragment
