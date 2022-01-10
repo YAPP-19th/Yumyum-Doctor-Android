@@ -23,18 +23,12 @@ class WriteDialog(val writeViewModel: WriteViewModel) : BaseDialog<DialogWriteBi
         super.onCreateView(inflater, container, savedInstanceState)
         binding.writeFinishNo.setOnClickListener { dismiss() }
         binding.writeFinishYes.setOnClickListener {
-            CoroutineScope(Dispatchers.IO).launch {
-                postRecipe()
-            }
+            writeViewModel.postRecipe()
             val intent = Intent(this.context, MainActivity::class.java)
             startActivity(intent)
             WriteTagActivity().finish()
         }
 
         return binding.root
-    }
-
-    private suspend fun postRecipe() {
-        writeViewModel.postRecipe()
     }
 }

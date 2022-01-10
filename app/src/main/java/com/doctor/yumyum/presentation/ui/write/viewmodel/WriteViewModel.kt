@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.doctor.yumyum.common.base.BaseViewModel
 import com.doctor.yumyum.common.utils.StatusType
 import com.doctor.yumyum.common.utils.TagType
@@ -15,6 +16,8 @@ import com.doctor.yumyum.data.model.FoodImage
 import com.doctor.yumyum.data.model.TagItem
 import com.doctor.yumyum.data.model.WriteRecipe
 import com.doctor.yumyum.data.repository.WriteRepositoryImpl
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -196,49 +199,53 @@ class WriteViewModel : BaseViewModel() {
         }
     }
 
-    suspend fun postRecipe() {
+    fun postRecipe() {
         refactorData()
-        try {
-            val writeRecipe = WriteRecipe(
-                categoryName = category.value.toString(),
-                title = title.value.toString(),
-                tags = tagList,
-                price = price.value!!.toInt(),
-                flavors = (tasteList.value?.toList() ?: emptyList()),
-                reviewMsg = reviewText.value.toString(),
-                foodStatus = foodStatus
-            )
-            val response: Response<ResponseBody> =
-                writeRepository.postRecipeText(writeRecipe = writeRecipe)
-            val recipeId = (response.headers()["location"] ?: "").split("/").last().toInt()
-            if (response.isSuccessful) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val writeRecipe = WriteRecipe(
+                    categoryName = category.value.toString(),
+                    title = title.value.toString(),
+                    tags = tagList,
+                    price = price.value!!.toInt(),
+                    flavors = (tasteList.value?.toList() ?: emptyList()),
+                    reviewMsg = reviewText.value.toString(),
+                    foodStatus = foodStatus
+                )
+                val response: Response<ResponseBody> =
+                    writeRepository.postRecipeText(writeRecipe = writeRecipe)
+                val recipeId = (response.headers()["location"] ?: "").split("/").last().toInt()
                 Log.d("WriteViewModel: ", "레시피 작성 성공")
-                postImages(recipeId)
+                if (response.isSuccessful) {
+                    postImages(recipeId)
+                }
+            } catch (e: Exception) {
+                Log.d("WriteViewModel: ", "레시피 작성 실패 ${e.message}")
             }
-        } catch (e: Exception) {
-
         }
     }
 
-    private suspend fun postImages(recipeId: Int) {
-        try {
-            val images = arrayListOf<MultipartBody.Part>()
-            val imageList = _reviewImageList.value ?: emptyList()
-            imageList.forEach {
-                val file = File(it.second)
-                val body = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
-                images.add(
-                    MultipartBody.Part.createFormData(
-                        name = "images",
-                        filename = file.name,
-                        body = body
+    private fun postImages(recipeId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val images = arrayListOf<MultipartBody.Part>()
+                val imageList = _reviewImageList.value ?: emptyList()
+                imageList.forEach {
+                    val file = File(it.second)
+                    val body = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+                    images.add(
+                        MultipartBody.Part.createFormData(
+                            name = "images",
+                            filename = file.name,
+                            body = body
+                        )
                     )
-                )
-            }
-            writeRepository.postRecipeImage(recipeId = recipeId, imgList = images)
+                }
+                writeRepository.postRecipeImage(recipeId = recipeId, imgList = images)
 
-        } catch (e: Exception) {
-            Log.d("WriteViewModel imgPost failed : ", e.toString())
+            } catch (e: Exception) {
+                Log.d("WriteViewModel imgPost failed : ", e.toString())
+            }
         }
     }
 
