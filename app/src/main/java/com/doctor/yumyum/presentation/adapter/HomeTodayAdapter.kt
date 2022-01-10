@@ -1,7 +1,6 @@
 package com.doctor.yumyum.presentation.adapter
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -32,7 +31,8 @@ class HomeTodayAdapter(private val itemClickListener: (Int) -> Unit) :
                     .load(recipe.foodImages[0].imageUrl)
                     .placeholder(R.drawable.ic_loading_image)
                     .into(binding.itemHomeTodayIvRecipe)
-
+            } else {
+                binding.itemHomeTodayIvRecipe.setImageResource(R.drawable.ic_loading_image)
             }
         }
     }

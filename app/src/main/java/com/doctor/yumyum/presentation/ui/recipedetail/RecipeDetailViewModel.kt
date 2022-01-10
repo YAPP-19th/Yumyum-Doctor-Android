@@ -64,7 +64,7 @@ class RecipeDetailViewModel : BaseViewModel() {
                 _authorName.postValue("${recipeInfo?.writerName} 학생의 레시피")
                 _content.postValue(recipeInfo?.reviewDetail)
                 _recipePrice.postValue(recipeInfo?.price)
-                _imageList.postValue(ArrayList(recipeInfo?.foodImages ?: listOf()))
+                _imageList.postValue(ArrayList(recipeInfo?.foodImages ?: listOf(FoodImage("","",""))))
                 _isMyFood.postValue(recipeInfo?.myFood)
 
                 val addList: ArrayList<String> = arrayListOf()
@@ -91,6 +91,8 @@ class RecipeDetailViewModel : BaseViewModel() {
                     }
                 }
                 _tasteTagList.postValue(tasteList)
+            } else {
+                _errorState.postValue(ERROR_RECIPE_DETAIL)
             }
         } catch (e: Exception) {
             _errorState.postValue(ERROR_RECIPE_DETAIL)

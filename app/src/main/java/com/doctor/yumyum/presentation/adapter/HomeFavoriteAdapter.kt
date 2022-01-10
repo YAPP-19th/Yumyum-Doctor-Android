@@ -29,7 +29,10 @@ class HomeFavoriteAdapter(private val itemClickListener: (Int) -> Unit) :
                     .load(recipe.foodImages[0].imageUrl)
                     .placeholder(R.drawable.ic_loading_image)
                     .into(binding.homeFavoriteIvRecipe)
+            } else {
+                binding.homeFavoriteIvRecipe.setImageResource(R.drawable.ic_loading_image)
             }
+
             binding.root.setOnClickListener {
                 itemClickListener(recipe.id)
             }
