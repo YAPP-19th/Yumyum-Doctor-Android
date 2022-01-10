@@ -64,6 +64,12 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
         initFavoriteRecipeRecycler()
         startForFilter()
 
+        //홈에서 나의레시피 가져오기
+        arguments?.getString(resources.getString(R.string.common_brand))?.let {
+            category = it
+            isFilterSet = true
+        }
+
         //음식,음료 observe
         myRecipeViewModel.mode.observe(viewLifecycleOwner) { mode ->
             binding.myRecipeIbMode.setImageResource(
