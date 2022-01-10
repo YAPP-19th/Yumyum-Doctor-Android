@@ -1,6 +1,7 @@
 package com.doctor.yumyum.presentation.adapter
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.BaseAdapter
@@ -46,7 +47,7 @@ class MyRecipeFavoriteAdapter(
             binding.root.setOnClickListener { itemClickListener(recipe.id)}
             binding.itemMyFavoriteIbHeart.setOnClickListener {
                 deleteFavorite(recipe.id)
-                favoriteList.removeAt(position)
+                favoriteList.remove(recipe)
                 notifyItemRemoved(position)}
         }
     }
