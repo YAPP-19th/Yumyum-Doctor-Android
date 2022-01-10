@@ -135,16 +135,6 @@ class RecipeDetailViewModel : BaseViewModel() {
         }
     }
 
-    fun deleteRecipe(recipeId: Int){
-        viewModelScope.launch {
-            try {
-                repository.deleteRecipe(recipeId)
-            }catch (e : java.lang.Exception){
-                _errorState.postValue(ERROR_DELETE_RECIPE)
-            }
-        }
-    }
-
     companion object {
         const val ERROR_RECIPE_DETAIL = R.string.error_recipe_detail
         const val ERROR_LIKE = R.string.error_like

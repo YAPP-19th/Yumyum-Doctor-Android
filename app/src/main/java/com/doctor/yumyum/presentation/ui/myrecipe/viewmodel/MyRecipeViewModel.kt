@@ -13,6 +13,7 @@ import com.doctor.yumyum.data.model.RecipeModel
 import com.doctor.yumyum.data.repository.MainRepositoryImpl
 import com.doctor.yumyum.data.repository.MyRecipeRepositoryImpl
 import com.doctor.yumyum.data.repository.RecipeRepositoryImpl
+import com.doctor.yumyum.presentation.ui.recipedetail.RecipeDetailViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -145,6 +146,14 @@ class MyRecipeViewModel : BaseViewModel() {
         val response = recipeRepository.deleteBookmark(recipeId)
         if (!response.isSuccessful) {
             Log.d("MyRecipeViewModel: ", "BookMarkDelete failed - ${response.code()}")
+        }
+    }
+
+    suspend fun deleteRecipe(recipeId: Int) {
+        try {
+            recipeRepository.deleteRecipe(recipeId)
+        } catch (e: java.lang.Exception) {
+            _errorState.postValue(RecipeDetailViewModel.ERROR_DELETE_RECIPE)
         }
 
     }
