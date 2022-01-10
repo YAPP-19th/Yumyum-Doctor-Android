@@ -85,14 +85,17 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
                 SortType.RECENT -> {
                     sort = SORT_FLAG.ID
                     order = ORDER_FLAG.DESC
+                    binding.myRecipeIbSort.setImageResource(R.drawable.ic_sort_gray)
                 }
                 SortType.EXPENSIVE -> {
                     sort = SORT_FLAG.PRICE
                     order = ORDER_FLAG.DESC
+                    binding.myRecipeIbSort.setImageResource(R.drawable.ic_sort_green)
                 }
                 SortType.CHEAP -> {
                     sort = SORT_FLAG.PRICE
                     order = ORDER_FLAG.ASC
+                    binding.myRecipeIbSort.setImageResource(R.drawable.ic_sort_green)
                 }
             }
             sortSelectDialog.dismiss()
