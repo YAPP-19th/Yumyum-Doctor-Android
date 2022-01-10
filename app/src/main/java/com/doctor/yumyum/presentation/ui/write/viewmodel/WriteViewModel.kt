@@ -124,10 +124,6 @@ class WriteViewModel : BaseViewModel() {
         _tempCategory.value = tempText
     }
 
-    fun setEtcCategory(category : String){
-        _category.value = category
-    }
-
     fun setCategory() {
         _category.value = _tempCategory.value
     }
