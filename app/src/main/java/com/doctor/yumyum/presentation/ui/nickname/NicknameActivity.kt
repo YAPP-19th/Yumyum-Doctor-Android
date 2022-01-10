@@ -74,7 +74,7 @@ class NicknameActivity : BaseActivity<ActivityNicknameBinding>(R.layout.activity
                 }
                 if (p0.isNullOrEmpty()) {
                     setMessageNull()
-                } else if (p0.length >= 20) {
+                } else if (p0.length > 20) {
                     setMessageOverflow()
                 } else {
                     setMessageSuccess()
