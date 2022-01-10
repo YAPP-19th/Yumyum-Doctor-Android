@@ -11,7 +11,7 @@ import retrofit2.create
 interface MyRecipeDataSource {
     suspend fun getMyRecipe(
         categoryName: String,
-        flavors: String,
+        flavors: ArrayList<String>,
         tags: String,
         minPrice: Int?,
         maxPrice: Int?,
@@ -32,7 +32,7 @@ interface MyRecipeDataSource {
 class MyRecipeDataSourceImpl : MyRecipeDataSource {
     override suspend fun getMyRecipe(
         categoryName: String,
-        flavors: String,
+        flavors: ArrayList<String>,
         tags: String,
         minPrice: Int?,
         maxPrice: Int?,
