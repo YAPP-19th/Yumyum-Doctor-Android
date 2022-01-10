@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -9,50 +8,50 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@drawable/bg_dialog">
 
+
         <TextView
-            android:id="@+id/taste_pass_title"
+            android:id="@+id/dialog_nickname_back_title"
             style="@style/font_h3_bold"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="19dp"
-            android:gravity="center"
-            android:text="@string/common_pass"
+            android:layout_marginTop="21dp"
+            android:text="@string/dialog_nickname_back_title"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/taste_pass_subtitle"
+            android:id="@+id/dialog_nickname_back_subtitle"
             style="@style/font_body1_regular"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="11dp"
             android:gravity="center"
-            android:text="@string/dialog_pass_taste"
+            android:text="@string/dialog_nickname_back_subtitle"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/taste_pass_title" />
+            app:layout_constraintTop_toBottomOf="@id/dialog_nickname_back_title" />
 
         <TextView
-            android:id="@+id/taste_pass_message"
+            android:id="@+id/dialog_nickname_back_content"
             style="@style/font_body2_regular"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="15dp"
             android:gravity="center"
-            android:text="@string/dialog_msg_taste"
+            android:text="@string/dialog_nickname_back_content"
             android:textColor="@color/dark_gray"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/taste_pass_subtitle" />
+            app:layout_constraintTop_toBottomOf="@id/dialog_nickname_back_subtitle" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/taste_pass_no"
+            android:id="@+id/dialog_nickname_back_no"
             style="@style/font_subtitle_medium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -65,13 +64,12 @@
             android:text="@string/common_no"
             android:textColor="@color/dark_gray"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/taste_pass_yes"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@+id/dialog_nickname_back_yes"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/taste_pass_message" />
+            app:layout_constraintTop_toBottomOf="@id/dialog_nickname_back_content" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/taste_pass_yes"
+            android:id="@+id/dialog_nickname_back_yes"
             style="@style/font_subtitle_medium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -86,9 +84,10 @@
             android:textColor="@color/main_orange"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/taste_pass_no"
-            app:layout_constraintTop_toBottomOf="@id/taste_pass_message" />
+            app:layout_constraintStart_toEndOf="@+id/dialog_nickname_back_no"
+            app:layout_constraintTop_toBottomOf="@id/dialog_nickname_back_content" />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

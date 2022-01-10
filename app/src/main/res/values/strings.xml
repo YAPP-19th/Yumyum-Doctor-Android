@@ -173,6 +173,9 @@
     <string name="nickname_tv_overlap">*중복된 닉네임 입니다.</string>
     <string name="nickname_tv_overflow">*최대 20자까지 입력할 수 있습니다.</string>
     <string name="nickname_tv_success">*사용가능한 닉네임입니다.</string>
+    <string name="dialog_nickname_back_title">건너뛰기</string>
+    <string name="dialog_nickname_back_subtitle">닉네임 설정과 입맛 설정을\n건너뛰시겠습니까?</string>
+    <string name="dialog_nickname_back_content">*닉네임은 실명으로 설정되며,\n추후 마이페이지에서 다시 설정 가능합니다.</string>
 
     <!-- 신고하기 -->
     <string name="report">신고</string>
