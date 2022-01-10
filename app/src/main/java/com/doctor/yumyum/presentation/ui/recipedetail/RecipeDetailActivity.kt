@@ -46,7 +46,7 @@ class RecipeDetailActivity :
         binding.recipeDetailIbDelete.setOnClickListener {
             RecipeDeleteDialog{
                 val intent = Intent(this, MyRecipeFragment::class.java)
-                intent.putExtra("recipeId",recipeId)
+                viewModel.deleteRecipe(recipeId)
                 setResult(MyRecipeFragment.DELETE_RECIPE,intent)
                 finish()
             }.show(supportFragmentManager,"DeleteRecipe")

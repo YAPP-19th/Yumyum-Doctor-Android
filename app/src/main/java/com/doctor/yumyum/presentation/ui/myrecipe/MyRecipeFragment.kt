@@ -133,8 +133,9 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
         detailLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 if (it.resultCode == DELETE_RECIPE) {
-                    val recipeId = it.data?.getIntExtra("recipeId",0) ?:0
-                    deleteRecipe(recipeId)
+                    lifecycleScope.launch {
+                        getMyPostWithFilter()
+                    }
                 }
             }
 
@@ -279,13 +280,6 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
     private fun deleteBookMark(recipeId: Int){
         lifecycleScope.launch {
             myRecipeViewModel.deleteBookMark(recipeId)
-            getMyPostWithFilter()
-        }
-    }
-
-    private fun deleteRecipe(recipeId: Int){
-        lifecycleScope.launch{
-            myRecipeViewModel.deleteRecipe(recipeId)
             getMyPostWithFilter()
         }
     }

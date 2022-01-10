@@ -144,15 +144,6 @@ class MyRecipeViewModel : BaseViewModel() {
             Log.d("MyRecipeViewModel: ", "BookMarkDelete failed - ${response.code()}")
         }
     }
-
-    suspend fun deleteRecipe(recipeId: Int) {
-        try {
-            recipeRepository.deleteRecipe(recipeId)
-        } catch (e: java.lang.Exception) {
-            _errorState.postValue(RecipeDetailViewModel.ERROR_DELETE_RECIPE)
-        }
-
-    }
 }
 
 
