@@ -225,7 +225,8 @@
     <string name="error_report_fail">레시피 신고하기를 할 수 없습니다.</string>
     <string name="error_delete_recipe">레시피를 삭제할 수 없습니다.</string>
     <string name="error_failed_upload">레시피를 작성할 수 없습니다.</string>
-    <string name="error_post_favorite_fail">최애 레시피는 5개까지 등록 가능합니다.</string>
+    <string name="error_favorite_count_limit">최애 레시피는 5개까지 등록 가능합니다.</string>
+
     <!-- 입맛 설정 -->
     <string name="taste_mode">입맛 설정 모드</string>
     <string name="taste_tv_title">냠냠박사 과정을 이수하러\n오신 여러분들을 환영합니다!</string>

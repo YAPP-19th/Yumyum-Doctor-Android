@@ -118,7 +118,7 @@ class MyRecipeViewModel : BaseViewModel() {
                     }
                 }
             } catch (e: Exception) {
-                _errorState.postValue(R.string.error_post_favorite_fail)
+                _errorState.postValue(R.string.error_favorite_count_limit)
             }
         }
     }
