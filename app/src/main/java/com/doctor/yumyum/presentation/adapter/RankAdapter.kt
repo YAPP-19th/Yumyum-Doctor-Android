@@ -32,6 +32,8 @@ class RankAdapter(private val itemClickListener: (Int) -> Unit) :
                     .load(recipe.foodImages[0].imageUrl)
                     .placeholder(R.drawable.ic_loading_image)
                     .into(binding.researchRankingIvRecipe)
+            } else {
+                binding.researchRankingIvRecipe.setImageResource(R.drawable.ic_loading_image)
             }
 
             binding.researchRankingIvRank.visibility = VISIBLE
