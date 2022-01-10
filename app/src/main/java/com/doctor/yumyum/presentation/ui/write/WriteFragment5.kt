@@ -81,6 +81,10 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
                 binding.writeFifthSwRecipePrivate.setTrackResource(R.drawable.recipe_private_sw_track)
             }
         }
+
+        writeViewModel.errorState.observe(viewLifecycleOwner) { resId ->
+            showToast(getString(resId))
+        }
     }
 
     private fun initBinding() {

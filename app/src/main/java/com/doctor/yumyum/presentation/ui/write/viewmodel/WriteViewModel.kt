@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseViewModel
 import com.doctor.yumyum.common.utils.StatusType
 import com.doctor.yumyum.common.utils.TagType
@@ -68,6 +69,9 @@ class WriteViewModel : BaseViewModel() {
     private var _tasteList: MutableLiveData<ArrayList<String>> = MutableLiveData(arrayListOf())
     val tasteList: LiveData<ArrayList<String>>
         get() = _tasteList
+
+    private val _errorState: MutableLiveData<Int> = MutableLiveData()
+    val errorState: LiveData<Int> get() = _errorState
 
     val secondOnNext: MediatorLiveData<Boolean> = MediatorLiveData()
     val fifthOnFinish : MediatorLiveData<Boolean> = MediatorLiveData()
@@ -216,7 +220,7 @@ class WriteViewModel : BaseViewModel() {
                     postImages(recipeId)
                 }
             } catch (e: Exception) {
-                Log.d("WriteViewModel: ", "레시피 작성 실패 ${e.message}")
+                _errorState.postValue(R.string.error_failed_upload)
             }
         }
     }
