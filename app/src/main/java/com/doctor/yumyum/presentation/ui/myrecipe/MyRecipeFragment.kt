@@ -10,6 +10,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
 import com.doctor.yumyum.common.utils.ORDER_FLAG
@@ -258,15 +259,18 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
     }
 
     private fun postFavorite(it: RecipeModel) {
-        myRecipeViewModel.postFavorite(it.id, requireContext().getString(this.mode))
-        getMyPostWithFilter()
-        getMyFavorite()
+        lifecycleScope.launch {
+            myRecipeViewModel.postFavorite(it.id, requireContext().getString(mode))
+            getMyPostWithFilter()
+        }
     }
 
     private fun deleteFavorite(recipeId : Int){
-        myRecipeViewModel.deleteFavorite(recipeId)
-        getMyPostWithFilter()
-        getMyFavorite()
+        lifecycleScope.launch {
+            myRecipeViewModel.deleteFavorite(recipeId)
+            getMyFavorite()
+            getMyPostWithFilter()
+        }
     }
 
     fun showBottomSheet() {

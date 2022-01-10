@@ -75,8 +75,8 @@ class MyRecipeViewModel : BaseViewModel() {
         minPrice: String?,
         maxPrice: String?,
         status: String?,
-        sort : String,
-        order: String
+        sort: String,
+        order: String,
     ) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -107,12 +107,12 @@ class MyRecipeViewModel : BaseViewModel() {
     }
 
     fun getFavoriteRecipe(categoryName: String) {
-        Log.d("getMyFavoritePost","cateGoryName : $categoryName")
+        Log.d("getMyFavoritePost", "cateGoryName : $categoryName")
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response =
                     recipeRepository.getFavorite(categoryName)
-                Log.d("최애레시피 가져오기!",response.body().toString())
+                Log.d("최애레시피 가져오기!", response.body().toString())
                 if (response.isSuccessful) {
                     response.body()?.favoriteFoods?.let {
                         _favoriteRecipeList.postValue(it)
@@ -124,23 +124,20 @@ class MyRecipeViewModel : BaseViewModel() {
         }
     }
 
-    fun deleteFavorite(recipeId: Int) {
-        viewModelScope.launch(Dispatchers.IO) {
-            val response = myRecipeRepository.deleteFavorite(recipeId)
-            Log.d("최애레시피 삭제","")
-            if (!response.isSuccessful) {
-                Log.d("MyRecipeViewModel: ", "FavoriteDelete failed - ${response.code()}")
-            }
+    suspend fun deleteFavorite(recipeId: Int) {
+        val response = myRecipeRepository.deleteFavorite(recipeId)
+        Log.d("최애레시피 삭제", "")
+        if (!response.isSuccessful) {
+            Log.d("MyRecipeViewModel: ", "FavoriteDelete failed - ${response.code()}")
         }
     }
 
-    fun postFavorite(recipeId: Int, categoryName: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            val response = myRecipeRepository.postFavorite(recipeId, categoryName)
-            Log.d("최애레시피 등록","cateGoryName : $categoryName")
-            if (!response.isSuccessful) {
-                Log.d("MyRecipeViewModel: ", "FavoritePost failed - ${response.code()}")
-            }
+    suspend fun postFavorite(recipeId: Int, categoryName: String) {
+        val response = myRecipeRepository.postFavorite(recipeId, categoryName)
+        getFavoriteRecipe(categoryName)
+        Log.d("최애레시피 등록", "cateGoryName : $categoryName")
+        if (!response.isSuccessful) {
+            Log.d("MyRecipeViewModel: ", "FavoritePost failed - ${response.code()}")
         }
     }
 
