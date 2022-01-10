@@ -43,7 +43,7 @@ class WriteFragment1 : BaseFragment<FragmentWriteFirstBinding>(R.layout.fragment
         initListener()
 
         writeViewModel.category.observe(requireActivity()) { brandSelectDialog.dismiss() }
-        writeViewModel.mode.observe(requireActivity()){
+        writeViewModel.mode.observe(requireActivity()) {
             writeViewModel.initCategory()
             writeViewModel.setCategory()
         }
@@ -52,10 +52,6 @@ class WriteFragment1 : BaseFragment<FragmentWriteFirstBinding>(R.layout.fragment
     private fun initListener() {
         binding.writeFirstBtnNext.setOnClickListener {
             findNavController().navigate(R.id.action_first_write_fragment_to_second_write_fragment)
-            val etcCategory = binding.writeFirstEtEtcCategory.text
-            etcCategory?.let {
-                writeViewModel.setEtcCategory(it.toString())
-            }
         }
     }
 
@@ -66,7 +62,7 @@ class WriteFragment1 : BaseFragment<FragmentWriteFirstBinding>(R.layout.fragment
 
     private fun initDialog() {
         brandSelectView = layoutInflater.inflate(R.layout.dialog_select_brand, null)
-        brandSelectBinding = DataBindingUtil.inflate<DialogSelectBrandBinding>(
+        brandSelectBinding = DataBindingUtil.inflate(
             layoutInflater,
             R.layout.dialog_select_brand,
             brandSelectView as ViewGroup,

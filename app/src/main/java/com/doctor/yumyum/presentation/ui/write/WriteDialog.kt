@@ -14,7 +14,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class WriteDialog(val writeViewModel: WriteViewModel) : BaseDialog<DialogWriteBinding>(R.layout.dialog_write) {
+class WriteDialog(private val finishListener : () -> Unit) : BaseDialog<DialogWriteBinding>(R.layout.dialog_write) {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -23,18 +23,9 @@ class WriteDialog(val writeViewModel: WriteViewModel) : BaseDialog<DialogWriteBi
         super.onCreateView(inflater, container, savedInstanceState)
         binding.writeFinishNo.setOnClickListener { dismiss() }
         binding.writeFinishYes.setOnClickListener {
-            CoroutineScope(Dispatchers.IO).launch {
-                postRecipe()
-            }
-            val intent = Intent(this.context, MainActivity::class.java)
-            startActivity(intent)
-            WriteTagActivity().finish()
+            finishListener()
         }
 
         return binding.root
-    }
-
-    private suspend fun postRecipe() {
-        writeViewModel.postRecipe()
     }
 }

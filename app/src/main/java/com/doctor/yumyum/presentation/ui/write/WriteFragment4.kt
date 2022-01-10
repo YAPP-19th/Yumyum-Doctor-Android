@@ -61,10 +61,10 @@ class WriteFragment4 : BaseFragment<FragmentWriteFourthBinding>(R.layout.fragmen
             detailTasteAdapter.updateSelectedList(it)
             if(it.isNullOrEmpty()){
                 binding.writeFourthBtnNext.isEnabled = false
-                binding.writeFourthBtnNext.background = resources.getDrawable(R.drawable.bg_btn_sub)
+                binding.writeFourthBtnNext.background = activity?.getDrawable(R.drawable.bg_btn_sub)
             }else{
                 binding.writeFourthBtnNext.isEnabled = true
-                binding.writeFourthBtnNext.background = resources.getDrawable(R.drawable.bg_btn_main)
+                binding.writeFourthBtnNext.background = activity?.getDrawable(R.drawable.bg_btn_main)
             }
         }
     }

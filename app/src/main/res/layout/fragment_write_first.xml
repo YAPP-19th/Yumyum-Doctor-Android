@@ -94,34 +94,6 @@
             app:layout_constraintStart_toStartOf="@id/write_first_tv_select_brand"
             app:layout_constraintTop_toBottomOf="@id/write_first_tv_select_brand" />
 
-        <EditText
-            android:id="@+id/write_first_et_etc_category"
-            style="@style/font_h3_regular"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="32dp"
-            android:background="@null"
-            android:hint="브랜드명을 입력해주세요"
-            android:inputType="text"
-            android:lines="1"
-            android:visibility="@{viewModel.category.equals(viewModel.ETC) == true ? View.VISIBLE : View.GONE}"
-            android:textColor="@color/black"
-            android:textColorHint="@color/light_gray"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/write_first_view1" />
-
-        <View
-            android:id="@+id/write_first_view2"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="8dp"
-            android:background="@color/light_gray"
-            android:visibility="@{viewModel.category.equals(viewModel.ETC) == true ? View.VISIBLE : View.GONE}"
-            app:layout_constraintEnd_toEndOf="@id/write_first_et_etc_category"
-            app:layout_constraintStart_toStartOf="@id/write_first_et_etc_category"
-            app:layout_constraintTop_toBottomOf="@id/write_first_et_etc_category" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/write_first_btn_next"

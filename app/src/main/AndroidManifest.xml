@@ -81,7 +81,8 @@
             android:value="@string/kakao_app_key" />
 
         <activity android:name=".presentation.ui.write.WriteRecipeActivity" />
-        <activity android:name=".presentation.ui.write.WriteTagActivity" />
+        <activity android:name=".presentation.ui.write.WriteTagActivity"
+            android:windowSoftInputMode="adjustNothing"/>
         <activity android:name=".presentation.ui.myrecipe.MyRecipeFilterActivity" />
     </application>
 

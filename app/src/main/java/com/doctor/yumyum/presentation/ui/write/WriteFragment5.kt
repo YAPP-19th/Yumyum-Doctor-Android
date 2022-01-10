@@ -58,7 +58,11 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
         openGallery()
 
         binding.writeBtnFinish.setOnClickListener {
-            WriteDialog(writeViewModel).show(parentFragmentManager, "WriteDialog")
+            WriteDialog {
+                writeViewModel.postRecipe()
+                activity?.finish()
+            }.show(parentFragmentManager, "WriteDialog")
+
         }
         writeViewModel.fifthOnFinish.observe(viewLifecycleOwner){
             if(it){
@@ -76,6 +80,10 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
             }else{
                 binding.writeFifthSwRecipePrivate.setTrackResource(R.drawable.recipe_private_sw_track)
             }
+        }
+
+        writeViewModel.errorState.observe(viewLifecycleOwner) { resId ->
+            showToast(getString(resId))
         }
     }
 
