@@ -1,16 +1,14 @@
 package com.doctor.yumyum.presentation.ui.mypage
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.common.base.BaseViewModel
-import com.doctor.yumyum.data.remote.response.UserInfoResponse
-import com.doctor.yumyum.data.repository.UserRepositoryImpl
-import retrofit2.Response
-import java.lang.Exception
 import com.doctor.yumyum.common.utils.gradeEnToKo
+import com.doctor.yumyum.data.remote.response.UserInfoResponse
 import com.doctor.yumyum.data.repository.LoginRepositoryImpl
+import com.doctor.yumyum.data.repository.UserRepositoryImpl
 import com.kakao.sdk.user.UserApiClient
+import retrofit2.Response
 
 class MyPageViewModel : BaseViewModel() {
     private val userRepository = UserRepositoryImpl()
@@ -62,10 +60,10 @@ class MyPageViewModel : BaseViewModel() {
     }
 
     fun logout() {
+        userRepository.setLocalGrade("")
+        loginRepository.setLoginToken("")
+        loginRepository.setLoginMode("")
         UserApiClient.instance.logout {
-            userRepository.setLocalGrade("")
-            loginRepository.setLoginToken("")
-            loginRepository.setLoginMode("")
         }
     }
 }
