@@ -7,7 +7,7 @@ import retrofit2.Response
 interface MyRecipeRepository {
     suspend fun getMyRecipe(
         categoryName: String,
-        flavors: String,
+        flavors: ArrayList<String>,
         tags: String,
         minPrice: Int?,
         maxPrice: Int?,

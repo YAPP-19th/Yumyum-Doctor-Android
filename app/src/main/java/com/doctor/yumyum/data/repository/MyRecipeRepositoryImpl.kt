@@ -12,7 +12,7 @@ class MyRecipeRepositoryImpl : MyRecipeRepository {
 
     override suspend fun getMyRecipe(
         categoryName: String,
-        flavors: String,
+        flavors: ArrayList<String>,
         tags: String,
         minPrice: Int?,
         maxPrice: Int?,

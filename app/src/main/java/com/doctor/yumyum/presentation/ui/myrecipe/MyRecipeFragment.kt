@@ -3,17 +3,21 @@ package com.doctor.yumyum.presentation.ui.myrecipe
 import ResearchListAdapter
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
 import com.doctor.yumyum.common.utils.ORDER_FLAG
+import com.doctor.yumyum.common.utils.RecipeType
 import com.doctor.yumyum.common.utils.SORT_FLAG
 import com.doctor.yumyum.common.utils.SortType
+import com.doctor.yumyum.data.local.LocalDataSourceImpl
 import com.doctor.yumyum.data.model.RecipeModel
 import com.doctor.yumyum.databinding.DialogMyRecipeSortBinding
 import com.doctor.yumyum.databinding.FragmentMyRecipeBinding
@@ -24,6 +28,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlin.math.min
 
 
 class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment_my_recipe) {
@@ -34,6 +39,9 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
     private lateinit var sortSelectBinding: DialogMyRecipeSortBinding
     private lateinit var sortSelectView: View
 
+    private lateinit var myRecipeFavoriteAdapter: MyRecipeFavoriteAdapter
+    private lateinit var myRecipeListAdapter: ResearchListAdapter
+    private var mode: Int = 0
     private var category: String? = null
     private var sort = "id"
     private var order = "desc"
@@ -41,6 +49,7 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
     private var maxPrice: String? = null
     private var status: String? = null
     private var flavors: java.util.ArrayList<String> = arrayListOf("")
+    private var foodType: String = RecipeType.MYFOOD.name
 
     private var isFilterSet: Boolean = false
 
@@ -61,7 +70,7 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
 
         initBinding()
         initDialog()
-        initFavoriteRecipeRecycler()
+        initAdapter()
         startForFilter()
 
         //홈에서 나의레시피 가져오기
@@ -75,8 +84,26 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
             binding.myRecipeIbMode.setImageResource(
                 if (mode == R.string.common_food) R.drawable.ic_change_food else R.drawable.ic_change_beverage
             )
-            getFavoriteList(requireContext().resources.getString(mode))
+
+            this.mode = mode
+            getMyFavorite()
             getMyPostWithFilter()
+        }
+
+        //내가쓴글, 스크랩 observe
+        myRecipeViewModel.foodType.observe(viewLifecycleOwner) {
+            foodType = it
+            getMyPostWithFilter()
+        }
+
+        //내가쓴 글 리스트 observe
+        myRecipeViewModel.myRecipeList.observe(viewLifecycleOwner) {
+            myRecipeListAdapter.setRecipeList(it)
+        }
+
+        //최애리스트 observe
+        myRecipeViewModel.favoriteRecipeList.observe(viewLifecycleOwner) {
+            myRecipeFavoriteAdapter.setFavoriteList(it)
         }
 
         //정렬 적용하기 Observe
@@ -106,9 +133,16 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
         detailLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 if (it.resultCode == DELETE_RECIPE) {
-                    getMyPostWithFilter()
+                    lifecycleScope.launch {
+                        getMyPostWithFilter()
+                    }
                 }
             }
+
+        myRecipeViewModel.errorState.observe(viewLifecycleOwner) { resId ->
+            showToast(requireContext().getString(resId))
+        }
+
     }
 
     private fun initBinding() {
@@ -135,42 +169,29 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
         sortSelectDialog.setContentView(sortSelectBinding.root)
     }
 
-    private fun initMyRecipeRecycler(foodType: String) {
-        if (isFilterSet) {
-            binding.myRecipeIbFilter.setImageResource(R.drawable.ic_filter_green)
-        } else {
-            binding.myRecipeIbFilter.setImageResource(R.drawable.ic_filter_gray)
-        }
-        val myRecipeListAdapter = ResearchListAdapter({ recipeId ->
-            val intent = Intent(requireContext(), RecipeDetailActivity::class.java)
-            intent.putExtra("recipeId", recipeId)
-            detailLauncher.launch(intent)
-        }, { _, _ -> }, {
-            deleteBookMark(it.id)
-        }, {
-            postFavorite(it)
-        }, foodType)
-        binding.myRecipeRvPost.adapter = myRecipeListAdapter
-
-        myRecipeViewModel.myRecipeList.observe(viewLifecycleOwner) {
-            myRecipeListAdapter.setRecipeList(it)
-        }
-    }
-
-    private fun initFavoriteRecipeRecycler() {
-        val myRecipeFavoriteAdapter = MyRecipeFavoriteAdapter({ recipeId ->
+    private fun initAdapter() {
+        // 최애레시피 초기화
+        myRecipeFavoriteAdapter = MyRecipeFavoriteAdapter({ recipeId ->
             val intent = Intent(requireContext(), RecipeDetailActivity::class.java)
             intent.putExtra("recipeId", recipeId)
             startActivity(intent)
         }, { recipeId ->
-            CoroutineScope(Dispatchers.IO).launch {
-                myRecipeViewModel.deleteFavorite(recipeId)
-            }
+            deleteFavorite(recipeId)
         })
         binding.myRecipeRvFavoriteRecipe.adapter = myRecipeFavoriteAdapter
 
-        myRecipeViewModel.favoriteRecipeList.observe(viewLifecycleOwner) {
-            myRecipeFavoriteAdapter.setFavoriteList(it)
+        // 내가 쓴 글 초기화
+        myRecipeViewModel.foodType.observe(viewLifecycleOwner){
+            myRecipeListAdapter = ResearchListAdapter({ recipeId ->
+                val intent = Intent(requireContext(), RecipeDetailActivity::class.java)
+                intent.putExtra("recipeId", recipeId)
+                detailLauncher.launch(intent)
+            }, { _, _ -> }, { recipeId ->
+                deleteBookMark(recipeId)
+            }, {
+                postFavorite(it)
+            }, it)
+            binding.myRecipeRvPost.adapter = myRecipeListAdapter
         }
     }
 
@@ -211,47 +232,55 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
         }
     }
 
-    private fun getFavoriteList(category: String) {
-        CoroutineScope(Dispatchers.IO).launch {
-            myRecipeViewModel.getFavoriteRecipe(category)
-        }
-    }
-
     private fun getMyPostWithFilter() {
         val categoryName = if (category.isNullOrBlank()) {
             myRecipeViewModel.mode.value?.let { requireContext().resources.getString(it) }
         } else {
             category
         }
-        myRecipeViewModel.foodType.observe(viewLifecycleOwner) { foodType ->
-            CoroutineScope(Dispatchers.IO).launch {
-                myRecipeViewModel.getMyRecipe(
-                    categoryName.toString(),
-                    foodType,
-                    null,
-                    minPrice,
-                    maxPrice,
-                    status,
-                    sort,
-                    order)
-            }
-            initMyRecipeRecycler(foodType)
+        // 필터 아이콘 색깔 적용
+        if (isFilterSet) {
+            binding.myRecipeIbFilter.setImageResource(R.drawable.ic_filter_green)
+        } else {
+            binding.myRecipeIbFilter.setImageResource(R.drawable.ic_filter_gray)
         }
+
+        myRecipeViewModel.foodType.observe(viewLifecycleOwner) { foodType ->
+            myRecipeViewModel.getMyRecipe(
+                categoryName.toString(),
+                foodType,
+                flavors,
+                minPrice,
+                maxPrice,
+                status,
+                sort,
+                order)
+        }
+    }
+
+    private fun getMyFavorite() {
+        myRecipeViewModel.getFavoriteRecipe(requireContext().getString(this.mode))
     }
 
     private fun postFavorite(it: RecipeModel) {
-        myRecipeViewModel.mode.observe(viewLifecycleOwner) { mode ->
-            val categoryName = requireContext().resources.getString(mode)
-            CoroutineScope(Dispatchers.IO).launch {
-                myRecipeViewModel.postFavorite(it.id, categoryName)
-                myRecipeViewModel.getFavoriteRecipe(categoryName)
-            }
+        lifecycleScope.launch {
+            myRecipeViewModel.postFavorite(it.id, requireContext().getString(mode))
+            getMyPostWithFilter()
         }
     }
 
-    private fun deleteBookMark(recipeId: Int) {
-        CoroutineScope(Dispatchers.IO).launch {
+    private fun deleteFavorite(recipeId : Int){
+        lifecycleScope.launch {
+            myRecipeViewModel.deleteFavorite(recipeId)
+            getMyFavorite()
+            getMyPostWithFilter()
+        }
+    }
+
+    private fun deleteBookMark(recipeId: Int){
+        lifecycleScope.launch {
             myRecipeViewModel.deleteBookMark(recipeId)
+            getMyPostWithFilter()
         }
     }
 

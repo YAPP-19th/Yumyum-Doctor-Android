@@ -12,7 +12,7 @@ import com.doctor.yumyum.databinding.ItemResearchRecipeBinding
 class ResearchListAdapter(
     private val itemClickListener: (Int) -> Unit,
     private val bookmarkClickListener: (RecipeModel, Int) -> Unit,
-    private val bookmarkDeleteListener: (RecipeModel) -> Unit,
+    private val bookmarkDeleteListener: (Int) -> Unit,
     private val favoriteClickListener: (RecipeModel) -> Unit,
     private val recipeType: String
 ) :
@@ -33,9 +33,7 @@ class ResearchListAdapter(
                 }
                 RecipeType.BOOKMARK.name -> binding.itemResearchRecipeIbBookmark.setOnClickListener {
                     binding.itemResearchRecipeIbBookmark.visibility = View.VISIBLE
-                    bookmarkDeleteListener(recipe)
-                    recipeList.removeAt(position)
-                    notifyItemRemoved(position)
+                    bookmarkDeleteListener(recipe.id)
                 }
             }
             binding.itemResearchRecipeTvBrand.text = recipe.categoryName

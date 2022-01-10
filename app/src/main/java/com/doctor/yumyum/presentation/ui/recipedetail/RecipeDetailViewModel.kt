@@ -8,6 +8,7 @@ import com.doctor.yumyum.common.base.BaseViewModel
 import com.doctor.yumyum.data.model.FoodImage
 import com.doctor.yumyum.data.remote.response.RecipeDetailResponse
 import com.doctor.yumyum.data.repository.RecipeRepositoryImpl
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.ResponseBody
 import retrofit2.Response
@@ -144,7 +145,7 @@ class RecipeDetailViewModel : BaseViewModel() {
     }
 
     fun deleteRecipe(recipeId: Int) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO){
             try {
                 repository.deleteRecipe(recipeId)
             } catch (e: java.lang.Exception) {
@@ -160,4 +161,6 @@ class RecipeDetailViewModel : BaseViewModel() {
 
         const val ERROR_DELETE_RECIPE = R.string.error_delete_recipe
     }
+
+
 }

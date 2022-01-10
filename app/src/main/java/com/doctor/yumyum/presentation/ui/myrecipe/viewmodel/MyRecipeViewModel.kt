@@ -3,6 +3,7 @@ package com.doctor.yumyum.presentation.ui.myrecipe.viewmodel
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseViewModel
 import com.doctor.yumyum.common.utils.SortType
@@ -12,6 +13,9 @@ import com.doctor.yumyum.data.model.RecipeModel
 import com.doctor.yumyum.data.repository.MainRepositoryImpl
 import com.doctor.yumyum.data.repository.MyRecipeRepositoryImpl
 import com.doctor.yumyum.data.repository.RecipeRepositoryImpl
+import com.doctor.yumyum.presentation.ui.recipedetail.RecipeDetailViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class MyRecipeViewModel : BaseViewModel() {
@@ -22,6 +26,9 @@ class MyRecipeViewModel : BaseViewModel() {
     private val _mode: MutableLiveData<Int> = MutableLiveData(repository.getMode())
     val mode: LiveData<Int>
         get() = _mode
+
+    private val _errorState: MutableLiveData<Int> = MutableLiveData()
+    val errorState: LiveData<Int> get() = _errorState
 
     private var _sortType: MutableLiveData<SortType> = MutableLiveData(SortType.RECENT)
     val sortType: LiveData<SortType> get() = _sortType
@@ -62,54 +69,57 @@ class MyRecipeViewModel : BaseViewModel() {
         _foodType.value = foodType
     }
 
-    suspend fun getMyRecipe(
+    fun getMyRecipe(
         categoryName: String,
         mineFoodType: String,
-        flavor: String?,
+        flavor: ArrayList<String>,
         minPrice: String?,
         maxPrice: String?,
         status: String?,
-        sort : String,
-        order: String
+        sort: String,
+        order: String,
     ) {
-        try {
-            val response =
-                myRecipeRepository.getMyRecipe(
-                    categoryName = categoryName,
-                    flavors = "",
-                    tags = "",
-                    offset = 0,
-                    pageSize = 10,
-                    mineFoodType = mineFoodType,
-                    minPrice = minPrice?.toInt(),
-                    maxPrice = maxPrice?.toInt(),
-                    firstSearchTime = "2022-12-20T12:12:12",
-                    sort = sort,
-                    order = order,
-                    status = status
-                )
-            Log.d("MyRecipeViewModel: ", "${response.body()}")
-            if (response.isSuccessful) {
-                response.body()?.foods?.let {
-                    _myRecipeList.postValue(it)
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response =
+                    myRecipeRepository.getMyRecipe(
+                        categoryName = categoryName,
+                        flavors = flavor,
+                        tags = "",
+                        offset = 0,
+                        pageSize = 10,
+                        mineFoodType = mineFoodType,
+                        minPrice = minPrice?.toInt(),
+                        maxPrice = maxPrice?.toInt(),
+                        firstSearchTime = "2022-12-20T12:12:12",
+                        sort = sort,
+                        order = order,
+                        status = status
+                    )
+                if (response.isSuccessful) {
+                    response.body()?.foods?.let {
+                        _myRecipeList.postValue(it)
+                    }
                 }
+            } catch (e: Exception) {
+                Log.d("MyRecipeViewModel: ", "MyRecipeGet 실패")
             }
-        } catch (e: Exception) {
-            Log.d("MyRecipeViewModel: ", "MyRecipeGet 실패")
         }
     }
 
-    suspend fun getFavoriteRecipe(categoryName: String) {
-        try {
-            val response =
-                recipeRepository.getFavorite(categoryName)
-            if (response.isSuccessful) {
-                response.body()?.favoriteFoods?.let {
-                    _favoriteRecipeList.postValue(it)
+    fun getFavoriteRecipe(categoryName: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response =
+                    recipeRepository.getFavorite(categoryName)
+                if (response.isSuccessful) {
+                    response.body()?.favoriteFoods?.let {
+                        _favoriteRecipeList.postValue(it)
+                    }
                 }
+            } catch (e: Exception) {
+                _errorState.postValue(R.string.error_favorite_count_limit)
             }
-        } catch (e: Exception) {
-            Log.d("MyRecipeViewModel: ", "FavoriteGet failed - ${e.message}")
         }
     }
 
@@ -122,6 +132,7 @@ class MyRecipeViewModel : BaseViewModel() {
 
     suspend fun postFavorite(recipeId: Int, categoryName: String) {
         val response = myRecipeRepository.postFavorite(recipeId, categoryName)
+        getFavoriteRecipe(categoryName)
         if (!response.isSuccessful) {
             Log.d("MyRecipeViewModel: ", "FavoritePost failed - ${response.code()}")
         }
