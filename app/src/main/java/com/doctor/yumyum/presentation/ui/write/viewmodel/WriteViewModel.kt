@@ -226,22 +226,19 @@ class WriteViewModel : BaseViewModel() {
 
     private suspend fun postImages(recipeId: Int) {
         try {
-            viewModelScope.launch(Dispatchers.IO) {
-                val images = arrayListOf<MultipartBody.Part>()
-                val imageList = _reviewImageList.value ?: emptyList()
-                imageList.forEach {
-                    val file = File(it.second)
-                    val body = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
-                    images.add(
-                        MultipartBody.Part.createFormData(
-                            name = "images",
-                            filename = file.name,
-                            body = body
-                        )
-                    )
-                }
-                writeRepository.postRecipeImage(recipeId = recipeId, imgList = images)
+            val images = arrayListOf<MultipartBody.Part>()
+            val imageList = _reviewImageList.value ?: emptyList()
+            imageList.forEach {
+                val file = File(it.second)
+                val body = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+                images.add(
+                    MultipartBody.Part.createFormData(
+                        name = "images",
+                        filename = file.name,
+                        body = body
+                    ))
             }
+            writeRepository.postRecipeImage(recipeId = recipeId, imgList = images)
         } catch (e: Exception) {
             Log.d("WriteViewModel imgPost failed : ", e.toString())
         }
