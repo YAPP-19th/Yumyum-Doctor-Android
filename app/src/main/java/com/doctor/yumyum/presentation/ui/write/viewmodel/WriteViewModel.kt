@@ -225,8 +225,8 @@ class WriteViewModel : BaseViewModel() {
     }
 
     private suspend fun postImages(recipeId: Int) {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
+        try {
+            viewModelScope.launch(Dispatchers.IO) {
                 val images = arrayListOf<MultipartBody.Part>()
                 val imageList = _reviewImageList.value ?: emptyList()
                 imageList.forEach {
@@ -241,11 +241,9 @@ class WriteViewModel : BaseViewModel() {
                     )
                 }
                 writeRepository.postRecipeImage(recipeId = recipeId, imgList = images)
-
-            } catch (e: Exception) {
-                Log.d("WriteViewModel imgPost failed : ", e.toString())
             }
+        } catch (e: Exception) {
+            Log.d("WriteViewModel imgPost failed : ", e.toString())
         }
     }
-
 }
