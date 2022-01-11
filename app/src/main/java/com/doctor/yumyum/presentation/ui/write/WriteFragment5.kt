@@ -1,7 +1,6 @@
 package com.doctor.yumyum.presentation.ui.write
 
 
-import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.annotation.SuppressLint
 import android.app.Activity.RESULT_OK
@@ -24,10 +23,12 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
 import com.doctor.yumyum.databinding.FragmentWriteFifthBinding
 import com.doctor.yumyum.presentation.ui.write.viewmodel.WriteViewModel
+import kotlinx.coroutines.launch
 
 /**
  * 레시피 작성하기 5
@@ -59,7 +60,9 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
 
         binding.writeBtnFinish.setOnClickListener {
             WriteDialog {
-                writeViewModel.postRecipe()
+                lifecycleScope.launch {
+                    writeViewModel.postRecipe()
+                }
                 activity?.finish()
             }.show(parentFragmentManager, "WriteDialog")
 
@@ -121,7 +124,6 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
                         it.data
                     }
 
-                    //이미지를 여러장 선택한 경우
                     val images =
                         writeViewModel.reviewImageList.value?.toMutableList() ?: arrayListOf()
                     intentResult?.clipData?.apply {
@@ -131,7 +133,10 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
                             images.add(Pair(uri, path))
                             if (images.size == 3) break
                         }
+                    }?: intentResult?.data?.let {
+                        images.add(Pair(it,uriToPath(requireContext(),it)))
                     }
+                    Log.d("img",images.toString())
                     writeViewModel.setReviewImageList(images)
                 }
             }

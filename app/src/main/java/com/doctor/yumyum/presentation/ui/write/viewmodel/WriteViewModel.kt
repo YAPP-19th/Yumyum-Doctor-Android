@@ -74,7 +74,7 @@ class WriteViewModel : BaseViewModel() {
     val errorState: LiveData<Int> get() = _errorState
 
     val secondOnNext: MediatorLiveData<Boolean> = MediatorLiveData()
-    val fifthOnFinish : MediatorLiveData<Boolean> = MediatorLiveData()
+    val fifthOnFinish: MediatorLiveData<Boolean> = MediatorLiveData()
 
     init {
         secondOnNext.addSource(title) {
@@ -92,10 +92,10 @@ class WriteViewModel : BaseViewModel() {
     }
 
     init {
-        fifthOnFinish.addSource(reviewImageList){
+        fifthOnFinish.addSource(reviewImageList) {
             fifthOnFinish.value = fifthFinish()
         }
-        fifthOnFinish.addSource(reviewText){
+        fifthOnFinish.addSource(reviewText) {
             fifthOnFinish.value = fifthFinish()
         }
     }
@@ -150,7 +150,7 @@ class WriteViewModel : BaseViewModel() {
         }
     }
 
-    fun deleteReviewImage(index : Int){
+    fun deleteReviewImage(index: Int) {
         _reviewImageList.value?.removeAt(index)
         _reviewImageList.value = _reviewImageList.value
     }
@@ -169,16 +169,16 @@ class WriteViewModel : BaseViewModel() {
     private fun secondOnNext(): Boolean {
         if (title.value.isNullOrBlank() || mainIngredient.value.isNullOrBlank()) {
             return false
-        } else if (addTagList.value?.isNullOrEmpty() == false){
+        } else if (addTagList.value?.isNullOrEmpty() == false) {
             return true
-        } else if (minusTagList.value?.isNullOrEmpty() == false){
+        } else if (minusTagList.value?.isNullOrEmpty() == false) {
             return true
         }
         return false
     }
 
-    private fun fifthFinish() : Boolean {
-        if(!reviewImageList.value.isNullOrEmpty() && !reviewText.value.isNullOrBlank()){
+    private fun fifthFinish(): Boolean {
+        if (!reviewImageList.value.isNullOrEmpty() && !reviewText.value.isNullOrBlank()) {
             return true
         }
         return false
@@ -199,33 +199,32 @@ class WriteViewModel : BaseViewModel() {
         }
     }
 
-    fun postRecipe() {
+    suspend fun postRecipe() {
         refactorData()
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                val writeRecipe = WriteRecipe(
-                    categoryName = category.value.toString(),
-                    title = title.value.toString(),
-                    tags = tagList,
-                    price = price.value!!.toInt(),
-                    flavors = (tasteList.value?.toList() ?: emptyList()),
-                    reviewMsg = reviewText.value.toString(),
-                    foodStatus = foodStatus
-                )
-                val response: Response<ResponseBody> =
-                    writeRepository.postRecipeText(writeRecipe = writeRecipe)
-                val recipeId = (response.headers()["location"] ?: "").split("/").last().toInt()
-                Log.d("WriteViewModel: ", "레시피 작성 성공")
-                if (response.isSuccessful) {
-                    postImages(recipeId)
-                }
-            } catch (e: Exception) {
-                _errorState.postValue(R.string.error_failed_upload)
+        try {
+            val writeRecipe = WriteRecipe(
+                categoryName = category.value.toString(),
+                title = title.value.toString(),
+                tags = tagList,
+                price = price.value!!.toInt(),
+                flavors = (tasteList.value?.toList() ?: emptyList()),
+                reviewMsg = reviewText.value.toString(),
+                foodStatus = foodStatus
+            )
+            val response: Response<ResponseBody> =
+                writeRepository.postRecipeText(writeRecipe = writeRecipe)
+            val recipeId = (response.headers()["location"] ?: "").split("/").last().toInt()
+            Log.d("WriteViewModel: ", "레시피 작성 성공")
+            if (response.isSuccessful) {
+                postImages(recipeId)
             }
+        } catch (e: Exception) {
+            _errorState.postValue(R.string.error_failed_upload)
         }
+
     }
 
-    private fun postImages(recipeId: Int) {
+    private suspend fun postImages(recipeId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val images = arrayListOf<MultipartBody.Part>()
