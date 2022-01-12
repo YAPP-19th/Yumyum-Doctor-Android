@@ -73,6 +73,9 @@ class WriteViewModel : BaseViewModel() {
     private val _errorState: MutableLiveData<Int> = MutableLiveData()
     val errorState: LiveData<Int> get() = _errorState
 
+    private val _successState : MutableLiveData<Boolean> = MutableLiveData(false)
+    val successState : MutableLiveData<Boolean> get() = _successState
+
     val secondOnNext: MediatorLiveData<Boolean> = MediatorLiveData()
     val fifthOnFinish: MediatorLiveData<Boolean> = MediatorLiveData()
 
@@ -166,6 +169,10 @@ class WriteViewModel : BaseViewModel() {
         _tasteList.value = _tasteList.value
     }
 
+    fun resetSuccessState(){
+        _successState.value = false
+    }
+
     private fun secondOnNext(): Boolean {
         if (title.value.isNullOrBlank() || mainIngredient.value.isNullOrBlank()) {
             return false
@@ -200,6 +207,7 @@ class WriteViewModel : BaseViewModel() {
     }
 
     suspend fun postRecipe() {
+
         refactorData()
         try {
             val writeRecipe = WriteRecipe(
@@ -238,7 +246,10 @@ class WriteViewModel : BaseViewModel() {
                         body = body
                     ))
             }
-            writeRepository.postRecipeImage(recipeId = recipeId, imgList = images)
+            val response = writeRepository.postRecipeImage(recipeId = recipeId, imgList = images)
+            if(response.isSuccessful){
+                _successState.postValue(true)
+            }
         } catch (e: Exception) {
             Log.d("WriteViewModel imgPost failed : ", e.toString())
         }

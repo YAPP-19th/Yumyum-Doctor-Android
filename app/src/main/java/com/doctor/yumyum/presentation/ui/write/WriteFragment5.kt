@@ -63,7 +63,6 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
                 lifecycleScope.launch {
                     writeViewModel.postRecipe()
                 }
-                activity?.finish()
             }.show(parentFragmentManager, "WriteDialog")
 
         }
@@ -87,6 +86,13 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
 
         writeViewModel.errorState.observe(viewLifecycleOwner) { resId ->
             showToast(getString(resId))
+        }
+
+        writeViewModel.successState.observe(viewLifecycleOwner){
+            if(it){
+                activity?.finish()
+                writeViewModel.resetSuccessState()
+            }
         }
     }
 
