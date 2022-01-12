@@ -145,6 +145,11 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        getMyPostWithFilter()
+    }
+
     private fun initBinding() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = myRecipeViewModel

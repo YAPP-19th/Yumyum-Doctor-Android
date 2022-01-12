@@ -14,8 +14,7 @@ import com.doctor.yumyum.data.repository.MainRepositoryImpl
 import com.doctor.yumyum.data.repository.MyRecipeRepositoryImpl
 import com.doctor.yumyum.data.repository.RecipeRepositoryImpl
 import com.doctor.yumyum.presentation.ui.recipedetail.RecipeDetailViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 
 class MyRecipeViewModel : BaseViewModel() {
@@ -79,33 +78,34 @@ class MyRecipeViewModel : BaseViewModel() {
         sort: String,
         order: String,
     ) {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                val response =
-                    myRecipeRepository.getMyRecipe(
-                        categoryName = categoryName,
-                        flavors = flavor,
-                        tags = "",
-                        offset = 0,
-                        pageSize = 10,
-                        mineFoodType = mineFoodType,
-                        minPrice = minPrice?.toInt(),
-                        maxPrice = maxPrice?.toInt(),
-                        firstSearchTime = "2022-12-20T12:12:12",
-                        sort = sort,
-                        order = order,
-                        status = status
-                    )
-                if (response.isSuccessful) {
-                    response.body()?.foods?.let {
-                        _myRecipeList.postValue(it)
-                    }
+        viewModelScope.launch {
+            val response = viewModelScope.async(Dispatchers.IO) {
+                myRecipeRepository.getMyRecipe(
+                    categoryName = categoryName,
+                    flavors = flavor,
+                    tags = "",
+                    offset = 0,
+                    pageSize = 10,
+                    mineFoodType = mineFoodType,
+                    minPrice = minPrice?.toInt(),
+                    maxPrice = maxPrice?.toInt(),
+                    firstSearchTime = "2022-12-20T12:12:12",
+                    sort = sort,
+                    order = order,
+                    status = status
+                )
+            }
+
+            if (response.await().isSuccessful) {
+                response.await().body()?.foods?.let {
+                    _myRecipeList.postValue(it)
                 }
-            } catch (e: Exception) {
-                Log.d("MyRecipeViewModel: ", "MyRecipeGet 실패")
+            } else {
+                Log.d("getMyRecipe:", "error")
             }
         }
     }
+
 
     fun getFavoriteRecipe(categoryName: String) {
         viewModelScope.launch(Dispatchers.IO) {
