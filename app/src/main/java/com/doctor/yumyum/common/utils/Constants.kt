@@ -31,3 +31,7 @@ object ORDER_FLAG {
     const val DESC = "desc"
     const val ASC ="asc"
 }
+
+object REQUEST_CODE{
+    const val DELETE_RECIPE = 1006
+}
