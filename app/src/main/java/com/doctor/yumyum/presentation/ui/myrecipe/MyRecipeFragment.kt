@@ -193,30 +193,8 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
     }
 
     private fun initAdapter() {
-//        // 최애레시피 초기화
-//        myRecipeFavoriteAdapter = MyRecipeFavoriteAdapter({ recipeId ->
-//            val intent = Intent(requireContext(), RecipeDetailActivity::class.java)
-//            intent.putExtra("recipeId", recipeId)
-//            startActivity(intent)
-//        }, { recipeId ->
-//            deleteFavorite(recipeId)
-//        })
         binding.myRecipeRvFavoriteRecipe.adapter = myRecipeFavoriteAdapter
         binding.myRecipeRvPost.adapter = myRecipeListAdapter
-
-        // 내가 쓴 글 초기화
-    //    myRecipeViewModel.foodType.observe(viewLifecycleOwner) {
-//            myRecipeListAdapter = ResearchListAdapter({ recipeId ->
-//                val intent = Intent(requireContext(), RecipeDetailActivity::class.java)
-//                intent.putExtra("recipeId", recipeId)
-//                detailLauncher.launch(intent)
-//            }, { _, _ -> }, { recipeId ->
-//                deleteBookMark(recipeId)
-//            }, {
-//                postFavorite(it)
-//            })
-
-    //}
     }
 
     private fun startForFilter() {
