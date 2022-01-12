@@ -208,15 +208,15 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
                 }
 
             }
-        binding.myRecipeIbFilter.setOnClickListener {
-            val intent = Intent(context, MyRecipeFilterActivity::class.java)
-            intent.putExtra(MIN_KEY, minPrice)
-            intent.putExtra(MAX_KEY, maxPrice)
-            intent.putExtra(CATEGORY_KEY, category)
-            intent.putExtra(STATUS_KEY, status)
-            intent.putStringArrayListExtra(TASTE_KEY, flavors)
-            filterLauncher.launch(intent)
-        }
+//        binding.myRecipeIbFilter.setOnClickListener {
+//            val intent = Intent(context, MyRecipeFilterActivity::class.java)
+//            intent.putExtra(MIN_KEY, minPrice)
+//            intent.putExtra(MAX_KEY, maxPrice)
+//            intent.putExtra(CATEGORY_KEY, category)
+//            intent.putExtra(STATUS_KEY, status)
+//            intent.putStringArrayListExtra(TASTE_KEY, flavors)
+//            filterLauncher.launch(intent)
+//        }
     }
 
     private fun getMyPostWithFilter() {
