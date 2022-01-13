@@ -18,39 +18,9 @@ class SplashViewModel : BaseViewModel() {
     val isLogin: LiveData<Boolean>
         get() = _isLogin
 
-    suspend fun signIn(): Boolean {
-        val accessToken = TokenManager.instance.getToken()?.accessToken
+    suspend fun signIn() {
+        val accessToken = repository.getLoginToken();
         val oauthType = repository.getLoginMode()
-
-        if (accessToken.isNullOrEmpty()) {
-            _isLogin.postValue(false)
-            return false
-        }
-        if (oauthType.isNullOrEmpty()) {
-            _isLogin.postValue(false)
-            return false
-        }
-
-        try {
-            val response: Response<ResponseBody> = repository.signIn(
-                SignInModel(
-                    oauthType, accessToken
-                )
-            )
-            if (response.isSuccessful) {
-                for (h in response.headers().toList()) {
-                    if (h.first == "Authorization") {
-                        repository.setLoginToken(h.second)
-                        _isLogin.postValue(true)
-                    }
-                }
-                return true
-            }
-            _isLogin.postValue(false)
-            return false
-        } catch (e: Exception) {
-            _isLogin.postValue(false)
-            return false
-        }
+        _isLogin.postValue(!accessToken.isNullOrEmpty() && !oauthType.isNullOrEmpty())
     }
 }
