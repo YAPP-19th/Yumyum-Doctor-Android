@@ -144,13 +144,11 @@ class RecipeDetailViewModel : BaseViewModel() {
         }
     }
 
-    fun deleteRecipe(recipeId: Int) {
-        viewModelScope.launch(Dispatchers.IO){
-            try {
-                repository.deleteRecipe(recipeId)
-            } catch (e: java.lang.Exception) {
-                _errorState.postValue(ERROR_DELETE_RECIPE)
-            }
+    suspend fun deleteRecipe(recipeId: Int) {
+        try {
+            repository.deleteRecipe(recipeId)
+        } catch (e: java.lang.Exception) {
+            _errorState.postValue(ERROR_DELETE_RECIPE)
         }
     }
 

@@ -13,11 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
-import com.doctor.yumyum.common.utils.ORDER_FLAG
-import com.doctor.yumyum.common.utils.RecipeType
-import com.doctor.yumyum.common.utils.SORT_FLAG
-import com.doctor.yumyum.common.utils.SortType
-import com.doctor.yumyum.data.local.LocalDataSourceImpl
+import com.doctor.yumyum.common.utils.*
 import com.doctor.yumyum.data.model.RecipeModel
 import com.doctor.yumyum.databinding.DialogMyRecipeSortBinding
 import com.doctor.yumyum.databinding.FragmentMyRecipeBinding
@@ -25,10 +21,7 @@ import com.doctor.yumyum.presentation.adapter.MyRecipeFavoriteAdapter
 import com.doctor.yumyum.presentation.ui.myrecipe.viewmodel.MyRecipeViewModel
 import com.doctor.yumyum.presentation.ui.recipedetail.RecipeDetailActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlin.math.min
 
 
 class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment_my_recipe) {
@@ -80,7 +73,6 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
 
         const val FILTER_APPLY = 1004
         const val FILTER_RESET = 1005
-        const val DELETE_RECIPE = 1006
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -98,12 +90,19 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
             isFilterSet = true
         }
 
+        //Detail Launcher
+        detailLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                if (it.resultCode == REQUEST_CODE.DELETE_RECIPE) {
+                    getMyPostWithFilter()
+                }
+            }
+
         //음식,음료 observe
         myRecipeViewModel.mode.observe(viewLifecycleOwner) { mode ->
             binding.myRecipeIbMode.setImageResource(
                 if (mode == R.string.common_food) R.drawable.ic_change_food else R.drawable.ic_change_beverage
             )
-
             this.mode = mode
             getMyFavorite()
             getMyPostWithFilter()
@@ -146,16 +145,6 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
             sortSelectDialog.dismiss()
             getMyPostWithFilter()
         }
-
-        //Detail Launcher
-        detailLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-                if (it.resultCode == DELETE_RECIPE) {
-                    lifecycleScope.launch {
-                        getMyPostWithFilter()
-                    }
-                }
-            }
 
         myRecipeViewModel.errorState.observe(viewLifecycleOwner) { resId ->
             showToast(requireContext().getString(resId))
@@ -213,29 +202,28 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
                     }
                     FILTER_RESET -> {
                         isFilterSet = false
-                        minPrice = null
-                        maxPrice = null
-                        category = null
-                        status = null
-                        flavors = arrayListOf()
+                        resetFilter()
                         getMyPostWithFilter()
                     }
                 }
 
             }
         binding.myRecipeIbFilter.setOnClickListener {
+            showToast(resources.getString(R.string.common_update))
+            /**
             val intent = Intent(context, MyRecipeFilterActivity::class.java)
             intent.putExtra(MIN_KEY, minPrice)
             intent.putExtra(MAX_KEY, maxPrice)
             intent.putExtra(CATEGORY_KEY, category)
             intent.putExtra(STATUS_KEY, status)
             intent.putStringArrayListExtra(TASTE_KEY, flavors)
-            filterLauncher.launch(intent)
+            filterLauncher.launch(intent)**/
         }
     }
 
     private fun getMyPostWithFilter() {
         // 필터 아이콘 색깔 적용
+        Log.d("Filter",isFilterSet.toString())
         if (isFilterSet) {
             binding.myRecipeIbFilter.setImageResource(R.drawable.ic_filter_green)
         } else {
@@ -276,7 +264,6 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
     }
 
     fun changeRecipeType(type: RecipeType) {
-        isFilterSet = false
         myRecipeViewModel.changeRecipeType(type)
 
         val categoryName = if (category.isNullOrBlank()) {
@@ -299,5 +286,19 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
             sort,
             order
         )
+    }
+
+    fun changeMode(){
+        resetFilter()
+        myRecipeViewModel.changeMode()
+    }
+
+    private fun resetFilter(){
+        isFilterSet = false
+        minPrice = null
+        maxPrice = null
+        category = null
+        status = null
+        flavors = arrayListOf()
     }
 }

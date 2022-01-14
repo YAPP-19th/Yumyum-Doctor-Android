@@ -43,7 +43,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
-                android:onClick="@{() -> viewModel.changeMode()}"
+                android:onClick="@{() -> myRecipeFragment.changeMode()}"
                 android:id="@+id/my_recipe_ib_mode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

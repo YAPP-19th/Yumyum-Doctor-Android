@@ -1,4 +1,5 @@
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,18 +23,19 @@ class ResearchListAdapter(
     inner class ViewHolder(private val binding: ItemResearchRecipeBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(recipe: RecipeModel, position: Int) {
-            when (recipeType.name) {
-                RecipeType.MYFOOD.name -> binding.itemResearchRecipeIbBookmark.visibility =
-                    View.GONE
-                RecipeType.BASIC.name -> {
+            when (recipeType) {
+                RecipeType.MYFOOD-> binding.itemResearchRecipeIbBookmark.visibility = View.GONE
+                RecipeType.BASIC -> {
                     binding.itemResearchRecipeIbFavorite.visibility = View.GONE
                     binding.itemResearchRecipeIbBookmark.setOnClickListener {
                         bookmarkClickListener(recipe, position)
                     }
                 }
-                RecipeType.BOOKMARK.name -> binding.itemResearchRecipeIbBookmark.setOnClickListener {
+                RecipeType.BOOKMARK -> {
                     binding.itemResearchRecipeIbBookmark.visibility = View.VISIBLE
-                    bookmarkDeleteListener(recipe.id)
+                    binding.itemResearchRecipeIbBookmark.setOnClickListener {
+                        bookmarkDeleteListener(recipe.id)
+                    }
                 }
             }
             binding.itemResearchRecipeTvBrand.text = recipe.categoryName
