@@ -28,6 +28,7 @@ import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
 import com.doctor.yumyum.databinding.FragmentWriteFifthBinding
 import com.doctor.yumyum.presentation.ui.write.viewmodel.WriteViewModel
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 /**
@@ -50,7 +51,6 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
                 WriteViewModel() as T
         }
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -58,12 +58,16 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
         changeReview()
         openGallery()
 
+
         binding.writeBtnFinish.setOnClickListener {
             WriteDialog {
-                lifecycleScope.launch {
-                    writeViewModel.postRecipe()
-                }
-                activity?.finish()
+               lifecycleScope.launch {
+                   val postRecipe = lifecycleScope.async {
+                        writeViewModel.postRecipe()
+                    }
+                   postRecipe.await()
+                   activity?.finish()
+               }
             }.show(parentFragmentManager, "WriteDialog")
 
         }

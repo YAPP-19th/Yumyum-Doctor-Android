@@ -134,10 +134,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
-                    android:onClick="@{() -> myRecipeFragment.changeFoodType(mineFoodType.MYFOOD.name)}"
+                    android:onClick="@{() -> myRecipeFragment.changeRecipeType(mineFoodType.MYFOOD)}"
                     android:layout_marginTop="16dp"
                     android:text="@string/my_recipe_tv_my_post"
-                    android:textColor="@{viewModel.foodType == mineFoodType.MYFOOD.name ? @color/black : @color/gray}"
+                    android:textColor="@{viewModel.recipeType == mineFoodType.MYFOOD ? @color/black : @color/gray}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/my_recipe_divider2" />
 
@@ -147,9 +147,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
-                    android:onClick="@{() -> myRecipeFragment.changeFoodType(mineFoodType.BOOKMARK.name)}"
+                    android:onClick="@{() -> myRecipeFragment.changeRecipeType(mineFoodType.BOOKMARK)}"
                     android:text="@string/my_recipe_tv_scrap"
-                    android:textColor="@{viewModel.foodType == mineFoodType.BOOKMARK.name ? @color/black : @color/gray}"
+                    android:textColor="@{viewModel.recipeType == mineFoodType.BOOKMARK ? @color/black : @color/gray}"
                     app:layout_constraintBottom_toBottomOf="@id/my_recipe_tv_my_post"
                     app:layout_constraintStart_toEndOf="@id/my_recipe_tv_my_post"
                     app:layout_constraintTop_toTopOf="@id/my_recipe_tv_my_post" />
@@ -203,7 +203,7 @@
                     android:paddingHorizontal="20dp"
                     android:paddingTop="20dp"
                     android:paddingBottom="28dp"
-                    android:text="@{viewModel.foodType == mineFoodType.MYFOOD.name() ? @string/my_post_empty : @string/my_bookmark_empty}"
+                    android:text="@{viewModel.recipeType == mineFoodType.MYFOOD ? @string/my_post_empty : @string/my_bookmark_empty}"
                     android:textColor="@color/black"
                     app:drawableTopCompat="@drawable/ic_logo_error"
                     app:layout_constraintTop_toBottomOf="@id/my_recipe_tv_my_post"

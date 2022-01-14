@@ -1,6 +1,7 @@
 package com.doctor.yumyum.presentation.ui.myrecipe.viewmodel
 
 import android.util.Log
+import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -14,8 +15,7 @@ import com.doctor.yumyum.data.repository.MainRepositoryImpl
 import com.doctor.yumyum.data.repository.MyRecipeRepositoryImpl
 import com.doctor.yumyum.data.repository.RecipeRepositoryImpl
 import com.doctor.yumyum.presentation.ui.recipedetail.RecipeDetailViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 
 class MyRecipeViewModel : BaseViewModel() {
@@ -39,9 +39,13 @@ class MyRecipeViewModel : BaseViewModel() {
     val favoriteRecipeList: LiveData<ArrayList<FavoriteRecipe>>
         get() = _favoriteRecipeList
 
-    private val _foodType: MutableLiveData<String> = MutableLiveData(RecipeType.MYFOOD.name)
-    val foodType: LiveData<String>
-        get() = _foodType
+    private val _recipeType: MutableLiveData<RecipeType> = MutableLiveData()
+    val recipeType: LiveData<RecipeType>
+        get() = _recipeType
+
+    private val _categoryName: MutableLiveData<String> = MutableLiveData()
+    val categoryName: LiveData<String>
+        get() = _categoryName
 
     private val _myRecipeList: MutableLiveData<ArrayList<RecipeModel>> = MutableLiveData()
     val myRecipeList: LiveData<ArrayList<RecipeModel>>
@@ -59,14 +63,18 @@ class MyRecipeViewModel : BaseViewModel() {
         _sortType.value = tmpSortType.value
     }
 
+    fun setCategoryName(categoryName: String) {
+        _categoryName.value = categoryName
+    }
+
     fun changeMode() {
         _mode.value =
             if (mode.value == R.string.common_food) R.string.common_beverage else R.string.common_food
         repository.setMode(mode.value ?: R.string.common_food)
     }
 
-    fun changeFoodType(foodType: String) {
-        _foodType.value = foodType
+    fun changeRecipeType(type: RecipeType) {
+        _recipeType.value = type
     }
 
     fun getMyRecipe(
@@ -79,33 +87,34 @@ class MyRecipeViewModel : BaseViewModel() {
         sort: String,
         order: String,
     ) {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                val response =
-                    myRecipeRepository.getMyRecipe(
-                        categoryName = categoryName,
-                        flavors = flavor,
-                        tags = "",
-                        offset = 0,
-                        pageSize = 10,
-                        mineFoodType = mineFoodType,
-                        minPrice = minPrice?.toInt(),
-                        maxPrice = maxPrice?.toInt(),
-                        firstSearchTime = "2022-12-20T12:12:12",
-                        sort = sort,
-                        order = order,
-                        status = status
-                    )
-                if (response.isSuccessful) {
-                    response.body()?.foods?.let {
-                        _myRecipeList.postValue(it)
-                    }
+        viewModelScope.launch {
+            val response = viewModelScope.async(Dispatchers.IO) {
+                myRecipeRepository.getMyRecipe(
+                    categoryName = categoryName,
+                    flavors = flavor,
+                    tags = "",
+                    offset = 0,
+                    pageSize = 10,
+                    mineFoodType = mineFoodType,
+                    minPrice = if (minPrice?.isNotBlank() == true) minPrice.toInt() else 0,
+                    maxPrice = if (maxPrice?.isNotBlank() == true) maxPrice.toInt() else Int.MAX_VALUE,
+                    firstSearchTime = "2022-12-20T12:12:12",
+                    sort = sort,
+                    order = order,
+                    status = status
+                )
+            }
+
+            if (response.await().isSuccessful) {
+                response.await().body()?.foods?.let {
+                    _myRecipeList.postValue(it)
                 }
-            } catch (e: Exception) {
-                Log.d("MyRecipeViewModel: ", "MyRecipeGet 실패")
+            } else {
+                Log.d("getMyRecipe:", response.await().errorBody().toString())
             }
         }
     }
+
 
     fun getFavoriteRecipe(categoryName: String) {
         viewModelScope.launch(Dispatchers.IO) {

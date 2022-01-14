@@ -14,15 +14,15 @@ class ResearchListAdapter(
     private val bookmarkClickListener: (RecipeModel, Int) -> Unit,
     private val bookmarkDeleteListener: (Int) -> Unit,
     private val favoriteClickListener: (RecipeModel) -> Unit,
-    private val recipeType: String
-) :
-    RecyclerView.Adapter<ResearchListAdapter.ViewHolder>() {
+
+    ) : RecyclerView.Adapter<ResearchListAdapter.ViewHolder>() {
     private val recipeList: ArrayList<RecipeModel> = arrayListOf()
+    private var recipeType: RecipeType = RecipeType.BASIC
 
     inner class ViewHolder(private val binding: ItemResearchRecipeBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(recipe: RecipeModel, position: Int) {
-            when (recipeType) {
+            when (recipeType.name) {
                 RecipeType.MYFOOD.name -> binding.itemResearchRecipeIbBookmark.visibility =
                     View.GONE
                 RecipeType.BASIC.name -> {
@@ -79,7 +79,8 @@ class ResearchListAdapter(
     override fun getItemCount(): Int = recipeList.size
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setRecipeList(newRecipeList: ArrayList<RecipeModel>) {
+    fun setRecipeList(newRecipeList: ArrayList<RecipeModel>, type: RecipeType = RecipeType.BASIC) {
+        recipeType = type
         recipeList.clear()
         recipeList.addAll(newRecipeList)
         notifyDataSetChanged()
