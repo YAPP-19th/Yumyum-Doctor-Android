@@ -19,7 +19,7 @@ class SplashViewModel : BaseViewModel() {
         get() = _isLogin
 
     suspend fun signIn() {
-        val accessToken = repository.getLoginToken();
+        val accessToken = loginToken
         val oauthType = repository.getLoginMode()
         _isLogin.postValue(!accessToken.isNullOrEmpty() && !oauthType.isNullOrEmpty())
     }
