@@ -1,21 +1,21 @@
 package com.doctor.yumyum.presentation.ui.myrecipe.viewmodel
 
 import android.util.Log
-import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseViewModel
+import com.doctor.yumyum.common.utils.RecipeType
 import com.doctor.yumyum.common.utils.SortType
 import com.doctor.yumyum.data.model.FavoriteRecipe
-import com.doctor.yumyum.common.utils.RecipeType
 import com.doctor.yumyum.data.model.RecipeModel
 import com.doctor.yumyum.data.repository.MainRepositoryImpl
 import com.doctor.yumyum.data.repository.MyRecipeRepositoryImpl
 import com.doctor.yumyum.data.repository.RecipeRepositoryImpl
-import com.doctor.yumyum.presentation.ui.recipedetail.RecipeDetailViewModel
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 
 
 class MyRecipeViewModel : BaseViewModel() {
@@ -67,9 +67,9 @@ class MyRecipeViewModel : BaseViewModel() {
         _categoryName.value = categoryName
     }
 
-    fun changeMode() {
-        _mode.value =
-            if (mode.value == R.string.common_food) R.string.common_beverage else R.string.common_food
+    fun changeMode(isTurnOn: Boolean) {
+        _mode.value = if (isTurnOn) R.string.common_beverage else R.string.common_food
+        // 현재 모드 저장
         repository.setMode(mode.value ?: R.string.common_food)
     }
 

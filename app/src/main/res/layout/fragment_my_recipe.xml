@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="android.view.View" />
+
+        <import type="com.doctor.yumyum.R" />
 
         <variable
             name="viewModel"
@@ -29,6 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="51dp"
             android:paddingHorizontal="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
@@ -42,17 +46,22 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageButton
-                android:onClick="@{() -> myRecipeFragment.changeMode()}"
-                android:id="@+id/my_recipe_ib_mode"
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/my_recipe_sw_mode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:contentDescription="@string/common_button_change_mode"
-                android:minHeight="48dp"
+                android:checked="@{viewModel.mode == R.string.common_beverage}"
+                android:minHeight="0dp"
+                android:onCheckedChanged="@{(_, isChecked)-> viewModel.changeMode(isChecked)}"
+                android:thumb="@drawable/sw_mode_thumb_food"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:showText="false"
+                app:switchMinWidth="0dp"
+                app:track="@drawable/sw_mode_track"
+                app:trackTint="@color/main_orange" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -98,9 +107,9 @@
                     android:paddingHorizontal="24dp"
                     android:paddingTop="19dp"
                     android:paddingBottom="26dp"
-                    android:visibility="@{viewModel.favoriteRecipeList.size() == 0 ? View.VISIBLE : View.INVISIBLE}"
                     android:text="@string/best_recipe_empty"
                     android:textColor="@color/dark_gray"
+                    android:visibility="@{viewModel.favoriteRecipeList.size() == 0 ? View.VISIBLE : View.INVISIBLE}"
                     app:drawableTopCompat="@drawable/ic_heart"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -126,7 +135,7 @@
                     android:layout_height="14dp"
                     android:layout_marginTop="28dp"
                     android:background="@color/layout_empty"
-                    app:layout_constraintTop_toBottomOf="@id/my_recipe_tv_favorite_empty"/>
+                    app:layout_constraintTop_toBottomOf="@id/my_recipe_tv_favorite_empty" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/my_recipe_tv_my_post"
@@ -134,8 +143,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
-                    android:onClick="@{() -> myRecipeFragment.changeRecipeType(mineFoodType.MYFOOD)}"
                     android:layout_marginTop="16dp"
+                    android:onClick="@{() -> myRecipeFragment.changeRecipeType(mineFoodType.MYFOOD)}"
                     android:text="@string/my_recipe_tv_my_post"
                     android:textColor="@{viewModel.recipeType == mineFoodType.MYFOOD ? @color/black : @color/gray}"
                     app:layout_constraintStart_toStartOf="parent"
@@ -161,8 +170,8 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="16dp"
                     android:background="@color/white"
-                    android:src="@drawable/ic_sort_green"
                     android:onClick="@{() -> myRecipeFragment.showBottomSheet()}"
+                    android:src="@drawable/ic_sort_green"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/my_recipe_divider2" />
 
@@ -197,7 +206,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="45dp"
                     android:background="@drawable/bg_message_empty"
-                    android:visibility="@{viewModel.myRecipeList.size() == 0? View.VISIBLE : View.GONE}"
                     android:drawablePadding="12dp"
                     android:gravity="center"
                     android:paddingHorizontal="20dp"
@@ -205,11 +213,12 @@
                     android:paddingBottom="28dp"
                     android:text="@{viewModel.recipeType == mineFoodType.MYFOOD ? @string/my_post_empty : @string/my_bookmark_empty}"
                     android:textColor="@color/black"
+                    android:visibility="@{viewModel.myRecipeList.size() == 0? View.VISIBLE : View.GONE}"
                     app:drawableTopCompat="@drawable/ic_logo_error"
-                    app:layout_constraintTop_toBottomOf="@id/my_recipe_tv_my_post"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/my_recipe_tv_my_post" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

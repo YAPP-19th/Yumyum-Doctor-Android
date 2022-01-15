@@ -3,11 +3,11 @@ package com.doctor.yumyum.presentation.ui.myrecipe
 import ResearchListAdapter
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -98,11 +98,15 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
                 }
             }
 
-        //음식,음료 observe
+        // 모드 변경에 따른 switch 이미지 설정
         myRecipeViewModel.mode.observe(viewLifecycleOwner) { mode ->
-            binding.myRecipeIbMode.setImageResource(
-                if (mode == R.string.common_food) R.drawable.ic_change_food else R.drawable.ic_change_beverage
+            binding.myRecipeSwMode.trackTintList = ResourcesCompat.getColorStateList(
+                requireContext().resources,
+                if (mode == R.string.common_food) R.color.main_orange else R.color.sub_green,
+                null
             )
+            binding.myRecipeSwMode.setThumbResource(if (mode == R.string.common_food) R.drawable.sw_mode_thumb_food else R.drawable.sw_mode_thumb_drink)
+
             this.mode = mode
             getMyFavorite()
             getMyPostWithFilter()
@@ -223,7 +227,6 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
 
     private fun getMyPostWithFilter() {
         // 필터 아이콘 색깔 적용
-        Log.d("Filter",isFilterSet.toString())
         if (isFilterSet) {
             binding.myRecipeIbFilter.setImageResource(R.drawable.ic_filter_green)
         } else {
@@ -288,12 +291,12 @@ class MyRecipeFragment : BaseFragment<FragmentMyRecipeBinding>(R.layout.fragment
         )
     }
 
-    fun changeMode(){
+    fun changeMode() {
         resetFilter()
-        myRecipeViewModel.changeMode()
+        myRecipeViewModel.changeMode(binding.myRecipeSwMode.isChecked)
     }
 
-    private fun resetFilter(){
+    private fun resetFilter() {
         isFilterSet = false
         minPrice = null
         maxPrice = null
