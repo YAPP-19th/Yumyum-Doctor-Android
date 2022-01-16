@@ -4,12 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.common.base.BaseViewModel
-import com.doctor.yumyum.data.model.SignInModel
 import com.doctor.yumyum.data.repository.LoginRepositoryImpl
-import com.kakao.sdk.auth.TokenManager
-import okhttp3.ResponseBody
-import retrofit2.Response
-import java.lang.Exception
 
 class SplashViewModel : BaseViewModel() {
     private val repository: LoginRepositoryImpl = LoginRepositoryImpl()
@@ -18,39 +13,28 @@ class SplashViewModel : BaseViewModel() {
     val isLogin: LiveData<Boolean>
         get() = _isLogin
 
-    suspend fun signIn(): Boolean {
-        val accessToken = TokenManager.instance.getToken()?.accessToken
+    suspend fun signIn() {
+        val accessToken = repository.getLoginToken()
         val oauthType = repository.getLoginMode()
 
-        if (accessToken.isNullOrEmpty()) {
-            _isLogin.postValue(false)
-            return false
-        }
-        if (oauthType.isNullOrEmpty()) {
-            _isLogin.postValue(false)
-            return false
-        }
+        if (accessToken.isNullOrEmpty() || oauthType.isNullOrEmpty()) _isLogin.postValue(false)
 
         try {
-            val response: Response<ResponseBody> = repository.signIn(
-                SignInModel(
-                    oauthType, accessToken
-                )
-            )
+            val response = repository.refreshToken()
             if (response.isSuccessful) {
                 for (h in response.headers().toList()) {
                     if (h.first == "Authorization") {
                         repository.setLoginToken(h.second)
+                        Log.d("donghwan", repository.getLoginToken().toString())
                         _isLogin.postValue(true)
                     }
                 }
-                return true
+            } else {
+                _isLogin.postValue(false)
             }
-            _isLogin.postValue(false)
-            return false
         } catch (e: Exception) {
+            e.printStackTrace()
             _isLogin.postValue(false)
-            return false
         }
     }
 }
