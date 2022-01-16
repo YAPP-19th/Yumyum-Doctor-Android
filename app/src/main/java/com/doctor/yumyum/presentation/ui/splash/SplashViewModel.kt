@@ -25,7 +25,6 @@ class SplashViewModel : BaseViewModel() {
                 for (h in response.headers().toList()) {
                     if (h.first == "Authorization") {
                         repository.setLoginToken(h.second)
-                        Log.d("donghwan", repository.getLoginToken().toString())
                         _isLogin.postValue(true)
                     }
                 }
