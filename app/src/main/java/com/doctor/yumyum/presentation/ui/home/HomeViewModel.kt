@@ -43,10 +43,8 @@ class HomeViewModel : BaseViewModel() {
     val errorState: LiveData<Boolean>
         get() = _errorState
 
-
-    fun changeMode() {
-        _mode.value =
-            if (mode.value == R.string.common_food) R.string.common_beverage else R.string.common_food
+    fun changeMode(isTurnOn: Boolean) {
+        _mode.value = if (isTurnOn) R.string.common_beverage else R.string.common_food
         mainRepository.setMode(mode.value ?: R.string.common_food)
     }
 

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
@@ -17,7 +18,6 @@ import com.doctor.yumyum.presentation.ui.recipedetail.RecipeDetailActivity
 import com.doctor.yumyum.presentation.ui.researchlist.ResearchListActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 class ResearchRecipeFragment :
@@ -58,11 +58,6 @@ class ResearchRecipeFragment :
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
 
-        viewModel.mode.observe(viewLifecycleOwner) {
-            binding.researchRecipeIbMode.setImageResource(
-                if (it == R.string.common_food) R.drawable.ic_change_food else R.drawable.ic_change_beverage
-            )
-        }
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         binding.researchRecipeRecyclerviewRanking.adapter = RankAdapter { recipeId ->
@@ -81,9 +76,16 @@ class ResearchRecipeFragment :
         brandRecyclerAdapter.setBrandList(beverageBrandList)
         brandRecyclerAdapter.notifyDataSetChanged()
 
+        // 모드 변경에 따른 switch 이미지 설정
         viewModel.mode.observe(viewLifecycleOwner) { mode ->
-            changeMode(mode)
+            binding.researchRecipeSwMode.trackTintList = ResourcesCompat.getColorStateList(
+                requireContext().resources,
+                if (mode == R.string.common_food) R.color.main_orange else R.color.sub_green,
+                null
+            )
+            binding.researchRecipeSwMode.setThumbResource(if (mode == R.string.common_food) R.drawable.sw_mode_thumb_food else R.drawable.sw_mode_thumb_drink)
 
+            changeBrandList(mode)
             // 주간 랭킹 리스트 조회
             CoroutineScope(Dispatchers.IO).launch {
                 viewModel.getRankRecipe(getString(mode), top = 9, rankDatePeriod = 7)
@@ -99,7 +101,7 @@ class ResearchRecipeFragment :
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun changeMode(mode: Int) {
+    fun changeBrandList(mode: Int) {
         if (mode == R.string.common_beverage) {
             brandRecyclerAdapter.setBrandList(beverageBrandList)
         } else {

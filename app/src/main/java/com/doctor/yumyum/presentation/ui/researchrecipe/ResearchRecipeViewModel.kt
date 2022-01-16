@@ -24,10 +24,8 @@ class ResearchRecipeViewModel : BaseViewModel() {
     val mode: LiveData<Int>
         get() = _mode
 
-    fun changeMode() {
-        _mode.value =
-            if (mode.value == R.string.common_food) R.string.common_beverage else R.string.common_food
-
+    fun changeMode(isTurnOn: Boolean) {
+        _mode.value = if (isTurnOn) R.string.common_beverage else R.string.common_food
         // 현재 모드 저장
         repository.setMode(mode.value ?: R.string.common_food)
     }

@@ -3,8 +3,8 @@ package com.doctor.yumyum.presentation.ui.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
@@ -96,9 +96,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
         // 음식 <=> 음료
         viewModel.mode.observe(viewLifecycleOwner) {
-            binding.homeIbMode.setImageResource(
-                if (it == R.string.common_food) R.drawable.ic_change_food else R.drawable.ic_change_beverage
+            binding.homeSwMode.trackTintList = ResourcesCompat.getColorStateList(
+                requireContext().resources,
+                if (it == R.string.common_food) R.color.main_orange else R.color.sub_green,
+                null
             )
+            binding.homeSwMode.setThumbResource(if (it == R.string.common_food) R.drawable.sw_mode_thumb_food else R.drawable.sw_mode_thumb_drink)
             changeBrandMode(it)
             CoroutineScope(Dispatchers.IO).launch {
                 viewModel.getFavorite(requireContext().getString(it))

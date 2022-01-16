@@ -7,6 +7,8 @@
 
         <import type="android.view.View" />
 
+        <import type="com.doctor.yumyum.R" />
+
         <variable
             name="viewModel"
             type="com.doctor.yumyum.presentation.ui.home.HomeViewModel" />
@@ -35,17 +37,22 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <ImageButton
-                android:id="@+id/home_ib_mode"
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/home_sw_mode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:contentDescription="@string/common_button_change_mode"
-                android:minHeight="48dp"
-                android:onClick="@{()->viewModel.changeMode()}"
+                android:checked="@{viewModel.mode == R.string.common_beverage}"
+                android:minHeight="0dp"
+                android:onCheckedChanged="@{(_, isChecked)-> viewModel.changeMode(isChecked)}"
+                android:thumb="@drawable/sw_mode_thumb_food"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                tools:src="@drawable/ic_change_food" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:showText="false"
+                app:switchMinWidth="0dp"
+                app:track="@drawable/sw_mode_track"
+                app:trackTint="@color/main_orange" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
