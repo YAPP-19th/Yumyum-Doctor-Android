@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="8dp">
+
+        <TextView
+            android:id="@+id/research_ranking_tv_rank"
+            style="@style/font_h2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="@id/research_ranking_iv_rank"
+            app:layout_constraintStart_toStartOf="@id/research_ranking_iv_rank"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="1" />
+
+        <ImageView
+            android:id="@+id/research_ranking_iv_rank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:contentDescription="@string/research_icon_ranking_medal"
+            android:src="@drawable/ic_gold_medal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/research_ranking_tv_rank" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/research_ranking_cv_recipe"
+            android:layout_width="@dimen/weekly_ranking_image_width"
+            android:layout_height="@dimen/weekly_ranking_image_height"
+            android:layout_marginStart="7dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
+            app:layout_constraintStart_toEndOf="@id/research_ranking_iv_rank"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/research_ranking_iv_recipe"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/common_recipe_image"
+                android:scaleType="center"
+                android:background="@color/light_gray"
+                android:src="@drawable/ic_loading_image" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/research_ranking_tv_brand"
+            style="@style/font_body2_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:textColor="@color/gray"
+            app:layout_constraintStart_toEndOf="@id/research_ranking_cv_recipe"
+            app:layout_constraintTop_toTopOf="@id/research_ranking_cv_recipe"
+            tools:text="@string/common_brand" />
+
+        <TextView
+            android:id="@+id/research_ranking_tv_title"
+            style="@style/font_subtitle_medium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/research_ranking_tv_brand"
+            app:layout_constraintTop_toBottomOf="@id/research_ranking_tv_brand"
+            tools:text="@string/common_recipe_title" />
+
+        <TextView
+            android:id="@+id/research_ranking_tv_cost"
+            style="@style/font_subtitle_regular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@id/research_ranking_tv_brand"
+            app:layout_constraintTop_toBottomOf="@id/research_ranking_tv_title"
+            tools:text="@string/common_cost_example" />
+
+        <ImageView
+            android:id="@+id/research_ranking_iv_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/common_like_image"
+            android:src="@drawable/ic_like"
+            app:layout_constraintStart_toStartOf="@id/research_ranking_tv_brand"
+            app:layout_constraintTop_toBottomOf="@id/research_ranking_tv_cost" />
+
+        <TextView
+            android:id="@+id/research_ranking_tv_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:layout_marginBottom="2dp"
+            app:layout_constraintBottom_toBottomOf="@id/research_ranking_iv_like"
+            app:layout_constraintStart_toEndOf="@id/research_ranking_iv_like"
+            app:layout_constraintTop_toTopOf="@id/research_ranking_iv_like"
+            tools:text="@string/common_number" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="firstFragment"
+            type="com.doctor.yumyum.presentation.ui.write.WriteFragment1" />
+
+        <variable
+            name="viewModel"
+            type="com.doctor.yumyum.presentation.ui.write.viewmodel.WriteViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/write_first_tv_guide"
+            style="@style/font_h3_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="50dp"
+            android:text="@string/write_first_tv_guide"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/write_first_sw_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="23dp"
+            android:checked="@{viewModel.mode}"
+            android:onCheckedChanged="@{(_, isChecked)-> viewModel.setMode(isChecked)}"
+            android:textOff="@string/common_food"
+            android:textOn="@string/common_beverage"
+            android:thumb="@drawable/shape_sw_thumb"
+            app:layout_constraintStart_toStartOf="@id/write_first_tv_guide"
+            app:layout_constraintTop_toBottomOf="@id/write_first_tv_guide"
+            app:showText="true"
+            app:track="@drawable/ic_sw_track" />
+
+        <TextView
+            android:id="@+id/write_first_tv_brand"
+            style="@style/font_body2_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="23dp"
+            android:includeFontPadding="false"
+            android:text="@string/dialog_tv_brand"
+            android:textColor="@color/dark_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/write_first_sw_category" />
+
+
+        <TextView
+            android:id="@+id/write_first_tv_select_brand"
+            style="@style/font_h3_regular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="6dp"
+            android:onClick="@{()-> firstFragment.showBottomSheet()}"
+            android:paddingVertical="6dp"
+            android:text="@{viewModel.category}"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/write_first_tv_brand" />
+
+        <ImageView
+            android:id="@+id/write_first_iv_dropdown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/ic_dropdown"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/write_first_tv_brand" />
+
+        <View
+            android:id="@+id/write_first_view1"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/light_gray"
+            app:layout_constraintEnd_toEndOf="@id/write_first_tv_select_brand"
+            app:layout_constraintStart_toStartOf="@id/write_first_tv_select_brand"
+            app:layout_constraintTop_toBottomOf="@id/write_first_tv_select_brand" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/write_first_btn_next"
+            style="@style/font_subtitle_medium"
+            android:layout_width="0dp"
+            android:layout_height="47dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_btn_main"
+            android:stateListAnimator="@null"
+            android:text="@string/common_next"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

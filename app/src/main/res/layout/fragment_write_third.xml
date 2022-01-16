@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.doctor.yumyum.presentation.ui.write.viewmodel.WriteViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/write_third_tv_menu_guide"
+            style="@style/font_body2_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="61dp"
+            android:text="@string/write_third_tv_menu_guide"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/write_third_tv_main"
+            style="@style/font_body1_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_select_tag_item"
+            android:textColor="@color/main_orange"
+            app:layout_constraintStart_toStartOf="@id/write_third_tv_menu_guide"
+            app:layout_constraintTop_toBottomOf="@id/write_third_tv_menu_guide" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/write_third_rv_add"
+            bind_tagList="@{viewModel.addTagList}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/write_third_tv_main" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="-2dp"
+            android:id="@+id/write_third_rv_minus"
+            bind_tagList="@{viewModel.minusTagList}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/write_third_rv_add" />
+
+        <TextView
+            android:id="@+id/write_third_tv_price_guide"
+            style="@style/font_body2_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="23dp"
+            android:text="@string/common_total_price"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@id/write_third_rv_minus"
+            app:layout_constraintTop_toBottomOf="@id/write_third_rv_minus" />
+
+
+        <EditText
+            android:text="@={viewModel.price}"
+            android:inputType="number"
+            android:id="@+id/write_third_et_price"
+            style="@style/font_h3_regular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:background="@null"
+            android:textColorHint="@color/light_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginHorizontal="16dp"
+            app:layout_constraintTop_toBottomOf="@id/write_third_tv_price_guide" />
+
+        <TextView
+            android:id="@+id/write_third_won_guide"
+            style="@style/font_subtitle_medium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="@string/common_unit_money"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/write_third_et_price"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/write_third_et_price" />
+
+
+        <View
+            android:id="@+id/write_third_view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/light_gray"
+            app:layout_constraintTop_toBottomOf="@id/write_third_et_price" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/write_third_btn_next"
+            style="@style/font_subtitle_medium"
+            android:layout_width="0dp"
+            android:layout_height="47dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_btn_sub"
+            android:enabled="false"
+            android:stateListAnimator="@null"
+            android:text="@string/common_next"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
+

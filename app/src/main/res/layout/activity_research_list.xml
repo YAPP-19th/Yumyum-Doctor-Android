@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".presentation.ui.researchlist.ResearchListActivity">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="activity"
+            type="com.doctor.yumyum.presentation.ui.researchlist.ResearchListActivity" />
+
+        <variable
+            name="viewModel"
+            type="com.doctor.yumyum.presentation.ui.researchlist.ResearchListViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/research_list_cl_appbar"
+            layout="@layout/layout_appbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:main="@{@string/research_list_title}" />
+
+        <View
+            android:id="@+id/research_list_divider"
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:background="@color/layout_empty"
+            app:layout_constraintTop_toBottomOf="@id/research_list_cl_appbar" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/research_list_cl_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="22dp"
+            android:background="@drawable/bg_search"
+            android:onClick="@{()->activity.showSearchDialog()}"
+            app:layout_constraintTop_toBottomOf="@id/research_list_divider">
+
+            <ImageView
+                android:id="@+id/research_list_iv_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ic_search"
+                app:layout_constraintBottom_toBottomOf="@id/research_list_et_search"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/research_list_et_search" />
+
+            <TextView
+                android:id="@+id/research_list_et_search"
+                style="@style/font_body1_medium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="2dp"
+                android:background="@null"
+                android:gravity="top"
+                android:paddingVertical="8dp"
+                android:text="@string/research_list_search"
+                android:textColor="@color/light_gray"
+                app:layout_constraintEnd_toStartOf="@id/research_list_ib_close"
+                app:layout_constraintStart_toEndOf="@id/research_list_iv_search"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/research_list_ib_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="7dp"
+                android:layout_marginBottom="1dp"
+                android:contentDescription="@string/research_list_ib_hashtag_reset"
+                android:onClick="@{()->activity.resetSearchList()}"
+                android:src="@drawable/ic_close"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/research_list_rv_search_taste"
+                bind_tasteTagList="@{viewModel.searchList}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="@id/research_list_et_search"
+                app:layout_constraintEnd_toEndOf="@id/research_list_et_search"
+                app:layout_constraintStart_toStartOf="@id/research_list_et_search"
+                app:layout_constraintTop_toTopOf="@id/research_list_et_search" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/research_list_tv_brand"
+            style="@style/font_h3_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/research_list_cl_search"
+            tools:text="@string/common_brand" />
+
+        <TextView
+            android:id="@+id/research_list_tv_filter"
+            style="@style/font_body2_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:drawablePadding="2dp"
+            android:gravity="top"
+            android:text="@string/common_filter"
+            android:textColor="@color/gray"
+            app:drawableStartCompat="@drawable/ic_filter_gray"
+            app:layout_constraintBottom_toBottomOf="@id/research_list_tv_sort"
+            app:layout_constraintEnd_toStartOf="@id/research_list_tv_sort"
+            app:layout_constraintTop_toTopOf="@id/research_list_tv_sort" />
+
+
+        <TextView
+            android:id="@+id/research_list_tv_sort"
+            style="@style/font_body2_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:drawablePadding="2dp"
+            android:gravity="top"
+            android:onClick="@{()->activity.showSortDialog()}"
+            android:text="@string/common_sort"
+            android:textColor="@color/gray"
+            app:drawableStartCompat="@drawable/ic_sort_gray"
+            app:layout_constraintBottom_toBottomOf="@id/research_list_tv_brand"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/research_list_tv_brand" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/research_list_rv_recipe"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="4dp"
+            android:paddingHorizontal="8dp"
+            android:visibility="@{viewModel.recipeList.size() == 0 ? View.GONE : View.VISIBLE}"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/research_list_tv_brand"
+            app:spanCount="2"
+            tools:listitem="@layout/item_research_recipe" />
+
+        <TextView
+            android:id="@+id/research_recipe_tv_empty"
+            style="@style/font_body1_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="42dp"
+            android:layout_marginBottom="42dp"
+            android:background="@drawable/bg_message_empty"
+            android:drawablePadding="12dp"
+            android:gravity="center"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="30dp"
+            android:paddingBottom="36dp"
+            android:text="@string/research_list_empty"
+            android:textColor="@color/black"
+            android:visibility="@{viewModel.recipeList.size() == 0? View.VISIBLE : View.GONE}"
+            app:drawableTopCompat="@drawable/ic_logo_error"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/research_list_tv_brand" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

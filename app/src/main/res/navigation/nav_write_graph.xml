@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_write_graph"
+    app:startDestination="@id/first_write_fragment">
+
+    <fragment
+        android:id="@+id/first_write_fragment"
+        android:name="com.doctor.yumyum.presentation.ui.write.WriteFragment1"
+        tools:layout="@layout/fragment_write_first">
+
+        <action
+            android:id="@+id/action_first_write_fragment_to_second_write_fragment"
+            app:destination="@id/second_write_fragment"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/second_write_fragment"
+        android:name="com.doctor.yumyum.presentation.ui.write.WriteFragment2"
+        tools:layout="@layout/fragment_write_second"
+        android:label="Second Write">
+
+        <action
+            android:id="@+id/action_second_write_fragment_to_third_write_fragment"
+            app:destination="@id/third_write_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/third_write_fragment"
+        android:name="com.doctor.yumyum.presentation.ui.write.WriteFragment3"
+        android:label="Third Write"
+        tools:layout="@layout/fragment_write_third">
+
+        <action
+            android:id="@+id/action_third_write_fragment_to_fourth_write_fragment"
+            app:destination="@id/fourth_write_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fourth_write_fragment"
+        android:name="com.doctor.yumyum.presentation.ui.write.WriteFragment4"
+        tools:layout="@layout/fragment_write_fourth"
+        android:label="Fourth Write">
+
+        <action
+            android:id="@+id/action_fourth_write_fragment_to_fifth_write_fragment"
+            app:destination="@id/fifth_write_fragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fifth_write_fragment"
+        android:name="com.doctor.yumyum.presentation.ui.write.WriteFragment5"
+        tools:layout="@layout/fragment_write_fifth"
+        android:label="Fifth Write">
+
+    </fragment>
+
+</navigation>

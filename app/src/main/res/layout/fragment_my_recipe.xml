@@ -1,25 +1,229 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
+        <import type="android.view.View" />
+
+        <import type="com.doctor.yumyum.R" />
+
         <variable
             name="viewModel"
-            type="com.doctor.yumyum.presentation.viewmodel.MyRecipeViewModel" />
+            type="com.doctor.yumyum.presentation.ui.myrecipe.viewmodel.MyRecipeViewModel" />
+
+        <variable
+            name="myRecipeFragment"
+            type="com.doctor.yumyum.presentation.ui.myrecipe.MyRecipeFragment" />
+
+        <variable
+            name="mineFoodType"
+            type="com.doctor.yumyum.common.utils.RecipeType" />
 
     </data>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".presentation.ui.main.MyRecipeFragment">
+        android:layout_height="match_parent">
 
-        <!-- TODO: Update blank fragment layout -->
-        <TextView
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/my_recipe_cl_appbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/menu_main_bottom_my_recipe" />
+            android:layout_height="51dp"
+            android:paddingHorizontal="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </FrameLayout>
+            <TextView
+                android:id="@+id/my_recipe_tv_title"
+                style="@style/font_h2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/menu_main_bottom_my_recipe"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/my_recipe_sw_mode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:checked="@{viewModel.mode == R.string.common_beverage}"
+                android:minHeight="0dp"
+                android:onCheckedChanged="@{(_, isChecked)-> viewModel.changeMode(isChecked)}"
+                android:thumb="@drawable/sw_mode_thumb_food"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:showText="false"
+                app:switchMinWidth="0dp"
+                app:track="@drawable/sw_mode_track"
+                app:trackTint="@color/main_orange" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/my_recipe_divider1"
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:background="@color/layout_empty"
+            app:layout_constraintTop_toBottomOf="@id/my_recipe_cl_appbar" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/my_recipe_divider1">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/my_recipe_tv_best_guide"
+                    style="@style/font_h3_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/my_recipe_tv_best_recipe"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/my_recipe_tv_favorite_empty"
+                    style="@style/font_body1_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="23dp"
+                    android:background="@drawable/bg_message_empty"
+                    android:drawablePadding="7dp"
+                    android:gravity="center"
+                    android:paddingHorizontal="24dp"
+                    android:paddingTop="19dp"
+                    android:paddingBottom="26dp"
+                    android:text="@string/best_recipe_empty"
+                    android:textColor="@color/dark_gray"
+                    android:visibility="@{viewModel.favoriteRecipeList.size() == 0 ? View.VISIBLE : View.INVISIBLE}"
+                    app:drawableTopCompat="@drawable/ic_heart"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/my_recipe_tv_best_guide" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/my_recipe_rv_favorite_recipe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="9dp"
+                    android:clipToPadding="false"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="16dp"
+                    android:visibility="@{viewModel.favoriteRecipeList.size() == 0 ? View.INVISIBLE : View.VISIBLE}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintStart_toStartOf="@id/my_recipe_tv_best_guide"
+                    app:layout_constraintTop_toBottomOf="@id/my_recipe_tv_best_guide"
+                    tools:listitem="@layout/item_myrecipe_favorite" />
+
+                <View
+                    android:id="@+id/my_recipe_divider2"
+                    android:layout_width="match_parent"
+                    android:layout_height="14dp"
+                    android:layout_marginTop="28dp"
+                    android:background="@color/layout_empty"
+                    app:layout_constraintTop_toBottomOf="@id/my_recipe_tv_favorite_empty" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/my_recipe_tv_my_post"
+                    style="@style/font_body1_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="16dp"
+                    android:onClick="@{() -> myRecipeFragment.changeRecipeType(mineFoodType.MYFOOD)}"
+                    android:text="@string/my_recipe_tv_my_post"
+                    android:textColor="@{viewModel.recipeType == mineFoodType.MYFOOD ? @color/black : @color/gray}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/my_recipe_divider2" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/my_recipe_tv_scrap"
+                    style="@style/font_body1_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:onClick="@{() -> myRecipeFragment.changeRecipeType(mineFoodType.BOOKMARK)}"
+                    android:text="@string/my_recipe_tv_scrap"
+                    android:textColor="@{viewModel.recipeType == mineFoodType.BOOKMARK ? @color/black : @color/gray}"
+                    app:layout_constraintBottom_toBottomOf="@id/my_recipe_tv_my_post"
+                    app:layout_constraintStart_toEndOf="@id/my_recipe_tv_my_post"
+                    app:layout_constraintTop_toTopOf="@id/my_recipe_tv_my_post" />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/my_recipe_ib_sort"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@color/white"
+                    android:onClick="@{() -> myRecipeFragment.showBottomSheet()}"
+                    android:src="@drawable/ic_sort_green"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/my_recipe_divider2" />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/my_recipe_ib_filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:background="@color/white"
+                    android:src="@drawable/ic_filter_gray"
+                    app:layout_constraintBottom_toBottomOf="@id/my_recipe_ib_sort"
+                    app:layout_constraintEnd_toStartOf="@id/my_recipe_ib_sort"
+                    app:layout_constraintTop_toTopOf="@id/my_recipe_ib_sort" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/my_recipe_rv_post"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="9dp"
+                    android:paddingHorizontal="8dp"
+                    android:visibility="@{viewModel.myRecipeList.size() == 0? View.GONE : View.VISIBLE}"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_constraintStart_toStartOf="@id/my_recipe_tv_my_post"
+                    app:layout_constraintTop_toBottomOf="@id/my_recipe_tv_my_post"
+                    app:spanCount="2"
+                    tools:listitem="@layout/item_research_recipe" />
+
+                <TextView
+                    android:id="@+id/my_recipe_tv_post_empty"
+                    style="@style/font_body1_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="45dp"
+                    android:background="@drawable/bg_message_empty"
+                    android:drawablePadding="12dp"
+                    android:gravity="center"
+                    android:paddingHorizontal="20dp"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="28dp"
+                    android:text="@{viewModel.recipeType == mineFoodType.MYFOOD ? @string/my_post_empty : @string/my_bookmark_empty}"
+                    android:textColor="@color/black"
+                    android:visibility="@{viewModel.myRecipeList.size() == 0? View.VISIBLE : View.GONE}"
+                    app:drawableTopCompat="@drawable/ic_logo_error"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/my_recipe_tv_my_post" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

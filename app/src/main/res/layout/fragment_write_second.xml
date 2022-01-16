@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="secondFragment"
+            type="com.doctor.yumyum.presentation.ui.write.WriteFragment2" />
+
+        <variable
+            name="writeViewModel"
+            type="com.doctor.yumyum.presentation.ui.write.viewmodel.WriteViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <EditText
+            android:layout_marginHorizontal="16dp"
+            android:id="@+id/write_second_et_name"
+            style="@style/font_h3_regular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="83dp"
+            android:text="@={writeViewModel.title}"
+            android:background="@null"
+            android:hint="@string/write_second_et_name"
+            android:maxLines="1"
+            android:textColorHint="@color/light_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/write_second_view1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/light_gray"
+            app:layout_constraintTop_toBottomOf="@id/write_second_et_name" />
+
+        <EditText
+            android:maxLines="1"
+            android:id="@+id/write_second_et_menu"
+            android:text="@={writeViewModel.mainIngredient}"
+            style="@style/font_h3_regular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="39dp"
+            android:background="@null"
+            android:hint="@string/write_second_et_menu"
+            android:textColorHint="@color/light_gray"
+            app:layout_constraintStart_toStartOf="@+id/write_second_et_name"
+            app:layout_constraintEnd_toEndOf="@id/write_second_et_name"
+            app:layout_constraintTop_toBottomOf="@+id/write_second_view1" />
+
+        <View
+            android:id="@+id/write_second_view2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/light_gray"
+            app:layout_constraintTop_toBottomOf="@id/write_second_et_menu" />
+
+
+        <TextView
+            android:id="@+id/write_second_tv_guide_add"
+            style="@style/font_body1_medium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/write_tv_add"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/write_second_et_menu"
+            app:layout_constraintTop_toBottomOf="@+id/write_second_view2" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:visibility="@{writeViewModel.addTagList.size() == 0 ? View.VISIBLE : View.INVISIBLE}"
+            android:id="@+id/write_second_btn_add"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ic_pluscircle"
+            app:layout_constraintStart_toStartOf="@id/write_second_tv_guide_add"
+            app:layout_constraintTop_toBottomOf="@id/write_second_tv_guide_add" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/write_second_rv_plus"
+            bind_tagList="@{writeViewModel.addTagList}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:paddingHorizontal="16dp"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            android:visibility="@{writeViewModel.addTagList.size() == 0 ? View.INVISIBLE : View.VISIBLE}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/write_second_tv_guide_add" />
+
+
+        <TextView
+            android:id="@+id/write_second_tv_guide_minus"
+            style="@style/font_body1_medium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/write_tv_minus"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/write_second_btn_add"
+            app:layout_constraintTop_toBottomOf="@+id/write_second_btn_add" />
+
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/write_second_ib_add_edit"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="4dp"
+            android:src="@drawable/ic_edit"
+            android:visibility="@{writeViewModel.addTagList.size() == 0 ? View.INVISIBLE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@id/write_second_tv_guide_add"
+            app:layout_constraintStart_toEndOf="@id/write_second_tv_guide_add"
+            app:layout_constraintTop_toTopOf="@id/write_second_tv_guide_add" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/write_second_ib_minus_edit"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="4dp"
+            android:src="@drawable/ic_edit"
+            android:visibility="@{writeViewModel.minusTagList.size() == 0 ? View.INVISIBLE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@id/write_second_tv_guide_minus"
+            app:layout_constraintStart_toEndOf="@id/write_second_tv_guide_minus"
+            app:layout_constraintTop_toTopOf="@id/write_second_tv_guide_minus" />
+
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:visibility="@{writeViewModel.minusTagList.size() == 0 ? View.VISIBLE : View.INVISIBLE}"
+            android:id="@+id/write_second_btn_minus"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ic_pluscircle"
+            app:layout_constraintStart_toStartOf="@id/write_second_tv_guide_minus"
+            app:layout_constraintTop_toBottomOf="@id/write_second_tv_guide_minus" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/write_second_rv_minus"
+            bind_tagList="@{writeViewModel.minusTagList}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:paddingHorizontal="16dp"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            android:visibility="@{writeViewModel.minusTagList.size() == 0 ? View.INVISIBLE : View.VISIBLE}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/write_second_tv_guide_minus" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:enabled="false"
+            android:id="@+id/write_second_btn_next"
+            style="@style/font_subtitle_medium"
+            android:layout_width="0dp"
+            android:layout_height="47dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_btn_sub"
+            android:stateListAnimator="@null"
+            android:text="@string/common_next"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
+

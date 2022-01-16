@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.doctor.yumyum.presentation.ui.write.viewmodel.WriteViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/write_fourth_tv_taste_guide"
+            style="@style/font_h3_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/common_taste"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            style="@style/font_body2_light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text="@string/common_multi_selectable"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/write_fourth_tv_taste_guide"
+            app:layout_constraintStart_toEndOf="@id/write_fourth_tv_taste_guide" />
+
+        <TextView
+            android:id="@+id/write_fourth_tv_sweet"
+            style="@style/font_body1_regular"
+            android:layout_width="@dimen/write_taste_width"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@{viewModel.tasteList.contains(viewModel.SWEET) == true ? @drawable/bg_filter_taste_selected : @drawable/bg_filter_taste_unselected}"
+            android:drawableStart="@{viewModel.tasteList.contains(viewModel.SWEET) == true ? @drawable/ic_write_sweet_selected : @drawable/ic_write_sweet_unselected }"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:onClick="@{(view) -> viewModel.updateTasteList(view)}"
+            android:paddingStart="8dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="7dp"
+            android:text="@string/taste_sweet"
+            android:textColor="@{viewModel.tasteList.contains(viewModel.SWEET) == true ? @color/black : @color/gray}"
+            app:layout_constraintEnd_toStartOf="@id/write_fourth_tv_salty"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/write_fourth_tv_taste_guide" />
+
+        <TextView
+            android:id="@+id/write_fourth_tv_salty"
+            style="@style/font_body1_regular"
+            android:layout_width="@dimen/write_taste_width"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="24dp"
+            android:background="@{viewModel.tasteList.contains(viewModel.SALTY) == true ? @drawable/bg_filter_taste_selected : @drawable/bg_filter_taste_unselected}"
+            android:drawableStart="@{viewModel.tasteList.contains(viewModel.SALTY) == true ? @drawable/ic_write_salty_selected : @drawable/ic_write_salty_unselected }"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:onClick="@{(view) -> viewModel.updateTasteList(view)}"
+            android:paddingStart="8dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="7dp"
+            android:text="@string/taste_salty"
+            android:textColor="@{viewModel.tasteList.contains(viewModel.SALTY) == true ? @color/black : @color/gray}"
+            app:layout_constraintEnd_toStartOf="@id/write_fourth_tv_spicy"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@id/write_fourth_tv_sweet"
+            app:layout_constraintTop_toBottomOf="@id/write_fourth_tv_taste_guide" />
+
+        <TextView
+            android:id="@+id/write_fourth_tv_spicy"
+            style="@style/font_body1_regular"
+            android:layout_width="@dimen/write_taste_width"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="24dp"
+            android:background="@{viewModel.tasteList.contains(viewModel.SPICY) == true ? @drawable/bg_filter_taste_selected : @drawable/bg_filter_taste_unselected}"
+            android:drawableStart="@{viewModel.tasteList.contains(viewModel.SPICY) == true ? @drawable/ic_write_spicy_selected : @drawable/ic_write_spicy_unselected }"
+            android:drawablePadding="4dp"
+            android:gravity="center_vertical"
+            android:onClick="@{(view) -> viewModel.updateTasteList(view)}"
+            android:paddingStart="8dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="7dp"
+            android:text="@string/taste_spicy"
+            android:textColor="@{viewModel.tasteList.contains(viewModel.SPICY) == true ? @color/black : @color/gray}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@id/write_fourth_tv_salty"
+            app:layout_constraintTop_toBottomOf="@id/write_fourth_tv_taste_guide" />
+
+        <TextView
+            android:id="@+id/write_fourth_tv_bitter"
+            style="@style/font_body1_regular"
+            android:layout_width="@dimen/write_taste_width"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@{viewModel.tasteList.contains(viewModel.BITTER) == true ? @drawable/bg_filter_taste_selected : @drawable/bg_filter_taste_unselected}"
+            android:drawableStart="@{viewModel.tasteList.contains(viewModel.BITTER) == true ? @drawable/ic_write_bitter_selected : @drawable/ic_write_bitter_unselected }"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:onClick="@{(view) -> viewModel.updateTasteList(view)}"
+            android:paddingStart="8dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="7dp"
+            android:text="@string/taste_bitter"
+            android:textColor="@{viewModel.tasteList.contains(viewModel.BITTER) == true ? @color/black : @color/gray}"
+            app:layout_constraintEnd_toStartOf="@id/write_fourth_tv_sour"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/write_fourth_tv_salty" />
+
+        <TextView
+            android:id="@+id/write_fourth_tv_sour"
+            style="@style/font_body1_regular"
+            android:layout_width="@dimen/write_taste_width"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:background="@{viewModel.tasteList.contains(viewModel.SOUR) == true ? @drawable/bg_filter_taste_selected : @drawable/bg_filter_taste_unselected}"
+            android:drawableStart="@{viewModel.tasteList.contains(viewModel.SOUR) == true ? @drawable/ic_write_sour_selected : @drawable/ic_write_sour_unselected }"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:onClick="@{(view) -> viewModel.updateTasteList(view)}"
+            android:paddingStart="8dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="7dp"
+            android:text="@string/taste_sour"
+            android:textColor="@{viewModel.tasteList.contains(viewModel.SOUR) == true ? @color/black : @color/gray}"
+            app:layout_constraintBottom_toBottomOf="@id/write_fourth_tv_bitter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@id/write_fourth_tv_bitter"
+            app:layout_constraintTop_toTopOf="@id/write_fourth_tv_bitter" />
+
+
+        <TextView
+            android:id="@+id/write_fourth_tv_detail_taste_guide"
+            style="@style/font_h3_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/common_taste_detail"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/write_fourth_tv_bitter" />
+
+        <TextView
+            style="@style/font_body2_light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text="@string/common_multi_selectable"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/write_fourth_tv_detail_taste_guide"
+            app:layout_constraintStart_toEndOf="@id/write_fourth_tv_detail_taste_guide" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/write_fourth_rv_detail_taste"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="28dp"
+            android:layout_marginTop="25dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/write_fourth_tv_detail_taste_guide"
+            app:spanCount="3"
+            tools:listitem="item_write_detail_taste" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/write_fourth_btn_next"
+            style="@style/font_subtitle_medium"
+            android:enabled="false"
+            android:layout_width="0dp"
+            android:layout_height="47dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_btn_sub"
+            android:stateListAnimator="@null"
+            android:text="@string/common_next"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
+

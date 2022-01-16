@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.doctor.yumyum.presentation.ui.myrecipe.viewmodel.MyRecipeViewModel" />
+
+        <variable
+            name="sortType"
+            type="com.doctor.yumyum.common.utils.SortType" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <TextView
+            android:id="@+id/dialog_my_tv_sort_guide"
+            style="@style/font_body1_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/common_sort"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/dialog_my_sort_tv_recent"
+            style="@style/font_subtitle_regular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="22dp"
+            android:background="@{viewModel.tmpSortType == sortType.RECENT ? @drawable/bg_tv_select : null}"
+            android:onClick="@{() -> viewModel.setTmpSortType(sortType.RECENT)}"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="11dp"
+            android:paddingBottom="12dp"
+            android:text="@string/sort_recent"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dialog_my_tv_sort_guide" />
+
+
+        <TextView
+            android:id="@+id/dialog_my_sort_tv_expensive"
+            style="@style/font_subtitle_regular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:background="@{viewModel.tmpSortType == sortType.EXPENSIVE ? @drawable/bg_tv_select : null}"
+            android:onClick="@{() -> viewModel.setTmpSortType(sortType.EXPENSIVE)}"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="11dp"
+            android:paddingBottom="12dp"
+            android:text="@string/sort_expensive"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="@id/dialog_my_sort_tv_recent"
+            app:layout_constraintStart_toStartOf="@id/dialog_my_sort_tv_recent"
+            app:layout_constraintTop_toBottomOf="@id/dialog_my_sort_tv_recent" />
+
+
+        <TextView
+            android:id="@+id/dialog_my_sort_tv_cheap"
+            style="@style/font_subtitle_regular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:background="@{viewModel.tmpSortType == sortType.CHEAP ? @drawable/bg_tv_select : null}"
+            android:onClick="@{() -> viewModel.setTmpSortType(sortType.CHEAP)}"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="11dp"
+            android:paddingBottom="12dp"
+            android:text="@string/sort_cheap"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="@id/dialog_my_sort_tv_expensive"
+            app:layout_constraintStart_toStartOf="@+id/dialog_my_sort_tv_expensive"
+            app:layout_constraintTop_toBottomOf="@+id/dialog_my_sort_tv_expensive" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/dialog_my_sort_btn_select"
+            style="@style/font_subtitle_medium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_btn_main"
+            android:onClick="@{() -> viewModel.setSortType()}"
+            android:stateListAnimator="@null"
+            android:text="@string/dialog_btn_select"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dialog_my_sort_tv_cheap" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

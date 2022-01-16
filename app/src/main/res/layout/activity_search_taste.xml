@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.doctor.yumyum.presentation.ui.search.taste.SearchTasteViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.ui.search.taste.SearchTasteActivity">
+
+        <include
+            android:id="@+id/search_taste_appbar"
+            layout="@layout/layout_appbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:main="@{@string/research_list_search_with_taste}" />
+
+        <View
+            android:id="@+id/search_taste_divider"
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:background="@color/layout_empty"
+            app:layout_constraintTop_toBottomOf="@id/search_taste_appbar" />
+
+        <TextView
+            android:id="@+id/search_taste_tv_taste"
+            style="@style/font_subtitle_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="36dp"
+            android:text="@string/common_taste"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_taste_divider" />
+
+        <TextView
+            android:id="@+id/search_taste_tv_taste_guide"
+            style="@style/font_body2_light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@string/common_multi_selectable"
+            app:layout_constraintBottom_toBottomOf="@id/search_taste_tv_taste"
+            app:layout_constraintStart_toEndOf="@id/search_taste_tv_taste" />
+
+        <GridLayout
+            android:id="@+id/search_taste_gl_taste"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:columnCount="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_taste_tv_taste">
+
+            <TextView
+                android:id="@+id/search_taste_tv_sweet"
+                style="@style/font_body1_regular"
+                android:layout_width="@dimen/taste_select_width"
+                android:layout_height="wrap_content"
+                android:background="@{viewModel.tasteList.contains(viewModel.TASTE_SWEET) ? @drawable/bg_filter_taste_selected : @drawable/bg_filter_taste_unselected}"
+                android:gravity="center"
+                android:onClick="@{()->viewModel.setTasteState(viewModel.TASTE_SWEET)}"
+                android:paddingTop="10dp"
+                android:paddingBottom="11dp"
+                android:text="@string/taste_sweet"
+                android:textColor="@{viewModel.tasteList.contains(viewModel.TASTE_SWEET) ? @color/black : @color/gray}"
+                tools:background="@drawable/bg_filter_taste_unselected"
+                tools:textColor="@color/gray" />
+
+            <TextView
+                android:id="@+id/search_taste_tv_salty"
+                style="@style/font_body1_regular"
+                android:layout_width="@dimen/taste_select_width"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:background="@{viewModel.tasteList.contains(viewModel.TASTE_SALTY) ? @drawable/bg_filter_taste_selected : @drawable/bg_filter_taste_unselected}"
+                android:gravity="center"
+                android:onClick="@{()->viewModel.setTasteState(viewModel.TASTE_SALTY)}"
+                android:paddingTop="10dp"
+                android:paddingBottom="11dp"
+                android:text="@string/taste_salty"
+                android:textColor="@{viewModel.tasteList.contains(viewModel.TASTE_SALTY) ? @color/black : @color/gray}"
+                tools:background="@drawable/bg_filter_taste_unselected"
+                tools:textColor="@color/gray" />
+
+            <TextView
+                android:id="@+id/search_taste_tv_sour"
+                style="@style/font_body1_regular"
+                android:layout_width="@dimen/taste_select_width"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@{viewModel.tasteList.contains(viewModel.TASTE_SOUR) ? @drawable/bg_filter_taste_selected : @drawable/bg_filter_taste_unselected}"
+                android:gravity="center"
+                android:onClick="@{()->viewModel.setTasteState(viewModel.TASTE_SOUR)}"
+                android:paddingTop="10dp"
+                android:paddingBottom="11dp"
+                android:text="@string/taste_sour"
+                android:textColor="@{viewModel.tasteList.contains(viewModel.TASTE_SOUR) ? @color/black : @color/gray}"
+                tools:background="@drawable/bg_filter_taste_unselected"
+                tools:textColor="@color/gray" />
+
+            <TextView
+                android:id="@+id/search_taste_tv_spicy"
+                style="@style/font_body1_regular"
+                android:layout_width="@dimen/taste_select_width"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="12dp"
+                android:background="@{viewModel.tasteList.contains(viewModel.TASTE_SPICY) ? @drawable/bg_filter_taste_selected : @drawable/bg_filter_taste_unselected}"
+                android:gravity="center"
+                android:onClick="@{()->viewModel.setTasteState(viewModel.TASTE_SPICY)}"
+                android:paddingTop="10dp"
+                android:paddingBottom="11dp"
+                android:text="@string/taste_spicy"
+                android:textColor="@{viewModel.tasteList.contains(viewModel.TASTE_SPICY) ? @color/black : @color/gray}"
+                tools:background="@drawable/bg_filter_taste_unselected"
+                tools:textColor="@color/gray" />
+
+            <TextView
+                android:id="@+id/search_taste_tv_bitter"
+                style="@style/font_body1_regular"
+                android:layout_width="@dimen/taste_select_width"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@{viewModel.tasteList.contains(viewModel.TASTE_BITTER) ? @drawable/bg_filter_taste_selected : @drawable/bg_filter_taste_unselected}"
+                android:gravity="center"
+                android:onClick="@{()->viewModel.setTasteState(viewModel.TASTE_BITTER)}"
+                android:paddingTop="10dp"
+                android:paddingBottom="11dp"
+                android:text="@string/taste_bitter"
+                android:textColor="@{viewModel.tasteList.contains(viewModel.TASTE_BITTER) ? @color/black : @color/gray}"
+                tools:background="@drawable/bg_filter_taste_unselected"
+                tools:textColor="@color/gray" />
+
+        </GridLayout>
+
+        <TextView
+            android:id="@+id/search_taste_tv_detail"
+            style="@style/font_subtitle_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="27dp"
+            android:text="@string/common_taste_detail"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@id/search_taste_tv_taste"
+            app:layout_constraintTop_toBottomOf="@id/search_taste_gl_taste" />
+
+        <TextView
+            android:id="@+id/search_taste_tv_detail_description"
+            style="@style/font_body2_light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@string/common_multi_selectable"
+            app:layout_constraintBottom_toBottomOf="@id/search_taste_tv_detail"
+            app:layout_constraintStart_toEndOf="@id/search_taste_tv_detail" />
+
+        <TextView
+            android:id="@+id/search_taste_tv_detail_sweet"
+            style="@style/font_body1_regular"
+            android:layout_width="@dimen/taste_detail_select_width"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="29dp"
+            android:background="@{viewModel.tasteList.contains(viewModel.TASTE_DETAIL_SWEET) ? @drawable/bg_filter_taste_detail_selected : @drawable/bg_filter_taste_detail_unselected}"
+            android:gravity="center"
+            android:onClick="@{()->viewModel.setTasteState(viewModel.TASTE_DETAIL_SWEET)}"
+            android:paddingTop="4dp"
+            android:paddingBottom="5dp"
+            android:text="@string/taste_detail_sweet"
+            android:textColor="@{viewModel.tasteList.contains(viewModel.TASTE_DETAIL_SWEET) ? @color/black : @color/gray}"
+            app:layout_constraintEnd_toStartOf="@id/search_taste_tv_detail_light"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_taste_tv_detail"
+            tools:background="@drawable/bg_filter_taste_detail_unselected"
+            tools:textColor="@color/gray" />
+
+        <TextView
+            android:id="@+id/search_taste_tv_detail_light"
+            style="@style/font_body1_regular"
+            android:layout_width="@dimen/taste_detail_select_width"
+            android:layout_height="wrap_content"
+            android:background="@{viewModel.tasteList.contains(viewModel.TASTE_DETAIL_LIGHT) ? @drawable/bg_filter_taste_detail_selected : @drawable/bg_filter_taste_detail_unselected}"
+            android:gravity="center"
+            android:onClick="@{()->viewModel.setTasteState(viewModel.TASTE_DETAIL_LIGHT)}"
+            android:paddingTop="4dp"
+            android:paddingBottom="5dp"
+            android:text="@string/taste_detail_light"
+            android:textColor="@{viewModel.tasteList.contains(viewModel.TASTE_DETAIL_LIGHT) ? @color/black : @color/gray}"
+            app:layout_constraintEnd_toStartOf="@id/search_taste_tv_detail_sour"
+            app:layout_constraintStart_toEndOf="@id/search_taste_tv_detail_sweet"
+            app:layout_constraintTop_toTopOf="@id/search_taste_tv_detail_sweet"
+            tools:background="@drawable/bg_filter_taste_detail_unselected"
+            tools:textColor="@color/gray" />
+
+        <TextView
+            android:id="@+id/search_taste_tv_detail_sour"
+            style="@style/font_body1_regular"
+            android:layout_width="@dimen/taste_detail_select_width"
+            android:layout_height="wrap_content"
+            android:background="@{viewModel.tasteList.contains(viewModel.TASTE_DETAIL_SOUR) ? @drawable/bg_filter_taste_detail_selected : @drawable/bg_filter_taste_detail_unselected}"
+            android:gravity="center"
+            android:onClick="@{()->viewModel.setTasteState(viewModel.TASTE_DETAIL_SOUR)}"
+            android:paddingTop="4dp"
+            android:paddingBottom="5dp"
+            android:text="@string/taste_detail_sour"
+            android:textColor="@{viewModel.tasteList.contains(viewModel.TASTE_DETAIL_SOUR) ? @color/black : @color/gray}"
+            app:layout_constraintEnd_toStartOf="@id/search_taste_tv_detail_cool"
+            app:layout_constraintStart_toEndOf="@id/search_taste_tv_detail_light"
+            app:layout_constraintTop_toTopOf="@id/search_taste_tv_detail_light"
+            tools:background="@drawable/bg_filter_taste_detail_unselected"
+            tools:textColor="@color/gray" />
+
+        <TextView
+            android:id="@+id/search_taste_tv_detail_cool"
+            style="@style/font_body1_regular"
+            android:layout_width="@dimen/taste_detail_select_width"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="21dp"
+            android:background="@{viewModel.tasteList.contains(viewModel.TASTE_DETAIL_COOL) ? @drawable/bg_filter_taste_detail_selected : @drawable/bg_filter_taste_detail_unselected}"
+            android:gravity="center"
+            android:onClick="@{()->viewModel.setTasteState(viewModel.TASTE_DETAIL_COOL)}"
+            android:paddingTop="4dp"
+            android:paddingBottom="5dp"
+            android:text="@string/taste_detail_cool"
+            android:textColor="@{viewModel.tasteList.contains(viewModel.TASTE_DETAIL_COOL) ? @color/black : @color/gray}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/search_taste_tv_detail_sour"
+            app:layout_constraintTop_toTopOf="@id/search_taste_tv_detail_sour"
+            tools:background="@drawable/bg_filter_taste_detail_unselected"
+            tools:textColor="@color/gray" />
+
+        <TextView
+            android:id="@+id/search_taste_tv_detail_salty"
+            style="@style/font_body1_regular"
+            android:layout_width="@dimen/taste_detail_select_width"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@{viewModel.tasteList.contains(viewModel.TASTE_DETAIL_SALTY) ? @drawable/bg_filter_taste_detail_selected : @drawable/bg_filter_taste_detail_unselected}"
+            android:gravity="center"
+            android:onClick="@{()->viewModel.setTasteState(viewModel.TASTE_DETAIL_SALTY)}"
+            android:paddingTop="4dp"
+            android:paddingBottom="5dp"
+            android:text="@string/taste_detail_salty"
+            android:textColor="@{viewModel.tasteList.contains(viewModel.TASTE_DETAIL_SALTY) ? @color/black : @color/gray}"
+            app:layout_constraintEnd_toStartOf="@id/search_taste_tv_detail_greasy"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="@id/search_taste_tv_detail_sweet"
+            app:layout_constraintTop_toBottomOf="@id/search_taste_tv_detail_sweet"
+            tools:background="@drawable/bg_filter_taste_detail_unselected"
+            tools:textColor="@color/gray" />
+
+        <TextView
+            android:id="@+id/search_taste_tv_detail_greasy"
+            style="@style/font_body1_regular"
+            android:layout_width="@dimen/taste_detail_select_width"
+            android:layout_height="wrap_content"
+            android:background="@{viewModel.tasteList.contains(viewModel.TASTE_DETAIL_GREASY) ? @drawable/bg_filter_taste_detail_selected : @drawable/bg_filter_taste_detail_unselected}"
+            android:gravity="center"
+            android:onClick="@{()->viewModel.setTasteState(viewModel.TASTE_DETAIL_GREASY)}"
+            android:paddingTop="4dp"
+            android:paddingBottom="5dp"
+            android:text="@string/taste_detail_greasy"
+            android:textColor="@{viewModel.tasteList.contains(viewModel.TASTE_DETAIL_GREASY) ? @color/black : @color/gray}"
+            app:layout_constraintEnd_toStartOf="@id/search_taste_tv_detail_attractive"
+            app:layout_constraintStart_toEndOf="@id/search_taste_tv_detail_salty"
+            app:layout_constraintTop_toTopOf="@id/search_taste_tv_detail_salty"
+            tools:background="@drawable/bg_filter_taste_detail_unselected"
+            tools:textColor="@color/gray" />
+
+        <TextView
+            android:id="@+id/search_taste_tv_detail_attractive"
+            style="@style/font_body1_regular"
+            android:layout_width="@dimen/taste_detail_select_width"
+            android:layout_height="wrap_content"
+            android:background="@{viewModel.tasteList.contains(viewModel.TASTE_DETAIL_ATTRACTIVE) ? @drawable/bg_filter_taste_detail_selected : @drawable/bg_filter_taste_detail_unselected}"
+            android:gravity="center"
+            android:onClick="@{()->viewModel.setTasteState(viewModel.TASTE_DETAIL_ATTRACTIVE)}"
+            android:paddingTop="4dp"
+            android:paddingBottom="5dp"
+            android:text="@string/taste_detail_attractive"
+            android:textColor="@{viewModel.tasteList.contains(viewModel.TASTE_DETAIL_ATTRACTIVE) ? @color/black : @color/gray}"
+            app:layout_constraintEnd_toStartOf="@id/search_taste_tv_detail_spicy"
+            app:layout_constraintStart_toEndOf="@id/search_taste_tv_detail_greasy"
+            app:layout_constraintTop_toTopOf="@id/search_taste_tv_detail_greasy"
+            tools:background="@drawable/bg_filter_taste_detail_unselected"
+            tools:textColor="@color/gray" />
+
+        <TextView
+            android:id="@+id/search_taste_tv_detail_spicy"
+            style="@style/font_body1_regular"
+            android:layout_width="@dimen/taste_detail_select_width"
+            android:layout_height="wrap_content"
+            android:background="@{viewModel.tasteList.contains(viewModel.TASTE_DETAIL_SPICY) ? @drawable/bg_filter_taste_detail_selected : @drawable/bg_filter_taste_detail_unselected}"
+            android:gravity="center"
+            android:onClick="@{()->viewModel.setTasteState(viewModel.TASTE_DETAIL_SPICY)}"
+            android:paddingTop="4dp"
+            android:paddingBottom="5dp"
+            android:text="@string/taste_detail_spicy"
+            android:textColor="@{viewModel.tasteList.contains(viewModel.TASTE_DETAIL_SPICY) ? @color/black : @color/gray}"
+            app:layout_constraintEnd_toEndOf="@id/search_taste_tv_detail_cool"
+            app:layout_constraintStart_toEndOf="@id/search_taste_tv_detail_attractive"
+            app:layout_constraintTop_toTopOf="@id/search_taste_tv_detail_attractive"
+            tools:background="@drawable/bg_filter_taste_detail_unselected"
+            tools:textColor="@color/gray" />
+
+        <TextView
+            android:id="@+id/search_taste_tv_detail_hot"
+            style="@style/font_body1_regular"
+            android:layout_width="@dimen/taste_detail_select_width"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@{viewModel.tasteList.contains(viewModel.TASTE_DETAIL_HOT) ? @drawable/bg_filter_taste_detail_selected : @drawable/bg_filter_taste_detail_unselected}"
+            android:gravity="center"
+            android:onClick="@{()->viewModel.setTasteState(viewModel.TASTE_DETAIL_HOT)}"
+            android:paddingTop="4dp"
+            android:paddingBottom="5dp"
+            android:text="@string/taste_detail_hot"
+            android:textColor="@{viewModel.tasteList.contains(viewModel.TASTE_DETAIL_HOT) ? @color/black : @color/gray}"
+            app:layout_constraintEnd_toStartOf="@id/search_taste_tv_detail_neat"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="@id/search_taste_tv_detail_salty"
+            app:layout_constraintTop_toBottomOf="@id/search_taste_tv_detail_salty"
+            tools:background="@drawable/bg_filter_taste_detail_unselected"
+            tools:textColor="@color/gray" />
+
+        <TextView
+            android:id="@+id/search_taste_tv_detail_neat"
+            style="@style/font_body1_regular"
+            android:layout_width="@dimen/taste_detail_select_width"
+            android:layout_height="wrap_content"
+            android:background="@{viewModel.tasteList.contains(viewModel.TASTE_DETAIL_NEAT) ? @drawable/bg_filter_taste_detail_selected : @drawable/bg_filter_taste_detail_unselected}"
+            android:gravity="center"
+            android:onClick="@{()->viewModel.setTasteState(viewModel.TASTE_DETAIL_NEAT)}"
+            android:paddingTop="4dp"
+            android:paddingBottom="5dp"
+            android:text="@string/taste_detail_neat"
+            android:textColor="@{viewModel.tasteList.contains(viewModel.TASTE_DETAIL_NEAT) ? @color/black : @color/gray}"
+            app:layout_constraintEnd_toStartOf="@id/search_taste_tv_detail_savory"
+            app:layout_constraintStart_toEndOf="@id/search_taste_tv_detail_hot"
+            app:layout_constraintTop_toTopOf="@id/search_taste_tv_detail_hot"
+            tools:background="@drawable/bg_filter_taste_detail_unselected"
+            tools:textColor="@color/gray" />
+
+        <TextView
+            android:id="@+id/search_taste_tv_detail_savory"
+            style="@style/font_body1_regular"
+            android:layout_width="@dimen/taste_detail_select_width"
+            android:layout_height="wrap_content"
+            android:background="@{viewModel.tasteList.contains(viewModel.TASTE_DETAIL_SAVORY) ? @drawable/bg_filter_taste_detail_selected : @drawable/bg_filter_taste_detail_unselected}"
+            android:gravity="center"
+            android:onClick="@{()->viewModel.setTasteState(viewModel.TASTE_DETAIL_SAVORY)}"
+            android:paddingTop="4dp"
+            android:paddingBottom="5dp"
+            android:text="@string/taste_detail_savory"
+            android:textColor="@{viewModel.tasteList.contains(viewModel.TASTE_DETAIL_SAVORY) ? @color/black : @color/gray}"
+            app:layout_constraintEnd_toStartOf="@id/search_taste_tv_detail_refresh"
+            app:layout_constraintStart_toEndOf="@id/search_taste_tv_detail_neat"
+            app:layout_constraintTop_toTopOf="@id/search_taste_tv_detail_neat"
+            tools:background="@drawable/bg_filter_taste_detail_unselected"
+            tools:textColor="@color/gray" />
+
+        <TextView
+            android:id="@+id/search_taste_tv_detail_refresh"
+            style="@style/font_body1_regular"
+            android:layout_width="@dimen/taste_detail_select_width"
+            android:layout_height="wrap_content"
+            android:background="@{viewModel.tasteList.contains(viewModel.TASTE_DETAIL_REFRESH) ? @drawable/bg_filter_taste_detail_selected : @drawable/bg_filter_taste_detail_unselected}"
+            android:gravity="center"
+            android:onClick="@{()->viewModel.setTasteState(viewModel.TASTE_DETAIL_REFRESH)}"
+            android:paddingTop="4dp"
+            android:paddingBottom="5dp"
+            android:text="@string/taste_detail_refresh"
+            android:textColor="@{viewModel.tasteList.contains(viewModel.TASTE_DETAIL_REFRESH) ? @color/black : @color/gray}"
+            app:layout_constraintEnd_toEndOf="@id/search_taste_tv_detail_spicy"
+            app:layout_constraintStart_toEndOf="@id/search_taste_tv_detail_savory"
+            app:layout_constraintTop_toTopOf="@id/search_taste_tv_detail_savory"
+            tools:background="@drawable/bg_filter_taste_detail_unselected"
+            tools:textColor="@color/gray" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/search_taste_btn_search"
+            style="@style/font_subtitle_medium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="36dp"
+            android:background="@drawable/bg_btn_main"
+            android:stateListAnimator="@null"
+            android:text="@string/common_search"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_taste_tv_detail_hot" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

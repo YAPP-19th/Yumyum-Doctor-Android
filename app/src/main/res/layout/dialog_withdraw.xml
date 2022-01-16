@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_dialog">
+
+        <TextView
+            android:id="@+id/dialog_withdraw_title"
+            style="@style/font_body1_medium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="23dp"
+            android:gravity="center"
+            android:text="@string/withdraw_dialog_title"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/dialog_withdraw_subtitle"
+            style="@style/font_body2_regular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@string/withdraw_dialog_subtitle"
+            android:textColor="@color/dark_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dialog_withdraw_title" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/dialog_withdraw_no"
+            style="@style/font_subtitle_medium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_dialog_btn"
+            android:backgroundTint="@color/light_gray"
+            android:stateListAnimator="@null"
+            android:text="@string/common_no"
+            android:textColor="@color/dark_gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/dialog_withdraw_yes"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dialog_withdraw_subtitle" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/dialog_withdraw_yes"
+            style="@style/font_subtitle_medium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_dialog_btn"
+            android:backgroundTint="@color/unselect_orange"
+            android:stateListAnimator="@null"
+            android:text="@string/common_yes"
+            android:textColor="@color/main_orange"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/dialog_withdraw_no"
+            app:layout_constraintTop_toBottomOf="@id/dialog_withdraw_subtitle" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

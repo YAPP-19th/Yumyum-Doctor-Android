@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_dialog">
+
+        <TextView
+            android:id="@+id/error_tv"
+            style="@style/font_body1_medium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="34dp"
+            android:layout_marginBottom="80dp"
+            android:gravity="center"
+            android:text="@string/dialog_msg_error"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.32" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/error_btn"
+            style="@style/font_subtitle_medium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="21dp"
+            android:layout_marginEnd="80dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_dialog_btn"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:backgroundTint="@color/unselect_orange"
+            android:stateListAnimator="@null"
+            android:text="@string/dialog_btn_error"
+            android:textColor="@color/main_orange"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/error_tv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

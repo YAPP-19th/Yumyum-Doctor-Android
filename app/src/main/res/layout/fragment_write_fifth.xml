@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.doctor.yumyum.presentation.ui.write.viewmodel.WriteViewModel" />
+
+        <variable
+            name="fragment"
+            type="com.doctor.yumyum.presentation.ui.write.WriteFragment5" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/write_fifth_tv_photo_guide"
+            style="@style/font_subtitle_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/write_fifth_tv_photo"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            style="@style/font_body1_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text="@string/write_fifth_photo_guide"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/write_fifth_tv_photo_guide"
+            app:layout_constraintStart_toEndOf="@id/write_fifth_tv_photo_guide"
+            app:layout_constraintTop_toTopOf="@id/write_fifth_tv_photo_guide" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/write_fifth_ib_image1"
+            android:layout_width="77dp"
+            android:layout_height="72dp"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/white"
+            android:onClick="@{() -> fragment.openGalleryListener()}"
+            android:src="@drawable/ic_write_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/write_fifth_tv_photo_guide" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            bind_writeImg="@{viewModel.reviewImageList[0]}"
+            android:layout_width="77dp"
+            android:layout_height="72dp"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/white"
+            android:onClick="@{() -> fragment.openGalleryListener()}"
+            android:scaleType="centerCrop"
+            android:visibility="@{viewModel.reviewImageList.size() >= 1 ? View.VISIBLE : View.GONE}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/write_fifth_tv_photo_guide" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:onClick="@{() -> viewModel.deleteReviewImage(0)}"
+            android:id="@+id/write_fifth_ib_remove1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="3dp"
+            android:background="@null"
+            android:src="@drawable/ic_img_remove"
+            android:visibility="@{viewModel.reviewImageList.size() >= 1 ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="@id/write_fifth_ib_image1"
+            app:layout_constraintTop_toTopOf="@id/write_fifth_ib_image1" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/write_fifth_ib_image2"
+            android:layout_width="77dp"
+            android:layout_height="72dp"
+            android:layout_marginStart="6dp"
+            android:background="@color/white"
+            android:onClick="@{() -> fragment.openGalleryListener()}"
+            android:src="@drawable/ic_plus_image"
+            android:visibility="@{viewModel.reviewImageList.size() >= 1 ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@id/write_fifth_ib_image1"
+            app:layout_constraintStart_toEndOf="@id/write_fifth_ib_image1"
+            app:layout_constraintTop_toTopOf="@id/write_fifth_ib_image1" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            bind_writeImg="@{viewModel.reviewImageList[1]}"
+            android:layout_width="77dp"
+            android:layout_height="72dp"
+            android:layout_marginStart="6dp"
+            android:background="@color/white"
+            android:onClick="@{() -> fragment.openGalleryListener()}"
+            android:scaleType="centerCrop"
+            android:visibility="@{viewModel.reviewImageList.size() >= 2 ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@id/write_fifth_ib_image1"
+            app:layout_constraintStart_toEndOf="@id/write_fifth_ib_image1"
+            app:layout_constraintTop_toTopOf="@id/write_fifth_ib_image1" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:onClick="@{() -> viewModel.deleteReviewImage(1)}"
+            android:id="@+id/write_fifth_ib_remove2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="3dp"
+            android:background="@null"
+            android:src="@drawable/ic_img_remove"
+            android:visibility="@{viewModel.reviewImageList.size() >= 2 ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="@id/write_fifth_ib_image2"
+            app:layout_constraintTop_toTopOf="@id/write_fifth_ib_image2" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/write_fifth_ib_image3"
+            android:layout_width="77dp"
+            android:layout_height="72dp"
+            android:layout_marginStart="6dp"
+            android:background="@color/white"
+            android:onClick="@{() -> fragment.openGalleryListener()}"
+            android:src="@drawable/ic_plus_image"
+            android:visibility="@{viewModel.reviewImageList.size() >= 2 ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@id/write_fifth_ib_image2"
+            app:layout_constraintStart_toEndOf="@id/write_fifth_ib_image2"
+            app:layout_constraintTop_toTopOf="@id/write_fifth_ib_image2" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            bind_writeImg="@{viewModel.reviewImageList[2]}"
+            android:layout_width="77dp"
+            android:layout_height="72dp"
+            android:layout_marginStart="6dp"
+            android:background="@color/white"
+            android:scaleType="centerCrop"
+            android:visibility="@{viewModel.reviewImageList.size() >= 3 ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@id/write_fifth_ib_image2"
+            app:layout_constraintStart_toEndOf="@id/write_fifth_ib_image2"
+            app:layout_constraintTop_toTopOf="@id/write_fifth_ib_image2" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:onClick="@{() -> viewModel.deleteReviewImage(2)}"
+            android:id="@+id/write_fifth_ib_remove3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="3dp"
+            android:background="@null"
+            android:src="@drawable/ic_img_remove"
+            android:visibility="@{viewModel.reviewImageList.size() >= 3 ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="@id/write_fifth_ib_image3"
+            app:layout_constraintTop_toTopOf="@id/write_fifth_ib_image3" />
+
+        <TextView
+            android:id="@+id/write_fifth_tv_review_guide"
+            style="@style/font_subtitle_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/write_fifth_tv_review"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@id/write_fifth_tv_photo_guide"
+            app:layout_constraintTop_toBottomOf="@id/write_fifth_ib_image1" />
+
+        <EditText
+            android:id="@+id/write_fifth_et_review"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/write_fifth_review_height"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_write_et_review"
+            android:gravity="top"
+            android:inputType="textMultiLine"
+            android:maxLength="110"
+            android:padding="10dp"
+            android:scrollHorizontally="false"
+            android:text="@={viewModel.reviewText}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/write_fifth_tv_review_guide" />
+
+        <TextView
+            android:id="@+id/write_fifth_tv_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/write_tv_text_count_init"
+            app:layout_constraintBottom_toBottomOf="@id/write_fifth_et_review"
+            app:layout_constraintEnd_toEndOf="@id/write_fifth_et_review" />
+
+        <TextView
+            android:id="@+id/write_fifth_tv_private_guide"
+            style="@style/font_subtitle_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/write_fifth_tv_private"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@id/write_fifth_tv_review_guide"
+            app:layout_constraintTop_toBottomOf="@id/write_fifth_et_review" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/write_fifth_sw_recipe_private"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="@{viewModel.privateMode}"
+            android:includeFontPadding="false"
+            android:onCheckedChanged="@{(_, isChecked)-> viewModel.setPrivateMode(isChecked)}"
+            android:thumb="@drawable/recipe_private_sw_thumb"
+            app:layout_constraintStart_toStartOf="@id/write_fifth_tv_private_guide"
+            app:layout_constraintTop_toBottomOf="@id/write_fifth_tv_private_guide"
+            app:showText="false"
+            app:track="@drawable/recipe_private_sw_track" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/write_btn_finish"
+            style="@style/font_subtitle_medium"
+            android:layout_width="0dp"
+            android:layout_height="47dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_btn_sub"
+            android:enabled="false"
+            android:stateListAnimator="@null"
+            android:text="@string/common_complete"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
+
