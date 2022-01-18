@@ -32,4 +32,8 @@ class LoginRepositoryImpl : LoginRepository {
 
     override suspend fun signIn(signInModel: SignInModel): Response<ResponseBody> =
         authDataSource.signIn(signInModel)
+
+    override suspend fun refreshToken(): Response<ResponseBody> =
+        authDataSource.refreshToken()
+
 }

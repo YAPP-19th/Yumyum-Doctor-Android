@@ -18,5 +18,10 @@ interface LoginRepository {
 
     // 회원가입
     suspend fun signUp(signUpModel: SignUpModel): Response<ResponseBody>
+
+    // 로그인
     suspend fun signIn(signInModel: SignInModel): Response<ResponseBody>
+
+    // 리프레스 토큰
+    suspend fun refreshToken(): Response<ResponseBody>
 }
