@@ -20,7 +20,9 @@ class TasteActivity : BaseActivity<ActivityTasteBinding>(R.layout.activity_taste
             ViewModelProvider.NewInstanceFactory()
         )[TasteViewModel::class.java]
     }
-    private var fromMyPage: Boolean = false
+    private val fromMyPage: Boolean by lazy {
+        intent.extras?.getBoolean(getString(R.string.taste_mode)) ?: false
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +41,7 @@ class TasteActivity : BaseActivity<ActivityTasteBinding>(R.layout.activity_taste
     }
 
     fun init() {
-        fromMyPage = intent.extras?.getBoolean(getString(R.string.taste_mode)) ?: false
+
         if (fromMyPage) {
             binding.tasteTvTitle.visibility = View.GONE
             binding.tasteTvSubtitle.setTextAppearance(R.style.font_h3_bold)
