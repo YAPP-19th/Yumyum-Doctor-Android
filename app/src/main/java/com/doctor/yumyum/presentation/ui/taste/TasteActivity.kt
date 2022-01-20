@@ -27,45 +27,14 @@ class TasteActivity : BaseActivity<ActivityTasteBinding>(R.layout.activity_taste
 
         init()
 
+        tasteViewModel.isSelected.observe(this) { isSelected ->
+            if (isSelected) setButtonAvailable()
+            else setButtonUnavailable()
+        }
+
         tasteViewModel.mode.observe(this) { mode ->
-            if (mode == 0) {
-                if (tasteViewModel.tasteClassState.value?.size == 0) setButtonUnavailable()
-                else setButtonAvailable()
-                setStateClass()
-            } else {
-                if (tasteViewModel.tasteDetailState.value?.size == 0) setButtonUnavailable()
-                else setButtonAvailable()
-                setStateDetail()
-            }
-        }
-
-        tasteViewModel.tasteClassState.observe(this) { tasteClassState ->
-            if (tasteViewModel.mode.value == 0) {
-                if (tasteClassState.size == 0) setButtonUnavailable()
-                else setButtonAvailable()
-            }
-        }
-
-        tasteViewModel.tasteDetailState.observe(this) { tasteDetailState ->
-            if (tasteViewModel.mode.value == 1) {
-                if (tasteDetailState.size == 0) setButtonUnavailable()
-                else setButtonAvailable()
-            }
-        }
-
-
-        tasteViewModel.tasteClassState.observe(this) { tasteClassState ->
-            if (tasteViewModel.mode.value == 0) {
-                if (tasteClassState.size == 0) setButtonUnavailable()
-                else setButtonAvailable()
-            }
-        }
-
-        tasteViewModel.tasteDetailState.observe(this) { tasteDetailState ->
-            if (tasteViewModel.mode.value == 1) {
-                if (tasteDetailState.size == 0) setButtonUnavailable()
-                else setButtonAvailable()
-            }
+            if (mode == 0) setStateClass()
+            else setStateDetail()
         }
     }
 
