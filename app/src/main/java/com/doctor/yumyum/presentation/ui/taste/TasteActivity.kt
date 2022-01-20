@@ -43,14 +43,12 @@ class TasteActivity : BaseActivity<ActivityTasteBinding>(R.layout.activity_taste
     fun init() {
 
         if (fromMyPage) {
+            binding.tasteToolbar.appbarTvSub.visibility = View.GONE
             binding.tasteTvTitle.visibility = View.GONE
             binding.tasteTvSubtitle.setTextAppearance(R.style.font_h3_bold)
         }
-
-        binding.apply {
-            lifecycleOwner = this@TasteActivity
-            viewModel = tasteViewModel
-            tasteToolbar.appbarTvSub.apply {
+        else {
+            binding.tasteToolbar.appbarTvSub.apply {
                 visibility = View.VISIBLE
                 text = getString(R.string.common_next)
                 setOnClickListener {
@@ -59,6 +57,12 @@ class TasteActivity : BaseActivity<ActivityTasteBinding>(R.layout.activity_taste
                     }
                 }
             }
+        }
+
+        binding.apply {
+            lifecycleOwner = this@TasteActivity
+            viewModel = tasteViewModel
+
             tasteToolbar.appbarIbBack.setOnClickListener {
                 onBackPressed()
             }
