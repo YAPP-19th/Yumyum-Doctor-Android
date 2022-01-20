@@ -110,6 +110,7 @@
     <string name="img_permission_dialog_message">사진을 첨부하기 위해서는 이미지 접근 권한이 필요합니다.기능 사용을 원하실 경우 휴대폰설정 > 애플리케이션 관리자에서 해당 앱의 권한을 허용해주세요.</string>
     <string name="img_permission_dialog_ok">설정</string>
     <string name="img_permission_dialog_dismiss">닫기</string>
+    <string name="write_loading_dialog_message">잠시만 기다려주세요.</string>
 
     <!-- 재료(태그) 입력 -->
     <string name="write_tag_tv_title">재료 입력</string>
@@ -299,7 +300,7 @@
     <string name="my_info_tv_title">내정보</string>
     <string name="my_info_tv_nickname_setting">닉네임 수정</string>
     <string name="my_info_tv_withdraw">회원탈퇴</string>
-    
+
     <!-- 회원 탈퇴 -->
     <string name="withdraw_title">회원탈퇴</string>
     <string name="withdraw_tv_reason">탈퇴 사유를 선택해주세요</string>
