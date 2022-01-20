@@ -20,6 +20,7 @@ class RecipeDeleteDialog(private val deleteListener : () -> Unit) : BaseDialog<D
         binding.writeFinishNo.setOnClickListener { dismiss() }
         binding.writeFinishYes.setOnClickListener {
             deleteListener()
+            dismiss()
         }
 
         return binding.root

@@ -62,8 +62,7 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
 
         binding.writeBtnFinish.setOnClickListener {
             WriteDialog {
-                val writeLoadingDialog = WriteLoadingDialog()
-                writeLoadingDialog.show(parentFragmentManager, "WriteLoadingDialog")
+                showLoading()
                 lifecycleScope.launch {
                     val postRecipe = lifecycleScope.async {
                         writeViewModel.postRecipe()
