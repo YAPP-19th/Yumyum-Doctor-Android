@@ -114,13 +114,17 @@ class TasteActivity : BaseActivity<ActivityTasteBinding>(R.layout.activity_taste
             CoroutineScope(Dispatchers.IO).launch {
                 viewModel.postFlavor()
             }
-            startActivity(
-                Intent(
-                    this,
-                    MainActivity::class.java
-                ).apply {
-                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                })
+            if (intent.getBooleanExtra(getString(R.string.taste_mode), false)) {
+                finish()
+            } else {
+                startActivity(
+                    Intent(
+                        this,
+                        MainActivity::class.java
+                    ).apply {
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    })
+            }
         }
     }
 
