@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseDialog
-import com.doctor.yumyum.databinding.DialogWriteLoadingBinding
+import com.doctor.yumyum.databinding.DialogLoadingBinding
 
-class WriteLoadingDialog : BaseDialog<DialogWriteLoadingBinding>(R.layout.dialog_write_loading) {
+class LoadingDialog : BaseDialog<DialogLoadingBinding>(R.layout.dialog_loading) {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
