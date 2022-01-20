@@ -52,9 +52,11 @@ class MyPageViewModel : BaseViewModel() {
 
     private fun isGradeUp(newGrade: String) {
         if (localGrade != null) {
-            if (localGrade != newGrade) {
-                _gradeUp.postValue(newGrade)
-                userRepository.setLocalGrade(newGrade)
+            if (localGrade.isNotBlank()) {
+                if (localGrade != newGrade) {
+                    _gradeUp.postValue(newGrade)
+                    userRepository.setLocalGrade(newGrade)
+                }
             }
         }
     }
