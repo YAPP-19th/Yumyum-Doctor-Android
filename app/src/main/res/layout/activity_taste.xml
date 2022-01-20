@@ -47,7 +47,8 @@
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/taste_tv_title" />
+            app:layout_constraintTop_toBottomOf="@id/taste_tv_title"
+            app:layout_goneMarginTop="28dp" />
 
         <TextView
             android:id="@+id/taste_tv_overlap"
