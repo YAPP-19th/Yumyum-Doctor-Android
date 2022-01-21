@@ -14,66 +14,41 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class TasteActivity : BaseActivity<ActivityTasteBinding>(R.layout.activity_taste) {
-    private val viewModel by lazy {
+    private val tasteViewModel by lazy {
         ViewModelProvider(
             this,
             ViewModelProvider.NewInstanceFactory()
         )[TasteViewModel::class.java]
     }
-    private var fromMyPage: Boolean = false
+    private val fromMyPage: Boolean by lazy {
+        intent.extras?.getBoolean(getString(R.string.taste_mode)) ?: false
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         init()
 
-        viewModel.mode.observe(this) { mode ->
-            if (mode == 0) {
-                if (viewModel.tasteClassState.value?.size == 0) setButtonUnavailable()
-                else setButtonAvailable()
-                setStateClass()
-            } else {
-                if (viewModel.tasteDetailState.value?.size == 0) setButtonUnavailable()
-                else setButtonAvailable()
-                setStateDetail()
-            }
+        tasteViewModel.isSelected.observe(this) { isSelected ->
+            if (isSelected) setButtonAvailable()
+            else setButtonUnavailable()
         }
 
-        viewModel.tasteClassState.observe(this) { tasteClassState ->
-            if (viewModel.mode.value == 0) {
-                if (tasteClassState.size == 0) setButtonUnavailable()
-                else setButtonAvailable()
-            }
-        }
-
-        viewModel.tasteDetailState.observe(this) { tasteDetailState ->
-            if (viewModel.mode.value == 1) {
-                if (tasteDetailState.size == 0) setButtonUnavailable()
-                else setButtonAvailable()
-            }
-        }
-
-
-        viewModel.tasteClassState.observe(this) { tasteClassState ->
-            if (viewModel.mode.value == 0) {
-                if (tasteClassState.size == 0) setButtonUnavailable()
-                else setButtonAvailable()
-            }
-        }
-
-        viewModel.tasteDetailState.observe(this) { tasteDetailState ->
-            if (viewModel.mode.value == 1) {
-                if (tasteDetailState.size == 0) setButtonUnavailable()
-                else setButtonAvailable()
-            }
+        tasteViewModel.mode.observe(this) { mode ->
+            if (mode == 0) setStateClass()
+            else setStateDetail()
         }
     }
 
     fun init() {
-        binding.apply {
-            lifecycleOwner = this@TasteActivity
-            viewModel = viewModel
-            tasteToolbar.appbarTvSub.apply {
+
+        if (fromMyPage) {
+            binding.tasteToolbar.appbarTvSub.visibility = View.GONE
+            binding.tasteTvTitle.visibility = View.GONE
+            binding.tasteTvSubtitle.setTextAppearance(R.style.font_h3_bold)
+        }
+        else {
+            binding.tasteToolbar.appbarTvSub.apply {
                 visibility = View.VISIBLE
                 text = getString(R.string.common_next)
                 setOnClickListener {
@@ -82,6 +57,12 @@ class TasteActivity : BaseActivity<ActivityTasteBinding>(R.layout.activity_taste
                     }
                 }
             }
+        }
+
+        binding.apply {
+            lifecycleOwner = this@TasteActivity
+            viewModel = tasteViewModel
+
             tasteToolbar.appbarIbBack.setOnClickListener {
                 onBackPressed()
             }
@@ -93,11 +74,10 @@ class TasteActivity : BaseActivity<ActivityTasteBinding>(R.layout.activity_taste
                     .navigate(R.id.action_tasteClassFragment_to_tasteDetailFragment)
             }
         }
-        fromMyPage = intent.extras?.getBoolean(getString(R.string.taste_mode)) ?: false
     }
 
     private fun setStateClass() {
-        if (viewModel.tasteClassState.value?.size == 0) setButtonUnavailable()
+        if (tasteViewModel.tasteClassState.value?.size == 0) setButtonUnavailable()
         binding.tasteTvSubtitle.text = getString(R.string.taste_tv_class)
         binding.tasteBtnNext.text = getString(R.string.common_next)
         binding.tasteBtnNext.setOnClickListener {
@@ -107,20 +87,24 @@ class TasteActivity : BaseActivity<ActivityTasteBinding>(R.layout.activity_taste
     }
 
     private fun setStateDetail() {
-        if (viewModel.tasteDetailState.value?.size == 0) setButtonUnavailable()
+        if (tasteViewModel.tasteDetailState.value?.size == 0) setButtonUnavailable()
         binding.tasteTvSubtitle.text = getString(R.string.taste_tv_detail)
         binding.tasteBtnNext.text = getString(R.string.common_complete)
         binding.tasteBtnNext.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
-                viewModel.postFlavor()
+                tasteViewModel.postFlavor()
             }
-            startActivity(
-                Intent(
-                    this,
-                    MainActivity::class.java
-                ).apply {
-                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                })
+            if (fromMyPage) {
+                finish()
+            } else {
+                startActivity(
+                    Intent(
+                        this,
+                        MainActivity::class.java
+                    ).apply {
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    })
+            }
         }
     }
 

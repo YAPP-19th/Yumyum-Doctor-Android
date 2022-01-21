@@ -14,10 +14,10 @@ class MyPageViewModel : BaseViewModel() {
     private val userRepository = UserRepositoryImpl()
     private val loginRepository = LoginRepositoryImpl()
     private val localGrade = userRepository.getLocalGrade()
-    private val _nickname: MutableLiveData<String> = MutableLiveData("")
+    private val _nickname: MutableLiveData<String> = MutableLiveData()
     val nickname: LiveData<String>
         get() = _nickname
-    private val _grade: MutableLiveData<String> = MutableLiveData("")
+    private val _grade: MutableLiveData<String> = MutableLiveData()
     val grade: LiveData<String>
         get() = _grade
     private val _point: MutableLiveData<Int> = MutableLiveData()
@@ -26,7 +26,7 @@ class MyPageViewModel : BaseViewModel() {
     private val _errorState: MutableLiveData<Boolean> = MutableLiveData(false)
     val errorState: LiveData<Boolean>
         get() = _errorState
-    private val _gradeUp: MutableLiveData<String> = MutableLiveData("")
+    private val _gradeUp: MutableLiveData<String> = MutableLiveData()
     val gradeUp: LiveData<String>
         get() = _gradeUp
 
@@ -51,12 +51,8 @@ class MyPageViewModel : BaseViewModel() {
     }
 
     private fun isGradeUp(newGrade: String) {
-        if (localGrade != null) {
-            if (localGrade != newGrade) {
-                _gradeUp.postValue(newGrade)
-                userRepository.setLocalGrade(newGrade)
-            }
-        }
+        if ((!localGrade.isNullOrBlank()) && (localGrade != newGrade)) _gradeUp.value = newGrade
+        userRepository.setLocalGrade(newGrade)
     }
 
     fun logout() {
