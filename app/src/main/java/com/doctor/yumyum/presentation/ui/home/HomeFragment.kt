@@ -4,10 +4,13 @@ package com.doctor.yumyum.presentation.ui.home
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
+import com.doctor.yumyum.common.utils.REQUEST_CODE
 import com.doctor.yumyum.databinding.FragmentHomeBinding
 import com.doctor.yumyum.presentation.adapter.HomeBrandAdapter
 import com.doctor.yumyum.presentation.adapter.HomeFavoriteAdapter
@@ -49,6 +52,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             Pair(R.drawable.ic_brand_ramen_home, getString(R.string.common_ramen))
         )
     }
+    private val detailLauncher: ActivityResultLauncher<Intent> =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == REQUEST_CODE.DELETE_RECIPE) {
+                CoroutineScope(Dispatchers.IO).launch {
+                    val mode = viewModel.mode.value ?: R.string.common_food
+                    viewModel.getFavorite(requireContext().getString(mode))
+                    viewModel.getRecommendation(requireContext().getString(mode))
+                }
+            }
+        }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -77,7 +90,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         binding.homeRvFavoriteRecipe.adapter = HomeFavoriteAdapter {
             val intent = Intent(context, RecipeDetailActivity::class.java)
             intent.putExtra("recipeId", it)
-            startActivity(intent)
+            detailLauncher.launch(intent)
         }
 
         // 나의 레시피 초기화
