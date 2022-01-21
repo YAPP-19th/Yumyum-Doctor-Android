@@ -6,6 +6,7 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.doctor.yumyum.presentation.ui.write.LoadingDialog
 
 abstract class BaseActivity<T : ViewDataBinding>(@LayoutRes private val layoutResId: Int) :
     AppCompatActivity() {
@@ -21,7 +22,8 @@ abstract class BaseActivity<T : ViewDataBinding>(@LayoutRes private val layoutRe
     }
 
     protected fun showLoading() {
-        TODO()
+        val loadingDialog = LoadingDialog()
+        loadingDialog.show(supportFragmentManager,"LoadingDialog")
     }
 
     protected fun hideLoading() {
