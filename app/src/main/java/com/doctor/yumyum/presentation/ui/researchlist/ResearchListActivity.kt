@@ -14,7 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseActivity
 import com.doctor.yumyum.common.utils.ORDER_FLAG
-import com.doctor.yumyum.common.utils.RecipeType
+import com.doctor.yumyum.common.utils.REQUEST_CODE
 import com.doctor.yumyum.common.utils.SORT_FLAG
 import com.doctor.yumyum.databinding.ActivityResearchListBinding
 import com.doctor.yumyum.databinding.DialogSelectSearchBinding
@@ -28,20 +28,17 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.launch
 import java.util.*
 
-
 class ResearchListActivity :
     BaseActivity<ActivityResearchListBinding>(R.layout.activity_research_list) {
 
     private lateinit var sortDialog: BottomSheetDialog
     private lateinit var searchDialog: BottomSheetDialog
-
     private val viewModel by lazy {
         ViewModelProvider(
             this,
             ViewModelProvider.NewInstanceFactory()
         )[ResearchListViewModel::class.java]
     }
-
     private var categoryName = ""
     private var sort = "id"
     private var order = "desc"
@@ -49,9 +46,72 @@ class ResearchListActivity :
     private var maxPrice: Int? = null
     private var flavors: ArrayList<String> = arrayListOf("")
     private var tags: ArrayList<String> = arrayListOf("")
-    private lateinit var filterLauncher: ActivityResultLauncher<Intent>
-    private lateinit var searchTasteLauncher: ActivityResultLauncher<Intent>
-    private lateinit var searchHashtagLauncher: ActivityResultLauncher<Intent>
+    private val researchListAdapter = ResearchListAdapter({ recipeId ->
+        val intent = Intent(this, RecipeDetailActivity::class.java)
+        intent.putExtra("recipeId", recipeId)
+        detailLauncher.launch(intent)
+    }, { recipe, position ->
+        viewModel.setBookmarkState(recipe, position)
+    }, {}, {})
+    private val filterLauncher: ActivityResultLauncher<Intent> =
+        // 필터 화면에서 돌아왔을 때
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == RESULT_OK && it.data != null) {
+                minPrice = it.data?.extras?.get("minPrice") as Int?
+                maxPrice = it.data?.extras?.get("maxPrice") as Int?
+
+                // 필터 아이콘 상태 변경
+                if (minPrice == null && maxPrice == null) {
+                    // 적용하지 않은 상태
+                    binding.researchListTvFilter.setCompoundDrawablesWithIntrinsicBounds(
+                        getDrawable(R.drawable.ic_filter_gray), null, null, null
+                    )
+                } else {
+                    // 적용한 상태
+                    binding.researchListTvFilter.setCompoundDrawablesWithIntrinsicBounds(
+                        getDrawable(R.drawable.ic_filter_green), null, null, null
+                    )
+                }
+                searchRecipeList()
+            }
+        }
+    private val searchTasteLauncher: ActivityResultLauncher<Intent> =
+        // 맛별로 검색할 때
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+        {
+            if (it.resultCode == RESULT_OK && it.data != null) {
+                val tasteList = it.data?.extras?.getStringArrayList(TASTE_EXTRA_KEY)
+
+                // 검색창 리스트 설정
+                tasteList?.let { list ->
+                    viewModel.setSearchList(list)
+                    flavors = list
+                    tags = arrayListOf("")
+                }
+                searchRecipeList()
+            }
+        }
+    private val searchHashtagLauncher: ActivityResultLauncher<Intent> =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == RESULT_OK && it.data != null) {
+                val hashtagList = it.data?.extras?.getStringArrayList(HASHTAG_EXTRA_KEY)
+
+                // 검색창 리스트 설정
+                hashtagList?.let { list ->
+                    viewModel.setSearchList(ArrayList(list.map { it -> "#$it" }))
+                    tags = list
+                    flavors = arrayListOf("")
+                }
+
+                searchRecipeList()
+            }
+        }
+    private val detailLauncher: ActivityResultLauncher<Intent> =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == REQUEST_CODE.DELETE_RECIPE) {
+                searchRecipeList()
+            }
+        }
     private var touchStartTime: Long = Calendar.getInstance().timeInMillis
 
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -82,30 +142,6 @@ class ResearchListActivity :
         initSortDialog()
         initSearchDialog()
 
-        // 필터 화면에서 돌아왔을 때
-        filterLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-                if (it.resultCode == RESULT_OK && it.data != null) {
-                    minPrice = it.data?.extras?.get("minPrice") as Int?
-                    maxPrice = it.data?.extras?.get("maxPrice") as Int?
-
-                    // 필터 아이콘 상태 변경
-                    if (minPrice == null && maxPrice == null) {
-                        // 적용하지 않은 상태
-                        binding.researchListTvFilter.setCompoundDrawablesWithIntrinsicBounds(
-                            getDrawable(R.drawable.ic_filter_gray), null, null, null
-                        )
-                    } else {
-                        // 적용한 상태
-                        binding.researchListTvFilter.setCompoundDrawablesWithIntrinsicBounds(
-                            getDrawable(R.drawable.ic_filter_green), null, null, null
-                        )
-                    }
-
-                    searchRecipeList()
-                }
-            }
-
         // 필터 화면으로 이동
         binding.researchListTvFilter.setOnClickListener {
             val intent = Intent(this, FilterActivity::class.java)
@@ -113,13 +149,6 @@ class ResearchListActivity :
             intent.putExtra("maxPrice", maxPrice)
             filterLauncher.launch(intent)
         }
-        val researchListAdapter = ResearchListAdapter({ recipeId ->
-            val intent = Intent(this, RecipeDetailActivity::class.java)
-            intent.putExtra("recipeId", recipeId)
-            startActivity(intent)
-        }, { recipe, position ->
-            viewModel.setBookmarkState(recipe, position)
-        }, {},{})
         binding.researchListClAppbar.appbarIbBack.setOnClickListener { finish() }
         binding.researchListRvRecipe.adapter = researchListAdapter
 
@@ -154,39 +183,6 @@ class ResearchListActivity :
                 src, null, null, null
             )
         }
-
-        // 맛별로 검색할 때
-        searchTasteLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-                if (it.resultCode == RESULT_OK && it.data != null) {
-                    val tasteList = it.data?.extras?.getStringArrayList(TASTE_EXTRA_KEY)
-
-                    // 검색창 리스트 설정
-                    tasteList?.let { list ->
-                        viewModel.setSearchList(list)
-                        flavors = list
-                        tags = arrayListOf("")
-                    }
-
-                    searchRecipeList()
-                }
-            }
-
-        searchHashtagLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-                if (it.resultCode == RESULT_OK && it.data != null) {
-                    val hashtagList = it.data?.extras?.getStringArrayList(HASHTAG_EXTRA_KEY)
-
-                    // 검색창 리스트 설정
-                    hashtagList?.let { list ->
-                        viewModel.setSearchList(ArrayList(list.map { it -> "#$it" }))
-                        tags = list
-                        flavors = arrayListOf("")
-                    }
-
-                    searchRecipeList()
-                }
-            }
 
         viewModel.searchType.observe(this) {
             if (it == ResearchListViewModel.SEARCH_HASHTAG) {
