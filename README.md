@@ -1,5 +1,5 @@
 ![license](https://img.shields.io/github/license/YAPP-19th/Android-Team-2-Frontend)
-![app version](https://img.shields.io/badge/Version-1.0.1-orange?style=flat&logo=android)
+![app version](https://img.shields.io/github/release/YAPP-19th/Android-Team-2-Frontend)
 [![Google Play](https://img.shields.io/badge/Play%20Store-gray?style=flat&logo=GooglePlay)](https://play.google.com/store/apps/details?id=com.doctor.yumyum)
 
 ![yumyum doctor](https://user-images.githubusercontent.com/40855422/149953406-141cf9a1-0ca7-4506-9528-fc110443a816.png)
