@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseActivity
 import com.doctor.yumyum.databinding.ActivityNicknameBinding
-import com.doctor.yumyum.presentation.ui.main.MainActivity
 import com.doctor.yumyum.presentation.ui.taste.TasteActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -23,25 +22,29 @@ class NicknameActivity : BaseActivity<ActivityNicknameBinding>(R.layout.activity
             ViewModelProvider.NewInstanceFactory()
         )[NicknameViewModel::class.java]
     }
+    val fromMyPage:Boolean by lazy { intent.extras?.getBoolean(getString(R.string.nickname_mode)) ?: false }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         init()
+        initNickname()
 
         viewModel.nickname.observe(this) { nickname ->
             binding.nicknameEtNickname.setText(nickname)
         }
-        initNickname()
     }
 
     private fun init() {
+        if (fromMyPage) {
+            binding.nicknameTvTitle.visibility = View.GONE
+        }
         binding.apply {
             viewModel = viewModel
             lifecycleOwner = this@NicknameActivity
         }
         binding.nicknameToolbar.appbarIbBack.setOnClickListener {
-            if (intent.getBooleanExtra(getString(R.string.nickname_mode), false)) {
+            if (fromMyPage) {
                 onBackPressed()
             } else {
                 NicknameBackDialog().show(supportFragmentManager, "NicknameBackDialog")
@@ -52,9 +55,7 @@ class NicknameActivity : BaseActivity<ActivityNicknameBinding>(R.layout.activity
             CoroutineScope(Dispatchers.IO).launch {
                 viewModel.patchNickname(binding.nicknameEtNickname.text.toString())
             }
-
-            if (intent.getBooleanExtra(getString(R.string.nickname_mode), false)) {
-                startActivity(Intent(this@NicknameActivity, MainActivity::class.java))
+            if (fromMyPage) {
                 finish()
             } else {
                 startActivity(Intent(this@NicknameActivity, TasteActivity::class.java))
@@ -84,7 +85,7 @@ class NicknameActivity : BaseActivity<ActivityNicknameBinding>(R.layout.activity
     }
 
     override fun onBackPressed() {
-        if (intent.getBooleanExtra(getString(R.string.nickname_mode), false)) {
+        if (fromMyPage) {
             super.onBackPressed()
         } else {
             NicknameBackDialog().show(supportFragmentManager, "NicknameBackDialog")
@@ -94,7 +95,7 @@ class NicknameActivity : BaseActivity<ActivityNicknameBinding>(R.layout.activity
     private fun initNickname() {
         CoroutineScope(Dispatchers.IO).launch {
 
-            if (intent.getBooleanExtra(getString(R.string.nickname_mode), false)) {
+            if (fromMyPage) {
                 viewModel.getUserInfo()
             } else {
                 viewModel.getNickname()

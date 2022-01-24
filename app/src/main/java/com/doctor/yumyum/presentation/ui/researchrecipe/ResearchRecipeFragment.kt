@@ -6,10 +6,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseFragment
+import com.doctor.yumyum.common.utils.REQUEST_CODE
 import com.doctor.yumyum.databinding.FragmentResearchRecipeBinding
 import com.doctor.yumyum.presentation.adapter.RankAdapter
 import com.doctor.yumyum.presentation.adapter.ResearchBrandAdapter
@@ -50,6 +53,12 @@ class ResearchRecipeFragment :
         )
     }
     private lateinit var brandRecyclerAdapter: ResearchBrandAdapter
+    private val detailLauncher: ActivityResultLauncher<Intent> =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == REQUEST_CODE.DELETE_RECIPE) {
+                getRankRecipes()
+            }
+        }
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
@@ -63,7 +72,7 @@ class ResearchRecipeFragment :
         binding.researchRecipeRecyclerviewRanking.adapter = RankAdapter { recipeId ->
             val intent = Intent(context, RecipeDetailActivity::class.java)
             intent.putExtra("recipeId", recipeId)
-            startActivity(intent)
+            detailLauncher.launch(intent)
         }
 
         // 브랜드 아이템 클릭시 이동
@@ -87,9 +96,7 @@ class ResearchRecipeFragment :
 
             changeBrandList(mode)
             // 주간 랭킹 리스트 조회
-            CoroutineScope(Dispatchers.IO).launch {
-                viewModel.getRankRecipe(getString(mode), top = 9, rankDatePeriod = 7)
-            }
+            getRankRecipes()
         }
 
         viewModel.errorState.observe(viewLifecycleOwner) { resId ->
@@ -98,6 +105,15 @@ class ResearchRecipeFragment :
         }
 
         return binding.root
+    }
+
+    // 주간 랭킹 리스트 조회
+    private fun getRankRecipes() = CoroutineScope(Dispatchers.IO).launch {
+        viewModel.getRankRecipe(
+            getString(viewModel.mode.value ?: R.string.common_food),
+            top = 9,
+            rankDatePeriod = 7
+        )
     }
 
     @SuppressLint("NotifyDataSetChanged")

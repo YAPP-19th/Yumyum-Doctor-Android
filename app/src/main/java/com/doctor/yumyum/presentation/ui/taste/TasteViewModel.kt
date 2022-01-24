@@ -3,6 +3,7 @@ package com.doctor.yumyum.presentation.ui.taste
 import android.view.View
 import android.widget.Button
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.doctor.yumyum.common.base.BaseViewModel
 import com.doctor.yumyum.data.model.UserFlavor
@@ -26,6 +27,17 @@ class TasteViewModel : BaseViewModel() {
     private val _mode: MutableLiveData<Int> = MutableLiveData(MODE_CLASS)
     val mode: LiveData<Int> = _mode
 
+    val isSelected: MediatorLiveData<Boolean> = MediatorLiveData<Boolean>().apply {
+        addSource(mode) { value = isStateSelected() }
+        addSource(tasteClassState) { value = isStateSelected() }
+        addSource(tasteDetailState) { value = isStateSelected() }
+    }
+
+    fun isStateSelected(): Boolean {
+        if (mode.value == MODE_CLASS) return !tasteClassState.value.isNullOrEmpty()
+        else if (mode.value == MODE_DETAIL) return !tasteDetailState.value.isNullOrEmpty()
+        return false
+    }
 
 
     fun tasteClassChange(taste: String) {

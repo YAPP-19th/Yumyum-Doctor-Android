@@ -51,6 +51,7 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
                 WriteViewModel() as T
         }
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -61,30 +62,32 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
 
         binding.writeBtnFinish.setOnClickListener {
             WriteDialog {
-               lifecycleScope.launch {
-                   val postRecipe = lifecycleScope.async {
+                showLoading()
+                lifecycleScope.launch {
+                    val postRecipe = lifecycleScope.async {
                         writeViewModel.postRecipe()
                     }
-                   postRecipe.await()
-                   activity?.finish()
-               }
+                    postRecipe.await()
+                    activity?.finish()
+                }
+
             }.show(parentFragmentManager, "WriteDialog")
 
         }
-        writeViewModel.fifthOnFinish.observe(viewLifecycleOwner){
-            if(it){
+        writeViewModel.fifthOnFinish.observe(viewLifecycleOwner) {
+            if (it) {
                 binding.writeBtnFinish.isEnabled = true
                 binding.writeBtnFinish.background = resources.getDrawable(R.drawable.bg_btn_main)
-            }else{
+            } else {
                 binding.writeBtnFinish.isEnabled = false
                 binding.writeBtnFinish.background = resources.getDrawable(R.drawable.bg_btn_sub)
             }
         }
 
-        writeViewModel.privateMode.observe(viewLifecycleOwner){
-            if(it){
+        writeViewModel.privateMode.observe(viewLifecycleOwner) {
+            if (it) {
                 binding.writeFifthSwRecipePrivate.setTrackResource(R.drawable.recipe_private_sw_seleted_track)
-            }else{
+            } else {
                 binding.writeFifthSwRecipePrivate.setTrackResource(R.drawable.recipe_private_sw_track)
             }
         }
@@ -137,10 +140,10 @@ class WriteFragment5 : BaseFragment<FragmentWriteFifthBinding>(R.layout.fragment
                             images.add(Pair(uri, path))
                             if (images.size == 3) break
                         }
-                    }?: intentResult?.data?.let {
-                        images.add(Pair(it,uriToPath(requireContext(),it)))
+                    } ?: intentResult?.data?.let {
+                        images.add(Pair(it, uriToPath(requireContext(), it)))
                     }
-                    Log.d("img",images.toString())
+                    Log.d("img", images.toString())
                     writeViewModel.setReviewImageList(images)
                 }
             }

@@ -3,22 +3,17 @@ package com.doctor.yumyum.presentation.ui.write.viewmodel
 import android.net.Uri
 import android.util.Log
 import android.view.View
-import android.widget.EditText
 import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseViewModel
 import com.doctor.yumyum.common.utils.StatusType
 import com.doctor.yumyum.common.utils.TagType
-import com.doctor.yumyum.data.model.FoodImage
 import com.doctor.yumyum.data.model.TagItem
 import com.doctor.yumyum.data.model.WriteRecipe
 import com.doctor.yumyum.data.repository.WriteRepositoryImpl
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -236,7 +231,8 @@ class WriteViewModel : BaseViewModel() {
                         name = "images",
                         filename = file.name,
                         body = body
-                    ))
+                    )
+                )
             }
             writeRepository.postRecipeImage(recipeId = recipeId, imgList = images)
         } catch (e: Exception) {

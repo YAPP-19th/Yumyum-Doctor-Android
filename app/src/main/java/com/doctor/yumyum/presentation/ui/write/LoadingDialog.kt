@@ -6,21 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import com.doctor.yumyum.R
 import com.doctor.yumyum.common.base.BaseDialog
-import com.doctor.yumyum.databinding.DialogWriteBinding
+import com.doctor.yumyum.databinding.DialogLoadingBinding
 
-class WriteDialog(private val finishListener : () -> Unit) : BaseDialog<DialogWriteBinding>(R.layout.dialog_write) {
+class LoadingDialog : BaseDialog<DialogLoadingBinding>(R.layout.dialog_loading) {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
-        binding.writeFinishNo.setOnClickListener { dismiss() }
-        binding.writeFinishYes.setOnClickListener {
-            finishListener()
-            dismiss()
-        }
-
+        isCancelable = false
         return binding.root
     }
 }
